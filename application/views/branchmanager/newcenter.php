@@ -24,34 +24,37 @@ $coordinator = $this->db->query("SELECT CONCAT(FirstName,' ', MiddleName, ' ', L
 
 				        <input type="text" name="centerno" style="width:562px;" >
 
-				    </label>
+				  
 				    
 				    <label>
 				        <span>Contact Number: </span> </label>
 
 				        <input type="text" name="contactno" style="width:562px;" >
 
-						<label>
+					<label>
 				        <span>Address: </span> </label>
 
 				        <input type="text" name="address" style="width:562px;" >	
 
-				        <label>
+				    <label>
 				        <span>Payment Day: </span> </label>
 
-				        	<select name="day" style="width:80px;">
+				        	<select name="day" style="width:150px;">
 				    			<option value="" selected="selected"></option>
 						        <option value="Monday">Monday</option>
 						        <option value="Tuesday">Tuesday</option>	
 						        <option value="Wednesday">Wednesday</option>
 						        <option value="Thursday">Thursday</option>
 						        <option value="Friday">Friday</option>
-						        
-				     <label>
+						      </select>
+						    <br>
 				     
-				        <span></span>
+
+				     <label> 
+				     
+				        <span></span></label>  
 				        <input type="submit" class="button" value="Submit" />
-				    </label>  
+				   
 				</form>
 			<br><br>
 		</div>

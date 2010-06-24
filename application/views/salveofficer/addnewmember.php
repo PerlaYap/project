@@ -32,10 +32,10 @@ date_default_timezone_set('Asia/Manila');
 				        <input type="text" name="branchname" style="width:300px;" value="<?php echo $branch ?>" disabled>
 				        <input hidden type="text" name="approved" style="width:400px;" value="P" >
 				
-				        &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				        &nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				        Center No. : 
 
-				        <select required name="centernumber" style="width:53px;">
+				        <select required name="centernumber" style="width:58px;">
 				    			<option value="" selected="selected"></option>
 				 
 				    		<?php
@@ -56,9 +56,11 @@ date_default_timezone_set('Asia/Manila');
 				        
 
 				        <input id="affiliations" type="text" name="org" style="width: 260px;" />
-				        Position :
-				        <input id="affiliations" type="text" name="pos" style="width: 188px;" />
-				     <input type="button" class="addmore2" value="+" onclick="addOrganization()"/>
+				        
+				         &nbsp &nbsp &nbsp
+				         Position :
+				        <input id="affiliations" type="text" name="pos" style="width: 175px;" />
+				     <input type="button" class="addmore2" value="+" style="padding:5px;"onclick="addOrganization()"/>
 				        
 
 				          
@@ -76,13 +78,13 @@ date_default_timezone_set('Asia/Manila');
 				   
 				    <label>
 				    	<span>Years of Residency :</span> </label>
-				        <input required="" id="residency" type="number" name="residency" min='1' style="width:30px;" /> &nbsp&nbsp&nbsp&nbsp
+				        <input required="" id="residency" type="number" name="residency" min='1' style="width:45px;" /> &nbsp&nbsp&nbsp&nbsp
 				        
-				        Contact Number : 
-				        <input required="" id="contact" type="text" name="contact" style="width: 140px;" placeholder="7 or 11-digit number only" /> &nbsp&nbsp&nbsp&nbsp
+				        Contact # : 
+				        <input required="" id="contact" type="text" name="contact" style="width: 140px;" placeholder="7 or 11-digit number" /> &nbsp&nbsp&nbsp&nbsp
 				    
 				    	Educational Attainment :
-				        	<select required="" name="educattain" style="width:100px;">
+				        	<select required="" name="educattain" style="width:98px;">
 						        <option value="" selected="selected"></option>
 						        <option value="Elementary">Elementary</option>
 						        <option value="High School">High School</option>
@@ -140,10 +142,10 @@ date_default_timezone_set('Asia/Manila');
 						        <?php  } ?>
 					        </select>
 					       -->
-					        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp 
 
 					        Birthplace: 
-					        <input id="birthplace" type="text" name="birthplace" style="width: 230px;" required/>
+					        <input id="birthplace" type="text" name="birthplace" style="width: 231px;" required/>
 				    
 
 				    <label>
@@ -157,7 +159,7 @@ date_default_timezone_set('Asia/Manila');
 					    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 
 				         Civil Status : 
-						       <select required name="apple" id="selectMenu" onchange="toggle(this.options[this.options.selectedIndex].value)" style="width:130px;">
+						       <select required name="apple" id="selectMenu" onchange="toggle(this.options[this.options.selectedIndex].value)" style="width:100px;">
 										<option value="" selected="selected"></option>
 										<option value="Single">Single</option>
 										<option value="Married">Married</option>
@@ -167,7 +169,7 @@ date_default_timezone_set('Asia/Manila');
 				        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 
 				        Religion :
-				        <input id="religion" required type="text" name="religion" style="width: 155px;" />
+				        <input id="religion" required type="text" name="religion" style="width: 172px;" />
 				    </label>
 
 				    <label>
@@ -188,12 +190,12 @@ date_default_timezone_set('Asia/Manila');
 				    </label>
 
 				    <label>
-				        <span>Contact :</span></label>
+				        <span>Contact #:</span></label>
 				        <input type="text" name="companycontact" id="" style="width: 250px;"/>
 				    	&nbsp &nbsp &nbsp
 
-				    	Year Entered in Business: 
-				    	<input type="number" name="yearinbusiness" id="" style="width: 135px;" min='1' required/>
+				    	Year Entered in the Business: 
+				    	<input type="number" name="yearinbusiness" id="" placeholder="2014" style="width: 100px;" min='1900' max='2014' required/>
 
 
 				    <!------ HOUSEHOLD -------->
@@ -236,19 +238,19 @@ date_default_timezone_set('Asia/Manila');
 										<option value="Married">Married</option>
 								</select>
 					        <!-- <input id="civilstat" type="text" name="c_status"  style="width: 140px;"/> -->
-					        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 					       
-					        Age : 
-					        <input id="age" type="text" name="age"  style="width: 150px;" required/>
-					      
-					       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-					       
-					       Gender : 
-				    		<select name="pine" style="width:80px;" required>
+					        Gender : 
+				    		<select name="pine" style="width:150px;" required>
 				    			<option value="" selected="selected"></option>
 						        <option value="male">Male</option>
 						        <option value="female">Female</option>
-					    </select>
+					      	</select>
+					       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					       
+					       Age : 
+					        <input id="age" type="text" name="age"  style="width: 50px;" required/>
+					    
 
 					     <label>
 					     	<span></span>

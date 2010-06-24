@@ -26,20 +26,20 @@ p.ControlNo  NOT IN (SELECT CaritasPersonnel_ControlNo FROM CaritasBranch_has_Ca
 
 				        <input type="text" name="branchname" style="width:562px;" >
 
-				    <label>
+				    
 				    
 				    <label>
 				        <span>Contact Number:</span> </label>
 
 				        <input type="text" name="contactno" style="width:562px;" >
 
-						<label>
+					<label>
 				        <span>Address :</span> </label>
 
 				        <input type="text" name="address" style="width:562px;" >
 
 						
-						<label>
+					<label>
 						<span>Branch Manager: </span></label>
 					        
 					        
@@ -51,7 +51,7 @@ p.ControlNo  NOT IN (SELECT CaritasPersonnel_ControlNo FROM CaritasBranch_has_Ca
 				    		 <?php } ?>
 						</select>
 
-   							 <label>
+   					<label>
 						<span>Salve Officer: </span></label>
 			
 				 <br><br>
