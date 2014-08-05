@@ -16,7 +16,7 @@
  $user = $this->session->userdata('firstname');
 $date=date('Y-m-d');
 $getCollection = $this->db->query("SELECT CenterNo, concat(LastName,', ',FirstName,' ', MiddleName) AS Name , (MemberCount * 50) AS TargetSavings,  TotalSavings AS ActualSaving, 
-IFNULL(Delta.Collection,0) AS Target23, Total23Loan, IFNULL(Echo.Collection,0) AS Target40, Total40Loan, SUM(TotalSavings+Total23Loan+Total40Loan) AS TotalCollected, TotalWithdrawal
+IFNULL(Delta.Collection,0) AS Target23, IFNULL(Total23Loan,0) AS Total23Loan, IFNULL(Echo.Collection,0) AS Target40, IFNULL(Total40Loan,0) AS Total40Loan, SUM(IFNULL(TotalSavings,0)+IFNULL(Total23Loan,0)+IFNULL(Total40Loan,0)) AS TotalCollected, IFNULL(TotalWithdrawal,0) AS TotalWithdrawal
 FROM (SELECT  CenterControl, CaritasPersonnel_ControlNo AS PersonnelControl, SUM(Amount) AS TotalSavings, Count(Members_ControlNo) AS MemberCount FROM transaction trans 
 LEFT JOIN (SELECT CaritasCenters_ControlNo AS CenterControl, Members_ControlNo AS MemberControl FROM 
 (SELECT * FROM caritascenters_has_members chm WHERE Date(DateEntered)<='$date' ORDER BY DateEntered DESC) A
