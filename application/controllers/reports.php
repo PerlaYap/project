@@ -54,17 +54,14 @@ class Reports extends CI_Controller {
 		}
 
         public function getDCSummary(){
-		$month = $this->input->post('dcmonth');
-		$day = $this->input->post('dcday');
-		$year = $this->input->post('dcyear');
-		$dcDate = $year."-".$month."-".$day;
-		$extra=strtotime($dcDate);
+		$dcday = $this->input->post('dcday');
+		$extra=strtotime($dcday);
 		$day = date('l', $extra);
 		
 
 		$data=array('branchControl'=>$this->input->post('dcbranchControl'), 
 					'centerControl'=>$this->input->post('dccenterControl'),
-					'reportDate'=>$dcDate, 'day'=>$day );
+					'reportDate'=>$dcday, 'day'=>$day );
 		
 		/*$this->load->view("header");
 		$this->load->view("navigation");*/

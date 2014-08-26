@@ -1,7 +1,15 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/salveofficer.css'); ?>">
 <script src="<?php echo base_url('Assets/js/salveofficer.js'); ?>"></script>
+<style media="screen">
+  .noPrint{ display: block; }
+  .yesPrint{ display: block !important; }
+</style>
 
+<style media="print">
+  .noPrint{ display: none; }
+  .yesPrint{ display: block !important; }
+</style>
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 
 <?php

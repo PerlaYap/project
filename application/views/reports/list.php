@@ -6,6 +6,10 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/list.css'); ?>">
 <script src="<?php echo base_url('Assets/js/list.js'); ?>"></script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/blitzer/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
 	<!--<link rel="stylesheet" type="text/css" href="../../../Assets/css/list.css">
 	<script src="../../../Assets/js/list.js"></script>-->
 
@@ -40,6 +44,11 @@ function removeOptions(selectbox)
     }
 }
 }
+
+$(function() {
+$( "#datepicker" ).datepicker();
+$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+});
 </script>
 
 
@@ -93,39 +102,7 @@ function removeOptions(selectbox)
 
 					<label>
 						<span>Date: </span></label>
-					        <select name="dcmonth" style="width:80px;"></label>
-							        <option value="" selected="selected"></option>
-							        <option value="01">January</option>
-							        <option value="02">February</option>
-							        <option value="03">March</option>
-							        <option value="04">April</option>
-							        <option value="05">May</option>
-							        <option value="06">June</option>
-							        <option value="07">July</option>
-							        <option value="08">August</option>
-							        <option value="09">September</option>
-							        <option value="10">October</option>
-							        <option value="11">November</option>
-							        <option value="12">December</option>
-							</select>
-
-					        <select name="dcday" style="width:50px;">
-						        <option value="" selected="selected"></option>
-						        <?php  for ($i=1; $i < 32 ; $i++) { ?>
-							        <?php if ($i<10) { ?>
-							        <option value="<?php echo '0'.$i ?>"><?php echo '0'.$i ?></option>		
-							       	<?php } else{ ?>
-							       	<option value="<?php echo $i ?>"><?php echo $i ?></option>
-							      	<?php } ?>
-						      <?php  } ?>
-					        </select>
-
-					        <select name="dcyear" style="width:80px;">
-						        <option value="" selected="selected"></option>
-						        <?php  for ($y=2011; $y <= 2014 ; $y++) { ?>
-							       <option value="<?php echo $y ?>"><?php echo $y ?></option>
-						        <?php  } ?>
-					        </select>
+					        <input type="text" id="datepicker" name="dcday">
 					        	<label>
 						<span></span>
 					     <input type="submit" class="button" value="Send" />
