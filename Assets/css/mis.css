@@ -1,0 +1,463 @@
+p, nav, ul, li{
+	font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+	font-size: 14px;
+	color: #1a1c1a;
+}
+
+
+	a:link {text-decoration: none; color:#676060;}      
+	a:visited {text-decoration: none; color:#676060}  
+	a:hover {text-decoration: none; color:#813834;}  
+	a:active {text-decoration: none; color:#676060;}
+
+a.highlight{color: #bf1b12;}
+
+body{
+	background-color: black;
+	background-image: url('../images/background-2.jpg');
+	background-repeat: repeat;
+}
+
+img.caritaslogo{
+	position: absolute;
+	display: block;
+	margin-left: 170px;
+	margin-right: auto;
+	margin-top: 35px;
+	width: 170px;
+	height: auto;
+}
+
+div.accent{
+	background-color: #a7321a;
+	position: absolute;
+	width: 101%;
+	height: 38px;
+	margin-left: -1%;
+	margin-top: -1%;
+	box-shadow: 3px 3px 5px #aeacac;	
+}
+
+div.search{
+	margin-left: 970px;
+	margin-top: 70px;
+	position: absolute;
+}
+	input.search{
+		text-indent: 5px;
+		border-radius: 5px;
+		width: 200px;
+		height: 33px;
+		border: 0px;
+		margin-top: -3px;
+	}
+
+	input.searchbtn{
+		background-image: url('../images/search1.png');
+		background-repeat: no-repeat;
+		width: 35px;
+		height: 35px;
+		position: absolute;
+		margin-left: 5px;
+		margin-top: -2px;
+		border: 0px;
+		background-color: transparent;
+		cursor: pointer;
+	}
+
+p.welcome, a.welcome{
+	color: #f7f2f2;
+	text-align: right;
+	margin-right: 10px;
+}
+	a.welcome:hover{
+		text-decoration: underline;
+	}
+
+div.header{
+	/*background-color: #a7321a;*/
+	position: absolute;
+	width: 101%;
+	height: 127px;
+	margin-left: -1%;
+	margin-top: -1%;
+}
+
+div.navBG{
+	background-color: #d6d3d3;
+	opacity: 0.3;
+	margin-left: 900px;
+	width: ;
+}
+nav.menu{
+	margin-left: 380px;
+	margin-top: 77px;
+	z-index: 1;
+}
+nav ul ul {
+	display: none;
+	z-index: 1;
+}
+
+	nav ul li:hover > ul {
+		display: inline;
+	}
+
+nav ul {
+	/*background: #efefef; */
+	border-radius: 0px;  
+	list-style: none;
+	position: relative;
+	display: inline-table;
+	z-index: 1;
+
+}
+	nav ul:after {
+		content: ""; 
+		display:  inline-block;
+	}
+
+	nav li.menu, a.menu{
+		margin-top: 10px;
+		font-size: 19px;
+		cursor: default;
+		z-index: 1;
+	}
+
+
+
+
+nav ul li {
+	float: left;
+}
+	nav ul li:hover {
+		/*background: #4b545f;*/
+	}
+		nav ul li:hover a {
+			color: #bf1b12 !important;
+			z-index: 1;
+		}
+
+		
+	
+	nav ul li a {
+		display: block; 
+		padding: 20px;
+		color: #757575; 
+		text-decoration: none;
+		z-index: 1;
+	}
+
+nav ul ul {
+	background: #efeeef; 
+	border-radius: 0px; 
+	padding: 0;
+	position: absolute; 
+	top: 100%;
+}
+	nav ul ul li {
+		float: none; 
+		border-bottom: 2px solid #f4f2f4;
+		position: relative;
+		z-index: 1;
+	}
+		nav ul ul li a {
+			padding: 10px;
+			width:200px;
+			color: #fff;
+		}	
+			nav ul ul li a:hover {
+				background: #dad8da;
+			}
+
+nav ul ul ul {
+	position: absolute; 
+	left: 100%; 
+	top:0;
+	z-index: 1;
+}
+
+div.content{
+	width: 1050px;
+	height: 150%;
+	position: absolute;
+	margin-left: 130px;
+	margin-top: 175px;
+	background-image: url('../images/bgOpac.png');
+	background-repeat: repeat;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 10px;
+	color: black;
+	font-size: 20px;
+}
+
+	div.signature{
+		text-align: right;
+		position: absolute;
+		margin-left: 880px;
+		margin-top: -146px;
+	}	
+
+	img.signature{
+		width: 150px;
+		height: auto;
+		margin-top: -10px;
+	}
+
+
+img.membershipNavi{
+	margin-top: 163px;
+	margin-left: 480px;
+	position: absolute;
+	width: 30px;
+	height: auto;
+}
+	img.loanNavi{
+	margin-top: 163px;
+	margin-left: 605px;
+	position: absolute;
+	width: 30px;
+	height: auto;}	
+	img.perfNavi{
+	margin-top: 163px;
+	margin-left: 790px;
+	position: absolute;
+	width: 30px;
+	height: auto;}	
+	img.reportsNavi{
+	margin-top: 163px;
+	margin-left: 995px;
+	position: absolute;
+	width: 30px;
+	height: auto;}
+	img.listsNavi{
+	margin-top: 163px;
+	margin-left: 1115px;
+	position: absolute;
+	width: 30px;
+	height: auto;
+	}
+
+
+ h1.membersbybranch {
+    font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+    padding: 10px 40px 15px 40px;
+    display: block;
+    border-bottom: 2px solid #efeeee;
+    border-top: 2px solid #efeeee;
+    margin: 10px 0px 30px -10px;
+    color: #888;
+    font-size: 15px;
+   	width: 990px;
+}
+
+select.membersbybranch{
+    background: #FFF url('down-arrow.png') no-repeat right;
+    background: #FFF url('down-arrow.png') no-repeat right);
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    text-indent: 5px;
+    text-overflow: '';
+    width: 300px;
+    height: 25px;
+    box-shadow: none;
+    margin-top: -68px;
+    margin-left: 380px;
+    position: absolute;
+}
+	
+	input.search{
+		text-indent: 5px;
+	    width: 350px;
+	    height: 25px;
+	    box-shadow: none;
+	    margin-top: -71px;
+	    margin-left: 325px;
+	    position: absolute;
+	}
+
+input.membersbybranch {
+    background: #c5baba;
+    border: none;
+    padding: 5px 15px 5px 15px;
+    color: #FFF;
+    cursor: pointer;
+    margin-top: -71px;
+    margin-left: 695px;
+    position: absolute;
+    height: 30px;
+}
+input.membersbybranch:hover {
+    background: #bcbcbc;
+}
+
+
+table.members{
+	margin-left: 40px;
+	margin-right: 40px;
+	border-collapse: collapse;
+}
+	table.center{
+	margin-left: 40px;
+	margin-right: 40px;
+	border-collapse: collapse;
+	}	
+
+
+table.members, table.center, th, td, tr{
+	font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+	font-size: 16px;
+	color: #464646;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	/*border: 1px solid black;*/
+}	
+	th{
+		border-bottom: 1.5px solid #bcbaba;
+		border-top: 1.5px solid #bcbaba;
+	}
+		tr.header:hover{
+			background: transparent;
+		}
+
+	tr:hover{
+		background: #cecaca;
+	}
+
+	th.tablename{
+		text-align: left;
+	}
+	
+	th.tablecount{
+		width: 30px;
+	}
+
+	th.tableid{
+		width: 100px;
+		text-align: left;
+	}
+
+	th.tablename{
+		width: 600px;
+	}
+		th.counttablename{
+			text-align: left;
+			width: 800px;
+		}
+
+	th.tablecenter{
+		width: 120px;
+		text-align: center;
+	}
+
+	th.tableposition{
+		width: 200px;
+		text-align: left;
+	}
+
+	td.centerno{
+		text-align: center;
+	}
+
+	tr.account{
+		cursor: pointer;
+	}
+
+
+
+/*************************************************/
+/****************ADD NEW EMPLOYEE ****************/
+/*************************************************/
+
+/* Basic Grey */
+.basic-grey {
+    width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+    background: #EEE;
+    padding: 20px 30px 20px 30px;
+    font: 12px Georgia, "Times New Roman", Times, serif;
+    color: #888;
+    text-shadow: 1px 1px 1px #FFF;
+    border:1px solid #DADADA;
+    
+}
+.basic-grey h1 {
+    font: 25px Georgia, "Times New Roman", Times, serif;
+    padding: 0px 0px 10px 40px;
+    display: block;
+    border-bottom: 1px solid #DADADA;
+    margin: -10px -30px 30px -30px;
+    color: #888;
+}
+.basic-grey h1>span {
+    display: block;
+    font-size: 11px;
+}
+.basic-grey label {
+    display: block;
+    margin: 0px 0px 5px;
+}
+.basic-grey label>span {
+    float: left;
+    width: 130px;
+    text-align: right;
+    padding-right: 10px;
+    margin-top: 10px;
+    color: #888;
+}
+.basic-grey input[type="text"], .basic-grey input[type="password"], .basic-grey textarea,.basic-grey select{
+    border: 1px solid #DADADA;
+    color: #888;
+    height: 24px;
+    margin-bottom: 16px;
+    margin-right: 6px;
+    margin-top: 2px;
+    outline: 0 none;
+    padding: 3px 3px 3px 5px;
+    width: 70%;
+    font: normal 12px/12px Georgia, "Times New Roman", Times, serif;
+
+}
+.basic-grey select {
+    background: #FFF url('down-arrow.png') no-repeat right;
+    background: #FFF url('down-arrow.png') no-repeat right);
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    width: 72%;
+    height: 30px;
+}
+.basic-grey textarea{
+    height:100px;
+}
+.basic-grey .button {
+    background: #E48F8F;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    cursor: pointer;
+}
+.basic-grey .button:hover {
+    background: #CF7A7A
+}
+
+	.basic-grey .addmore {
+	    background: #c5baba;
+	    border: none;
+	    padding: 5px 10px 5px 10px;
+	    color: #FFF;
+	    cursor: pointer;
+	    width: 20px;
+	    position: absolute;
+	    margin-left: 70px;
+	    margin-top: -46px;
+	}
+	.basic-grey .addmore:hover {
+	    background: #CF7A7A;
+}

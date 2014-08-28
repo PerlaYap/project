@@ -1,0 +1,394 @@
+
+@media print{
+	@page {
+		size: landscape
+	}
+}
+
+body{
+	overflow-y: auto;
+}
+
+h3, p, nav, ul, li{
+	font-family: "Times New Roman", Times, serif;
+	color: #1a1c1a;
+}
+
+
+body{
+	background-color: white;
+}
+
+img.caritaslogo{
+	display: block;
+	margin-right: auto;
+	width: 110px;
+	height: auto;
+	margin-left: auto;
+}
+
+h3{
+	text-align: center;
+	font-size: 15px;
+}
+
+table.dailycollectionsheet{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+	td{
+		font-size: 12px;
+		color: black;
+		padding: 5px;
+		text-align: center;
+	}
+
+	.ltr{
+		font-weight: bold;
+		text-align: center;
+	}
+
+		.num{
+			width: 20px;
+		}
+
+		.center{
+			width: 70px;
+		}
+
+		.SO{
+			width: 100px;
+		}
+
+		.sub{
+			width: 40px;
+		}
+
+		.mf{
+			width: 35px;
+		}
+
+		.total{
+			width: 80px;
+		}
+
+div.miniTables{
+	margin-left: 260px;
+	margin-top: -303px;
+	position: absolute;
+}
+
+div.info{
+	margin-left: 200px;
+}
+
+table.infoTable{
+	border: 1px solid black;
+	border-collapse: collapse;
+
+}
+	
+	.infoNum{
+		width: 15px;
+		padding: 0;
+	}
+
+	.infoSO{
+		width: 100px;
+		text-align: left;
+	}
+
+	.serial{
+		width: 80px;
+	}
+
+	.sign{
+		height: 50px;
+		width: 160px;
+	}
+
+.BM{
+	font-weight: bold;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: black;
+	width: 293px;
+}
+
+
+table.portfolioatrisk{
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+	.amt{
+		width: 90px;
+	}
+
+	.pax{
+		width: 40px;
+	}
+
+table.misreport{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+	
+	.branch{
+		width: 70px;
+		font-weight: bold;
+		font-size: 11px;
+	}
+
+	.label{
+		width: 125px;
+		text-align: left;
+		font-size: 12px;
+	}
+		.label1{
+			width: 125px;
+			text-align: right;
+			font-size: 12px;
+		}
+		.label2{
+			width: 125px;
+			text-align: right;
+			font-size: 12px;
+			font-style: italic;
+			font-weight: bold;
+		}
+
+	.number{
+		width: 70px;
+		font-size: 11px;
+		text-align: center;
+	}
+
+		.number1{
+			width: 70px;
+			font-size: 11px;
+			text-align: right;
+		}
+
+		.number2{
+			width: 70px;
+			font-size: 11px;
+			text-align: right;
+			font-weight: bold;
+		}
+
+table.paymentschedule{
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+	.pLabel{
+		width: 80px;
+		text-align: right;
+	}
+
+	.pName{
+		width: 350px;
+		text-align: left;
+	}
+
+	tr.date{
+		
+	}
+
+		.check{
+			border:0;
+			width: 20px;
+			height: 24px;
+			border-right-style: solid;
+			border-right-width: 1px;
+			border-right-color: black;
+			border-bottom-style: solid;
+			border-bottom-width: 1px;
+			border-bottom-color: black;
+		}
+
+		.date{
+			border:0;
+			width: 150px;
+			text-align: left;
+			border-right-style: solid;
+			border-right-width: 1px;
+			border-right-color: black;
+			border-bottom-style: solid;
+			border-bottom-width: 1px;
+			border-bottom-color: black;
+		}
+
+table.loanreceivable, .savingsbuildup{
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+	overflow-y:auto;
+	margin-top:-15px;
+}
+	.ctr{
+		width:30px;
+	}
+
+	.subctgry{
+		width: 50px;
+	}
+		.subctgry1{
+			width: 20px;
+		}	
+
+	.SO1{
+		width: 120px;
+	}
+
+	.bal{
+		width:60px;
+	}
+
+	.val{
+		font-size: 11.5px;
+		text-align: right;
+	}
+
+		.val1{
+			text-align: left;
+			font-size: 11.5px; 
+		}
+
+		.val2{
+			text-align: center;
+			font-size: 11.5px; 
+		}
+
+	.ltr1{
+		font-size:11px;
+		font-weight: bold;
+	}
+
+.totalDC{
+	font-weight: bold;
+	text-align: center;
+}
+
+
+.labelx{
+	width: 300px;
+	text-align: left;
+	font-weight: bold;
+	font-size: 14px;
+}
+	.label900{
+		width: 305px;
+		text-align: left;
+		font-weight: bold;
+		font-size: 14px;
+	}
+
+	.label00{
+		text-align: center;
+		font-size: 16px;
+		height: 20px;
+	}
+
+	.sublabel{
+		font-size: 13px;
+		text-align: left;
+		text-indent: 30px;
+	}
+
+	.labelinput{
+		width: 100px;
+		font-size: 13px;
+		text-align: center;
+	}
+
+	.labeltotal{
+		text-align: right;
+		font-weight: bold;
+		font-size: 13px;
+	}
+
+.num1{
+	width: 20px;
+	font-weight: bold;
+	text-indent: 5px;
+	font-size: 14px;
+}
+
+.individualDC{
+	border-collapse: collapse;
+}
+
+.hdrDC{
+	padding: 10px;
+	font-weight: bold;
+}
+
+.collectDC{
+	font-size: 12px;
+	text-align: center;
+}
+
+	.collectDC2{
+		font-size: 12px;
+		text-align: left;
+	}
+	.collectDC3{
+		font-size: 12px;
+		text-align: left;
+	}
+
+
+.BM2{
+	font-weight: bold;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: black;
+	height: 50px;
+	width: 270px;
+	vertical-align: text-top;
+}
+
+
+table.signature{
+	border-collapse: collapse;
+}
+
+	.sigBy{
+		font-size: 14px;
+		text-align: right;
+
+	}
+
+	.sig{
+		width: 160px;
+		border-bottom: 1px solid black;
+	}
+	.sig2{
+		width: 80px;
+		border-bottom: 1px solid black;
+	}
+
+
+table.pastdue{
+	border-collapse: collapse;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.PDlabel{
+	width: 100px;
+	text-align: right;
+	font-weight: bold;
+}
+	.PDcontent{
+		width: 400px;
+		text-align: left;
+		text-indent: 3px;
+	}

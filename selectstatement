@@ -1,0 +1,49 @@
+TO reset autoincrement in mysql
+ALTER TABLE tablename AUTO_INCREMENT = 1
+
+SELECT  STATEMENT ON THE PERSONNEL OF THE CARITAS
+
+
+Select branch.ControlNo as branchno, branch.BranchName, personnel.ControlNo as personnelno, personnel.FirstName, personnel.MiddleName, personnel.LastName, personnel.Rank, users.Username, users.Password
+from caritasbranch branch , caritaspersonnel personnel, caritasbranch_has_caritaspersonnel cp , users
+where branch.ControlNo = cp.CaritasBranch_ControlNo AND cp.CaritasPersonnel_ControlNo = personnel.ControlNo AND personnel.ControlNo = users.ControlNo
+
+
+-------------------------------------------------------------
+
+SELECT STATEMENT FOR CENTER
+
+-------CENTER'S UNDER A SPECIFIC BRANCH------
+
+SELECT caritasbranch.ControlNo as branchCNo, BranchName, caritascenters.ControlNo as CenterCNo, CenterNo, Members_ControlNo
+
+FROM caritasbranch, caritasbranch_has_caritascenters cc, caritascenters, caritascenters_has_members cm
+
+WHERE caritasbranch.ControlNo = cc.CaritasBranch_ControlNo AND caritascenters.ControlNo = cc.CaritasCenters_ControlNo AND caritascenters.ControlNo = cm.CaritasCenters_ControlNo AND
+BranchName='Tayuman'
+group by CenterNo
+
+------------select for SEARCH NAME(LASTNAME, FIRSTNAME MIDDLENAME)------------------------
+
+SELECT *  FROM `microfinance2`.`membersname`
+join members
+on members.ControlNo = membersname.ControlNo
+WHERE ( CONVERT(`FirstName` USING utf8) LIKE '%Chua%' OR CONVERT(`LastName` USING utf8) LIKE '%Chua%' OR CONVERT(`MiddleName` USING utf8) LIKE '%Chua%') AND members.Approved ='YES'
+ORDER BY `membersname`.`LastName` ASC
+
+
+
+-----select center number of the branch selected- with sample branchno---------------
+SELECT `CaritasCenters_ControlNo`, cc.`CenterNo` FROM `caritasbranch_has_caritascenters` , `caritascenters` cc WHERE `CaritasBranch_ControlNo` =1 and `CaritasCenters_ControlNo` = cc.`ControlNo` 
+
+
+
+
+------------------select pastdue number of centers in a specific branch---------------------------------
+SELECT  count(t.`TransactionType`) as pastdue ,m.CenterNo FROM `transaction` t 
+join (SELECT cm.`CaritasCenters_ControlNo`, cm.`Members_ControlNo`, c.CenterNo, bc.CaritasBranch_ControlNo as branch FROM `caritascenters_has_members` cm
+join `caritascenters` c on c.ControlNo = cm.`CaritasCenters_ControlNo`
+join `caritasbranch_has_caritascenters`bc
+on bc.CaritasCenters_ControlNo = c.ControlNo) m
+on t.`Members_ControlNo` = m.`Members_ControlNo`
+where t.`TransactionType` = 'Past Due' and month(t.`DateTime`)=7 and year(t.DateTime)=2014 and m.branch = 126

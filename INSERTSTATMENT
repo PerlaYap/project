@@ -1,0 +1,87 @@
+-INSERTING CENTER TO A BRANCH- CREATING NEW CENTER
+
+INSERT INTO `microfinance2`.`caritascenters` (`ControlNo`, `CenterNo`) VALUES (NULL, '30');
+
+-INSERTING CENTER TO A BRANCH- (ASSIGNING IT TO THE BRANCH)
+
+INSERT INTO `microfinance2`.`caritasbranch_has_caritascenters` (`CaritasBranch_ControlNo`, `CaritasCenters_ControlNo`, `Date`) VALUES ('2', '3', NOW());
+
+insert into transaction
+
+
+INSERT INTO `microfinance2`.`transaction` (`ControlNo`, `Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`) VALUES (NULL, '200', '2014-07-10 04:14:20', '2', '1', '4', 'Loan ');
+
+
+SELECT CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`)as Name
+
+
+FROM `caritascenters_has_members` cm, `membersname`mem
+
+WHERE mem.`ControlNo` = cm.`Members_ControlNo` and
+cm.`CaritasCenters_ControlNo` = 7
+
+
+
+SELECT mem.`ControlNo`,CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`)as Name,  `LoanExpense`, `Savings`, `CapitalShare`
+
+
+FROM `caritascenters_has_members` cm, `membersname`mem, `members` m
+
+WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`
+and
+cm.`CaritasCenters_ControlNo` = 1
+
+
+
+
+loan application
+
+SELECT `LoanApplication_ControlNo`, `Members_ControlNo`,`AmountRequested`, `Interest`
+FROM `loanapplication_has_members` lhm , `loanapplication` l
+WHERE lhm.`LoanApplication_ControlNo` = l.`ControlNo`
+
+
+
+
+joined two table
+
+SELECT * FROM (SELECT mem.`ControlNo`,CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`)as Name,  `LoanExpense`, `Savings`, `CapitalShare`
+
+
+FROM `caritascenters_has_members` cm, `membersname`mem, `members` m
+
+WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`)member
+
+join
+
+(SELECT `LoanApplication_ControlNo`, `Members_ControlNo`,`AmountRequested`, `Interest`
+FROM `loanapplication_has_members` lhm , `loanapplication` l
+WHERE lhm.`LoanApplication_ControlNo` = l.`ControlNo`) loan
+
+on member.ControlNo = loan.Members_ControlNo
+ 
+ 
+
+
+ with where center number
+
+ SELECT * FROM (SELECT mem.`ControlNo`,CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`)as Name,  `LoanExpense`, `Savings`, `CapitalShare`,`CaritasCenters_ControlNo`
+
+
+FROM `caritascenters_has_members` cm, `membersname`mem, `members` m
+
+WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`)member
+
+join
+
+(SELECT `LoanApplication_ControlNo`, `Members_ControlNo`,`AmountRequested`, `Interest`
+FROM `loanapplication_has_members` lhm , `loanapplication` l
+WHERE lhm.`LoanApplication_ControlNo` = l.`ControlNo`) loan
+
+on member.ControlNo = loan.Members_ControlNo
+
+where member.`CaritasCenters_ControlNo`= 2
+
+
+ 
+ 
