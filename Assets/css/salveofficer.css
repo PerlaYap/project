@@ -1199,3 +1199,93 @@ iframe.frame{
 	height: 720px;
 	border-color: 0;
 }
+
+h2.UserName{
+	color:#a7321a;
+	font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+	margin-left: 50px;
+}
+	
+	p.userInfo{
+		font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+		margin-left: 90px;
+		font-size: 13px;
+		margin-top: -13px;
+	}
+	p.userInfo1{
+		font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+		margin-left: 90px;
+		font-size: 13px;
+	}
+
+		p.pwInfo1{
+			font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+			font-size: 13px;
+		}
+		p.pwInfo{
+			font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+			font-size: 13px;
+		}
+
+
+
+div.underline{
+	border-bottom: 1px solid #575759;
+	margin: -30px 50px 0px 50px;
+}
+
+input.changepw{
+	background-color: transparent;
+	font-size: 11px;
+	border:0;
+}
+
+label.pwlabel{
+	width: 200px;
+	text-align: right;
+}
+
+	.changepw:hover{
+		color:#a7321a;
+		cursor: pointer;
+		text-decoration: underline;
+		font-size: 11px;
+	}
+
+#ChangePassword{
+	background-color: #c4c4c6;
+	padding: 10px 0px 10px 0px;
+	margin: 0px 50px 0px 50px;
+	text-align: center;
+}
+
+.btnPW{
+	margin-left: auto;
+	margin-right: auto;
+	border:0;
+	padding: 5px 10px 5px 10px;
+	width: 80px;
+	background-color: #873537;
+	color: #efeded;
+}
+
+.btnPW1{
+	margin-left: auto;
+	margin-right: auto;
+	border:0;
+	padding: 5px 10px 5px 10px;
+	width: 80px;
+}
+
+	.btnPW:hover, .btnPW1:hover{
+		cursor: pointer;
+		text-decoration: underline;
+	}
+
+
+.PWhdr{
+	font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #404042;
+}
