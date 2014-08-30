@@ -1,11 +1,13 @@
 <?php 
 $n = $this->session->userdata('branchno');
+$user = $this->session->userdata('firstname');
 $control_no =$n;
 
 date_default_timezone_set('Asia/Manila');
 
     $currentmonth = strtoupper(date("F"));
     $currentyear = date('Y');
+    $datetoday = date('F d, Y');
     $branch = strtoupper($this->session->userdata('branch'));
 
     $membertype = $this->db->query("SELECT CenterNo, y.* from caritascenters cc join (SELECT borrower.CenterControl, numsaver, numborrower from (SELECT c.CaritasCenters_ControlNo as centercontrol, m.ControlNo as member, m.Status, count(m.ControlNo) as numsaver from caritascenters_has_members c join members_has_membersmembershipstatus m on m.ControlNo = c.Members_ControlNo where c.CaritasCenters_ControlNo in (SELECT CaritasCenters_ControlNo from caritasbranch_has_caritascenters where CaritasBranch_ControlNo = $control_no) and m.Status = 'Active Saver' group by centercontrol)saver right join (SELECT c.CaritasCenters_ControlNo as centercontrol, m.ControlNo as member, m.Status, count(m.ControlNo) as numborrower from caritascenters_has_members c join members_has_membersmembershipstatus m on m.ControlNo = c.Members_ControlNo where c.CaritasCenters_ControlNo in (SELECT CaritasCenters_ControlNo from caritasbranch_has_caritascenters where CaritasBranch_ControlNo = $control_no) and m.Status = 'Borrower' group by centercontrol)borrower on saver.centercontrol = borrower.centercontrol)y on y.CenterControl = cc.ControlNo");
@@ -72,9 +74,9 @@ date_default_timezone_set('Asia/Manila');
     <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
-        <td class="sig">&nbsp</td>
+        <td class="sig"><?php echo $user ?></td>
         <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2">&nbsp</td>
+        <td class="sig2"><?php echo $datetoday; ?></td>
       </tr>
     </table>
     <br>
