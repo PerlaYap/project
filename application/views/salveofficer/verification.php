@@ -3,7 +3,17 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/branchmanager.css'); ?>">
 <script src="<?php echo base_url('Assets/js/general.js') ?>"></script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/blitzer/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
 
+<script>
+ $(function() {
+$( "#datepicker" ).datepicker();
+$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+});
+</script>
 
 	
 <div class="content3">
@@ -23,7 +33,8 @@
 			
 			<label>
 				<span>Birthdate :</span> </label>
-					        <select name="month" style="width:130px;" required>
+				<input type="text" id="datepicker" name="birthday">
+					        <!--<select name="month" style="width:130px;" required>
 						        <option value="" selected="selected"></option>
 						        <option value="01">January</option>
 						        <option value="02">February</option>
@@ -67,7 +78,8 @@
 							       <option value="<?php echo $y ?>"><?php echo $y ?></option>
 
 						        <?php  } ?>
-					        </select>
+					        </select>-->
+
 					        <br><br><br>
 					       <label><span></span>
 								<input type="submit" value="Verify" style="margin-left: 425px;" class="button">

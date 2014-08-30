@@ -15,10 +15,12 @@ class Salveofficer extends CI_Controller {
 		$result['data'] = $this->verifymember_model->getverificationinfo();
 		
 		if (count($result['data'])==0) {
+			$data=array('fname' => $this->input->post('firstname'), 'lname' => $this->input->post('lastname'),'mname' => $this->input->post('middlename'),'bday' => $this->input->post('birthday'));
+
 			echo "<script type='text/javascript'>alert('NO RESULT FOUND! You may proceed to add the new member.')</script>";
 			$this->load->view('header');
         	$this->load->view('navigation');
-			$this->load->view("Salveofficer/addnewmember");
+			$this->load->view("Salveofficer/addnewmember",$data);
 			$this->load->view('footer');
 		}else{
 

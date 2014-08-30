@@ -19,9 +19,7 @@ class Addnewmember_model extends CI_Model{
 		$middlename = $this->security->xss_clean($this->input->post('mname'));
 		$lastname  = $this->security->xss_clean($this->input->post('lname'));
         $memberid  = $this->security->xss_clean($this->input->post('memberid'));
-
         $approved  = $this->security->xss_clean($this->input->post('approved'));
-		$caritasbranch = $this->security->xss_clean($this->input->post('branch'));
 		$centerno = $this->security->xss_clean($this->input->post('centernumber'));
 
 		$home_address = $this->security->xss_clean($this->input->post('haddress'));
@@ -30,12 +28,8 @@ class Addnewmember_model extends CI_Model{
         $education = $this->security->xss_clean($this->input->post('educattain'));
 		$provincial_address = $this->security->xss_clean($this->input->post('paddress'));
 
-		$birth_month = $this->security->xss_clean($this->input->post('month'));
-		$birth_day = $this->security->xss_clean($this->input->post('day'));
-		$birth_year = $this->security->xss_clean($this->input->post('year'));
-
             //YYYY-MM-DD
-        $birthdate = $birth_year."-".$birth_month."-".$birth_day;
+        $birthdate = $this->security->xss_clean($this->input->post('bday'));
 
 		$birth_place = $this->security->xss_clean($this->input->post('birthplace'));
 
@@ -183,7 +177,6 @@ if (isset($dname)){
         }
 
     $this->addMembersContact($control_no,$contact_number);
-   // $this->addMembersBranch($caritasbranch, $centerno);
     $this->addMemberCenter($control_no, $centerno);
     $this->addSourceIncome($control_no, $BusinessType, $CompanyName, $CompanyContact, $YearInBusiness);
     
@@ -269,10 +262,6 @@ return true;
         $this->db->query("INSERT INTO memberscontact (`ControlNo`, `ContactNo`) VALUES ('$controlNo', '$contact')");
     }
 
-  //   public function addMembersBranch($caritasbranch, $centerno) {
-    //    $this->db->query("INSERT INTO caritasbranch_has_caritascenters (`CaritasBranch_ControlNo`, `CaritasCenters_ControlNo`) VALUES ('$caritasbranch', '$centerno')");
-   // }
-
     public function addMemberCenter($controlNo, $centerNo) {
         $this->db->query("INSERT INTO `microfinance2`.`caritascenters_has_members` (`CaritasCenters_ControlNo`, `Members_ControlNo`, `DateEntered`, `DateLeft`) VALUES ('$centerNo', '$controlNo', NOW(), NULL);");
 
@@ -282,10 +271,6 @@ return true;
     public function addSourceIncome($controlNo, $type, $companyName, $companyContact, $yearEntered) {
         $this->db->query("INSERT INTO sourceofincome (`ControlNo`, `BusinessType`, `CompanyName`, `CompanyContact`, `YearEntered`) VALUES ('$controlNo', '$type', '$companyName', '$companyContact', '$yearEntered')");
     }
-
-  //    public function addMembersPicture($controlNo, $location) {
-   //     $this->db->query("INSERT INTO memberspicture (`ControlNo`, `Picture`) VALUES ('$controlNo', '$location')");
-   // }
 
     //Members View
     

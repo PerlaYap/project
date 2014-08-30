@@ -10,12 +10,7 @@ class LoanApplication extends CI_Controller{
 		}
 
 	public function addnewloanprocess(){
-		$month = $this->input->post('month');
-		$day = $this->input->post('day');
-		$year = $this->input->post('year');
-		$loandate = $year."-".$month."-".$day;
-
-		$data=array('mid'=>$this->input->post('memberid'), 'date'=>$loandate);
+		$data=array('mid'=>$this->input->post('memberid'), 'date'=>$this->input->post('loandate'));
 		
 		$this->load->view("header");
 		$this->load->view("navigation");

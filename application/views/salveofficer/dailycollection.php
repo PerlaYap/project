@@ -149,7 +149,7 @@ function putinput(size){
 					<th style="width: 140px;">Active Release</th>
 					<th style="width: 140px;">Past Due</th>
 					<!-- <th>SBU</th> -->
-					<th style="width: 140px;">Loan Receivable</th>
+					<th style="width: 140px;">Loan Received</th>
 					<!-- <th>Withdrawal</th> -->
 					<th style="width: 140px;">Loan Balance</th>
 					<!-- <th>SBU <br>Total</th> -->

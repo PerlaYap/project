@@ -20,9 +20,9 @@ date_default_timezone_set('Asia/Manila');
 				   
 				    <label>
 				        <span>Name :</span></label>
-				        <input required="" id="name" type="text" name="fname" placeholder="First Name" style="width: 210px;"/>
-				        <input required="" id="name" type="text" name="mname" placeholder="Middle Name" style="width: 150px;"/>
-				        <input required="" id="name" type="text" name="lname" placeholder="Last Name" style="width: 175px;"/>
+				        <input readOnly="True" id="name" type="text" name="fname" placeholder="First Name" style="width: 210px;" value="<?php echo $fname ?>"/>
+				        <input readOnly="True" id="name" type="text" name="mname" placeholder="Middle Name" style="width: 150px;" value="<?php echo $mname ?>"/>
+				        <input readOnly="True" id="name" type="text" name="lname" placeholder="Last Name" style="width: 175px;" value="<?php echo $lname ?>"/>
 				 
 
 				    <label>
@@ -97,7 +97,8 @@ date_default_timezone_set('Asia/Manila');
 
 				    <label>
 				        <span>Birthday :</span> </label>
-					        <select name="month" style="width:80px;" required>
+				        <input readOnly="true" type="text" name="bday" style="width: 210px;" value="<?php echo $bday ?>" > 
+					       <!--<select name="month" style="width:80px;" required>
 						        <option value="" selected="selected"></option>
 						        <option value="01">January</option>
 						        <option value="02">February</option>
@@ -142,7 +143,7 @@ date_default_timezone_set('Asia/Manila');
 
 						        <?php  } ?>
 					        </select>
-					       
+					       -->
 					        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 
 					        Birthplace: 

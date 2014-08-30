@@ -247,7 +247,9 @@
 			header('Content-Type: image; charset=UTF-8');
 
 					?> 
+					<div>
 					<img src="<?php echo base_url($pic->Picture); ?>" class="user"> 
+				</div>
 
 					<?php } ?>
 
