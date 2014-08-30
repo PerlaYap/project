@@ -3,7 +3,12 @@
 <script src="<?php echo base_url('Assets/js/dailycollection.js'); ?>"></script>
 
 <?php 	$branch = $this->session->userdata('branchno');
-	$branchname = $this->session->userdata('branch'); ?>
+	$branchname = $this->session->userdata('branch'); 
+	$user = $this->session->userdata('firstname');
+
+	date_default_timezone_set('Asia/Manila');
+	$datetoday = date('F d, Y');
+	?>
 
 
 <?php 
@@ -302,9 +307,9 @@ function send(control_no){
 		<table class="signature" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Prepared by:</td>
-				<td class="sig">&nbsp</td>
+				<td class="sig">&nbsp<?php echo $user; ?></td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2">&nbsp</td>
+				<td class="sig2"><?php echo $datetoday; ?></td>
 			</tr>
 		</table>
 		<br>
