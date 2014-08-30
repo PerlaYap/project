@@ -101,20 +101,26 @@
 
 		<table style="margin-left: 300px;" >
 			<tr>
-				<!-- lyka -->
-				<?php echo $so; ?>
-
+				<td style="font-size: 13px;"><?php echo $so; ?></td>
+			</tr>
+			<tr>
 				<td class="BM2">Signature Above Printed Name of SO</td>
 			</tr>
-			<tr><!-- lyka -->
-				<?php echo $datetoday ?>
+			<tr>
+				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
+			</tr>
+			<tr>
+				
 				<td class="BM2">Date</td>
 			</tr>
 		</table>
 
-		<table style="margin-left: 750px; margin-top: -106px;" >
+		<table style="margin-left: 750px; margin-top: -132px;" >
 			<tr>
 				<td class="BM2">Signature Above Printed Name of Coordinator</td>
+			</tr>
+			<tr>
+				<td style="font-size: 13px;"><br></td>
 			</tr>
 			<tr>
 				<td class="BM2">Date</td>
