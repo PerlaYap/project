@@ -613,40 +613,81 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
 				?>
 					<table class="TransLog" >
 						<tr class="t">
-						<th>DATE</th>	
-						<th>LOAN PAYMENT</th>
-						<th>PAST DUE</th>
-						<!-- /*echo '<th>CREDIT</th>';*/ -->
-						<th>BALANCE</th>
+              <th style="width: 300px;">DATE</th> 
+  						<th style="width: 100px;">TIME</th>	
+  						<th style="width: 200px;">LOAN PAYMENT</th>
+  						<th style="width: 200px;">PAST DUE</th>
+  						<!-- /*echo '<th>CREDIT</th>';*/ -->
+  						<th style="width: 200px;">BALANCE</th>
+              <th style="width: 300px;">SALVE OFFICER</th> 
+
 						</tr>
-						<?php
-						$total=$amount;
-						foreach ($gettransaction->result() as $transact) {
-							
-							$type=$transact->TransactionType; ?>
-						
-						<tr>
-						<td class="tdate"><?php echo $transact->DateTime ?></td>
-							<?php if ($type=="Loan ") { ?>
-							
-							<td class="val"> <?php echo $transact->Amount ?></td>
-							<td class="val"></td>
-							<?php }else{ ?>
-							<td class="val"></td>
-							<td class="val"><?php echo $transact->Amount ?></td>
-							
-						<?php	} ?>
-							
-							<!-- /*echo '<td class="val"></td>';*/ -->
-							<?php
-							$f = $transact->TransactionType;
-						if ( $f=='Loan ') {
-						$total -= $transact->Amount;
-						}
-							?>
-						<td class="val"><?php echo $total ?></td>
+
+            <tr>
+              <td class="tdate" style="text-indent: 10px;">2014-08-05</td>
+              <td class="val">02:13pm</td>
+              <td class="val">200</td>
+              <td class="val"></td>
+              <td class="val">4400</td>
+              <td class="val">Lyka Dado</td>
+            </tr>
+
+            <tr>
+              <td class="tdate" style="text-indent: 10px;">2014-08-12</td>
+              <td class="val">04:13pm</td>
+              <td class="val"></td>
+              <td class="val">200</td>
+              <td class="val">4400</td>
+              <td class="val">Lyka Dado</td>
+            </tr>
+
+            <tr>
+              <td class="tdate" style="text-indent: 10px;">2014-08-19</td>
+              <td class="val">03:23pm</td>
+              <td class="val">200</td>
+              <td class="val"></td>
+              <td class="val">4200</td>
+              <td class="val">Lyka Dado</td>
+            </tr>
+
+            <tr>
+              <td class="tdate" style="text-indent: 10px;">2014-08-26</td>
+              <td class="val">03:54pm</td>
+              <td class="val"></td>
+              <td class="val">200</td>
+              <td class="val">4200</td>
+              <td class="val">Lyka Dado</td>
+            </tr>
+
+
+    						<?php
+    						$total=$amount;
+    						foreach ($gettransaction->result() as $transact) {
+    							
+    							$type=$transact->TransactionType; ?>
+    						
+    	<!-- 			<tr>
+    						<td class="tdate"><?php echo $transact->DateTime ?></td>
+    							<?php if ($type=="Loan ") { ?>
+    							
+    							<td class="val"> <?php echo $transact->Amount ?></td>
+    							<td class="val"></td>
+    							<?php }else{ ?>
+    							<td class="val"></td>
+    							<td class="val"><?php echo $transact->Amount ?></td>
+    							
+    						<?php	} ?>
+    							
+    							<!-- /*echo '<td class="val"></td>';*/ -->
+    			<!--				<?php
+    							$f = $transact->TransactionType;
+    						if ( $f=='Loan ') {
+    						$total -= $transact->Amount;
+    						}
+    							?>
+    						<td class="val"><?php echo $total ?></td>
 						</tr>
-					<?php } ?>
+					<?php } ?> -->
 				
 
 					</table>
@@ -703,6 +744,8 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
 								<!-- <th>CREDIT</th> -->
 								<th style="width:200px;">BALANCE</th>
 								<th style="width:200px;">TRANS CODE</th>
+                <th style="width:200px;">SALVE OFFICER</th>
+
 							</tr>
 
 							<?php $totsavings=0; ?>
@@ -711,7 +754,7 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
 							
 							<tr>
 								<td class="val"><?php echo $save->DateTime; ?></td>
-							<?php if ($fa =="Withdrawal ") {?>
+							     <?php if ($fa =="Withdrawal ") {?>
 								<td class="val"></td>
 								<td class="val"><?php echo $save->Amount; ?></td>
 								
@@ -740,6 +783,10 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
 								<?php } elseif ($fa=="Savings") { ?>
 									<td class="val">DP</td>	
 								<?php }?>
+
+<!--------------------------INPUT SALVE OFFICER ----->
+                <td class="val"></td>
+
 								
 							</tr>	
 
