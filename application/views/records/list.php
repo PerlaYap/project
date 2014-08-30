@@ -54,6 +54,11 @@
 				<td class="docuname"><a href="<?php echo site_url('records/volunteer'); ?>"> Voluntarily Terminated Accounts </a></td>
 				<td class="lastupdate">7/9/2014</td>
 			</tr>
+			<tr>
+				<td>07.</td>
+				<td class="docuname"><a href="#"> Audit Trail </a></td>
+				<td class="lastupdate">8/30/2014</td>
+			</tr>
 		</table>
 
 		
