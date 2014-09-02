@@ -1,6 +1,14 @@
 <title>Summary Report</title>
 
-<?php $loanInfo=$this->db->query("SELECT loanapplication_ControlNo AS LoanControl, MemberControl, BranchControl, BranchName, CenterNo, Name, ApplicationNumber, AmountRequested, Interest, DateApplied, DayoftheWeek, LoanType, CapitalShare FROM loanapplication_has_members lhmem
+<?php 
+
+date_default_timezone_set('Asia/Manila');
+$datetoday = date('F d, Y');
+
+$user = $this->session->userdata('firstname');
+
+
+$loanInfo=$this->db->query("SELECT loanapplication_ControlNo AS LoanControl, MemberControl, BranchControl, BranchName, CenterNo, Name, ApplicationNumber, AmountRequested, Interest, DateApplied, DayoftheWeek, LoanType, CapitalShare FROM loanapplication_has_members lhmem
 LEFT JOIN (SELECT CenterNo, Members_ControlNo AS MemberControl, concat(LastName,', ',FirstName,' ', MiddleName) AS Name
 FROM caritascenters_has_members cchmem
 LEFT JOIN membersname mn ON cchmem.Members_ControlNo=mn.ControlNo
@@ -133,9 +141,9 @@ else
 		<table class="signature" style="margin-left:auto; margin-right:auto; margin-top: 800px;">
 			<tr>
 				<td class="sigBy">Prepared by:</td>
-				<td class="sig">&nbsp</td>
+				<td class="sig"><?php echo $user ?></td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2">&nbsp</td>
+				<td class="sig2"><?php echo $datetoday; ?></td>
 			</tr>
 		</table>
 		<br>

@@ -9,6 +9,8 @@
     $currentmonth = strtoupper(date("F"));
     $currentyear = date('Y');
     $branch = strtoupper($this->session->userdata('branch'));
+    $user = strtoupper($this->session->userdata('firstname'));
+    $datetoday = date('F d, Y');
   ?>
 
 <head>
@@ -73,9 +75,9 @@
     <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
-        <td class="sig">&nbsp</td>
+        <td class="sig"><?php echo $user; ?></td>
         <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2">&nbsp</td>
+        <td class="sig2"><?php echo $datetoday; ?></td>
       </tr>
     </table>
     <br>
