@@ -784,8 +784,8 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
 									<td class="val">DP</td>	
 								<?php }?>
 
-<!--------------------------INPUT SALVE OFFICER ----->
-                <td class="val"></td>
+
+                <td class="val">Lyka Dado</td>
 
 								
 							</tr>	
