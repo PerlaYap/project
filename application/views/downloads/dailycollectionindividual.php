@@ -101,9 +101,13 @@
 
 		<table style="margin-left: 300px;" >
 			<tr>
-				<td class="BM2">Signature Above Printed Name of BM</td>
+				<!-- lyka -->
+				<?php echo $so; ?>
+
+				<td class="BM2">Signature Above Printed Name of SO</td>
 			</tr>
-			<tr>
+			<tr><!-- lyka -->
+				<?php echo $datetoday ?>
 				<td class="BM2">Date</td>
 			</tr>
 		</table>
