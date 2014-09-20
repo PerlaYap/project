@@ -180,8 +180,8 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 								<?php echo $loanpending+$loanapproved; ?>	</div>
 
 							<?php	} else{ ?>
-							<div class="loannotification">
-								<?php echo $loanapproved; ?>	</div>
+							<!-- <div class="loannotification">
+								<?php echo $loanapproved; ?>	</div> -->
 
 							<?php }?>
 					 	</a>
@@ -201,8 +201,10 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 							<!-- <li><a href="#" style="cursor: default;">Loan Application Status</a> -->
 								<!-- <ul> -->
 									<li><a href="<?php echo site_url('loanapplication/approvedloans'); ?>">Approved Loan 
-
-										<div class="loansubnotif"><?php echo $loanapproved ?></div></a></li>
+										<?php if (!$loanapproved==0) { ?>
+											<div class="loansubnotif"><?php echo $loanapproved ?></div>
+										<?php } ?>
+										</a></li>
 									<!-- <li><a href="<?php echo site_url('loanapplication/loanrejected'); ?>">Rejected Loan</a></li> -->
 								<!-- </ul> -->
 
