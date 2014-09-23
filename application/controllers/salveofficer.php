@@ -34,8 +34,9 @@ class Salveofficer extends CI_Controller {
 
 	}
 	public function gotoprofile(){
-		echo $sub = $_GET['submitvalue'];
+		 $sub = $_GET['submitvalue'];
 		if ($sub=="View Profile") {
+
 		$this->load->view('header');
         $this->load->view('navigation');
         $this->load->view("general/profile");

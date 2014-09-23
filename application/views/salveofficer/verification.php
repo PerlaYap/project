@@ -11,7 +11,7 @@
 <script>
  $(function() {
 $( "#datepicker" ).datepicker();
-$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+$( "#datepicker" ).datepicker( "option", "dateFormat", "yyyy-mm-dd" );
 });
 </script>
 

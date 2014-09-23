@@ -39,7 +39,7 @@
 		 </label>
 		 <label>
 		 	<span>Status:</span>
-			<input id="" type="text" name="" value="<?php echo $stat; ?>" style="width: 30%;" disabled/> since <input id="" type="text" style="width: 30%;" name="" value="<?php echo $date; ?>" disabled/>
+			<input id="" type="text" name="" value="<?php echo $stat; ?>" style="width: 30%;" disabled/> Since <input id="" type="text" style="width: 30%;" name="" value="<?php echo $date; ?>" disabled/>
 		 </label>
 		 
 		<br><br>

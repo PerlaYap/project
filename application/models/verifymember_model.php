@@ -8,13 +8,14 @@ class Verifymember_model extends CI_Model{
 		$firstname = $this->security->xss_clean($this->input->post('firstname'));
 		$middlename = $this->security->xss_clean($this->input->post('middlename'));
 		$lastname = $this->security->xss_clean($this->input->post('lastname'));
-		$month = $this->security->xss_clean($this->input->post('month'));
+		/*$month = $this->security->xss_clean($this->input->post('month'));
 		$day = $this->security->xss_clean($this->input->post('day'));
-		$year = $this->security->xss_clean($this->input->post('year'));
+		$year = $this->security->xss_clean($this->input->post('year'));*/
+		$bday = $this->security->xss_clean($this->input->post('birthday'));
 
 		  //YYYY-MM-DD
-		$birthdate = $year."-".$month."-".$day;
-		$v_result = $this->checkifexist($firstname, $middlename, $lastname, $birthdate);
+		// $birthdate = $year."-".$month."-".$day;
+		$v_result = $this->checkifexist($firstname, $middlename, $lastname, $bday);
 		return $v_result->result();
 
 	}
