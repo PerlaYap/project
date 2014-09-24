@@ -17,6 +17,12 @@ class Login extends CI_Controller {
 		$this->load->view('salveofficer/homepage'); 
         $this->load->view('footer');
      }
+     public function editpassword(){
+        $this->load->view('header');
+        $this->load->view('navigation');
+        $this->load->view('general/usereditpassword'); 
+        $this->load->view('footer');
+     }
 	public function process(){
 
 		//load the session library

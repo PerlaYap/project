@@ -11,7 +11,7 @@
 
 		<div class="accent">
 				<p class="welcome">
-					WELCOME! <?php echo $this->session->userdata('firstname'); ?> &nbsp&nbsp 
+					WELCOME! <a href="<?php echo site_url('login/editpassword'); ?>" class="welcome"><?php echo $this->session->userdata('firstname'); ?></a> &nbsp&nbsp 
 					<a href="<?php echo site_url('login'); ?>" class="welcome">[Sign Out]</a>
 				</p>
 
