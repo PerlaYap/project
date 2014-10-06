@@ -5,7 +5,7 @@ title>MIS Monthly Report</title>
 	<?php //$month = $_POST['month'];
 			//$year = $_POST['year'];
 
-			$month = 7;
+			$month = 8;
 			$year = 2014;
 
 			$prev = $year-1;
@@ -48,30 +48,107 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MIS REPORT <br> For The Month Of <b>
 		<?php echo $yue ?> <?php echo $year ?></b></h3>
 
+<?php 
+
+$getSavings = $this->db->query("SELECT ControlNo, BranchName, IFNULL(BegSavings,0) AS BegSaving, IFNULL(CurrentSaving,0) AS CurrentSaving, IFNULL(Withdrawal,0) AS CurrentWithdrawal, IFNULL(BegSavings,0)+IFNULL(CurrentSaving,0)-IFNULL(Withdrawal,0) AS Total FROM
+CaritasBranch cb
+LEFT JOIN 
+(SELECT SUM(PastCollection) AS BegSavings, BranchControl
+FROM (SELECT IFNULL(Saving,0)-IFNULL(Withdraw,0) AS PastCollection, Uno.BranchControl, Uno.Month, Uno.Year
+FROM (SELECT SUM(Amount) AS Saving, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
+(SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
+FROM Transaction 
+WHERE TransactionType='Savings' AND (Month(DateTime)<'$month' AND Year(DateTime)<='$year'))Alpha
+LEFT JOIN
+(SELECT MemberControl, BranchControl, DateEntered, DateLeft FROM 
+(SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
+FROM caritascenters_has_members cchm 
+LEFT JOIN caritasbranch_has_caritascenters cbhcc 
+ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
+LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
+ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
+WHERE Month(DateTime)<'$month' AND Year(DateTime)<='$year'
+GROUP BY Month(DateTime),Year(DateTime),BranchControl)UNO
+LEFT JOIN(SELECT SUM(Amount) AS Withdraw, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
+(SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
+FROM Transaction 
+WHERE TransactionType='Withdrawal' AND (Month(DateTime)<'$month' AND Year(DateTime)<='$year'))Alpha
+LEFT JOIN
+(SELECT MemberControl, BranchControl, DateEntered, DateLeft FROM 
+(SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
+FROM caritascenters_has_members cchm 
+LEFT JOIN caritasbranch_has_caritascenters cbhcc 
+ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
+LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
+ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
+WHERE Month(DateTime)<'$month' AND Year(DateTime)<='$year'
+GROUP BY Month(DateTime),Year(DateTime),BranchControl) DOS ON (UNO.Month=DOS.Month AND UNO.Year=DOS.Year AND Uno.BranchControl=Dos.BranchControl))Alpha
+GROUP BY Alpha.BranchControl)BegBal
+ON cb.ControlNo=BegBal.BranchControl
+LEFT JOIN
+(SELECT SUM(Amount) AS CurrentSaving, BranchControl
+FROM (SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
+FROM Transaction 
+WHERE TransactionType='Savings' AND (Month(DateTime)='$month' AND Year(DateTime)='$year'))Alpha
+LEFT JOIN
+(SELECT MemberControl, BranchControl, DateEntered, DateLeft 
+FROM (SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
+FROM caritascenters_has_members cchm 
+LEFT JOIN caritasbranch_has_caritascenters cbhcc 
+ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
+LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
+ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
+WHERE Month(DateTime)='$month' AND Year(DateTime)='$year'
+GROUP BY BranchControl)CurSaving ON CurSaving.BranchControl=cb.ControlNo
+LEFT JOIN
+(SELECT SUM(Amount) AS Withdrawal, BranchControl
+FROM (SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
+FROM Transaction 
+WHERE TransactionType='Withdrawal' AND (Month(DateTime)='$month' AND Year(DateTime)='$year'))Alpha
+LEFT JOIN
+(SELECT MemberControl, BranchControl, DateEntered, DateLeft 
+FROM (SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
+FROM caritascenters_has_members cchm 
+LEFT JOIN caritasbranch_has_caritascenters cbhcc 
+ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
+LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
+ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
+WHERE Month(DateTime)='$month' AND Year(DateTime)='$year'
+GROUP BY BranchControl)CurWithdrawal ON CurWithdrawal.BranchControl=cb.ControlNo");
+?>
 	<br>
 	<table class="misreport" border="1">
 		<tr>
 			<td class="label"><b>SAVINGS BUILD-UP</b></td>
-			<td colspan="15"></td>
+			<?php foreach ($getSavings->result() as $data){
+			echo '<td>'.$data->BranchName.'</td>';
+			} ?>
 		</tr>
+
 		<tr>
 			<td class="label1">Beginning</td>
-			<td class="number1"></td>
+			<?php foreach($getSavings->result() as $data){
+				echo '<td class="number1">'.$data->BegSaving.'</td>';
+			} ?>
 
 		</tr>
+
 		<tr>
 			<td class="label1">Savings Collection</td>
-			<td class="number1"></td>
-
+			<?php foreach ($getSavings->result() as $data) {
+			echo '<td class="number1">'.$data->CurrentSaving.'</td>';
+		}?>
 		</tr>
+
 		<tr>
 			<td class="label1">SBU Int</td>
 			<td class="number1"></td>
-
 		</tr>
 		<tr>
 			<td class="label1">Withdrawal</td>
-			<td class="number1"></td>
+			<?php foreach( $getSavings->result() as $data){
+				echo '<td class="number1">'.$data->CurrentWithdrawal.'</td>';
+			} ?>
 	
 		</tr>
 		<tr>
@@ -81,7 +158,9 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 		</tr>
 		<tr>
 			<td class="label"><i><b>Total Savings Mobilized</b></i></td>
-			<td class="number2"></td>
+			<?php foreach( $getSavings->result() as $data){
+				echo '<td class="number1">'.$data->Total.'</td>';
+			} ?>
 
 		</tr>
 		<tr>
