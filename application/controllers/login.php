@@ -23,6 +23,10 @@ class Login extends CI_Controller {
         $this->load->view('general/usereditpassword'); 
         $this->load->view('footer');
      }
+     public function editpasswordcheck(){
+        $this->load->model('editpassword_model');
+        $this->editpassword_model->editpwd();
+     }
 	public function process(){
 
 		//load the session library
