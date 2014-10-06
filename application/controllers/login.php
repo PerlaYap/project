@@ -25,7 +25,30 @@ class Login extends CI_Controller {
      }
      public function editpasswordcheck(){
         $this->load->model('editpassword_model');
-        $this->editpassword_model->editpwd();
+        $message = $this->editpassword_model->editpwd();
+
+        if ($message == "PS") {
+            echo "<script type='text/javascript'>alert('Successfully Changed Password.')</script>";
+                $this->load->view('header');
+                $this->load->view('navigation');
+                $this->load->view('salveofficer/homepage'); 
+                $this->load->view('footer');            
+
+        }else if ($message =="WCoP") {
+            echo "<script type='text/javascript'>alert('Confirm password did not match new password.')</script>";
+                $this->load->view('header');
+                $this->load->view('navigation');
+                $this->load->view('general/usereditpassword'); 
+                $this->load->view('footer');
+                
+        }else if ($message == "WCuP") {
+            echo "<script type='text/javascript'>alert('Wrong current password.')</script>";
+                $this->load->view('header');
+                $this->load->view('navigation');
+                $this->load->view('general/usereditpassword'); 
+                $this->load->view('footer');
+        }
+
      }
 	public function process(){
 
