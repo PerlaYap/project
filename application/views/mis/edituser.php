@@ -20,23 +20,23 @@ $getOfficer = $this->db->query("SELECT FirstName, MiddleName,  LastName, Personn
 	
 					 <label>
 				        <span>Control Number:</span></label>
-						 <input type='text' name='controlno' value="<?php echo $control_no; ?>">
+						 <input type='text' name='controlno' readonly value="<?php echo $control_no; ?>">
 
 				    <label>
 				        <span>Name :</span></label>
 				        
-				        <input id="name" type="text" name="fname" value="<?php echo $off->FirstName; ?>" style="width: 170px;"  />
-				        <input id="name"  type="text" name="mname" value="<?php echo $off->MiddleName; ?>" style="width: 175px;" />
-				    	<input id="name"  type="text" name="lname" value="<?php echo $off->LastName; ?>" style="width: 180px;" />
+				        <input id="name" readonly type="text" name="fname" value="<?php echo $off->FirstName; ?>" style="width: 170px;"  />
+				        <input id="name" readonly type="text" name="mname" value="<?php echo $off->MiddleName; ?>" style="width: 175px;" />
+				    	<input id="name" readonly type="text" name="lname" value="<?php echo $off->LastName; ?>" style="width: 180px;" />
 				   
 
 				    <label>
 				        <span>Personnel ID :</span> </label>
 				        <input id="personnelid" type="text" name="username"  value="<?php echo $off->PersonnelID; ?>" />
 				        	
-				       <label>
+				       <!-- <label>
 				        <span>Password :</span> </label>
-				        <input id="password" type="password" name="password"  value="<?php echo $off->Password; ?>" />		    
+				        <input id="password" type="password" name="password"  value="<?php echo $off->Password; ?>" /> -->		    
 
 				    <label>
 				        <span>Position :</span> </label>

@@ -22,25 +22,29 @@ $branches = $this->db->query("SELECT * FROM `caritasbranch` WHERE 1 ORDER BY `ca
 	
 				    <label>
 				        <span>Name :</span></label>
-				        <input id="name" type="text" name="fname" placeholder="First Name" style="width: 180px;"/>
-				        <input id="name" type="text" name="mname" placeholder="Middle Name" style="width: 170px;"/>
-				        <input id="name" type="text" name="lname" placeholder="Last Name" style="width: 175px;"/>
+				        <input id="name" type="text" required name="fname" placeholder="First Name" style="width: 180px;"/>
+				        <input id="name" type="text" required name="mname" placeholder="Middle Name" style="width: 170px;"/>
+				        <input id="name" type="text" required name="lname" placeholder="Last Name" style="width: 175px;"/>
 				   
 
 				    <label>
 				        <span>Personnel ID :</span> </label>
-				        <input id="personnelid" type="text" name="username"/>
+				        <input id="personnelid" required type="text" name="username"/>
 				        			    
 
 				    <label>
 				        <span>Password :</span> </label>
-				        <input id="password" type="password" name="password" style="width: 208px;" />
+				        <input id="password" type="password" required name="password" style="width: 208px;" />
+				        &nbsp&nbsp&nbsp&nbsp&nbsp
+				        <label>
+				        <span>Confirm Password :</span> </label>
+				        <input id="password" type="password" name="password" style="width: 208px;" required />
 				        &nbsp&nbsp&nbsp&nbsp&nbsp
 				      
 
 				    <label>
 				        <span>Position :</span> </label>
-					        <select name="position" style="width:300px;">
+					        <select name="position" required style="width:300px;">
 						        <option value="" selected="selected"></option>
 						        <option value="salveofficer">Salve Officer</option>
 						        <option value="branchmanager">Branch Manager</option>

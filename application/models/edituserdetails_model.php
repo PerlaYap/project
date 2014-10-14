@@ -46,7 +46,7 @@ class Edituserdetails_model extends CI_Model{
 	
 	
         public function updateusers($controlno, $username, $password, $active){
-		$this->db->query("UPDATE `users` SET `Username` = '$username', `Password` = '$password', `IsActive` = '$active'
+		$this->db->query("UPDATE `users` SET `Username` = '$username', `IsActive` = '$active'
 			WHERE `ControlNo`='$controlno';");
 	}
 
