@@ -36,6 +36,27 @@ class Edituserdetails_model extends CI_Model{
 
 
      }
+     public function changeposition(){
+			$controlno = $this->security->xss_clean($this->input->post('controlno'));
+			$position  = $this->security->xss_clean($this->input->post('position'));
+
+			$this->updateposition($controlno, $position);
+     }
+
+     public function updateposition($controlno, $position){
+     	$this->db->query("UPDATE `caritaspersonnel` SET `Rank`='$position'	WHERE `ControlNo`='$controlno';");
+     }
+
+     public  function disableuser(){
+     		$controlno = $this->security->xss_clean($this->input->post('controlno'));
+     		$this->db->query("UPDATE `users` SET`IsActive` = '0'
+			WHERE `ControlNo`='$controlno';");
+     }
+     public  function enableuser(){
+     		$controlno = $this->security->xss_clean($this->input->post('controlno'));
+     		$this->db->query("UPDATE `users` SET`IsActive` = '1'
+			WHERE `ControlNo`='$controlno';");
+     }
 
 	
 	public function updatecaritaspersonnel($controlno, $firstname, $middlename, $lastname, $position, $username){

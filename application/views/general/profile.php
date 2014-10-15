@@ -399,7 +399,13 @@ WHERE Members_ControlNo='$control_no' AND ControlNo IS NOT NULL");
 					<p class="info"><b>Educational Attainment: </b><?php echo $edu; ?> </p>
 					<p class="info"><b>Religion: </b> <?php echo $religion; ?> </p>
 					
-					<form action='editprofile' method='post'>
+          <!-- lyka for edit -->
+					<form action='' method='post'>
+            <input type='hidden'  name='controlno' value='<?php echo $control_no ?>' >
+            <input type="submit" class="editbtn" value="Terminate" />
+          </form>
+          <br>
+          <form action='editprofile' method='post'>
 						<input type='hidden'  name='controlno' value='<?php echo $control_no ?>' >
 						<input type="submit" class="editbtn" value="Edit Profile" />
 					</form>

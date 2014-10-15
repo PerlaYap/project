@@ -30,7 +30,7 @@
 				<p class="info"><b>Rank: </b>  <?php echo $row->Rank; ?>  </p>
 				<p class="info"><b>Branch: </b>  <?php echo $row->BranchName; ?>  </p>
 				
-			<input type="text" class="editbtn" value="Edit User" onclick="send('<?php echo $row->ControlNo ?>')" style="margin-left: 720px;"/>
+			<input type="button" class="editbtn" value="Edit User" onclick="send('<?php echo $row->ControlNo ?>')" style="width: 140px;"/>
 	<?php  }?>
 	
 		</div>

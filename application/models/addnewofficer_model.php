@@ -21,21 +21,29 @@ class Addnewofficer_model extends CI_Model{
 
 		$username  = $this->security->xss_clean($this->input->post('username'));
 		$password  = $this->security->xss_clean($this->input->post('password'));
+		$confirmpassword  = $this->security->xss_clean($this->input->post('confirmpassword'));
 	
 
 		$position  = $this->security->xss_clean($this->input->post('position'));
 		$active  = $this->security->xss_clean($this->input->post('active'));
 		
 
-	
-  	$this->addCaritasPersonnel($firstname, $middlename, $lastname, $position, $username );
+		if ($confirmpassword == $password) {
+			
+			$this->addCaritasPersonnel($firstname, $middlename, $lastname, $position, $username );
         
-	$control_no =   $this->getOfficersControlNumber();
-    $this->addUsers($control_no,$username, $password, $active);
+			$control_no =   $this->getOfficersControlNumber();
+    			$this->addUsers($control_no,$username, $password, $active);
+				return true;
+			}else{
+				return false;
+
+			}	
+  	
 
 
     
-return true;
+
     }
 	 //adding functions
 

@@ -62,7 +62,7 @@ class Login extends CI_Controller {
         $result = $this->login_model->validate();
 
         if (empty($result)) {
-            echo "<script type='text/javascript'>alert('Wrong Username or Password!')</script>";
+            echo "<script type='text/javascript'>alert('Access Denied! Kindly check your accessibility and account username and password.')</script>";
         	
         	 redirect('/','refresh');
         	

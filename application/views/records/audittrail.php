@@ -1,13 +1,14 @@
 <TITLE> Audit Trail</TITLE>
 
-<!--<link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">-->
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
 
-  <link rel="stylesheet" type="text/css" href="../../../Assets/css/reports.css">  
+  <!-- <link rel="stylesheet" type="text/css" href="../../../Assets/css/reports.css">   -->
 
 
 <body>
-	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="../../../Assets/images/caritaslogo.png" class="caritaslogo"></a>
-	<!-- <a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a> -->
+	<!-- <a href="<?php echo site_url('login/homepage'); ?>"> <img src="../../../Assets/images/caritaslogo.png" class="caritaslogo"></a> -->
+	 <a href="<?php echo site_url('login/homepage'); ?>"> 
+	 	<img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a> 
 
 	
 	<h3>

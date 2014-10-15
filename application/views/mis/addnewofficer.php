@@ -38,7 +38,7 @@ $branches = $this->db->query("SELECT * FROM `caritasbranch` WHERE 1 ORDER BY `ca
 				        &nbsp&nbsp&nbsp&nbsp&nbsp
 				        <label>
 				        <span>Confirm Password :</span> </label>
-				        <input id="password" type="password" name="password" style="width: 208px;" required />
+				        <input id="password" type="password" name="confirmpassword" style="width: 208px;" required />
 				        &nbsp&nbsp&nbsp&nbsp&nbsp
 				      
 

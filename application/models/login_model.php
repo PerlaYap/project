@@ -16,7 +16,7 @@ class Login_model extends CI_Model{
 		 $password = $this->security->xss_clean($this->input->post('password'));	
 		$query1 = $this->db->query("Select branch.ControlNo as branchno, branch.BranchName, personnel.ControlNo as personnelno, personnel.FirstName, personnel.MiddleName, personnel.LastName, personnel.Rank, users.Username, users.Password
 from caritasbranch branch , caritaspersonnel personnel, caritasbranch_has_caritaspersonnel cp , users
-where branch.ControlNo = cp.CaritasBranch_ControlNo AND cp.CaritasPersonnel_ControlNo = personnel.ControlNo AND personnel.ControlNo = users.ControlNo ");
+where branch.ControlNo = cp.CaritasBranch_ControlNo AND cp.CaritasPersonnel_ControlNo = personnel.ControlNo AND personnel.ControlNo = users.ControlNo AND users.IsActive = 1 ");
 
 		$q = $query1->result();
 		 $size = count($q);

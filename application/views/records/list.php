@@ -56,7 +56,7 @@
 			</tr>
 			<tr>
 				<td>07.</td>
-				<td class="docuname"><a href="#"> Audit Trail </a></td>
+				<td class="docuname"><a href="<?php echo site_url('records/audittrail'); ?>"> Audit Trail </a></td>
 				<td class="lastupdate">8/30/2014</td>
 			</tr>
 		</table>

@@ -8,25 +8,20 @@ class Records extends CI_Controller {
         $this->load->view('navigation');
 		$this->load->view("records/list");
 		$this->load->view('footer');
-
 	}
-
 	public function terminate(){
 
 		$this->load->view('header');
         $this->load->view('navigation');
 		$this->load->view("records/terminated");
 		$this->load->view('footer');
-
 	}
-
 	public function pdm(){
 
 		$this->load->view('header');
         $this->load->view('navigation');
 		$this->load->view("records/pdm");
 		$this->load->view('footer');
-
 	}
 	public function borrower(){
 
@@ -34,36 +29,28 @@ class Records extends CI_Controller {
         $this->load->view('navigation');
 		$this->load->view("records/borrower");
 		$this->load->view('footer');
-
 	}
-
 	public function activesaver(){
 
 		$this->load->view('header');
         $this->load->view('navigation');
 		$this->load->view("records/activesaver");
 		$this->load->view('footer');
-
 	}
-
 	public function dormantsaver(){
 
 		$this->load->view('header');
         $this->load->view('navigation');
 		$this->load->view("records/dormantsaver");
 		$this->load->view('footer');
-
 	}
-
-		public function volunteer(){
+	public function volunteer(){
 
 		$this->load->view('header');
         $this->load->view('navigation');
 		$this->load->view("records/volunteer");
 		$this->load->view('footer');
-
 	}
-
 	public function profiles(){
 
         $this->load->view('header');
@@ -72,6 +59,12 @@ class Records extends CI_Controller {
         $this->load->view("footer");
        
         }	
+    public function audittrail(){
+		
+        $this->load->view("records/audittrail");
+       
 	}
 
+	}
+	
 ?>

@@ -259,10 +259,15 @@ WHERE lhm.Members_ControlNo='$control_no' and Status='Active'");
 					<p class="info"><b>Educational Attainment: </b><?php echo $edu; ?> </p>
 					<p class="info"><b>Religion: </b> <?php echo $religion; ?> </p>
 					
-					<form action='editprofile' method='post'>
+					<form>
+						<input type='hidden'  name='controlno' value='<?php echo $control_no ?>' >
+						<input type="submit" class="editbtn" value="Terminate" />
+					</form>
+					<!-- <form action='editprofile' method='post'>
 						<input type='hidden'  name='controlno' value='<?php echo $control_no ?>' >
 						<input type="submit" class="editbtn" value="Edit Profile" />
-					</form>
+					</form> -->
+
 				    
 
 				    <br>

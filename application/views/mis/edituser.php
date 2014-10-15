@@ -63,25 +63,21 @@ $getOfficer = $this->db->query("SELECT FirstName, MiddleName,  LastName, Personn
 				        <span></span>
 				    <?php    if ($off->IsActive==1) { ?>
 	
-											<input type='hidden' name='active' value='0'>
+											<!-- <input type='hidden' name='active' value='0'> -->
 
-										<input type='submit' value='Disable' class='button'/>
+										<input type='submit' name='subs' value='Disable' class='button'/>
 										
 							<?php			}else{ ?> 
 											
-											<input type='hidden' name='active' value='1'>
-										<input type='submit' value='Enable' class='button'/>
+											<!-- <input type='hidden' name='active' value='1'> -->
+										<input type='submit' name='subs' value='Enable' class='button'/>
 									
 								<?php		}
 								 } ?>
 
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 
-				        <input type="submit" class="button" value="Save" />
+
+				    <input type="submit" name='subs' class="button" value="Save" />    
 				    </label>  
 				</form>
 			<br><br>

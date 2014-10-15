@@ -99,6 +99,15 @@ public function addnewofficer(){
 			$this->load->view('salveofficer/homepage'); 
 	        $this->load->view('footer');
 			
+				}else{
+				$message = "Confirm password does not match with the password.";
+
+			echo "<script type='text/javascript'>alert('$message');</script>";
+			$this->load->view('header');
+	        $this->load->view('navigation');
+			$this->load->view('mis/addnewofficer'); 
+	        $this->load->view('footer');
+					
 				}
 		}
 
@@ -180,7 +189,29 @@ public function listofusers(){
 
 public function edituser(){
 
-        $this->load->model('edituserdetails_model');
+	 $this->load->model('edituserdetails_model');
+	$submit = $_POST['subs'];
+
+
+	if ($submit == "Save") {
+		$this->edituserdetails_model->changeposition();
+		echo "<script type='text/javascript'>alert('Successfully Updated the Position!')</script>";
+	}elseif ($submit == "Disable") {
+		$this->edituserdetails_model->disableuser();
+		echo "<script type='text/javascript'>alert('Successfully Disabled Profile!')</script>";
+	}elseif ($submit == "Enable") {
+		$this->edituserdetails_model->enableuser();
+		echo "<script type='text/javascript'>alert('Successfully Enabled Profile!')</script>";
+	}else{
+		echo "<script type='text/javascript'>alert('Failed to update profile!')</script>";
+	}
+
+        $this->load->view('header');
+        $this->load->view('navigation');
+        $this->load->view('mis/listofusers'); 
+        $this->load->view('footer');
+
+/*        $this->load->model('edituserdetails_model');
        $result = $this->edituserdetails_model->setdetails();
 
        if ($result) {
@@ -189,11 +220,7 @@ public function edituser(){
             echo "<script type='text/javascript'>alert('Failed to update profile!')</script>";
        }
 
-        $this->load->view('header');
-        $this->load->view('navigation');
-        $this->load->view('salveofficer/homepage'); 
-        $this->load->view('footer');
-       
+*/       
     }
 
 
