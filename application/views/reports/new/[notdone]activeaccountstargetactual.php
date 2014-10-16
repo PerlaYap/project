@@ -4,6 +4,45 @@
  <link rel="stylesheet" type="text/css" href="../../../Assets/css/reports.css">  
 
 
+ <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1.1", {packages:["bar"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Actual', 'Target', 'Inactive'],
+          ['JAN',  200, 250, 53 ],
+          ['FEB',  280, 300, 55 ],
+          ['MAR',  340, 400, 44 ],
+          ['APR',  350, 660, 35 ],
+          ['MAY',  400, 700, 70 ],
+          ['JUN',  410, 700, 75 ],
+          ['JUL',  430, 720, 83 ],
+          ['AUG',  500, 800, 98 ],
+          ['SEPT',  550, 830, 124 ],
+          ['OCT',  600, 980, 62 ],
+          ['NOV',  650, 1000, 25 ],
+          ['DEC',  860, 1100, 13 ]
+        ]);
+
+        var options = {
+          bars: 'vertical', // Required for Material Bar Charts.
+          colors:['#d37681', '#989a98', '#a1a4a2' ],
+          hAxis: {title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true}},
+          vAxis: {title: 'NO. OFACCOUNTS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
+          'width':1300,
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+<!--
+
 <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -11,7 +50,7 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Month', 'Actual', 'Target'],
+          ['Month', 'Actual', 'Target', 'Inactive'],
           ['JAN',  200, 250 ],
           ['FEB',  280, 300],
           ['MAR',  340, 400],
@@ -39,7 +78,7 @@
       }
     </script>
   </head>
-
+-->
 
 
 <body>
@@ -52,7 +91,8 @@
 		AS OF SEPTEMBER 29, 2014
 	</h3>
 
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    <div id="barchart_material" style="width: 900px; height: 500px;"></div>
+
 
 
     <br>
