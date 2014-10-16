@@ -254,7 +254,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 							<!-- <li><a href="<?php // echo site_url('reports/dcsummary'); ?>">Daily Collection Summary</a></li> -->
 							<li><a href="<?php echo site_url('reports/mismonthly'); ?>">Monthly Account Report</a></li>
 							<li><a href="<?php echo site_url('reports/loanportfolio'); ?>">Monthly Loan Portfolio Report</a></li>
-							<li><a href="<?php echo site_url('reports/pdmmonthly'); ?>">Monthly Past Due Mature Report</a></li>
+							<!--<li><a href="<?php echo site_url('reports/pdmmonthly'); ?>">Monthly Past Due Mature Report</a></li>-->
 							<li><a href="<?php echo site_url('reports/sbushares'); ?>">Monthly Savings Build-Up and Capital Shares Report</a></li>
 							<?php endif;?>
 						</ul>

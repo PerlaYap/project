@@ -47,7 +47,41 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 	<!-- <img src="<?php // echo base_url ('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"> -->
 	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MIS REPORT <br> For The Month Of <b>
 		<?php echo $yue ?> <?php echo $year ?></b></h3>
+<?php
 
+$getInterest =$this->db->query("SELECT FirstTable.BranchControl, Saving-Withdrawal AS PerMonth, FirstTable.Month, FirstTable.Year FROM 
+(SELECT SUM(Amount) AS Saving, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
+(SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
+FROM Transaction 
+WHERE TransactionType='Savings' AND (Month(DateTime)<'$month' AND Year(DateTime)<='$year'))Alpha
+LEFT JOIN
+(SELECT MemberControl, BranchControl, DateEntered, DateLeft FROM 
+(SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
+FROM caritascenters_has_members cchm 
+LEFT JOIN caritasbranch_has_caritascenters cbhcc 
+ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
+LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
+ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
+WHERE Month(DateTime)<'$month' AND Year(DateTime)<='$year'
+GROUP BY Month(DateTime),Year(DateTime),BranchControl) FirstTable
+LEFT JOIN
+(SELECT SUM(Amount) AS Withdrawal, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
+(SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
+FROM Transaction 
+WHERE TransactionType='Withdrawal' AND (Month(DateTime)<'$month' AND Year(DateTime)<='$year'))Alpha
+LEFT JOIN
+(SELECT MemberControl, BranchControl, DateEntered, DateLeft FROM 
+(SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
+FROM caritascenters_has_members cchm 
+LEFT JOIN caritasbranch_has_caritascenters cbhcc 
+ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
+LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
+ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
+WHERE Month(DateTime)<'$month' AND Year(DateTime)<='$year'
+GROUP BY Month(DateTime),Year(DateTime),BranchControl) SecondTable
+ON FirstTable.BranchControl=SecondTable.branchControl
+ORDER BY (FirstTable.Month && FirstTable.Year)")
+?>
 <?php 
 
 $getSavings = $this->db->query("SELECT ControlNo, BranchName, IFNULL(BegSavings,0) AS BegSaving, IFNULL(CurrentSaving,0) AS CurrentSaving, IFNULL(Withdrawal,0) AS CurrentWithdrawal, IFNULL(BegSavings,0)+IFNULL(CurrentSaving,0)-IFNULL(Withdrawal,0) AS Total FROM
@@ -114,7 +148,8 @@ ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
 LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
 ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
 WHERE Month(DateTime)='$month' AND Year(DateTime)='$year'
-GROUP BY BranchControl)CurWithdrawal ON CurWithdrawal.BranchControl=cb.ControlNo");
+GROUP BY BranchControl)CurWithdrawal ON CurWithdrawal.BranchControl=cb.ControlNo
+WHERE ControlNo!=1");
 ?>
 	<br>
 	<table class="misreport" border="1">
@@ -134,6 +169,22 @@ GROUP BY BranchControl)CurWithdrawal ON CurWithdrawal.BranchControl=cb.ControlNo
 		</tr>
 
 		<tr>
+			<td class="label1">Beginning SBU Int</td>
+			<?php 
+				foreach($getSavings->result() as $data){
+					$money=0;
+					foreach($getInterest->result() as $data2){
+						if($data2->BranchControl==$data->ControlNo){
+							$money+=$data2->PerMonth;
+							$money=$money*1.503;
+						}
+					}
+					echo '<td class="number1">'.($money-$data->BegSaving).'</td>';
+				}
+			?>
+		</tr>
+
+		<tr>
 			<td class="label1">Savings Collection</td>
 			<?php foreach ($getSavings->result() as $data) {
 			echo '<td class="number1">'.$data->CurrentSaving.'</td>';
@@ -141,29 +192,49 @@ GROUP BY BranchControl)CurWithdrawal ON CurWithdrawal.BranchControl=cb.ControlNo
 		</tr>
 
 		<tr>
-			<td class="label1">SBU Int</td>
-			<td class="number1"></td>
+			<td class="label1">Savings Collection Int</td>
+			<?php 
+				foreach($getSavings->result() as $data){
+					$money=($data->CurrentSaving)*1.503;
+					echo '<td class="number1">'.($money-$data->CurrentSaving).'</td>';
+				}
+			?>
 		</tr>
+		
 		<tr>
 			<td class="label1">Withdrawal</td>
 			<?php foreach( $getSavings->result() as $data){
-				echo '<td class="number1">'.$data->CurrentWithdrawal.'</td>';
+				echo '<td class="number1">('.$data->CurrentWithdrawal.')</td>';
 			} ?>
 	
 		</tr>
-		<tr>
+		<!--<tr>
 			<td class="label1">Returns</td>
 			<td class="number1"></td>
 
-		</tr>
+		</tr>-->
 		<tr>
 			<td class="label"><i><b>Total Savings Mobilized</b></i></td>
 			<?php foreach( $getSavings->result() as $data){
-				echo '<td class="number1">'.$data->Total.'</td>';
+				$interest1=0;
+				$interest2=0;
+				foreach ($getInterest->result() as $data2) {
+					if($data->ControlNo==$data2->BranchControl){
+						$interest1+=$data2->PerMonth;
+						$interest1=$interest1*1.503;
+					}
+				}
+
+				$interest1-=$data->BegSaving;
+
+				$interest2=($data->CurrentSaving)*1.503;
+				$interest2-=$data->CurrentSaving;
+
+				echo '<td class="number1">'.($interest1+$interest2+$data->Total).'</td>';
 			} ?>
 
 		</tr>
-		<tr>
+		<!--<tr>
 			<td class="label"><b>Dormant (Inactive)</b></td>
 			<td class="number1"></td>
 	
@@ -183,7 +254,7 @@ GROUP BY BranchControl)CurWithdrawal ON CurWithdrawal.BranchControl=cb.ControlNo
 			<td class="number2"></td>
 	
 		</tr>
-
+-->
 	</table>
 
 	
