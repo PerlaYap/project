@@ -11,19 +11,19 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Month', 'Actual', 'Target', 'Inactive'],
-          ['JAN',  200, 250, 53 ],
-          ['FEB',  280, 300, 55 ],
-          ['MAR',  340, 400, 44 ],
-          ['APR',  350, 660, 35 ],
-          ['MAY',  400, 700, 70 ],
-          ['JUN',  410, 700, 75 ],
-          ['JUL',  430, 720, 83 ],
-          ['AUG',  500, 800, 98 ],
-          ['SEPT',  550, 830, 124 ],
-          ['OCT',  600, 980, 62 ],
-          ['NOV',  650, 1000, 25 ],
-          ['DEC',  860, 1100, 13 ]
+          ['Month', 'Active', 'Inactive'],
+          ['JAN',  200, 53 ],
+          ['FEB',  280, 55 ],
+          ['MAR',  340, 44 ],
+          ['APR',  350, 35 ],
+          ['MAY',  400, 70 ],
+          ['JUN',  410, 75 ],
+          ['JUL',  430, 83 ],
+          ['AUG',  500, 98 ],
+          ['SEPT', 550, 124 ],
+          ['OCT',  600, 62 ],
+          ['NOV',  650, 25 ],
+          ['DEC',  860, 13 ]
         ]);
 
         var options = {
@@ -86,9 +86,9 @@
 	
 	<h3>
 		CARITAS SALVE CREDIT COOPERATIVE <br> 
-		ACTUAL VS. TARGET ACTIVE ACCOUNTS <br>
+		ACTIVE & INACTIVE ACCOUNTS <br>
     OF PACO BRANCH CENTER 3 <br>
-		AS OF SEPTEMBER 29, 2014
+		FOR THE YEAR 2013
 	</h3>
 
     <div id="barchart_material" style="width: 900px; height: 500px;"></div>

@@ -21,6 +21,8 @@
 
         var options = {
           colors:['#a83a47', '#a8a23a', '562b30'],
+          hAxis: {title: '', titleTextStyle: {color: 'black', italic: false, bold: true}},
+          vAxis: {title: 'MEMBER', titleTextStyle: {color: 'black', italic: false,  bold: true}},
         };
 
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
