@@ -16,6 +16,7 @@ body{
 	background-color: black;
 	background-image: url('../images/background-2.jpg');
 	background-repeat: repeat;
+	overflow: scroll;
 }
 
 img.caritaslogo{
@@ -191,6 +192,7 @@ div.content{
 	padding: 10px;
 	color: black;
 	font-size: 20px;
+	overflow: scroll;
 }
 
 

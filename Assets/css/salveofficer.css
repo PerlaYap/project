@@ -17,6 +17,7 @@ body{
 	background-color: black;
 	background-image: url('../images/background-2.jpg');
 	background-repeat: repeat;
+	overflow: scroll;
 }
 
 

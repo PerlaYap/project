@@ -359,7 +359,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branchno'");
 //						foreach ($term->result() as $t){
 
 							 ?>	
-								<li class="collecttxt1"><a href=><?php //echo $t->LastName;  ?> <?php //echo $t->FirstName ?></li>
+								<li class="collecttxt1"><a href=><?php //echo $t->LastName;  ?> <?php //echo $t->FirstName ?></a></li>
 								<?php // } ?> 
 								
 							
