@@ -80,8 +80,8 @@ foreach ($getbranchandcenter->result() as $bc) {
 			<div class="content">
 				<br>
 				<form action="editmember" method="post" name="editmember" class="basic-grey">
-					<h1>Member Account For Approval
-				        <span>Contact the Salve Officer in-charge for any information descrepancies.</span>
+					<h1>Edit Profile
+				       <!--  <span>Contact the Salve Officer in-charge for any information descrepancies.</span> -->
 				    </h1>
 
 				    <!-- <label>
@@ -109,9 +109,9 @@ foreach ($getbranchandcenter->result() as $bc) {
 				    	  <!-- if member has member id already, view it and disable it if wala pa, add memberid -->
 
 				        <!-- <span>Member's ID :</span></label> -->
-				        <?php if (!empty($membersid)) {?>
+				        <?php //if (!empty($membersid)) {?>
 				        <input id="name" disabled  type="hidden" value="<?php echo $membersid ?>" name=""  style="width: 562px;" />	
-				        <?php } else{?>
+				        <?php //} else{?>
 				        
 				   
 				    <label>
@@ -286,7 +286,7 @@ foreach ($getbranchandcenter->result() as $bc) {
   
 					</div>
 
-<?php } }?>
+<?php } //}?>
 
 					<div id="household"></div>
 
