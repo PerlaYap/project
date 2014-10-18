@@ -400,7 +400,7 @@ WHERE Members_ControlNo='$control_no' AND ControlNo IS NOT NULL");
 					<p class="info"><b>Religion: </b> <?php echo $religion; ?> </p>
 					
           <!-- lyka for edit -->
-					<form action='' method='post'>
+					<form action='terminate' method='post'>
             <input type='hidden'  name='controlno' value='<?php echo $control_no ?>' >
             <input type="submit" class="editbtn" value="Terminate" />
           </form>

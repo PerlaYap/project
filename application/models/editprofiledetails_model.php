@@ -42,7 +42,7 @@ class Editprofiledetails_model extends CI_Model{
 			$hage = $this->security->xss_clean($this->input->post('hage'));
 
 			/*Add more household*/
-			$H_fname =  $this->security->xss_clean($this->input->post('hfname_1'));
+			 $H_fname =  $this->security->xss_clean($this->input->post('hfname_1'));
 	        $H_mname =  $this->security->xss_clean($this->input->post('hmname_1'));
 	        $H_lname =  $this->security->xss_clean($this->input->post('hlname_1'));
 	        $h_relation =  $this->security->xss_clean($this->input->post('relation'));
@@ -69,7 +69,7 @@ class Editprofiledetails_model extends CI_Model{
 		        
 		     $this->addHousehold($h_age_1[$size], $h_gender_1[$size], $h_c_stat[$size]);
 		     $householdno = $this->getHouseholdControlNo();
-		     $this->addMembersHasHousehold($controlno, $householdno, $h_relation[$size]);
+		     $this->addMembersHasHousehold($controlno, $householdno, $h_relation[$size]); 
 		     $this->addHouseholdOccupation($householdno, $h_occupy[$size]);
 		     $this->addHouseholdName($householdno, $H_fname[$size], $H_mname[$size], $H_lname[$size]);
 		    }
