@@ -40,11 +40,11 @@ where branch.ControlNo = cp.CaritasBranch_ControlNo AND cp.CaritasPersonnel_Cont
 		  if ($d>=6){
 
 		  		//$this->db->query("UPDATE `members_has_membersmembershipstatus` SET `Status` = 'Dormant Saver', `DateUpdated` = now() WHERE `ControlNo` ='$m'");
-		  		$this->addMembershipStatus($ControlNo,"Dormant Saver");
+		  		$this->addMembershipStatus($m,"Dormant Saver");
 
 		  }else {
-		  		$this->db->query("UPDATE `members_has_membersmembershipstatus` SET `Status` = 'Active Saver', `DateUpdated` = now() WHERE `ControlNo` ='$m'");
-		  		$this->addMembershipStatus($ControlNo,"Active Saver");
+		  		//$this->db->query("UPDATE `members_has_membersmembershipstatus` SET `Status` = 'Active Saver', `DateUpdated` = now() WHERE `ControlNo` ='$m'");
+		  		$this->addMembershipStatus($m,"Active Saver");
 		  }
 
 		  }
@@ -65,10 +65,10 @@ where branch.ControlNo = cp.CaritasBranch_ControlNo AND cp.CaritasPersonnel_Cont
 		  if ($p>=6){
 
 		  		//$this->db->query("UPDATE `members_has_membersmembershipstatus` SET `Status` = 'Past Due', `DateUpdated` = now() WHERE `ControlNo` ='$m2'");
-		  			$this->addMembershipStatus($ControlNo,"Past Due");
+		  			$this->addMembershipStatus($m,"Past Due");
 		  }else {
 		  		//$this->db->query("UPDATE `members_has_membersmembershipstatus` SET `Status` = 'Borrower', `DateUpdated` = now()WHERE `ControlNo` ='$m2'");
-		  		$this->addMembershipStatus($ControlNo,"Borrower");
+		  		$this->addMembershipStatus($m,"Borrower");
 		  }
 
 		  }
