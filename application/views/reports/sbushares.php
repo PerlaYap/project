@@ -1,4 +1,4 @@
-title>MIS Monthly Report</title>
+<title>MIS Monthly Report</title>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
 	
