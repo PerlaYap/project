@@ -116,3 +116,27 @@ function TabLoanPerf(){
 	document.getElementById("ApplicationContent").style.display="none";
 
 }
+
+
+function changeCategory(category){
+
+	if (category == "x"){
+		document.getElementById("user").style.display="none";
+		document.getElementById("date").style.display="none";
+	}
+
+	else if (category=="user"){
+		document.getElementById("user").style.display="";
+		document.getElementById("date").style.display="none";
+	}
+
+	else if (category=="date"){
+		document.getElementById("user").style.display="none";
+		document.getElementById("date").style.display="";
+	}
+
+}
+
+function enableName(){
+		document.getElementById("filtername").disabled=false;
+}
