@@ -64,7 +64,7 @@ where branch.ControlNo = cp.CaritasBranch_ControlNo AND cp.CaritasPersonnel_Cont
 
 		  if ($p>=6){
 
-		  			//$this->db->query("UPDATE `members_has_membersmembershipstatus` SET `Status` = 'Past Due', `DateUpdated` = now() WHERE `ControlNo` ='$m2'");
+		  		//$this->db->query("UPDATE `members_has_membersmembershipstatus` SET `Status` = 'Past Due', `DateUpdated` = now() WHERE `ControlNo` ='$m2'");
 		  			$this->addMembershipStatus($ControlNo,"Past Due");
 		  }else {
 		  		//$this->db->query("UPDATE `members_has_membersmembershipstatus` SET `Status` = 'Borrower', `DateUpdated` = now()WHERE `ControlNo` ='$m2'");
