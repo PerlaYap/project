@@ -21,12 +21,12 @@
 
 </style>
 
-<footer>
+<!-- <footer>
 	<p class="footertext">
 		&#169; 2014 <br>
 		Microfinance Cooperative Information Management System
 	</p>
-</footer>
+</footer> -->
 
 </body>
 </html>
