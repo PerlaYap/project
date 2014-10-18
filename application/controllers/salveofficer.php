@@ -124,7 +124,7 @@ class Salveofficer extends CI_Controller {
        }else{
             echo "<script type='text/javascript'>alert('Failed to update profile!')</script>";
        }
-/*
+		/*
         $this->load->view('header');
         $this->load->view('navigation');
         $this->load->view('salveofficer/homepage'); 
@@ -164,17 +164,16 @@ class Salveofficer extends CI_Controller {
 		$this->load->view("general/directory");
 		$this->load->view('footer');
 		}
-
 	public function activedormant(){
 		$this->load->view('salveofficer/activedormant');
-	}
-
+	 }
 	public function targetactualcenter(){
 		$this->load->view('salveofficer/targetactualcenter');
-	}
+	 }
 
 	public function terminate(){
-		
+		$controlno['name'] = $_POST['controlno'];
+		$this->load->view('general/terminate',$controlno);
 	}
 
 

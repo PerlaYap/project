@@ -367,7 +367,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branchno'");
 						
 				</table>
 				<br>
-			</div>
+		<!-- 	</div> -->
 
 
 
