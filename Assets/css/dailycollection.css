@@ -482,12 +482,18 @@ table.signature{
 	}
 
 	.sig{
-		width: 160px;
-		border-bottom: 1px solid black;
+		width: 300px;
+		color: black;
+		font-weight: bold;
+		text-indent: 10px;
 	}
 	.sig2{
-		width: 80px;
-		border-bottom: 1px solid black;
+		width: 200px;
+		color: black;
+		font-weight: bold;
+		text-indent: 10px;
+
+
 	}
 
 h3{
