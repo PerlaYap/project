@@ -247,8 +247,9 @@
 			header('Content-Type: image; charset=UTF-8');
 
 					?> 
-					<div>
-					<img src="<?php echo base_url($pic->Picture); ?>" class="user"> 
+					<div style="width: 192px; height: 192px">
+
+					<img src="<?php echo base_url($pic->Picture); ?>" class="user"  style="width: 100%;max-height: 100%"> 
 				</div>
 
 					<?php } ?>
@@ -263,8 +264,9 @@
 			header('Content-Type: image; charset=UTF-8');
 
 					?> 
-					<img src="<?php echo base_url($doc->Signature); ?>" class="user"> 
-
+					 <div style="width: 768px; height: 960px">
+					<img src="<?php echo base_url($doc->Signature); ?>" class="user" style="width: 100%;max-height: 100%"> 
+					</div>
 					<?php } ?>
 
 				    <br><br>
