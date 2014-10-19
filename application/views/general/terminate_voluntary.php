@@ -19,66 +19,80 @@
 			$comcontact = $mem->CompanyContact;
 			$yearen = $mem->YearEntered;
 			$edu = $mem->EducationalAttainment;
+			$loanexpense = $mem->LoanExpense;
 		}
 
 		foreach ($branchcenter as $bc) {
 			$branch = $bc->BranchName;
 			$center = $bc->CenterNo;
 		}
-
+		if (!empty($loaninfo)) {
 		foreach ($loaninfo as $loan) {
-			# code...
+			$AmountRequested = $loan->AmountRequested;
+			$Interest = $loan->Interest;
+			$Dateapplied = $loan->DateApplied;
+			$dayofweek = $loan->DayoftheWeek;
+			$status = $loan->Status;
+			$LoanType = $loan->LoanType;
+		}		
 		}
+		
 
  ?>
 
 
-Report for printing <br><br><br>
-PERSONAL INFORMATION <br><br>
-Name: <?php echo $lastname.",".$FirstName." ".$middlename; ?>
-<br>
-Member ID: <?php echo $memid;?>
-<br>
-Home Address: <?php echo $addresshome; ?>
-<br>
-Contact Number: <?php echo $contactno; ?>
-<br>
-Branch: <?php echo $branch; ?>
-<br>
-Center: <?php echo $center; ?>
-<br>
-Date Entered: <?php echo $enter; ?>
+	Report for printing <br><br><br>
+	PERSONAL INFORMATION <br><br>
+		Name: <?php echo $lastname.",".$FirstName." ".$middlename; ?>
+		<br>
+		Member ID: <?php echo $memid;?>
+		<br>
+		Home Address: <?php echo $addresshome; ?>
+		<br>
+		Contact Number: <?php echo $contactno; ?>
+		<br>
+		Branch: <?php echo $branch; ?>
+		<br>
+		Center: <?php echo $center; ?>
+		<br>
+		Date Entered: <?php echo $enter; ?>
 
-<br><br><br>
+		<br><br><br>
 
 
 CURRENT LOAN INFORMATION
 <br><br>
-Date Loan:
+<?php if (!empty($loaninfo)){ ?>
+	
+Date Loan: <?php echo $Dateapplied; ?>
 <br>
-Loan Type:
+Loan Type: <?php echo $LoanType; ?>
 <br>
-Active Loan Release:
+Active Loan Release: <?php echo $AmountRequested+$Interest; ?>
 <br>
-Loan Collected:
+Loan Collected: <?php echo ($AmountRequested+$Interest) - $loanexpense; ?>
 <br>
-Remaining Balance:
+Remaining Balance: <?php echo $loanexpense;?>
 <br><br>
 
-	if wala current loan:   "NO CURRENT LOAN"
+		Co-MAKER INFORMATION
+		<br>
+		Name:
+		<br>
+		Member ID:
+		<br>
+		Home Address:
+		<br>
+		Contact Number:
+		<br><br>
+<?php } else{ ?>
+<br>
 
+	<!-- if wala current loan:   --> "NO CURRENT LOAN"
+<?php } ?>
 <br><br>
 <!-- only shown if may current loan (BELOW) -->
-Co-MAKER INFORMATION
-<br>
-Name:
-<br>
-Member ID:
-<br>
-Home Address:
-<br>
-Contact Number:
-<br><br>
+
 <!-- only shown if may current loan (ABOVE) -->
 
 SAVINGS, WITHDRAWAL & CAPITAL SHARE

@@ -64,10 +64,6 @@ date_default_timezone_set('Asia/Manila');
 				          
 				    	<div id="organizations"></div>
 
-				         
-					
-				   
-
 				    <label>
 				        <span>Other Microfinance Institutions :</span>
 				        <input id="others" type="text" name="othersmicro" style="width: 550px;" />
