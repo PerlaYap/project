@@ -368,11 +368,17 @@ table.signature{
 
 	.sig{
 		width: 160px;
-		border-bottom: 1px solid black;
+		color: black;
+		font-size: 15px;
+		font-weight: bold;
+		text-align: left;
 	}
 	.sig2{
-		width: 80px;
-		border-bottom: 1px solid black;
+		width: 150px;
+		font-size: 15px;
+		text-align: left;
+		color: black;
+		font-weight: bold;
 	}
 
 

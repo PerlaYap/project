@@ -30,7 +30,7 @@
           bars: 'vertical', // Required for Material Bar Charts.
           colors:['#d37681', '#989a98', '#a1a4a2' ],
           hAxis: {title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true}},
-          vAxis: {title: 'NO. OFACCOUNTS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
+          vAxis: {title: 'NO. OF ACCOUNTS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
           'width':1300,
         };
 

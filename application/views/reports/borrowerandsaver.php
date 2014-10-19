@@ -70,6 +70,31 @@ date_default_timezone_set('Asia/Manila');
     <div id="chart_div" style="width: 1300px; height: 500px; margin-left:160PX;; margin-right: auto;"></div>
 
     <br>
+   
+    <style type="text/css">
+      .hdrx{
+        padding: 5px 15px 5px 15px;
+        font-weight: bold;
+        font-size: 15px;s
+      }
+    </style>
+
+    <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
+      <tr>
+          <td class='hdrx'>CENTER</td>
+          <td class='hdrx'>NO. OF BORROWERS</td>
+          <td class='hdrx'>NO. OF SAVERS</td>
+      </tr>
+      <tr>
+          <td class='hdrtxt'>2</td>
+          <td class='hdrtxt'>100</td>
+          <td class='hdrtxt'>150</td>
+      </tr>
+
+    </table>
+
+
+    <br><br>
 
     <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
