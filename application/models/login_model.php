@@ -83,7 +83,7 @@ class Login_model extends CI_Model{
 		 						if($data->MembershipStatus!="Past Due")
 									$this->addMembershipStatus($data->MemberControl,"Past Due");
 						  	}else {
-						  		if(!$data->MembershipStatus!="Borrower")
+						  		if($data->MembershipStatus!="Borrower")
 						  			$this->addMembershipStatus($data->MemberControl,"Borrower");
 						  	}
 
