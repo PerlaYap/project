@@ -201,9 +201,17 @@ foreach ($getTotal->result() as $row) {
 	} 
 	</script>
 
+	<style type="text/css" media="print">
+	    .page
+	    {
+	     -webkit-transform: rotate(-90deg); -moz-transform:rotate(-90deg);
+	     filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+	    }
+	</style>
+
 	<div class="content">
 		<div class="noPrint" >
-			<form action="getOtherDC" method="post" name="getOtherDC" >
+			<!--<form action="getOtherDC" method="post" name="getOtherDC" >
 
 				<br><br>
 				<p style="text-align:center;">VIEW DAILY LOAN COLLECTION SUMMARY OF:  
@@ -228,8 +236,10 @@ foreach ($getTotal->result() as $row) {
 					<span>of Date: </span></label>
 					<input type="text" name="reportDate" style="width: 135px;" value="<?php echo $reportDate ?>" readOnly="true"/>
 					<input type="submit" value="Go" class="go"/>
-				</form>
+				</form>-->
 			</div>
+
+			<br>
 			<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo2"></a>
 			
 			<div class="yesPrint">
@@ -240,10 +250,9 @@ foreach ($getTotal->result() as $row) {
 					Daily Collection Summary <br>
 					<?php echo $nBranch; ?> Branch &nbsp
 					Center no.  <?php echo $nCenter; ?> <br>
-					AS OF <br>
-					<?php echo $wordDate?>
+					as of <?php echo $wordDate?>
 				</h3>
-
+				<br>
 
 				<TABLE class="loancollection">
 					<tr class="headr">
