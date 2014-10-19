@@ -3,6 +3,44 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
 <script src="<?php echo base_url('Assets/js/general.js'); ?>"></script>
 
+<head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["table"]});
+      google.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('string', 'Position');
+        data.addColumn('string', 'Date');
+        data.addColumn('string', 'Time');
+        data.addColumn('string', 'Activity');
+
+
+       /* data.addColumn('number', 'Salary');
+        data.addColumn('boolean', 'Full Time Employee');*/
+        data.addRows([
+          ['Mike',  'Salve Officer', 'October 19, 2014', '10:43am', 'Log in'],
+        ]);
+
+         var options = {
+          //title: 'Company Performance',
+          backgroundColor: 'transparent',
+          legend: { position: "none" },
+           'width':300,
+          'height':500,
+          
+        };
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data, {showRowNumber: true});
+      }
+    </script>
+  </head>
+
+
 
 
 <body>
@@ -45,7 +83,7 @@
 		}
 
 		.filterbtn{
-			margin-top: -36px;
+			margin-top: -26px;
 			margin-left: 210px;
 		}
 
@@ -81,6 +119,8 @@
 
 
 
+
+
 		<div id="user" class="user" style="display: none;" onchange="enableName(this.value)">
 			<select id="filterposition">
 				<option selected value="x">Position</option>
@@ -96,13 +136,13 @@
 			
 		</div>
 
-		
+		<div id="table_div" style="width: 1000px; height: auto; margin-left:auto; margin-right: auto;"></div>
 
 	</p> 
 
 	<br>
 
-    <table class="dailycollectionsheet" border="1" style="margin-left:auto; margin-right: auto;">
+    <!--<table class="dailycollectionsheet" border="1" style="margin-left:auto; margin-right: auto;">
 		<tr class="header">
 			<td class="num"><b>#</b></td>
 			<td style="width: 220px;"><b>NAME</b></td>
@@ -119,7 +159,7 @@
 			<td>01/20/2014</td>
 			<td>12:22pm</td>
 			<td style="text-align: left;">Log in</td>
-			
+		-->	
 			
 			
 		</tr>
