@@ -547,6 +547,7 @@ WHERE Members_ControlNo='$control_no' AND ControlNo IS NOT NULL");
           <div style="width: 768px; height: 960px">
 					 <img src="<?php echo base_url($doc->Signature); ?>" class="user" style="width: 100%;max-height: 100%"> 
           </div>
+          <br><br>
 					<?php } ?>
 
 						
