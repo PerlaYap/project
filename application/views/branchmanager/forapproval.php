@@ -247,7 +247,7 @@
 			header('Content-Type: image; charset=UTF-8');
 
 					?> 
-					<div style="width: 192px; height: 192px">
+					<div style="width: 324px; height: 204px">
 
 					<img src="<?php echo base_url($pic->Picture); ?>" class="user"  style="width: 100%;max-height: 100%"> 
 				</div>
