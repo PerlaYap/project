@@ -21,7 +21,7 @@
        /* data.addColumn('number', 'Salary');
         data.addColumn('boolean', 'Full Time Employee');*/
         data.addRows([
-          ['Mike',  'Salve Officer', 'October 19, 2014', '10:43am', 'Log in'],
+          ['Lyka Ellace Dado',  'Salve Officer', 'October 19, 2014', '10:43am', 'Log in'],
         ]);
 
          var options = {
@@ -136,7 +136,7 @@
 			
 		</div>
 
-		<div id="table_div" style="width: 1000px; height: auto; margin-left:auto; margin-right: auto;"></div>
+		<div id="table_div" style="width: 1070px; height: auto; margin-left:auto; margin-right: auto;"></div>
 
 	</p> 
 
