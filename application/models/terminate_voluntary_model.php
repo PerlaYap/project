@@ -49,9 +49,14 @@ class terminate_voluntary_model extends CI_Model{
 							b.`ControlNo` = cbc.`CaritasBranch_ControlNo`");
 			return $branchcenter->result();
 	}
-	/*public function getcomaker($control_no){
-
-	}*/
+	public function getloaninfo(){
+		$control_no = $this->getcontrolno();
+		$getLoanInfo = $this->db->query("SELECT loanapplication_ControlNo AS LoanControl, ApplicationNumber, AmountRequested, Interest, DateApplied, DayoftheWeek, Status, LoanType FROM loanapplication_has_members lhm
+			LEFT JOIN loanapplication la ON lhm.LoanApplication_ControlNo=la.ControlNo
+			WHERE lhm.Members_ControlNo='$control_no' and Status='Current'");
+		return $getLoanInfo->result();
+	}
+	
 
     
 }

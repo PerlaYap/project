@@ -175,6 +175,10 @@ class Salveofficer extends CI_Controller {
 		$this->load->model('terminate_voluntary_model');
 		$data['profileinfo'] = $this->terminate_voluntary_model->getprofileinfo();
 		$data['branchcenter'] = $this->terminate_voluntary_model->getbranchcenter();
+		$loan_info = $this->terminate_voluntary_model->getloaninfo();
+			if (!empty($loan_info)) {
+				$data['loaninfo'] = $loan_info;
+			}
 		/*$controlno['name'] = $_POST['controlno'];*/
 		$this->load->view('general/terminate_voluntary',$data);
 	}

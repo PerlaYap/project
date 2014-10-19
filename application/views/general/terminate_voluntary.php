@@ -26,6 +26,10 @@
 			$center = $bc->CenterNo;
 		}
 
+		foreach ($loaninfo as $loan) {
+			# code...
+		}
+
  ?>
 
 
@@ -33,7 +37,7 @@ Report for printing <br><br><br>
 PERSONAL INFORMATION <br><br>
 Name: <?php echo $lastname.",".$FirstName." ".$middlename; ?>
 <br>
-Member ID: <?php echo $memid; ?>
+Member ID: <?php echo $memid;?>
 <br>
 Home Address: <?php echo $addresshome; ?>
 <br>
