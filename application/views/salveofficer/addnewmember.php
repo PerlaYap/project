@@ -80,7 +80,7 @@ date_default_timezone_set('Asia/Manila');
 				   
 				    <label>
 				    	<span>Years of Residency :</span> </label>
-				        <input required="" id="residency" type="text" name="residency" style="width:30px;" /> &nbsp&nbsp&nbsp&nbsp
+				        <input required="" id="residency" type="number" name="residency" min='1' style="width:30px;" /> &nbsp&nbsp&nbsp&nbsp
 				        
 				        Contact Number : 
 				        <input required="" id="contact" type="text" name="contact" style="width: 140px;" placeholder="7 or 11-digit number only" /> &nbsp&nbsp&nbsp&nbsp
@@ -197,7 +197,7 @@ date_default_timezone_set('Asia/Manila');
 				    	&nbsp &nbsp &nbsp
 
 				    	Year Entered in Business: 
-				    	<input type="text" name="yearinbusiness" id="" style="width: 135px;" required/>
+				    	<input type="number" name="yearinbusiness" id="" style="width: 135px;" min='1' required/>
 
 
 				    <!------ HOUSEHOLD -------->
