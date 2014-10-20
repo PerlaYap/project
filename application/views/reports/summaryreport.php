@@ -125,7 +125,10 @@ else
 				        <input type='hidden' name='loanID' value='<?php echo $loanControl ?>'>
 				        <input type='hidden' name='memberID' value=" <?php echo $memberControl; ?> ">
 				        <input type='hidden' name='activerelease' value=" <?php echo $activeLoan; ?> " >
+				        <input type='hidden' name='capitalshare' value=" <?php echo $capitalShare; ?> " >
+				        <input type='hidden' name='sonumber' value=" <?php echo $this->session->userdata('personnelno'); ?> " >
 				        <input type="submit" class="button" value="Release" style="margin-left: 300px;" />
+				       
 				    </form>
 				    <form action='approvedloans' method='post' class="basic-grey" style="height: 10px; padding: 0; width: 860px; margin-top: -10px;">
 					     		<div>

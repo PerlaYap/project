@@ -5,8 +5,10 @@
 	<?php //$month = $_POST['month'];
 			//$year = $_POST['year'];
 
-			$month = 8;
+			$month = 9;
 			$year = 2014;
+
+			$date=$year."-".$month."-"."01";
 
 			$prev = $year-1;
 			$prev2 = $year-2;
@@ -53,7 +55,7 @@ $getInterest =$this->db->query("SELECT FirstTable.BranchControl, Saving-Withdraw
 (SELECT SUM(Amount) AS Saving, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
 (SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
 FROM Transaction 
-WHERE TransactionType='Savings' AND (Month(DateTime)<'$month' AND Year(DateTime)<='$year'))Alpha
+WHERE TransactionType='Savings' AND DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))Alpha
 LEFT JOIN
 (SELECT MemberControl, BranchControl, DateEntered, DateLeft FROM 
 (SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
@@ -62,13 +64,13 @@ LEFT JOIN caritasbranch_has_caritascenters cbhcc
 ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
 LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
 ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
-WHERE Month(DateTime)<'$month' AND Year(DateTime)<='$year'
+WHERE DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH))
 GROUP BY Month(DateTime),Year(DateTime),BranchControl) FirstTable
 LEFT JOIN
 (SELECT SUM(Amount) AS Withdrawal, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
 (SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
 FROM Transaction 
-WHERE TransactionType='Withdrawal' AND (Month(DateTime)<'$month' AND Year(DateTime)<='$year'))Alpha
+WHERE TransactionType='Withdrawal' AND DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))Alpha
 LEFT JOIN
 (SELECT MemberControl, BranchControl, DateEntered, DateLeft FROM 
 (SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
@@ -77,7 +79,7 @@ LEFT JOIN caritasbranch_has_caritascenters cbhcc
 ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
 LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
 ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
-WHERE Month(DateTime)<'$month' AND Year(DateTime)<='$year'
+WHERE DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH))
 GROUP BY Month(DateTime),Year(DateTime),BranchControl) SecondTable
 ON FirstTable.BranchControl=SecondTable.branchControl
 ORDER BY (FirstTable.Month && FirstTable.Year)")
@@ -92,7 +94,7 @@ FROM (SELECT IFNULL(Saving,0)-IFNULL(Withdraw,0) AS PastCollection, Uno.BranchCo
 FROM (SELECT SUM(Amount) AS Saving, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
 (SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
 FROM Transaction 
-WHERE TransactionType='Savings' AND (Month(DateTime)<'$month' AND Year(DateTime)<='$year'))Alpha
+WHERE TransactionType='Savings' AND DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))Alpha
 LEFT JOIN
 (SELECT MemberControl, BranchControl, DateEntered, DateLeft FROM 
 (SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
@@ -101,12 +103,12 @@ LEFT JOIN caritasbranch_has_caritascenters cbhcc
 ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
 LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
 ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
-WHERE Month(DateTime)<'$month' AND Year(DateTime)<='$year'
+WHERE DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH))
 GROUP BY Month(DateTime),Year(DateTime),BranchControl)UNO
 LEFT JOIN(SELECT SUM(Amount) AS Withdraw, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
 (SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
 FROM Transaction 
-WHERE TransactionType='Withdrawal' AND (Month(DateTime)<'$month' AND Year(DateTime)<='$year'))Alpha
+WHERE TransactionType='Withdrawal' AND DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))Alpha
 LEFT JOIN
 (SELECT MemberControl, BranchControl, DateEntered, DateLeft FROM 
 (SELECT CaritasBranch_ControlNo AS BranchControl, Members_ControlNo AS MemberControl, DateEntered, DateLeft 
@@ -115,7 +117,7 @@ LEFT JOIN caritasbranch_has_caritascenters cbhcc
 ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
 LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
 ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
-WHERE Month(DateTime)<'$month' AND Year(DateTime)<='$year'
+WHERE DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH))
 GROUP BY Month(DateTime),Year(DateTime),BranchControl) DOS ON (UNO.Month=DOS.Month AND UNO.Year=DOS.Year AND Uno.BranchControl=Dos.BranchControl))Alpha
 GROUP BY Alpha.BranchControl)BegBal
 ON cb.ControlNo=BegBal.BranchControl
@@ -132,7 +134,7 @@ LEFT JOIN caritasbranch_has_caritascenters cbhcc
 ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
 LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
 ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
-WHERE Month(DateTime)='$month' AND Year(DateTime)='$year'
+WHERE (Month(DateTime)='$month' AND Year(DateTime)='$year')
 GROUP BY BranchControl)CurSaving ON CurSaving.BranchControl=cb.ControlNo
 LEFT JOIN
 (SELECT SUM(Amount) AS Withdrawal, BranchControl
@@ -147,7 +149,7 @@ LEFT JOIN caritasbranch_has_caritascenters cbhcc
 ON cbhcc.CaritasCenters_ControlNo=cchm.CaritasCenters_ControlNo)A
 LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta 
 ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
-WHERE Month(DateTime)='$month' AND Year(DateTime)='$year'
+WHERE (Month(DateTime)='$month' AND Year(DateTime)='$year')
 GROUP BY BranchControl)CurWithdrawal ON CurWithdrawal.BranchControl=cb.ControlNo
 WHERE ControlNo!=1");
 ?>

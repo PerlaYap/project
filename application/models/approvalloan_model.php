@@ -18,10 +18,13 @@ class Approvalloan_model extends CI_Model{
 		 $controlno = $this->security->xss_clean($this->input->post('loanID'));
 		 $memberno = $this->security->xss_clean($this->input->post('memberID'));
 		 $activerelease = $this->security->xss_clean($this->input->post('activerelease'));
+		 $so = $this->security->xss_clean($this->input->post('sonumber'));
+		 $amount = $this->security->xss_clean($this->input->post('capitalshare'));
 		 $date= date('Y-m-d');
 
 		$this->addReleaseDate($controlno, $date);
 		$this->addloanbalance($activerelease, $memberno);
+		$this->insertCapitalShare($controlno, $amount,$date,$memberno,$so);
 
 		return $this->currentizeLoanQuery($controlno);
 	}
@@ -55,8 +58,11 @@ class Approvalloan_model extends CI_Model{
 	}
 
 	public function addReleaseDate($loanControl,$dateRelease){
-		$this->db->query("UPDATE LoanAPplication SET DateReleased='$dateRelease' WHERE ControlNo='$loanControl';");
+		$this->db->query("UPDATE LoanApplication SET DateReleased='$dateRelease' WHERE ControlNo='$loanControl';");
 	}
 
+	public function insertCapitalShare($loanappno, $loanpayment, $datetime, $member, $so){
+
+		$this->db->query("INSERT INTO `microfinance2`.`transaction` ( `LoanAppControlNo`, `Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`) VALUES ('$loanappno', '$loanpayment', '$datetime', '$member', '2', '$so', 'Capital Share');");
 	}
 ?>
