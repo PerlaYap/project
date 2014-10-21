@@ -851,7 +851,7 @@ $expected = $diff*50;
 								if(!$actual ==0){
 								if ($actual < $expected){
 									$kulang = $expected-$actual;
-									echo 'You need to save P'.$kulang.' more! ';
+									echo 'This member needs to save P'.$kulang.' more! ';
 
 								} else{
 
