@@ -407,11 +407,9 @@ WHERE Members_ControlNo='$control_no' AND ControlNo IS NOT NULL");
           <br>
           <form action='editprofile' method='post'>
 						<input type='hidden'  name='controlno' value='<?php echo $control_no ?>' >
-						<input type="submit" class="editbtn" value="Edit Profile" />
+						<input type="submit" class="editbtn1" value="Edit Profile" />
 					</form>
 				    
-
-				    <br>
 				</div>
 		
 
