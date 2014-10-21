@@ -31,7 +31,7 @@ INNER JOIN (SELECT CenterControl, BranchControl FROM (SELECT CaritasBranch_Contr
 FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY Date DESC)A GROUP BY CenterControl) A WHERE BranchControl='$branch') B ON B.CenterControl=cchm.CaritasCenters_ControlNo
 LEFT JOIN CaritasCenters cc ON cc.ControlNo=cchm.CaritasCenters_ControlNo) Alpha ON Alpha.MemberControl=lhm.Members_ControlNo)Beta
 LEFT JOIN LoanApplication la ON la.ControlNo=Beta.LoanControl
-WHERE STATUS='Active'"); ?>
+WHERE STATUS='Active' GROUP BY DateApplied"); ?>
 
 
 
