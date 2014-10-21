@@ -796,7 +796,7 @@ window.onload = function() {
 				</div>
 
 				<?php } ?>
-				<div class = "personalinfo">
+<!--				<div class = "personalinfo">
 
 					<div class="subheadername">Overview</div>
 					<div class="subskew"></div>
@@ -807,7 +807,7 @@ window.onload = function() {
 
 
 					<br>
-				</div>
+				</div> -->
 
 
 				<div class = "personalinfo">
@@ -851,7 +851,7 @@ $expected = $diff*50;
 								if(!$actual ==0){
 								if ($actual < $expected){
 									$kulang = $expected-$actual;
-									echo 'You need to save P'.$kulang.'more! ';
+									echo 'You need to save P'.$kulang.' more! ';
 
 								} else{
 

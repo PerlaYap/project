@@ -1031,7 +1031,7 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
 				    <br>
 				</div> -->
 
-				<div class = "personalinfo">
+	<!--			<div class = "personalinfo">
 
 					<div class="subheadername">Overview</div>
 						<div class="subskew"></div>
@@ -1042,7 +1042,7 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
 								    
 
 				    <br>
-				</div>
+				</div> -->
 
 				<div class = "personalinfo">
 
@@ -1075,7 +1075,7 @@ $expected = $diff*50;
 
 
         
-            <p class="info00">Actual Amount of Savings: P</b> <?php echo $actual;?></b></p>
+            <p class="info00">Actual Amount of Savings: P<b> <?php echo $actual;?></b></p>
             <p class="info00">Expected Amount of Savings: P<b> <?php echo $expected;?></b></p>
             
             <br>
@@ -1089,7 +1089,7 @@ $expected = $diff*50;
                 if(!$actual ==0){
                 if ($actual < $expected){
                   $kulang = $expected-$actual;
-                  echo 'You need to save P'.$kulang.'more! ';
+                  echo 'You need to save P'.$kulang.' more! ';
 
                 } else{
 
