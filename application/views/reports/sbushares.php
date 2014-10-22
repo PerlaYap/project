@@ -151,7 +151,98 @@ LEFT JOIN caritasbranch cb ON A.BranchControl=cb.ControlNo)Beta
 ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(DateLeft,CURDATE()))
 WHERE (Month(DateTime)='$month' AND Year(DateTime)='$year')
 GROUP BY BranchControl)CurWithdrawal ON CurWithdrawal.BranchControl=cb.ControlNo
-WHERE ControlNo!=1");
+WHERE ControlNo!=1 ORDER BY BranchName ASC");
+?>
+<?php
+
+$getCapital =$this->db->query("SELECT ControlNo, cb.BranchName, IFNULL(BegCapital,0) AS BegCapital, IFNULL(TotalCapital,0) AS TotalCapital, IFNULL(ReturnedCapital,0) AS ReturnedCapital
+FROM CaritasBranch cb
+LEFT JOIN
+(SELECT CapitalShare.BranchControl, CapitalShare.BranchName, (IFNULL(CapitalShare,0)-IFNULL(ReturnCapital,0)) AS BegCapital, IFNULL(TotalCapital,0) AS TotalCapital, IFNULL(ReturnedCapital,0) AS ReturnedCapital
+FROM (SELECT BranchControl, BranchName, SUM(Amount) AS CapitalShare FROM
+(SELECT Members_ControlNo AS MemberControl, Amount, TransactionType, DateTime 
+FROM Transaction WHERE TransactionType='Capital Share' AND DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))Alpha
+LEFT JOIN
+(SELECT BranchControl, MemberControl, BranchName 
+FROM (SELECT A.CaritasCenters_ControlNo AS CenterControl, cchm.Members_ControlNo AS MemberControl 
+FROM caritascenters_has_members cchm
+LEFT JOIN(SELECT * FROM caritascenters_has_members cchm WHERE DateEntered<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)) ORDER BY DateEntered DESC)A
+ON A.Members_ControlNo=cchm.Members_ControlNo 
+WHERE cchm.DateLeft IS NULL GROUP BY cchm.Members_ControlNo)Alpha
+LEFT JOIN
+(SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl, BranchName
+FROM caritasbranch_has_caritascenters cbhcc
+LEFT JOIN (SELECT * 
+FROM caritasbranch_has_caritascenters cbhcc WHERE Date<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)) ORDER BY Date DESC)A
+ON A.CaritasCenters_ControlNo=cbhcc.CaritasCenters_ControlNo
+LEFT JOIN CaritasBranch cb ON cb.ControlNo=cbhcc.CaritasBranch_ControlNo
+GROUP BY cbhcc.CaritasCenters_ControlNo ORDER BY cbhcc.CaritasCenters_ControlNo ASC)Beta
+ON Alpha.CenterControl=Beta.CenterControl) Beta ON Alpha.MemberControl=Beta.MemberControl
+GROUP BY BranchControl) CapitalShare
+LEFT JOIN 
+(SELECT BranchControl, BranchName, SUM(Amount) AS ReturnCapital FROM
+(SELECT Members_ControlNo AS MemberControl, Amount, TransactionType, DateTime 
+FROM Transaction WHERE TransactionType='Capital Share Return' AND DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))Alpha
+LEFT JOIN
+(SELECT BranchControl, MemberControl, BranchName 
+FROM (SELECT A.CaritasCenters_ControlNo AS CenterControl, cchm.Members_ControlNo AS MemberControl 
+FROM caritascenters_has_members cchm
+LEFT JOIN(SELECT * FROM caritascenters_has_members cchm WHERE DateEntered<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)) ORDER BY DateEntered DESC)A
+ON A.Members_ControlNo=cchm.Members_ControlNo 
+WHERE cchm.DateLeft IS NULL GROUP BY cchm.Members_ControlNo)Alpha
+LEFT JOIN
+(SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl, BranchName
+FROM caritasbranch_has_caritascenters cbhcc
+LEFT JOIN (SELECT * 
+FROM caritasbranch_has_caritascenters cbhcc WHERE Date<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)) ORDER BY Date DESC)A
+ON A.CaritasCenters_ControlNo=cbhcc.CaritasCenters_ControlNo
+LEFT JOIN CaritasBranch cb ON cb.ControlNo=cbhcc.CaritasBranch_ControlNo
+GROUP BY cbhcc.CaritasCenters_ControlNo ORDER BY cbhcc.CaritasCenters_ControlNo ASC)Beta
+ON Alpha.CenterControl=Beta.CenterControl) Beta ON Alpha.MemberControl=Beta.MemberControl
+GROUP BY BranchControl)ReturnCapital ON CapitalShare.BranchControl=ReturnCapital.BranchControl
+LEFT JOIN
+(SELECT BranchControl, BranchName, SUM(IFNULL(Amount,0)) AS TotalCapital FROM 
+(SELECT Members_ControlNo, Amount 
+FROM Transaction WHERE TransactionType='Capital Share' AND MONTH(DateTime)='$month' AND YEAR(DateTime)='$year')UNO
+LEFT JOIN
+(SELECT BranchControl, MemberControl, BranchName 
+FROM (SELECT A.CaritasCenters_ControlNo AS CenterControl, cchm.Members_ControlNo AS MemberControl 
+FROM caritascenters_has_members cchm
+LEFT JOIN(SELECT * FROM caritascenters_has_members cchm WHERE DateEntered<='$date' ORDER BY DateEntered DESC)A
+ON A.Members_ControlNo=cchm.Members_ControlNo 
+WHERE cchm.DateLeft IS NULL GROUP BY cchm.Members_ControlNo)Alpha
+LEFT JOIN
+(SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl, BranchName
+FROM caritasbranch_has_caritascenters cbhcc
+LEFT JOIN (SELECT * 
+FROM caritasbranch_has_caritascenters cbhcc WHERE Date<='$date' ORDER BY Date DESC)A
+ON A.CaritasCenters_ControlNo=cbhcc.CaritasCenters_ControlNo
+LEFT JOIN CaritasBranch cb ON cb.ControlNo=cbhcc.CaritasBranch_ControlNo
+GROUP BY cbhcc.CaritasCenters_ControlNo ORDER BY cbhcc.CaritasCenters_ControlNo ASC)Beta
+ON Alpha.CenterControl=Beta.CenterControl)DOS ON UNO.Members_ControlNo=DOS.MemberControl
+GROUP BY BranchControl)CollectedCapital ON CapitalShare.BranchControl=CollectedCapital.BranchControl
+LEFT JOIN
+(SELECT BranchControl, BranchName, SUM(IFNULL(Amount,0)) AS ReturnedCapital FROM 
+(SELECT Members_ControlNo, Amount 
+FROM Transaction WHERE TransactionType='Capital Share Return' AND MONTH(DateTime)='$month' AND YEAR(DateTime)='$year')UNO
+LEFT JOIN
+(SELECT BranchControl, MemberControl, BranchName 
+FROM (SELECT A.CaritasCenters_ControlNo AS CenterControl, cchm.Members_ControlNo AS MemberControl 
+FROM caritascenters_has_members cchm
+LEFT JOIN(SELECT * FROM caritascenters_has_members cchm WHERE DateEntered<='$date' ORDER BY DateEntered DESC)A
+ON A.Members_ControlNo=cchm.Members_ControlNo 
+WHERE cchm.DateLeft IS NULL GROUP BY cchm.Members_ControlNo)Alpha
+LEFT JOIN
+(SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl, BranchName
+FROM caritasbranch_has_caritascenters cbhcc
+LEFT JOIN (SELECT * 
+FROM caritasbranch_has_caritascenters cbhcc WHERE Date<='$date' ORDER BY Date DESC)A
+ON A.CaritasCenters_ControlNo=cbhcc.CaritasCenters_ControlNo
+LEFT JOIN CaritasBranch cb ON cb.ControlNo=cbhcc.CaritasBranch_ControlNo
+GROUP BY cbhcc.CaritasCenters_ControlNo ORDER BY cbhcc.CaritasCenters_ControlNo ASC)Beta
+ON Alpha.CenterControl=Beta.CenterControl)DOS ON UNO.Members_ControlNo=DOS.MemberControl
+GROUP BY BranchControl)ReturnedCapital ON ReturnedCapital.BranchControl=CapitalShare.BranchControl)Sole
+ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC")
 ?>
 	<br>
 	<table class="misreport" border="1">
@@ -210,11 +301,7 @@ WHERE ControlNo!=1");
 			} ?>
 	
 		</tr>
-		<!--<tr>
-			<td class="label1">Returns</td>
-			<td class="number1"></td>
 
-		</tr>-->
 		<tr>
 			<td class="label"><i><b>Total Savings Mobilized</b></i></td>
 			<?php foreach( $getSavings->result() as $data){
@@ -265,138 +352,37 @@ WHERE ControlNo!=1");
 		<tr>
 			<td class="label">Preferred Share - Beg</td>
 			<?php
-	$totalshare = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$share = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo 
-	AND month(t.DateTime)<'$month' AND year(t.DateTime)<= '$year' AND t.TransactionType = 'Capital Share'  ");
-
-				foreach ($share->result() as $se){ 
-					$sha  = $se->Amount; 
-
-					if ($sha==null){
-						$sha = 0;
-					}
-					?>
-
-			<td class="number"><?php echo $sha;  ?></td>
-	<?php   $totalshare +=$sha; 
-} } 
-
-?>	<td class="number"><?php echo $totalshare;  ?></td>
-		
+				foreach ($getCapital->result() as $data3) {
+					echo "<td class='number'>".$data3->BegCapital."</td>";
+				}
+			?>
 		</tr>
 		<tr>
 			<td class="label">Purchased</td>
 			<?php
-	$totalshare2 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$share2 = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo 
-	AND month(t.DateTime)='$month' AND year(t.DateTime)= '$year' AND t.TransactionType = 'Capital Share'  ");
-
-				foreach ($share2->result() as $se){ 
-					$sha2  = $se->Amount; 
-
-					if ($sha2==null){
-						$sha2 = 0;
-					}
-					?>
-
-			<td class="number"><?php echo $sha2;  ?></td>
-	<?php   $totalshare2 +=$sha2; 
-} } 
-
-?>	<td class="number"><?php echo $totalshare2;  ?></td>
+				foreach ($getCapital->result() as $data3) {
+					echo "<td class='number'>".$data3->TotalCapital."</td>";
+				}
+			?>
 	
 		</tr>
 		<tr>
 			<td class="label">Returned</td>
 			<?php
-	$totalshare3 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$share3 = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo 
-	AND month(t.DateTime)='$month' AND year(t.DateTime)= '$year' AND t.TransactionType = 'Capital Share Return'  ");
-
-				foreach ($share3->result() as $se){ 
-					$sha3  = $se->Amount; 
-
-					if ($sha3==null){
-						$sha3 = 0;
-					}
-					?>
-
-			<td class="number"><?php echo $sha3;  ?></td>
-	<?php   $totalshare3 +=$sha3; 
-} } 
-
-?>	<td class="number"><?php echo $totalshare3;  ?></td>
+				foreach ($getCapital->result() as $data3) {
+					echo "<td class='number'>(".$data3->ReturnedCapital.")</td>";
+				}
+			?>
 	
 		</tr>
 		
 		<tr>
 			<td class="label">Preferred Share - End</td>
 			<?php
-	$totalshare4 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$share3 = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo 
-	AND month(t.DateTime)='$month' AND year(t.DateTime)= '$year' AND t.TransactionType = 'Capital Share Return'  ");
-
-$share2 = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo 
-	AND month(t.DateTime)='$month' AND year(t.DateTime)= '$year' AND t.TransactionType = 'Capital Share'  ");
-
-$share = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo 
-	AND month(t.DateTime)<'$month' AND year(t.DateTime)<= '$year' AND t.TransactionType = 'Capital Share'  ");
-
-				foreach ($share->result() as $se){ 
-					$sha  = $se->Amount; 
-
-					if ($sha==null){
-						$sha = 0;
-					}
-				foreach ($share2->result() as $se){ 
-					$sha2  = $se->Amount; 
-
-					if ($sha2==null){
-						$sha2 = 0;
-					}
-				foreach ($share3->result() as $se){ 
-					$sha3  = $se->Amount; 
-
-					if ($sha3==null){
-						$sha3 = 0;
-					}
-
-					$sha4 = $sha+$sha2+$sha3;
-					?>
-
-			<td class="number"><?php echo $sha4;  ?></td>
-	<?php   $totalshare4 +=$sha4; 
-} } } }
-
-?>	<td class="number"><?php echo $totalshare4;  ?></td>
+				foreach ($getCapital->result() as $data3) {
+					echo "<td class='number'>".($data3->BegCapital + $data3->TotalCapital - $data3->ReturnedCapital)."</td>";
+				}
+			?>
 	
 		</tr>
 	</table>

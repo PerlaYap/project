@@ -37,7 +37,7 @@ foreach ($memberinfo->result() as $row) {
 
 <?php $loanbusiness=$this->db->query("SELECT lb.ControlNo, lb.BusinessName FROM loanbusiness_has_loanapplication lhl 
 RIGHT JOIN (SELECT LoanApplication_ControlNo AS ControlNo FROM loanapplication_has_members lhm WHERE Members_ControlNo=(SELECT ControlNo FROM Members WHERE MemberID='$memberID')) A ON A.ControlNo=lhl.LoanApplication_ControlNo
-LEFT JOIN loanbusiness lb ON lhl.LoanBusiness_ControlNo=lb.ControlNo"); ?>
+LEFT JOIN loanbusiness lb ON lhl.LoanBusiness_ControlNo=lb.ControlNo GROUP BY BusinessName"); ?>
 
 <?php $householdlist=$this->db->query("SELECT mhm.HouseholdNo, concat(hn.LastName,', ',hn.FirstName,' ', hn.MiddleName) AS Name
 FROM members_has_membershousehold mhm 
