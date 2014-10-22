@@ -65,4 +65,6 @@ class Approvalloan_model extends CI_Model{
 
 		$this->db->query("INSERT INTO `microfinance2`.`transaction` ( `LoanAppControlNo`, `Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`) VALUES ('$loanappno', '$loanpayment', '$datetime', '$member', '2', '$so', 'Capital Share');");
 	}
+}
+
 ?>
