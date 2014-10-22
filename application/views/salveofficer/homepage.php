@@ -11,21 +11,55 @@
 
 $center = $this->db->query("SELECT count(cm.Members_ControlNo) as number_of_member, bc.caritascenters_controlno as centercontrol, c.CenterNo FROM caritasbranch_has_caritascenters bc, caritascenters_has_members cm, caritascenters c where bc.caritasbranch_controlno = '$branchno' and bc.caritascenters_controlno = cm.caritascenters_controlno and cm.caritascenters_controlno = c.controlno and c.dayoftheweek = '$day' group by c.CenterNo");
 
-$member = $this->db->query("SELECT count(cm.Members_ControlNo) as Membercount, bc.caritascenters_controlno as center FROM caritasbranch_has_caritascenters bc, caritascenters_has_members cm where bc.caritasbranch_controlno = '$branchno' and bc.caritascenters_controlno = cm.caritascenters_controlno
-group by center");
+$member = $this->db->query("SELECT COUNT(Members_ControlNo) AS ActiveMembers FROM (SELECT Members_ControlNo, CaritasCenters_ControlNo AS CenterControl, BranchControl, BranchName, Status
+FROM (SELECT cchm.Members_ControlNo, A.CaritasCenters_ControlNo FROM CaritasCenters_has_Members cchm
+LEFT JOIN
+(SELECT * FROM CaritasCenters_has_Members WHERE DateLeft IS NULL ORDER BY DateEntered DESC)A
+ON A.Members_ControlNo=cchm.Members_ControlNo GROUP BY Members_ControlNo)Alpha
+LEFT JOIN (SELECT CenterControl, BranchControl, BranchName FROM 
+(SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
+FROM caritasbranch_has_caritascenters cbhcc
+LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters ORDER BY Date)A
+ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
+LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
+ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl
+LEFT JOIN
+(SELECT mhms.ControlNo, A.Status, A.DateUpdated FROM members_has_membersmembershipstatus mhms
+LEFT JOIN (SELECT * FROM members_has_membersmembershipstatus ORDER BY DateUpdated)A
+ON mhms.ControlNo=A.ControlNo GROUP BY mhms.ControlNo) Charlie
+ON Alpha.Members_ControlNo=Charlie.ControlNo)Omega WHERE (Status!='Terminated' OR Status!='Terminated Voluntarily') AND BranchControl='$branchno'");
 
 $allmember = $this->db->query("SELECT * FROM `members` ");
 $all_mem = $allmember->num_rows();
 
-$allcenter = $this->db->query("SELECT * FROM `caritascenters` ");
-$all_ctr = $allcenter->num_rows();
+$perbranchCenter = $this->db->query("SELECT IFNULL(COUNT(CenterControl),0) AS CenterNo FROM (SELECT CenterControl, BranchControl, BranchName FROM 
+(SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
+FROM caritasbranch_has_caritascenters cbhcc
+LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters ORDER BY Date)A
+ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
+LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Omega WHERE BranchControl='$branchno' ");
+
+$allcenter = $this->db->query("SELECT IFNULL(COUNT(CenterControl),0) AS CenterNo FROM (SELECT CenterControl, BranchControl, BranchName FROM 
+(SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
+FROM caritasbranch_has_caritascenters cbhcc
+LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters ORDER BY Date)A
+ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
+LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Omega");
 
 $countm = 0;
+$countc=0;
+$allcount=0;
 
 foreach ($member->result() as $m){
-	$countm +=$m->Membercount;	
+	$countm +=$m->ActiveMembers;	
 }
-	$countc =$member->num_rows();
+foreach($perbranchCenter->result() as $data1){
+	$countc =$data1->CenterNo;
+}
+foreach($allcenter->result() as $data2){
+	$allcount=$data2->CenterNo;
+
+}
 
 /*
 $pd = $this->db->query("SELECT count(cm.Members_ControlNo) as member, c.centerno FROM caritasbranch_has_caritascenters bc, caritascenters c ,caritascenters_has_members cm, members_has_membersmembershipstatus mm where bc.caritasbranch_controlno = '$branchno' and bc.caritascenters_controlno = c.controlno and c.controlno = cm.caritascenters_controlno and cm.Members_ControlNo = mm.controlno and mm.status = 'Past Due'");*/
@@ -146,7 +180,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branchno'");
 				<p class="stat"><?php echo $countc ?></p>
 				<?php endif;?>
 				<?php if($userrank=='mispersonnel') :?>
-				<p class="stat"><?php echo $all_ctr ?></p>
+				<p class="stat"><?php echo $allcount ?></p>
 				<?php endif;?>
 				<p class="stat1">Centers</p>
 				<p class="stat2">Updated last <?php echo $datetoday; ?></p>
