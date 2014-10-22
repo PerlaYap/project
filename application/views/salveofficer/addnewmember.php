@@ -218,6 +218,7 @@ date_default_timezone_set('Asia/Manila');
 				        	<span>Relationship :</span> 
 				        	<select name="relationship" style="width: 550px; height: 35px;" required>
 				        		<option> </option>
+				        		<option>Spouse</option>
 				        		<option>Grandparent</option>
 				        		<option>Father</option>
 				        		<option>Mother</option>
