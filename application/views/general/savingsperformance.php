@@ -46,6 +46,6 @@
     </script>
   </head>
   <body>
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    <div id="chart_div" style="width: auto; height: 500px; overflow: auto;"></div>
   </body>
 </html>
