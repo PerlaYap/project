@@ -169,7 +169,7 @@ date_default_timezone_set('Asia/Manila');
 				        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 
 				        Religion :
-				        <input id="religion" required type="text" name="religion" style="width: 172px;" />
+				        <input id="religion" required type="text" name="religion" style="width: 172px;" value="Roman Catholic"  readonly="true" />
 				    </label>
 
 				    <label>
@@ -219,10 +219,10 @@ date_default_timezone_set('Asia/Manila');
 				        	<select name="relationship" style="width: 550px; height: 35px;" required>
 				        		<option> </option>
 				        		<option>Spouse</option>
-				        		<option>Grandparent</option>
-				        		<option>Father</option>
-				        		<option>Mother</option>
 				        		<option>Child</option>
+				        		<option>Grandparent</option>
+				        		<option>Parent</option>
+				        		<option>Sibling</option>
 				        		<option>In-Law</option>
 				        	</select>
 					        <!--<input id="relationship" type="text" name="relationship"  style="width: 560px;"/>-->

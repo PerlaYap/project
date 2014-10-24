@@ -14,9 +14,7 @@ a.highlight{color: #bf1b12;}
 
 
 body{
-	background-color: black;
-	background-image: url('../images/background-2.jpg');
-	background-repeat: repeat;
+	background-color: white;
 	overflow: scroll;
 }
 
@@ -279,21 +277,22 @@ div.content{
     width: 800px;
     margin-right: auto;
     margin-left: auto;
-    background: #EEE;
+    background: #f5f5f5;
     padding: 20px 30px 20px 30px;
     font: 12px Georgia, "Times New Roman", Times, serif;
     color: #888;
     text-shadow: 1px 1px 1px #FFF;
-    border:1px solid #DADADA;
+    border:1px solid #f9f8f8;
     
 }
 .basic-grey h1 {
     font: 25px Georgia, "Times New Roman", Times, serif;
     padding: 0px 0px 10px 40px;
     display: block;
-    border-bottom: 1px solid #DADADA;
+    border-bottom: 3px solid #f9f8f8;
     margin: -10px -30px 30px -30px;
     color: #888;
+
 }
 .basic-grey h1>span {
     display: block;
