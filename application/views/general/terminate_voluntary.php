@@ -103,7 +103,9 @@
 
 
 
-
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
 <!------------------------------------------------------------------------>
 				<br><br><br><br><br>
 					<h1 style="text-align:center; color:#b7351b; border-top: 3px solid #f9f8f8;">
@@ -119,6 +121,115 @@
 					</h1>
 				<br><br><br>
 <!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+				<br>
+						<label>
+					        <span>Loan Balance :</span></label>
+					        <input id="name" type="text" name="fname" value="" style="width: 562px;" disabled/>
+
+					    <label>
+					        <span>Payment Received :</span></label>
+					        <input id="name" type="text" name="fname" value="" style="width: 562px;"/>
+
+
+					    <input type="button" value="Pay Remaining Balance"/>
+						<input type="button" value="Use Savings"/>
+				<br>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+				<br><br><br><br><br>
+					<h1 style="text-align:center; color:#b7351b; border-top: 3px solid #f9f8f8; border-bottom:0">
+
+						<br>
+						SUCCESSFULLY PAID REMAINING BALANCE THROUGH SAVINGS! 
+						<br>
+
+					</h1>
+						
+						<label>
+					        <span>Savings :</span></label>
+					        <input id="name" type="text" name="fname" value="" style="width: 562px;" disabled/>
+
+					    <label>
+					        <span>Loan Balance :</span></label>
+					        <input id="name" type="text" name="fname" value="" style="width: 562px;" disabled/>
+
+					    <label>
+					        <span>Current Savings :</span></label>
+					        <input id="name" type="text" name="fname" value="" style="width: 562px; color:#b7351b; font-weight:bold;" disabled/>
+
+						<br><br>
+					
+				<br><br><br>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+				<br><br><br><br><br>
+					<h1 style="text-align:center; color:#b7351b; border-top: 3px solid #f9f8f8; border-bottom:0">
+
+						<br>
+						Insufficient Savings!
+						<br>
+
+					</h1>
+						
+						<label>
+					        <span>Savings :</span></label>
+					        <input id="name" type="text" name="fname" value="" style="width: 562px;" disabled/>
+
+					    <label>
+					        <span>Loan Balance :</span></label>
+					        <input id="name" type="text" name="fname" value="" style="width: 562px;" disabled/>
+
+					    <label>
+					        <span>Remaining Loan Balance :</span></label>
+					        <input id="name" type="text" name="fname" value="" style="width: 562px; color:#b7351b; font-weight:bold;" disabled/>
+
+						<br><br>
+
+						<input type="button" value="Pay Remaining Balance"/>
+						<input type="button" value="Cancel"/>
+					
+				<br><br><br>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+<!------------------------------------------------------------------------>
+				<br><br><br><br><br>
+					<h1 style="text-align:center; color:#b7351b; border-top: 3px solid #f9f8f8; border-bottom:0">
+
+						<br>
+							Payment Received! <br>
+							@Member's account has now been terminated.
+						<br><br>
+
+						<input type="button" value="Ok"/>
+					</h1>
+						
+					
+<!------------------------------------------------------------------------>
+
+
+
+
+
+
+
+
+
+
+
+
+
 		    </div>
 
 
