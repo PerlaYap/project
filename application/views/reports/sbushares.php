@@ -50,6 +50,8 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MIS REPORT <br> For The Month Of <b>
 		<?php echo $yue ?> <?php echo $year ?></b></h3>
 <?php
+$user = $this->session->userdata('firstname');
+$datetoday = date('F d, Y');
 
 $getInterest =$this->db->query("SELECT FirstTable.BranchControl, Saving-Withdrawal AS PerMonth, FirstTable.Month, FirstTable.Year FROM 
 (SELECT SUM(Amount) AS Saving, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
@@ -390,9 +392,9 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 		<table class="signature" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Prepared by:</td>
-				<td class="sig">&nbsp</td>
+				<td class="sig">&nbsp<?php echo $user; ?></td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2">&nbsp</td>
+				<td class="sig2">&nbsp<?php echo $datetoday; ?></td>
 			</tr>
 		</table>
 		<br>
