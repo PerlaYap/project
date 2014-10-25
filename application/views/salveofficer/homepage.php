@@ -24,9 +24,11 @@ ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasC
 LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
 ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl
 LEFT JOIN
-(SELECT mhms.ControlNo, A.Status, A.DateUpdated FROM members_has_membersmembershipstatus mhms
-LEFT JOIN (SELECT * FROM members_has_membersmembershipstatus ORDER BY DateUpdated)A
-ON mhms.ControlNo=A.ControlNo GROUP BY mhms.ControlNo) Charlie
+(SELECT A.ControlNo, Status, DateUpdated 
+FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo)A
+LEFT JOIN 
+(SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus mhms ORDER BY ControlNo ASC, DateUpdated DESC)A GROUP BY ControlNo)B
+ON B.ControlNo=A.ControlNo) Charlie
 ON Alpha.Members_ControlNo=Charlie.ControlNo)Omega WHERE (Status!='Terminated' OR Status!='Terminated Voluntarily') AND BranchControl='$branchno'");
 
 $allmember = $this->db->query("SELECT * FROM `members` ");
