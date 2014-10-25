@@ -11,7 +11,10 @@
 
 $center = $this->db->query("SELECT count(cm.Members_ControlNo) as number_of_member, bc.caritascenters_controlno as centercontrol, c.CenterNo FROM caritasbranch_has_caritascenters bc, caritascenters_has_members cm, caritascenters c where bc.caritasbranch_controlno = '$branchno' and bc.caritascenters_controlno = cm.caritascenters_controlno and cm.caritascenters_controlno = c.controlno and c.dayoftheweek = '$day' group by c.CenterNo");
 
-$member = $this->db->query("SELECT COUNT(Members_ControlNo) AS ActiveMembers FROM (SELECT Members_ControlNo, CaritasCenters_ControlNo AS CenterControl, BranchControl, BranchName, Status
+$member = $this->db->query("SELECT COUNT(Members_ControlNo) AS ActiveMembers FROM 
+(SELECT * FROM Members mem
+LEFT JOIN
+(SELECT Members_ControlNo, CaritasCenters_ControlNo AS CenterControl, BranchControl, BranchName, Status
 FROM (SELECT cchm.Members_ControlNo, A.CaritasCenters_ControlNo FROM CaritasCenters_has_Members cchm
 LEFT JOIN
 (SELECT * FROM CaritasCenters_has_Members WHERE DateLeft IS NULL ORDER BY DateEntered DESC)A
@@ -29,7 +32,8 @@ FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY Control
 LEFT JOIN 
 (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus mhms ORDER BY ControlNo ASC, DateUpdated DESC)A GROUP BY ControlNo)B
 ON B.ControlNo=A.ControlNo) Charlie
-ON Alpha.Members_ControlNo=Charlie.ControlNo)Omega WHERE (Status!='Terminated' OR Status!='Terminated Voluntarily') AND BranchControl='$branchno'");
+ON Alpha.Members_ControlNo=Charlie.ControlNo)Omega 
+ON mem.ControlNo=Omega.Members_ControlNo)Zeta WHERE (Status!='Terminated' OR Status!='Terminated Voluntarily') AND BranchControl='$branchno'");
 
 $allmember = $this->db->query("SELECT * FROM `members` ");
 $all_mem = $allmember->num_rows();
