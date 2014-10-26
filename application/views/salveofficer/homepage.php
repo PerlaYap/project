@@ -33,7 +33,7 @@ LEFT JOIN
 (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus mhms ORDER BY ControlNo ASC, DateUpdated DESC)A GROUP BY ControlNo)B
 ON B.ControlNo=A.ControlNo) Charlie
 ON Alpha.Members_ControlNo=Charlie.ControlNo)Omega 
-ON mem.ControlNo=Omega.Members_ControlNo)Zeta WHERE (Status!='Terminated' OR Status!='Terminated Voluntarily') AND BranchControl='$branchno'");
+ON mem.ControlNo=Omega.Members_ControlNo WHERE Approved='YES')Zeta WHERE (Status!='Terminated' OR Status!='Terminated Voluntarily') AND BranchControl='$branchno'");
 
 $allmember = $this->db->query("SELECT * FROM `members` ");
 $all_mem = $allmember->num_rows();
