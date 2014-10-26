@@ -173,14 +173,92 @@ class Salveofficer extends CI_Controller {
 
 	public function terminate(){
 		$this->load->model('terminate_voluntary_model');
-		$data['profileinfo'] = $this->terminate_voluntary_model->getprofileinfo();
-		$data['branchcenter'] = $this->terminate_voluntary_model->getbranchcenter();
-		$loan_info = $this->terminate_voluntary_model->getloaninfo();
+		$controlno = $this->terminate_voluntary_model->getcontrolno();
+		$data['profileinfo'] = $this->terminate_voluntary_model->getprofileinfo($controlno);
+		$data['branchcenter'] = $this->terminate_voluntary_model->getbranchcenter($controlno);
+		$loan_info = $this->terminate_voluntary_model->getloaninfo($controlno);
 			if (!empty($loan_info)) {
 				$data['loaninfo'] = $loan_info;
+				$data['comaker'] = $this->terminate_voluntary_model->getcomaker();
 			}
+		$data['capitalshare'] = $this->terminate_voluntary_model->getcapitalshare($controlno);
+		$data['savings'] = $this->terminate_voluntary_model->getsavings($controlno);
 		/*$controlno['name'] = $_POST['controlno'];*/
 		$this->load->view('general/terminate_voluntary',$data);
+	}
+
+	public function payloanbalance(){
+		$this->load->model('terminate_voluntary_model');
+		$controlno = $this->terminate_voluntary_model->getcontrolno();
+		$submittype = $_POST['paymenttype'];
+		if ($submittype =='Cash Payment') {
+			$loantopay['controlno'] = $controlno;
+			$loantopay['loanbalance'] = $this->terminate_voluntary_model->getloanbalance();
+			$loantopay['paymenttype'] = $submittype;
+
+			$this->load->view('general/payloanbalance', $loantopay);
+		}else if ($submittype =='Savings') {
+			/*echo "you click savings";*/
+			$loantopay['controlno'] = $controlno;
+			$loantopay['loanbalance'] = $this->terminate_voluntary_model->getloanbalance();
+			$loantopay['paymenttype'] = $submittype;
+			$loantopay['savings'] = $this->terminate_voluntary_model->getsavings($controlno);
+			
+			/*$this->terminate_voluntary_model->paythroughsavings();*/
+
+			$this->load->view('general/payloanbalance', $loantopay);
+		}
+	}
+
+	public function payloanbalance_2(){
+		$this->load->model('terminate_voluntary_model');
+		$this->load->model('recordcollection_model');
+
+		$controlno = $this->terminate_voluntary_model->getcontrolno();
+		$loanbalance = $this->terminate_voluntary_model->getloanbalance();
+		$paymentrecieved = $this->terminate_voluntary_model->getpaymentrecieved();
+		$datetoday = $this->terminate_voluntary_model->getdatetoday();
+		$sopersonnel = $this->terminate_voluntary_model->getsopersonnel();
+		$loaninfo = $this->terminate_voluntary_model->getloaninfo($controlno);
+
+		foreach ($loaninfo as $loan) {
+			$AmountRequested = $loan->AmountRequested;
+			$Interest = $loan->Interest;
+			$Dateapplied = $loan->DateApplied;
+			$dayofweek = $loan->DayoftheWeek;
+			$status = $loan->Status;
+			$LoanType = $loan->LoanType;
+			$loanappcontrol = $loan->LoanControl;
+		}
+
+		$activerelease = $AmountRequested+$Interest;
+		if ($LoanType =="23-Weeks") {
+			$amounttopay = $activerelease/23;
+		}else if ($LoanType =="40-Weeks") {
+			$amounttopay = $activerelease/40;
+		}
+
+		$savingspayment = 0;
+		$withdrawals = 0;
+		$this->recordcollection_model->insertloantransaction($loanappcontrol, $paymentrecieved, $datetoday, $controlno, $sopersonnel);
+
+		$this->recordcollection_model->updatemembertransaction($loanappcontrol, $controlno, $paymentrecieved, $savingspayment, $amounttopay, $withdrawals);
+
+		if ($paymentrecieved < $loanbalance) {
+			echo "<script type='text/javascript'>alert('Account Termination Failed! Please settle the remaining loan balance before terminating the account.')</script>";
+
+			echo "<script type='text/javascript'>window.location.href='profiles?name='+".$controlno."</script>";
+		}else if ($paymentrecieved == $loanbalance) {
+			$this->terminate_voluntary_model->setterminatestatus($controlno);
+			echo "<script type='text/javascript'>alert('Loan Fully Paid. Account terminated successfully.')</script>";
+
+			$this->directory();
+
+
+
+
+		}
+		
 	}
 
 

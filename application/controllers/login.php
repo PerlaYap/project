@@ -47,6 +47,12 @@ class Login extends CI_Controller {
                 $this->load->view('navigation');
                 $this->load->view('general/usereditpassword'); 
                 $this->load->view('footer');
+        }else if ($message == "WCuN") {
+            echo "<script type='text/javascript'>alert('New Password cannot be the same as the current password.')</script>";
+                $this->load->view('header');
+                $this->load->view('navigation');
+                $this->load->view('general/usereditpassword'); 
+                $this->load->view('footer');
         }
 
      }

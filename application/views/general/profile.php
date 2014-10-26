@@ -604,7 +604,7 @@ WHERE Members_ControlNo='$control_no' AND ControlNo IS NOT NULL");
 					<br><br><p class='noresultfound'>- No Active Loan -</p><br><br>
 		<?php } ?>
 	<?php 			
-$gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`, `LoanAppControlNo` FROM `transaction` WHERE `LoanAppControlNo`='$love' and (`TransactionType` ='Loan' or `TransactionType` ='Past Due')  and `Members_ControlNo`='$control_no' "); ?>
+$gettransaction = $this->db->query("SELECT transaction.`ControlNo`, `Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`, `LoanAppControlNo`, concat(LastName,', ', FirstName,' ', MiddleName) as name FROM `transaction` join `caritaspersonnel` p on transaction.CaritasPersonnel_ControlNo = p.ControlNo WHERE `LoanAppControlNo`='$love' and (`TransactionType` ='Loan' or `TransactionType` ='Past Due')  and `Members_ControlNo`='$control_no' "); ?>
 
 				<div id="TransactionLog">
 				<br>
@@ -624,7 +624,7 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
 					<table class="TransLog" >
 						<tr class="t">
               <th style="width: 300px;">DATE</th> 
-  						<th style="width: 100px;">TIME</th>	
+  						<!-- <th style="width: 100px;">TIME</th>	 -->
   						<th style="width: 200px;">LOAN PAYMENT</th>
   						<th style="width: 200px;">PAST DUE</th>
   						<!-- /*echo '<th>CREDIT</th>';*/ -->
@@ -632,7 +632,7 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
               <th style="width: 300px;">SALVE OFFICER</th> 
 
 						</tr>
-
+<!-- 
             <tr>
               <td class="tdate" style="text-indent: 10px;">2014-08-05</td>
               <td class="val">02:13pm</td>
@@ -667,7 +667,7 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
               <td class="val">200</td>
               <td class="val">4200</td>
               <td class="val">Lyka Dado</td>
-            </tr>
+            </tr> -->
 
 
     						<?php
@@ -676,7 +676,7 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
     							
     							$type=$transact->TransactionType; ?>
     						
-    	<!-- 			<tr>
+    				<tr>
     						<td class="tdate"><?php echo $transact->DateTime ?></td>
     							<?php if ($type=="Loan ") { ?>
     							
@@ -689,15 +689,16 @@ $gettransaction = $this->db->query("SELECT `ControlNo`, `Amount`, `DateTime`, `M
     						<?php	} ?>
     							
     							<!-- /*echo '<td class="val"></td>';*/ -->
-    			<!--				<?php
+    							<?php
     							$f = $transact->TransactionType;
     						if ( $f=='Loan ') {
     						$total -= $transact->Amount;
     						}
     							?>
     						<td class="val"><?php echo $total ?></td>
+                <td class="val"><?php echo $transact->name ?></td>
 						</tr>
-					<?php } ?> -->
+					<?php } ?> 
 				
 
 					</table>

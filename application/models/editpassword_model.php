@@ -24,14 +24,19 @@ class editpassword_model extends CI_Model{
 
 		if ($current == true) {
 			/*echo "Correct password entered";*/
-			if ($new_pw == $confirm_pw) {
-						/*echo "correct new password.";*/
-						$this->updatepassword($personnelid, $new_pw);
-					$message = "PS";
+			if ($new_pw != $current_pw) {
+				
+				if ($new_pw == $confirm_pw) {
+							/*echo "correct new password.";*/
+							$this->updatepassword($personnelid, $new_pw);
+						$message = "PS";
 
-				}else{
-				 	$message = "WCoP";
-				}
+					}else{
+					 	$message = "WCoP";
+					}
+			}else{
+				$message = "WCuN";
+			}
 
 		}else{
 					$message = "WCuP";				

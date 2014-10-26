@@ -7,10 +7,10 @@
 <?php
 $branchno = $this->session->userdata('branchno');
 
-$getmember = $this->db->query("SELECT bc.`CaritasCenters_ControlNo`, `CenterNo`, cm.Members_ControlNo, CONCAT(LastName,',', FirstName, ' ', MiddleName) as Name , `Approved` FROM `caritasbranch_has_caritascenters` bc join `caritascenters` c on bc.`CaritasCenters_ControlNo` = c.`ControlNo` join `caritascenters_has_members` cm on cm.`CaritasCenters_ControlNo` = c.`ControlNo` join `membersname` mn on mn.ControlNo = cm.Members_ControlNo join `members` m on mn.ControlNo = m.ControlNo WHERE `CaritasBranch_ControlNo` = $branchno and `Approved` ='YES' ORDER BY `CenterNo`,`Name` ASC
+$getmember = $this->db->query("SELECT bc.`CaritasCenters_ControlNo`, `CenterNo`, cm.Members_ControlNo, CONCAT(LastName,',', FirstName, ' ', MiddleName) as Name , `Approved` FROM `caritasbranch_has_caritascenters` bc join `caritascenters` c on bc.`CaritasCenters_ControlNo` = c.`ControlNo` join `caritascenters_has_members` cm on cm.`CaritasCenters_ControlNo` = c.`ControlNo` join `membersname` mn on mn.ControlNo = cm.Members_ControlNo join `members` m on mn.ControlNo = m.ControlNo  WHERE `CaritasBranch_ControlNo` = $branchno and `Approved` ='YES'  ORDER BY `CenterNo`,`Name` ASC
 
  ");
-
+/*members_has_membersmembershipstatus ms on m.ControlNo = ms.ControlNo*/
  ?>
 
  			<script type="text/javascript">

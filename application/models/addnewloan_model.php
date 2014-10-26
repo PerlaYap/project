@@ -182,7 +182,7 @@ public function add_loanapplication(){
 
 	//Member Comaker
 
-	$this->addMemberComaker($loanControlNo,$memberControl,$mrelationship);
+	$this->addMemberComaker($loanControlNo,$mcomakerid,$mrelationship);
 
     //Income
 

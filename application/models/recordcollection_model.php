@@ -231,7 +231,10 @@ class Recordcollection_model extends CI_Model{
 				$this->db->query("UPDATE `microfinance2`.`members` SET `pastdue` = '$currentpastdue' WHERE `members`.`ControlNo` = $memberid;");
 			}elseif ($loanpayment > $amounttopay) {
 					
-				$currentpastdue = $pastpastdue - $loanpayment + $amounttopay;		
+				$currentpastdue = $pastpastdue - $loanpayment + $amounttopay;
+				if ($currentpastdue < 0) {
+						$currentpastdue = 0;		
+					}		
 				
 				$this->db->query("UPDATE `microfinance2`.`members` SET `pastdue` = '$currentpastdue' WHERE `members`.`ControlNo` = $memberid;");
 			}
