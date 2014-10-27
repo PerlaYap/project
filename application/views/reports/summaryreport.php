@@ -141,7 +141,7 @@ else
 				<br><Br>
 		</div>
 		<br>
-		<table class="signature" style="margin-left:auto; margin-right:auto; margin-top: 800px;">
+<!--		<table class="signature" style="margin-left:auto; margin-right:auto; margin-top: 800px;">
 			<tr>
 				<td class="sigBy">Prepared by:</td>
 				<td class="sig"><?php echo $user ?></td>
@@ -161,4 +161,4 @@ else
 		<br><br>
 		<div style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button> 
-	</div>
+	</div> -->
