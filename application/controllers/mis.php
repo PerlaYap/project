@@ -147,8 +147,8 @@ public function addnewofficer(){
 
 	public function editbranch(){
 		
-		$this->load->model('editbranchdetails_model');
-       $result = $this->editbranchdetails_model->setdetails();
+	$this->load->model('editbranchdetails_model');
+    $result = $this->editbranchdetails_model->setdetails();
 
        if ($result) {
            echo "<script type='text/javascript'>alert('Successfully Updated!')</script>";

@@ -10,32 +10,45 @@
 <body>
 	<div class="content2">  
 
-	<?php	
+		<?php	
 
-	
-
-		$user = $this->db->query("SELECT CONCAT(FirstName,' ', MiddleName, ' ', LastName) AS Name, Rank, BranchName, p.ControlNo FROM caritaspersonnel p, caritasbranch_has_caritaspersonnel bp,caritasbranch cb 
- where p.ControlNo = bp.CaritasPersonnel_ControlNo AND bp.CaritasBranch_ControlNo = cb.ControlNo");
 		
 
-	?> 
+		$user = $this->db->query("SELECT CONCAT(LastName,', ', FirstName, ' ', MiddleName) AS Name, Rank, BranchName, ControlNo 
+			FROM CaritasPersonnel cp
+			LEFT JOIN 
+			(SELECT CaritasPersonnel_ControlNo AS PersonnelControl, BranchName 
+				FROM CaritasBranch_has_Caritaspersonnel cbhcp LEFT JOIN CaritasBranch cb ON cb.ControlNo=cbhcp.CaritasBranch_ControlNo)A
+		ON cp.ControlNo=A.PersonnelControl ORDER BY Name");
+		
+
+		?> 
 
 		<div class = "mainincome">
 			<form action="updateuser" method="post">
 				
 				<?php	foreach ($user->result() as $row){ ?> 
-				<div class="subheadername"><b><?php echo $row->Name; ?></b></div>
-					<div class="subskew"></div>
+				<div class="subheadername"><b><?php echo strtoupper($row->Name); ?></b></div>
+				<div class="subskew"></div>
 				<br><br>
-				<p class="info"><b>Rank: </b>  <?php echo $row->Rank; ?>  </p>
-				<p class="info"><b>Branch: </b>  <?php echo $row->BranchName; ?>  </p>
+				<p class="info"><b>Rank: </b>  <?php echo strtoupper($row->Rank); ?>  </p>
+				<p class="info"><b>Branch: </b>  
+					<?php 
+					if($row->BranchName!=null){
+						echo strtoupper($row->BranchName);
+					}
+					else{
+						echo "UNASSIGNED";
+					}
+					?>
+				</p>
 				
-			<input type="button" class="editbtn" value="Edit User" onclick="send('<?php echo $row->ControlNo ?>')" style="width: 140px;"/>
-	<?php  }?>
-	
+				<input type="button" class="editbtn" value="Edit User" onclick="send('<?php echo $row->ControlNo ?>')" style="width: 140px;"/>
+				<?php  }?>
+				
+			</div>
+
+			<br><br><br>
 		</div>
 
-	<br><br><br>
-	</div>
-
-</body>
+	</body>

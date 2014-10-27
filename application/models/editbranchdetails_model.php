@@ -31,14 +31,14 @@ class Editbranchdetails_model extends CI_Model{
   			$this->updateBranchContact($control_no, $contact);
 
 			$this->updateBranchAddress($control_no, $address);
-	
-			$this->updatemanager($control_no, $manager);
-			
 		
+			$this->deleteAllOfficer($control_no);
+
+			$this->addOfficer($control_no, $manager);
 
 			for ($i=0; $i < $officersize; $i++) { 
 			
-			$this->updateofficer($control_no, $officer[$i]);
+			$this->addOfficer($control_no, $officer[$i]);
 		}
 
 			
@@ -65,10 +65,17 @@ class Editbranchdetails_model extends CI_Model{
 			WHERE `CaritasBranch_ControlNo`='$control_no'");
 	} 
 	
-    public function updateofficer($control_no, $officer){
-		$this->db->query("UPDATE `caritasbranch_has_caritaspersonnel` SET `CaritasPersonnel_ControlNo` = '$officer'
-			WHERE `CaritasBranch_ControlNo`='$control_no'");
+    public function addOfficer($branchControl, $officer){
+		$this->db->query("INSERT INTO `microfinance2`.`caritasbranch_has_caritaspersonnel` (`CaritasBranch_ControlNo`, `CaritasPersonnel_ControlNo`) VALUES ('$branchControl', '$officer');
+");
 	}   
+
+	public function deleteAllOfficer($branchControl){
+		$this->db->query("DELETE FROM `microfinance2`.`caritasbranch_has_caritaspersonnel` WHERE `CaritasBranch_ControlNo`='$branchControl';");
+	}   
+
+	
+
 	
 
 				}

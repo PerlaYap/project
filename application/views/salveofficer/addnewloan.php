@@ -31,7 +31,10 @@ WHERE ISNULL(Status) OR Status='Full Payment' OR Status='Rejected' ORDER BY Memb
 
 <script>
 $(function() {
-	$( "#datepicker" ).datepicker();
+	$( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true
+    });
 	$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 });
 </script>
