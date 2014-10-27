@@ -223,6 +223,8 @@ date_default_timezone_set('Asia/Manila');
 				        		<option>Grandparent</option>
 				        		<option>Parent</option>
 				        		<option>Sibling</option>
+				        		<option>Uncle</option>
+				        		<option>Aunt</option>
 				        		<option>In-Law</option>
 				        	</select>
 					        <!--<input id="relationship" type="text" name="relationship"  style="width: 560px;"/>-->

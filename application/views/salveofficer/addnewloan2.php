@@ -434,14 +434,13 @@ foreach ($dayoftheweek->result() as $row){
 						        <!--<input id="household" type="text" name="hrelation" style="width:400px;" /> -->
 						        <select name="hrelation" style="width:405px;">
 						        	<option value=" " selected=" "></option>
-						        	<option value="Grandfather">Grandfather</option>
-						        	<option value="Grandmother">Grandmother</option>
-						        	<option value="Father">Father</option>
-						        	<option value="Mother">Mother</option>
+						        	<option value="Spouse">Spouse</option>
 						        	<option value="Child">Child</option>
+						        	<option value="Grandparent">Grandparent</option>
+						        	<option value="Parent">Parent</option>
 						        	<option value="Uncle">Uncle</option>
 						        	<option value="Aunt">Aunt</option>
-						        	<option value="Cousin">Cousin</option>
+						        	<option value="In-Law">In-Law</option>
 						        </select>
 						        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						        Gender : 
