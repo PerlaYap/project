@@ -20,7 +20,7 @@ LEFT JOIN
 ON Alpha.MemberControl=Beta.MemberControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MemberControl
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MemberControl
-WHERE ISNULL(Status) OR Status='Full Payment' OR Status='Rejected' ORDER BY MemberID ASC");
+WHERE ISNULL(Status) OR Status='Full Payment' OR Status='Rejected' ORDER BY LastName ASC");
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/salveofficer.css'); ?>">
 <script src="<?php echo base_url('Assets/js/salveofficer.js'); ?>"></script>
@@ -47,11 +47,11 @@ $(function() {
 		</h1>
 
 		<label>
-			<span>Member ID :</span></label>
+			<span>Member:</span></label>
 			<select required="true" name='memberid' style="width: 260px;" >
 				<option></option>
 				<?php foreach ($getmemberid->result() as $memid) {
-					echo '<option value="'.$memid->MemberID.'">'.$memid->MemberID.'|'.$memid->Name.'</option>';
+					echo '<option value="'.$memid->MemberID.'">'.$memid->Name.'</option>';
 				} ?>
 				
 			</select>

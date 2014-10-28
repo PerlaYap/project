@@ -39,7 +39,7 @@ FROM members_has_membersmembershipstatus GROUP BY ControlNo) A
 ON mhms.ControlNo=A.ControlNo AND mhms.DateUpdated=A.LatestDate
 WHERE Status!='Terminated') B ON mem.ControlNo=B.ControlNo
 LEFT JOIN MembersName mn ON mem.ControlNo=mn.ControlNo
-WHERE Approved='YES'"); ?>
+WHERE Approved='YES' Order by LastName"); ?>
 
 <?php $memberinfo=$this->db->query("SELECT cb.ControlNo AS BranchControl, cb.BranchName,cc.ControlNo AS CenterControl, cc.CenterNo, B.FirstName, B.MiddleName, B.LastName, B.ControlNo, B.MemberID FROM caritasbranch_has_caritascenters cbhcc 
 LEFT JOIN caritasbranch cb ON cbhcc.CaritasBranch_ControlNo=cb.ControlNo
@@ -482,7 +482,7 @@ foreach ($dayoftheweek->result() as $row){
 						        <select required="true" name='mcomakerid' style="width: 562px;" >
 				        		<option></option>
 				        		<?php foreach ($membercomaker->result() as $memid) { ?>
-				        		<option value="<?php echo $memid->MemberID ?>"> <?php echo $memid->MemberID ?>| <?php echo $memid->Name ?></option>
+				        		<option value="<?php echo $memid->MemberID ?>"> <?php echo $memid->Name ?></option>
 				        		<?php } ?>
 				        	
 				        </select>	 
