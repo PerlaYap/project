@@ -28,7 +28,7 @@
 			<form action="updateuser" method="post">
 				
 				<?php	foreach ($user->result() as $row){ ?> 
-				<div class="subheadername"><b><?php echo strtoupper($row->Name); ?></b></div>
+				<div class="subheadername" style="width: 250px; height: 30px; font-size: 16px;"><b><?php echo strtoupper($row->Name); ?></b></div>
 				<div class="subskew"></div>
 				<br><br>
 				<p class="info"><b>Rank: </b>  <?php echo strtoupper($row->Rank); ?>  </p>
