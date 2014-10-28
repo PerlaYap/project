@@ -189,22 +189,69 @@ class Salveofficer extends CI_Controller {
 
 	public function payloanbalance(){
 		$this->load->model('terminate_voluntary_model');
+
 		$controlno = $this->terminate_voluntary_model->getcontrolno();
 		$submittype = $_POST['paymenttype'];
+		$loanbalance = $this->terminate_voluntary_model->getloanbalance();
+		$savings = $this->terminate_voluntary_model->getsavings($controlno);
+
 		if ($submittype =='Cash Payment') {
 			$loantopay['controlno'] = $controlno;
-			$loantopay['loanbalance'] = $this->terminate_voluntary_model->getloanbalance();
+			$loantopay['loanbalance'] = $loanbalance;
 			$loantopay['paymenttype'] = $submittype;
 
 			$this->load->view('general/payloanbalance', $loantopay);
 		}else if ($submittype =='Savings') {
 			/*echo "you click savings";*/
+			$this->load->model('recordcollection_model');
+
 			$loantopay['controlno'] = $controlno;
-			$loantopay['loanbalance'] = $this->terminate_voluntary_model->getloanbalance();
+			$loantopay['loanbalance'] = $loanbalance;
 			$loantopay['paymenttype'] = $submittype;
-			$loantopay['savings'] = $this->terminate_voluntary_model->getsavings($controlno);
+			$loantopay['savings'] = $savings;
+			$datetoday = $this->terminate_voluntary_model->getdatetoday();
+			$sopersonnel = $this->terminate_voluntary_model->getsopersonnel();
+			/*echo "<br>";*/
+
+			$loaninfo = $this->terminate_voluntary_model->getloaninfo($controlno);
+
+				foreach ($loaninfo as $loan) {
+					$AmountRequested = $loan->AmountRequested;
+					$Interest = $loan->Interest;
+					$Dateapplied = $loan->DateApplied;
+					$dayofweek = $loan->DayoftheWeek;
+					$status = $loan->Status;
+					$LoanType = $loan->LoanType;
+					$loanappcontrol = $loan->LoanControl;
+				}
+
+				$activerelease = $AmountRequested+$Interest;
+					if ($LoanType =="23-Weeks") {
+						$amounttopay = $activerelease/23;
+					}else if ($LoanType =="40-Weeks") {
+						$amounttopay = $activerelease/40;
+					}
+
+
+				$savingspayment = 0;
+				
+				if ($loanbalance<=$savings) {
+					$withdrawals = $loanbalance;
+				}elseif ($loanbalance>$savings) {
+					$withdrawals = $savings;
+				}
+
+				$paymentrecieved = $withdrawals;
+
+				$this->recordcollection_model->insertwithdrawaltransaction($loanappcontrol, $withdrawals, $datetoday, $controlno, $sopersonnel);
+
+				$this->recordcollection_model->insertloantransaction($loanappcontrol, $paymentrecieved, $datetoday, $controlno, $sopersonnel);
+
+				$this->recordcollection_model->updatemembertransaction($loanappcontrol, $controlno, $paymentrecieved, $savingspayment, $amounttopay, $withdrawals);
 			
-			/*$this->terminate_voluntary_model->paythroughsavings();*/
+			/*$this->terminate_voluntary_model->paythroughsavings($loantopay);*/
+			/*withdrawal money*/
+			/*if loanbalance <= */
 
 			$this->load->view('general/payloanbalance', $loantopay);
 		}

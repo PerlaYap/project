@@ -1,4 +1,8 @@
 <?php 
+
+date_default_timezone_set('Asia/Manila');
+$SOpersonnel =$this->session->userdata('personnelno');
+
 		foreach ($profileinfo as $mem) {
 			$lastname = $mem->LastName;
 			$middlename = $mem->MiddleName;
@@ -68,6 +72,19 @@
  ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/terminate.css'); ?>">
+
+<script type="text/javascript">
+
+	function verify_action(){
+		var r = confirm("Are you sure you want to pay through savings?");
+		if (r == true) {
+				return true;
+		}else{
+				return false;
+		}	
+	}
+
+</script>
 
 
 			<div class="basic-grey">
@@ -180,11 +197,13 @@
 						<br>
 						PLEASE SETTLE THE REMAINING LOAN BALANCE <br>
 						<b>Php <?php echo $loanexpense ?> .00</b> <br><br>
-						<form action='payloanbalance' method='post'>
+						<form action='payloanbalance' method='post' id='myform'>
 							<input type='hidden' name='controlno' value='<?php echo $memcontrol ?>'>
 							<input type ='hidden' name='loanbalance' value='<?php echo $loanexpense ?>'>
+							<input type='hidden' name='datetoday' value='<?php echo date("Y-m-j") ?>'>
+							<input type ='hidden' name='sopersonnel' value='<?php echo $SOpersonnel; ?>'/>
 						<input type="submit" name='paymenttype' value="Cash Payment"/>
-						<input type="submit" name='paymenttype' value="Savings"/>
+						<input type="submit" name='paymenttype' onclick=" return verify_action()" value="Savings"/>
 						</form>
 						<br><br>
 					</h1>

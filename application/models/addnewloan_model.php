@@ -181,8 +181,8 @@ public function add_loanapplication(){
 	$this->addHouseholdComaker($loanControlNo,$householdno);
 
 	//Member Comaker
-
-	$this->addMemberComaker($loanControlNo,$mcomakerid,$mrelationship);
+        $mcomakerno = $memberControl= $this->getMemberControlNo($mcomakerid);
+	$this->addMemberComaker($loanControlNo,$mcomakerno,$mrelationship);
 
     //Income
 

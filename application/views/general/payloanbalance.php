@@ -75,11 +75,13 @@
 
 					    <label>
 					        <span>Loan Balance :</span></label>
-					        <input id="name" type="text" name="fname" value="<?php echo $loanbalance ?>" style="width: 562px;" disabled/>
+					        <input id="name" type="text" name="loanbalance" value="<?php echo $loanbalance ?>" style="width: 562px;" disabled/>
 
 					    <label>
 					        <span>Current Savings :</span></label>
 					        <input id="name" type="text" name="fname" value="<?php echo $savingstot-$loanbalance ?>" style="width: 562px; color:#b7351b; font-weight:bold;" disabled/>
+					        <br><br>
+					    <input type='submit' value='OK'>
 
 						<br><br>
 					
