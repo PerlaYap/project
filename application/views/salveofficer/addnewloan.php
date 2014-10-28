@@ -20,7 +20,7 @@ LEFT JOIN
 ON Alpha.MemberControl=Beta.MemberControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MemberControl
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MemberControl
-WHERE ISNULL(Status) OR Status='Full Payment' OR Status='Rejected' ORDER BY LastName ASC");
+WHERE ISNULL(Status) OR Status='Full Payment' OR Status='Rejected' ORDER BY LastName, FirstName ASC");
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/salveofficer.css'); ?>">
 <script src="<?php echo base_url('Assets/js/salveofficer.js'); ?>"></script>

@@ -39,7 +39,7 @@ FROM members_has_membersmembershipstatus GROUP BY ControlNo) A
 ON mhms.ControlNo=A.ControlNo AND mhms.DateUpdated=A.LatestDate
 WHERE Status!='Terminated') B ON mem.ControlNo=B.ControlNo
 LEFT JOIN MembersName mn ON mem.ControlNo=mn.ControlNo
-WHERE Approved='YES' Order by LastName"); ?>
+WHERE Approved='YES' Order by LastName, FirstName"); ?>
 
 <?php $memberinfo=$this->db->query("SELECT cb.ControlNo AS BranchControl, cb.BranchName,cc.ControlNo AS CenterControl, cc.CenterNo, B.FirstName, B.MiddleName, B.LastName, B.ControlNo, B.MemberID FROM caritasbranch_has_caritascenters cbhcc 
 LEFT JOIN caritasbranch cb ON cbhcc.CaritasBranch_ControlNo=cb.ControlNo
@@ -434,13 +434,15 @@ foreach ($dayoftheweek->result() as $row){
 						        <!--<input id="household" type="text" name="hrelation" style="width:400px;" /> -->
 						        <select name="hrelation" style="width:405px;">
 						        	<option value=" " selected=" "></option>
-						        	<option value="Spouse">Spouse</option>
+						        	<option value="Aunt">Aunt</option>
 						        	<option value="Child">Child</option>
+						        	<option value="Cousin">Cousin</option>
 						        	<option value="Grandparent">Grandparent</option>
+						        	<option value="In-Law">In-Law</option>
+						        	<option value="Spouse">Spouse</option>
 						        	<option value="Parent">Parent</option>
 						        	<option value="Uncle">Uncle</option>
-						        	<option value="Aunt">Aunt</option>
-						        	<option value="In-Law">In-Law</option>
+
 						        </select>
 						        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						        Gender : 
@@ -477,7 +479,7 @@ foreach ($dayoftheweek->result() as $row){
 				    </label>
 
 					   		<label>
-						    	<span>Co-Maker ID :</span> 
+						    	<span>Co-Maker:</span> 
 						        <!--<input id="" type="text" name="mcomakerid" style="width:562px;" />-->
 						        <select required="true" name='mcomakerid' style="width: 562px;" >
 				        		<option></option>
@@ -490,7 +492,17 @@ foreach ($dayoftheweek->result() as $row){
 
 						    <label>
 						    	<span>Relationship :</span> 
-						        <input required="true" id="" type="text" name="mrelationship" style="width:562px;" /> 
+						        <select name="mrelationship" style="width:405px;">
+						        	<option value=" " selected=" "></option>
+						        	<option value="Aunt">Aunt</option>
+						        	<option value="Child">Child</option>
+						        	<option value="Cousin">Cousin</option>
+						        	<option value="Grandparent">Grandparent</option>
+						        	<option value="In-Law">In-Law</option>
+						        	<option value="Spouse">Spouse</option>
+						        	<option value="Parent">Parent</option>
+						        	<option value="Uncle">Uncle</option>
+						        </select>
 						    </label>
 
 				 <!--	<label>

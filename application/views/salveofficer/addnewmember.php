@@ -217,15 +217,15 @@ date_default_timezone_set('Asia/Manila');
 					    <label>
 				        	<span>Relationship :</span> 
 				        	<select name="relationship" style="width: 550px; height: 35px;" required>
-				        		<option> </option>
-				        		<option>Spouse</option>
-				        		<option>Child</option>
-				        		<option>Grandparent</option>
-				        		<option>Parent</option>
-				        		<option>Sibling</option>
-				        		<option>Uncle</option>
-				        		<option>Aunt</option>
-				        		<option>In-Law</option>
+				        		<option value=" " selected=" "></option>
+						        	<option value="Aunt">Aunt</option>
+						        	<option value="Child">Child</option>
+						        	<option value="Cousin">Cousin</option>
+						        	<option value="Grandparent">Grandparent</option>
+						        	<option value="In-Law">In-Law</option>
+						        	<option value="Spouse">Spouse</option>
+						        	<option value="Parent">Parent</option>
+						        	<option value="Uncle">Uncle</option>
 				        	</select>
 					        <!--<input id="relationship" type="text" name="relationship"  style="width: 560px;"/>-->
 					    </label>
