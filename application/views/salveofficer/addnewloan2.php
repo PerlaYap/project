@@ -285,7 +285,7 @@ foreach ($dayoftheweek->result() as $row){
 
 					 	&nbsp&nbsp&nbsp&nbsp
 				        Max Loan Amount :
-				        <input type="text" readOnly="true" id="maxLoan" name="" style="width: 210px;" />
+				        <input type="text" readOnly="true" id="maxLoan" name="" style="width: 210px; color:#962a2a" />
 				
 				    <label>
 				        <span>Loan Type :</span></label>
@@ -325,7 +325,7 @@ foreach ($dayoftheweek->result() as $row){
 
 					<label>
 				    	<span>Type :</span> </label>
-				        <input id="business" type="text" name="type" style="width:220px;" placeholder="insert example"/> 
+				        <input id="business" type="text" name="type" style="width:220px;" /> 
 				    
 				    	&nbsp&nbsp
 						Date Established :
@@ -513,7 +513,7 @@ foreach ($dayoftheweek->result() as $row){
 				<table class="creditinvestigation" border="1">
 					<tr class="hdrrr">
 						<td class="CIheader">SOURCE OF INCOME</td>
-						<td class="CIheader2">DAILY INCOME</td>
+						<td class="CIheader2">MONTHLY INCOME</td>
 					</tr>
 
 				<?php $a=0;
@@ -536,7 +536,7 @@ foreach ($dayoftheweek->result() as $row){
 				<table class="creditinvestigation" border="1">
 					<tr class="hdrrr">
 						<td class="CIheader">FAMILY EXPENSE</td>
-						<td class="CIheader2">DAILY EXPENSE</td>
+						<td class="CIheader2">MONTHLY EXPENSE</td>
 					</tr>
 
 				<?php $a=0;
@@ -559,7 +559,7 @@ foreach ($dayoftheweek->result() as $row){
 				<table class="creditinvestigation" border="1">
 					<tr class="hdrrr">
 						<td class="CIheader">BUSINESS EXPENSE</td>
-						<td class="CIheader2">DAILY EXPENSE</td>
+						<td class="CIheader2">MONTHLY EXPENSE</td>
 					</tr>
 
 				<?php $a=0;

@@ -450,7 +450,7 @@ foreach ($pastDuePerformance->result() as $row) {
    <p class="info"><b>Company Name: </b> <?php echo $companyname; ?> </p>
    <p class="info"><b>Business Type: </b> <?php echo $btype; ?> </p>
    <p class="info"><b>Contact No.: </b> <?php echo $comcontact; ?>  </p>
-   <p class="info"><b>Years in the Business: </b><?php echo $yearen; ?> years  </p>
+   <p class="info"><b>Year  entered in the Business: </b><?php echo $yearen; ?> </p>
 
  </div>
 
