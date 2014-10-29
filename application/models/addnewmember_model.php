@@ -147,8 +147,6 @@ if (isset($dname)){
 
     $this->addMemberType($control_no, "Associate Member"); 
 
-    $this->addMembersStatus($control_no,"Active");
-
   $this->addMembersAddress($control_no, $home_address, $year_of_residency,"Home Address");
     //address, year. type
 
@@ -231,11 +229,6 @@ return true;
 
     public function addMembershasMembers($membersmembers) {
         $this->db->insert_batch('Members_has_Members', $membersmembers);
-    }
-
-    public function addMembersStatus($controlNo, $status) {
-        $this->db->query("INSERT INTO members_has_membersmembershipstatus(`ControlNo`, `DateUpdated`, `Status`) VALUES ('$controlNo', NOW(), '$status')");
-        /*INSERT INTO `microfinance2`.`members_has_membersmembershipstatus` (`ControlNo`, `DateUpdated`, `Status`) VALUES ('16', NOW(), 'Active');*/
     }
 
     public function addMembersAddress($controlNo, $address, $year, $type) {
