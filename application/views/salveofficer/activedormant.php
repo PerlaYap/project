@@ -22,38 +22,35 @@ $dormantaccount = $dormants->result();
   google.load("visualization", "1", {packages:["corechart"]});
   google.setOnLoadCallback(drawChart);
   function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Month', 'Active'],
+  
+  var data = google.visualization.arrayToDataTable([
+      ['Month', 'Active','Past Due Mature', 'Dormant Borrower'],
       <?php
-        for($a=1; $a<=12; $a++){
-          $date=$currentyear."-".$a."-"."01";
+        for($a=0; $a<12; $a++){
+          $date=$currentyear."-".($a+1)."-"."01";
           $active = $this->db->query("SELECT COUNT(A.ControlNo) AS NoActive  FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)) GROUP BY ControlNo)A
                                     LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
-                                    ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily' AND Status!='Past Due' AND Status!='Dormant')");
-          foreach($active0>result() as $data){
+                                    ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily' AND Status!='Past Due' AND Status!='Dormant Saver')");
+          $past = $this->db->query("SELECT COUNT(A.ControlNo) AS NoActive  FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)) GROUP BY ControlNo)A
+                                    LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
+                                    ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily') AND Status='Past Due'");
+          $dormant = $this->db->query("SELECT COUNT(A.ControlNo) AS NoActive  FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)) GROUP BY ControlNo)A
+                                    LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
+                                    ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily') AND Status='Dormant Saver'");
+          
+          foreach($active->result() as $data){
             $count=$data->NoActive;
           }
-          echo '['.$month[$i].', '.$count.'],';
-        }
+          foreach($past->result() as $data1){
+            $count1=$data1->NoActive;
+          }
+          foreach($dormant->result() as $data2){
+            $count2=$data2->NoActive;
+          }
+          ?>
+          ['<?php echo $month[$a]; ?>', <?php echo $count; ?>,<?php echo $count1; ?>, <?php echo $count2; ?>],
+        <?php }
         ?>
-
-      /*<?php for ($i=0; $i < 12 ; $i++) { ?>
-        <?php foreach ($activeaccount as $act) {
-          $monthq = $act->Month;
-          $numact = $act->Count;
-          if ($monthq == $i+1) { ?>
-            ['<?php echo $month[$i] ?>',  <?php echo $numact; ?>],         
-            <?php } else{ 
-              $numact = 0;
-              ?>
-              ['<?php echo $month[$i] ?>',  <?php echo $numact; ?>],         
-              <?php } ; ?>
-
-
-              <?php } ?>
-              <?php } ?>
-              */
-
               ]);
 
     var options = {
@@ -61,7 +58,7 @@ $dormantaccount = $dormants->result();
       hAxis: {title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true}},
       vAxis: {title: 'NO. OF ACCOUNTS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
       backgroundColor: 'transparent',
-      colors:['#2795be','#a63923' ],
+      colors:['#2795be','#a63923', '#FFA500' ],
 
         //if salve officer
         <?php if($userrank=='salveofficer') :?>
