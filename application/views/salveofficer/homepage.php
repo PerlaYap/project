@@ -71,7 +71,26 @@ foreach($allcenter->result() as $data2){
 $pd = $this->db->query("SELECT count(cm.Members_ControlNo) as member, c.centerno FROM caritasbranch_has_caritascenters bc, caritascenters c ,caritascenters_has_members cm, members_has_membersmembershipstatus mm where bc.caritasbranch_controlno = '$branchno' and bc.caritascenters_controlno = c.controlno and c.controlno = cm.caritascenters_controlno and cm.Members_ControlNo = mm.controlno and mm.status = 'Past Due'");*/
 
 
-$term = $this->db->query("SELECT m.FirstName, m.LastName, c.centerno, m.ControlNo FROM caritasbranch_has_caritascenters bc, caritascenters c ,caritascenters_has_members cm, members_has_membersmembershipstatus mm, membersname m where bc.caritasbranch_controlno = '$branchno' and bc.caritascenters_controlno = c.controlno and c.controlno = cm.caritascenters_controlno and cm.Members_ControlNo = mm.controlno AND mm.controlno = m.controlno and mm.status = 'Past Due' || 'Dormant Saver'");
+$term = $this->db->query("SELECT MemberControl, LastName, FirstName, CenterNo FROM (SELECT MemberControl, Alpha.CenterControl, Beta.BranchControl FROM(SELECT MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo AS MemberControl FROM CaritasCenters_has_Members GROUP BY Members_ControlNo)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members ORDER BY DateEntered DESC)A GROUP BY Members_ControlNo)B
+ON A.MemberControl=B.Members_ControlNo)Alpha
+LEFT JOIN 
+(SELECT CenterControl, CaritasBranch_ControlNo AS BranchControl 
+FROM (SELECT CaritasCenters_ControlNo AS CenterControl FROM caritasbranch_has_caritascenters GROUP BY CaritasCenters_ControlNo)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY Date DESC)A GROUP BY CaritasCenters_ControlNo)B 
+ON A.CenterControl=B.CaritasCenters_ControlNo)Beta
+ON Alpha.CenterControl=Beta.CenterControl
+WHERE BranchControl='$branchno')Uno
+LEFT JOIN
+(SELECT A.ControlNo, Status 
+FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo)A LEFT JOIN 
+(SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus mhms ORDER BY ControlNo ASC, DateUpdated DESC)A GROUP BY ControlNo)B
+ON B.ControlNo=A.ControlNo)Dos ON Uno.MemberControl=Dos.ControlNo
+LEFT JOIN
+MembersName mn ON mn.ControlNo=Uno.MemberControl
+LEFT JOIN CaritasCenters cc ON cc.ControlNo=Uno.CenterControl
+WHERE (Status='Past Due' OR Status='Dormant Saver')
+ORDER BY LastName");
 
 /*FOR UPDATES*/
 $pendinglist = $this->db->query("SELECT m.ControlNo
@@ -336,8 +355,8 @@ function gotoapprovedloan(){
 
 										<tr class="updaterow">
 											<td class="updatecontent" style="width: 30px; color:#232222;"> <?php echo $number; ?></td>
-											<td class="updatecontent" style="width: 240px;"><a href="javascript:void(0)" onclick="send('<?php echo $t->ControlNo ?>')"><?php echo $t->LastName;  ?>, <?php echo $t->FirstName ?></a></td>
-											<td class="updatecontent" style="width: 30px; text-align:center; color:#232222;"><?php echo $t->centerno; ?></td>						
+											<td class="updatecontent" style="width: 240px;"><a href="javascript:void(0)" onclick="send('<?php echo $t->MemberControl ?>')"><?php echo $t->LastName;  ?>, <?php echo $t->FirstName ?></a></td>
+											<td class="updatecontent" style="width: 30px; text-align:center; color:#232222;"><?php echo $t->CenterNo; ?></td>						
 										</tr>
 
 										<?php } ?>
