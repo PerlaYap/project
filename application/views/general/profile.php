@@ -402,7 +402,7 @@ foreach ($pastDuePerformance->result() as $row) {
      <!-- lyka for edit -->
      <form action='terminate' method='post'>
       <input type='hidden'  name='controlno' value='<?php echo $control_no ?>' >
-      <input type="submit" class="editbtn" value="Terminate" />
+      <input type="submit" class="editbtn" value="Withdraw" />
     </form>
     <br>
     <form action='editprofile' method='post'>

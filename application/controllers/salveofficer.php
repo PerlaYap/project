@@ -209,6 +209,9 @@ class Salveofficer extends CI_Controller {
 			$loantopay['loanbalance'] = $loanbalance;
 			$loantopay['paymenttype'] = $submittype;
 			$loantopay['savings'] = $savings;
+			foreach ($savings as $save) {
+				$sav = $save->Savings;
+			}
 			$datetoday = $this->terminate_voluntary_model->getdatetoday();
 			$sopersonnel = $this->terminate_voluntary_model->getsopersonnel();
 			/*echo "<br>";*/
@@ -235,20 +238,31 @@ class Salveofficer extends CI_Controller {
 
 				$savingspayment = 0;
 				
-				if ($loanbalance<=$savings) {
+				if ($loanbalance<=$sav) {
+					/*echo $loanbalance;
+					echo "<br>";
+					echo $sav;
+					echo "<br>";
+					echo "loanbalance <= savings";*/
+					/*echo "<br>Withdrawals:";*/
 					$withdrawals = $loanbalance;
-				}elseif ($loanbalance>$savings) {
-					$withdrawals = $savings;
+				}elseif ($loanbalance > $sav) {
+					/*echo "loanbalance > savings";*/
+					$withdrawals = $sav;
+				}else{
+					$withdrawals = 0;
 				}
 
 				$paymentrecieved = $withdrawals;
-
+				/*echo "withdrawals: ".$withdrawals;*/
+				if (!$paymentrecieved == 0) {
 				$this->recordcollection_model->insertwithdrawaltransaction($loanappcontrol, $withdrawals, $datetoday, $controlno, $sopersonnel);
 
 				$this->recordcollection_model->insertloantransaction($loanappcontrol, $paymentrecieved, $datetoday, $controlno, $sopersonnel);
 
 				$this->recordcollection_model->updatemembertransaction($loanappcontrol, $controlno, $paymentrecieved, $savingspayment, $amounttopay, $withdrawals);
-			
+				}
+				
 			/*$this->terminate_voluntary_model->paythroughsavings($loantopay);*/
 			/*withdrawal money*/
 			/*if loanbalance <= */
@@ -295,18 +309,18 @@ class Salveofficer extends CI_Controller {
 			echo "<script type='text/javascript'>alert('Account Termination Failed! Please settle the remaining loan balance before terminating the account.')</script>";
 
 			echo "<script type='text/javascript'>window.location.href='profiles?name='+".$controlno."</script>";
+			
 		}else if ($paymentrecieved == $loanbalance) {
 			$this->terminate_voluntary_model->setterminatestatus($controlno);
-			echo "<script type='text/javascript'>alert('Loan Fully Paid. Account terminated successfully.')</script>";
-
-			$this->directory();
-
-
-
-
+			$this->load->view('general/successtermination');
+			/*echo "<script type='text/javascript'>alert('Loan Fully Paid. Account terminated successfully.')</script>";*/
+			/*$this->directory();*/
 		}
+
 		
 	}
+
+	
 
 
 }

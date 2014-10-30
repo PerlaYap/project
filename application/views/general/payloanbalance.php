@@ -93,46 +93,42 @@
 					<h1 style="text-align:center; color:#b7351b; border-top: 3px solid #f9f8f8; border-bottom:0">
 
 						<br>
-						Insufficient Savings!
+						INSUFFICIENT SAVINGS!
+						
 						<br>
 
 					</h1>
-						
+						<form action="payloanbalance_2" method="post">
+						<input type='hidden' name='controlno' value='<?php echo $controlno ?>'>
+						<input type='hidden' name='datetoday' value='<?php echo date("Y-m-j"); ?>'>
+						<input type ='hidden' name='sopersonnel' value='<?php echo $SOpersonnel; ?>'/>
 						<label>
 					        <span>Savings :</span></label>
-					        <input id="name" type="text" name="fname" value="<?php echo $savingstot ?>" style="width: 562px;" disabled/>
+					        <input id="name" type="text" name="savings" value="<?php echo $savingstot ?>" style="width: 562px;" readonly=true/>
 
 					    <label>
 					        <span>Loan Balance :</span></label>
-					        <input id="name" type="text" name="fname" value="<?php echo $loanbalance ?>" style="width: 562px;" disabled/>
+					        <input id="name" type="text" name="loanbalance" value="<?php echo $loanbalance ?>" style="width: 562px;" readonly=true/>
 
 					    <label>
 					        <span>Remaining Loan Balance :</span></label>
-					        <input id="name" type="text" name="fname" value="<?php echo $loanbalance-$savingstot ?>" style="width: 562px; color:#b7351b; font-weight:bold;" disabled/>
+					        <input id="name" type="text" name="reamainingbalance" value="<?php echo $loanbalance-$savingstot ?>" style="width: 562px; color:#b7351b; font-weight:bold;" readonly=true/>
+					     <label>PLS. PAY THE REMAINING BALANCE THROUGH CASH.</label>
+					     <label>
+					        <span>Payment Recieved :</span></label>
+					        <input id="name" type="number" min=0  max=<?php echo $loanbalance-$savingstot ?> name="paymentrecieved"  style="width: 562px; color:#b7351b; font-weight:bold;" required/>
 
 						<br><br>
+						<input type="submit" value="Pay Remaining Balance"/>
+					    <input type="button" onclick="cancelfunction(<?php echo $controlno ?>)" value="Cancel"/>
 
-						<input type="button" value="Pay Remaining Balance"/>
-						<input type="button" value="Cancel"/>
+						</form>
 					
 				<br><br><br>
-<!------------------------------------------------------------------------>
-<!------------------------------------------------------------------------>
-<!------------------------------------------------------------------------>
-<!------------------------------------------------------------------------>
-<!------------------------------------------------------------------------>
 				<br><br><br><br><br>
 				<?php } ?>
 				<?php } ?>
-					<h1 style="text-align:center; color:#b7351b; border-top: 3px solid #f9f8f8; border-bottom:0">
-
-						<br>
-							Payment Received! <br>
-							@Member's account has now been terminated.
-						<br><br>
-
-						<input type="button" value="Ok"/>
-					</h1>
+					
 						
 					
 <!------------------------------------------------------------------------>
