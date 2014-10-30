@@ -36,8 +36,9 @@ class Editbranchdetails_model extends CI_Model{
 
 			$this->addOfficer($control_no, $manager);
 
+			echo $officersize;
+
 			for ($i=0; $i < $officersize; $i++) { 
-			
 			$this->addOfficer($control_no, $officer[$i]);
 		}
 

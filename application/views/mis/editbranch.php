@@ -67,7 +67,7 @@ $getBranch = $this->db->query("SELECT BranchName, BranchID, BranchAddress, Conta
 
 				<?php
 
-				$getBranch2 = $this->db->query("SELECT  cb.ControlNo, CONCAT(LastName, ', ', FirstName, ' ', MiddleName) AS Officer FROM caritasbranch cb, CaritasBranch_has_CaritasPersonnel cp, CaritasPersonnel cl
+				$getBranch2 = $this->db->query("SELECT  CaritasPersonnel_ControlNo AS ControlNo, CONCAT(LastName, ', ', FirstName, ' ', MiddleName) AS Officer FROM caritasbranch cb, CaritasBranch_has_CaritasPersonnel cp, CaritasPersonnel cl
 					where cb.ControlNo='$control_no' AND cb.ControlNo = cp.CaritasBranch_ControlNo AND cp.CaritasPersonnel_ControlNo = cl.ControlNo
 					AND cl.Rank = 'salveofficer' "); 
 
