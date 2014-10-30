@@ -20,16 +20,16 @@ function addMaterial(){
 				        	+"<option value='Transportation Service'>Transportation Service</option>"
 				        	+"<option value='Utilities'>Utilities</option>"
 				        +"</select>"
-				        +" &nbsp&nbsp&nbsp Qty : <input type='text' name='quantity_1[]' class='quantity_1' style='width: 26px;'/>   &nbsp&nbsp&nbsp Unit Price :<input type='text' name='unitprice_1[]' class='unitprice_1' style='width: 80px;' placeholder='Peso'/>"; 
-	}
+				        +"&nbsp&nbsp&nbsp Unit Price :<input type='text' name='unitprice_1[]' class='unitprice_1' style='width: 80px;' placeholder='Peso'/>"; 
+	}	// &nbsp&nbsp&nbsp Qty : <input type='text' name='quantity_1[]' class='quantity_1' style='width: 26px;'/>
 
 		$(".unitprice_1").on("keydown keyup",function(){
 			materialSum();
 		});
-
+		 /*
 		$(".quantity_1").on("keydown keyup",function(){
 			materialSum();
-		});
+		});*/
 }
 
 function addIncome(){

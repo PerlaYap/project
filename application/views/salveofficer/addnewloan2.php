@@ -679,7 +679,6 @@ function total(){
 
 							<br><br><br><br>
 							<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Member Co-Maker Information
-								<span>tanggalin nalang natin ito, since ilalagay ito sa taas.</span>
 							</h1>
 
 							<label>
