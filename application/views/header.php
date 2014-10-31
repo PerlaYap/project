@@ -12,7 +12,7 @@
 		<div class="accent">
 				<p class="welcome">
 					WELCOME! <a href="<?php echo site_url('login/editpassword'); ?>" class="welcome"><?php echo $this->session->userdata('firstname'); ?></a> &nbsp&nbsp 
-					<a href="<?php echo site_url('login'); ?>" class="welcome">[Sign Out]</a>
+					<a href="<?php echo site_url('login/logout'); ?>" class="welcome">[Sign Out]</a>
 				</p>
 
 

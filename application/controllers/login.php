@@ -10,6 +10,11 @@ class Login extends CI_Controller {
 		//loading login page in the view
 			$this->load->view('login');
 		}
+    public function logout(){
+        /*kill session*/
+        $this->session->sess_destroy();
+        redirect('/','refresh');
+    }
 	public function homepage(){
 		//loading salveofficer homepage in the view
         $this->load->view('header');
