@@ -35,3 +35,9 @@ WHERE `ControlNo` = '12'
 
 ---business type-------company name-------------------contact-----------------year entered---------------------
 UPDATE `sourceofincome` SET `BusinessType`='businesstype',`CompanyName`='comname',`CompanyContact`='09223232',`YearEntered`='2011' WHERE `ControlNo`='25'
+
+
+get lastest update
+
+
+SELECT MemberControl, Status FROM (SELECT ControlNo AS MemberControl FROM Members_has_Membersmembershipstatus)A LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipstatus ORDER BY DateUpdated DESC)A GROUP BY ControlNo)B ON A.MemberControl=B.ControlNo where Status!='Terminated' and Status!='Terminated Voluntarily' group by MemberControl

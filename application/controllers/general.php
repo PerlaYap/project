@@ -114,6 +114,25 @@ class General extends CI_Controller {
         $this->load->view('footer');
        
     }
+
+    public function gotoaboutus(){
+        $this->load->view('header');
+        $this->load->view('navigation');
+        $this->load->view('general/aboutus');
+        $this->load->view("footer"); 
+    }
+    public function gotocontactus(){
+        $this->load->view('header');
+        $this->load->view('navigation');
+        $this->load->view('general/contactus');
+        $this->load->view("footer");  
+    }
+    public function gotofaq(){
+      $this->load->view('header');
+        $this->load->view('navigation');
+        $this->load->view('general/faq');
+        $this->load->view("footer"); 
+    }
 }
 
 ?>

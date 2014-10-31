@@ -15,7 +15,8 @@ $branches = $this->db->query("SELECT * FROM `caritasbranch` WHERE 1 ORDER BY `ca
 	
 			<div class="content">
 				<br>
-				<form action="addnewofficerprocess" method="post" name="addnewofficerprocess" enctype="multipart/form-data" class="basic-grey">
+				<!-- addnewofficerprocess -->
+				<form action="" method="post" name="addnewofficerprocess" enctype="multipart/form-data" class="basic-grey">
 					<h1>New User
 				        <span>Fill in all the necessary information.</span>
 				    </h1>
@@ -25,22 +26,6 @@ $branches = $this->db->query("SELECT * FROM `caritasbranch` WHERE 1 ORDER BY `ca
 				        <input id="name" type="text" required name="fname" placeholder="First Name" style="width: 180px;"/>
 				        <input id="name" type="text" required name="mname" placeholder="Middle Name" style="width: 170px;"/>
 				        <input id="name" type="text" required name="lname" placeholder="Last Name" style="width: 175px;"/>
-				   
-
-				    <label>
-				        <span>Personnel ID :</span> </label>
-				        <input id="personnelid" required type="text" name="username"/>
-				        			    
-
-				    <label>
-				        <span>Password :</span> </label>
-				        <input id="password" type="password" required name="password" style="width: 208px;" />
-				        &nbsp&nbsp&nbsp&nbsp&nbsp
-				        <label>
-				        <span>Confirm Password :</span> </label>
-				        <input id="password" type="password" name="confirmpassword" style="width: 208px;" required />
-				        &nbsp&nbsp&nbsp&nbsp&nbsp
-				      
 
 				    <label>
 				        <span>Position :</span> </label>
