@@ -16,7 +16,7 @@ $branches = $this->db->query("SELECT * FROM `caritasbranch` WHERE 1 ORDER BY `ca
 			<div class="content">
 				<br>
 				<!-- addnewofficerprocess -->
-				<form action="" method="post" name="addnewofficerprocess" enctype="multipart/form-data" class="basic-grey">
+				<form action="addnewofficerprocess" method="post" name="addnewofficerprocess" enctype="multipart/form-data" class="basic-grey">
 					<h1>New User
 				        <span>Fill in all the necessary information.</span>
 				    </h1>
@@ -33,7 +33,7 @@ $branches = $this->db->query("SELECT * FROM `caritasbranch` WHERE 1 ORDER BY `ca
 						        <option value="" selected="selected"></option>
 						        <option value="salveofficer">Salve Officer</option>
 						        <option value="branchmanager">Branch Manager</option>
-						        <option value="mis">MIS Personnel</option>
+						        <option value="mispersonnel">MIS Personnel</option>
 					        </select>
 
 				 <input id="active" hidden type="text" name="active" value="1"/>

@@ -87,7 +87,7 @@ class Addnewmember_model extends CI_Model{
  
  $this->addMembers($approved, $birthdate,$memberid, $birth_place,$gender,$religion,$education,$civil_status);
 
- echo  $control_no =   $this->getMembersControlNumber();
+   $control_no =   $this->getMembersControlNumber();
 
 
 $name  = $_FILES['file']['name'];
@@ -105,14 +105,14 @@ if (isset($name)){
 
         $this->db->query("INSERT INTO memberspicture (`ControlNo`, `Picture`) VALUES ('$control_no', '$location')");
     
-        echo 'Uploaded!';
+        /*echo 'Uploaded!';*/
     
         
       } else{
-        echo 'Select Another One';
+      /*  echo 'Select Another One';*/
       }
 } else{
-    echo 'Nothing happened';
+    /*echo 'Nothing happened';*/
 }
 
 
@@ -131,14 +131,14 @@ if (isset($dname)){
 
         $this->db->query("INSERT INTO MembersSignature (`ControlNo`, `Signature`) VALUES ('$control_no', '$dlocation')");
     
-        echo 'Uploaded!';
+        /*echo 'Uploaded!';*/
     
         
       } else{
-        echo 'Select Another One';
+        /*echo 'Select Another One';*/
       }
 } else{
-    echo 'Nothing happened';
+    /*echo 'Nothing happened';*/
 }
 
 

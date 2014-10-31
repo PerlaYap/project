@@ -18,33 +18,71 @@ class Addnewofficer_model extends CI_Model{
 	    $firstname = $this->security->xss_clean($this->input->post('fname'));
 		$middlename = $this->security->xss_clean($this->input->post('mname'));
 		$lastname  = $this->security->xss_clean($this->input->post('lname'));
-
-		$username  = $this->security->xss_clean($this->input->post('username'));
-		$password  = $this->security->xss_clean($this->input->post('password'));
-		$confirmpassword  = $this->security->xss_clean($this->input->post('confirmpassword'));
-	
-
 		$position  = $this->security->xss_clean($this->input->post('position'));
-		$active  = $this->security->xss_clean($this->input->post('active'));
-		
 
-		if ($confirmpassword == $password) {
-			
-			$this->addCaritasPersonnel($firstname, $middlename, $lastname, $position, $username );
+		if ($position=='salveofficer') {
+			$position_1 = "Salve Officer";
+		}elseif ($position=='branchmanager') {
+			$position_1 ="Branch Manager";
+		}elseif ($position=='mispersonnel') {
+			$position_1="MIS Personnel";
+		}
+
+		$active='1';
+
+		if (!empty($firstname) && !empty($lastname)) {
+
+			$firstname = ucfirst($firstname);
+			$middlename = ucfirst($middlename);
+			$lastname = ucfirst($lastname);
+
+			 $fname_initial = substr($firstname,0,1);
+			 $lname_initial = substr($lastname,0,1);
+			 $rannum = rand(10000,99999);
+
+			  $username = $fname_initial.$lname_initial.$rannum;
+			  
+			  $password = $this->generateRandStr(10);
+
+			 $details["Name"] = $firstname." ".$middlename." ".$lastname;
+			 $details["position"] = $position_1;
+			 $details["username"] = $username;
+			 $details["password"] = $password;
+		
+		/*	$this->addCaritasPersonnel($firstname, $middlename, $lastname, $position, $username );
         
 			$control_no =   $this->getOfficersControlNumber();
-    			$this->addUsers($control_no,$username, $password, $active);
-				return true;
-			}else{
-				return false;
+    			$this->addUsers($control_no,$username, $password, $active);*/
+				return $details;
+		}else{
+			return false;
+		}
 
-			}	
+
+		
+			
+			
+			
   	
 
 
     
 
     }
+    public function generateRandStr($length){ 
+      $randstr = ""; 
+      for($i=0; $i<$length; $i++){ 
+         $randnum = mt_rand(0,61); 
+         if($randnum < 10){ 
+            $randstr .= chr($randnum+48); 
+         }else if($randnum < 36){ 
+            $randstr .= chr($randnum+55); 
+         }else{ 
+            $randstr .= chr($randnum+61); 
+         } 
+      } 
+      return $randstr; 
+   } 
 	 //adding functions
 
 

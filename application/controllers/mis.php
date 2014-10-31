@@ -85,22 +85,23 @@ public function addnewofficer(){
 			//load model
 			$this->load->model('addnewofficer_model');
 
-			$result = $this->addnewofficer_model->get_officerdetails();
+			$result['user'] = $this->addnewofficer_model->get_officerdetails();
 
-			if($result == 'True'){
+			if(!empty($result)){
 		
 			$message = "Officer is successfully added.";
 
 			echo "<script type='text/javascript'>alert('$message');</script>";
 
+			$this->load->view('mis/newuserreport', $result);
 
-			$this->load->view('header');
+			/*$this->load->view('header');
 	        $this->load->view('navigation');
 			$this->load->view('salveofficer/homepage'); 
 	        $this->load->view('footer');
-			
+			*/
 				}else{
-				$message = "Confirm password does not match with the password.";
+				$message = "No User added.";
 
 			echo "<script type='text/javascript'>alert('$message');</script>";
 			$this->load->view('header');
