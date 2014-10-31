@@ -170,7 +170,7 @@ date_default_timezone_set('Asia/Manila');
 
 				        Religion :
 				        <input id="religion" required type="text" name="religion" style="width: 172px;" value="Roman Catholic"  readonly="true" />
-				    </label>
+				    
 
 				    <label>
 				    		<span>
@@ -272,7 +272,6 @@ date_default_timezone_set('Asia/Manila');
 				    <br>
 				     
 						
-				    </label> 
 
 				   <label>
 				    	<span>Valid ID: </span><br>

@@ -186,29 +186,29 @@ function gotoapprovedloan(){
 						</ul>
 					</td>
 				</table>
-			</div>
+	</div>
 		<?php endif;?>
 
 		<div class="statnumber">
-			<?php if($userrank!='mispersonnel') :?>
-			<p class="stat"><?php echo $countm ?></p>
-		<?php endif;?>
-		<?php if($userrank=='mispersonnel') :?>
-		<p class="stat"><?php echo $all_mem ?></p>
-	<?php endif;?>
-	<p class="stat1">Members</p>
-	<p class="stat2">Updated last <?php echo $datetoday; ?></p>
-</div>
+					<?php if($userrank!='mispersonnel') :?>
+					<p class="stat"><?php echo $countm ?></p>
+				<?php endif;?>
+				<?php if($userrank=='mispersonnel') :?>
+				<p class="stat"><?php echo $all_mem ?></p>
+			<?php endif;?>
+			<p class="stat1">Members</p>
+			<p class="stat2">Updated last <?php echo $datetoday; ?></p>
+		</div>
 
 <div class="statnumberBranch">
-	<?php if($userrank!='mispersonnel') :?>
-	<p class="stat"><?php echo $countc ?></p>
-<?php endif;?>
-<?php if($userrank=='mispersonnel') :?>
-	<p class="stat"><?php echo $allcount ?></p>
-<?php endif;?>
-<p class="stat1">Centers</p>
-<p class="stat2">Updated last <?php echo $datetoday; ?></p>
+		<?php if($userrank!='mispersonnel') :?>
+		<p class="stat"><?php echo $countc ?></p>
+	<?php endif;?>
+	<?php if($userrank=='mispersonnel') :?>
+		<p class="stat"><?php echo $allcount ?></p>
+	<?php endif;?>
+	<p class="stat1">Centers</p>
+	<p class="stat2">Updated last <?php echo $datetoday; ?></p>
 </div>
 
 
@@ -242,30 +242,31 @@ function gotoapprovedloan(){
 				<?php if (!empty($pdcount)) { ?>
 				<table style="margin-top:10px; margin-left:auto; margin-right: auto;">
 					<tr>
-						<td class="hdrTDctr" style="width: 120px;">CENTER</th>
-							<td class="hdrTDmbr" style="width: 100px;"># of PAST DUE</th>
-							</tr>
+						<td class="hdrTDctr" style="width: 120px;">CENTER</td>
+						<td class="hdrTDmbr" style="width: 100px;"># of PAST DUE</td>
+					</tr>
 							<?php foreach ( $pdcount as $p) {
 								$centerno = $p->CenterNo;
 								$centercontrolno = $p->centercontrol;
 								$numpd = $p->NumPastDue;
 								$pdtotal +=$numpd;
 								?>
-								<tr onclick="gotocenter(<?php echo $centercontrolno; ?>)"  class="updaterow" >
-									<td class="TDctr" style="cursor:pointer;"><?php echo $centerno ?></td>
-									<td class="TDmbr" style="cursor:pointer;"><?php echo $numpd ?></td>
+					<tr onclick="gotocenter(<?php echo $centercontrolno; ?>)"  class="updaterow" >
+						<td class="TDctr" style="cursor:pointer;"><?php echo $centerno ?></td>
+						<td class="TDmbr" style="cursor:pointer;"><?php echo $numpd ?></td>
+					</tr>
 									<?php } ?>
-									<tr>
-										<td class="TDtotal">Total:</td>
-										<td class="TDtotal2"><?php echo $pdtotal ?></b></td>
-									</tr>
-								</table>
+					<tr>
+						<td class="TDtotal">Total:</td>
+						<td class="TDtotal2"><?php echo $pdtotal ?></b></td>
+					</tr>
+				</table>
 								<?php } else{ ?>
-								<p style="text-align: center; margin-top: 50px;">- No Past Due -</p>
+					<p style="text-align: center; margin-top: 50px;">- No Past Due -</p>
 								
 								<?php } ?>
-								<br>
-							</div>
+					<br>
+	</div>
 
 							<div class="update" style="overflow:auto;">
 								<img src="<?php echo base_url('Assets/images/update.png'); ?>" class="update">
@@ -377,7 +378,7 @@ function gotoapprovedloan(){
 										</table>
 
 										<br>
-									</div>
+								</div>
 									<!------------------------- IF BM -------------------------------------->
 								<?php endif;?>
 								<?php if($userrank=='salveofficer') :?>
@@ -395,27 +396,14 @@ function gotoapprovedloan(){
 
 
 
-							</div>
-
+						
 
 							<!------------------------- IF SO -------------------------------->
 						<?php endif;?>
 						
-
-						<!------------------------------- DOUBLE TERMINATION--------------------------------- -->
-	<!--	<div class="terminate">
-		<img src="<?php //echo base_url('Assets/images/center.png'); ?>" class="calendar">
-				<p class="HPheadtxt">Candidates For Termination</p>
-				<table>
-				
-						<td>
-
-							<!-- foreach divide into 5 per ul -->
 							
 							<?php 
 
-
-//						foreach ($term->result() as $t){
 
 							?>	
 							<li class="collecttxt1"><a href=><?php //echo $t->LastName;  ?> <?php //echo $t->FirstName ?></a></li>
@@ -426,23 +414,36 @@ function gotoapprovedloan(){
 						
 					</table>
 					<br>
-					<!-- 	</div> -->
 
 
 
 
+	
+	<div style="margin-top: 1260px;">
+
+		<style type="text/css">
+			p.footertext{
+				color: #a7321a;
+				line-height: 15px;
+				font-size: 13px;
+				text-align: center;
+				margin-right: auto;
+				margin-left: auto;
+			}
+		</style>
+
+		<p class="footertext">
+			&#169; 2014 Microfinance Information Management System <br>
+			<a href="#">ABOUT US</a> | <a href="#">CONTACT US</a> | <a href="#">FAQs</a>
+		</p>
+
+		<br><br>
+	</div>
 
 
-	<!--		<div class="activedormant">
-				<iframe src=" <?php echo base_url('salveofficer/activedormant') ?> " width="900px" height="400px;" frameborder="0" scrolling="no"></iframe>
-			</div>
-			<div class="targetactual">
-				<iframe src=" <?php echo base_url('salveofficer/targetactualcenter') ?> " width="900px" height="400px;" frameborder="0" scrolling="no"></iframe>
-			</div>-->
 
+</div>
 
-
-		</div>
 
 
 		
