@@ -419,7 +419,7 @@ function gotoapprovedloan(){
 
 
 	
-	<div style="margin-top: 1260px;">
+	<div style="margin-top: 1350px;">
 
 		<style type="text/css">
 			p.footertext{
@@ -429,6 +429,7 @@ function gotoapprovedloan(){
 				text-align: center;
 				margin-right: auto;
 				margin-left: auto;
+				bottom: 0;
 			}
 		</style>
 
