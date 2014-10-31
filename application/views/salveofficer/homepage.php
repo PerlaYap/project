@@ -194,7 +194,7 @@ function gotoapprovedloan(){
 					<p class="stat"><?php echo $countm ?></p>
 				<?php endif;?>
 				<?php if($userrank=='mispersonnel') :?>
-				<p class="stat"><?php echo $all_member ?></p>
+				<p class="stat"><?php echo $all_mem ?></p>
 			<?php endif;?>
 			<p class="stat1">Members</p>
 			<p class="stat2">Updated last <?php echo $datetoday; ?></p>
