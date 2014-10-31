@@ -49,10 +49,10 @@ class Addnewofficer_model extends CI_Model{
 			 $details["username"] = $username;
 			 $details["password"] = $password;
 		
-		/*	$this->addCaritasPersonnel($firstname, $middlename, $lastname, $position, $username );
+			$this->addCaritasPersonnel($firstname, $middlename, $lastname, $position, $username );
         
 			$control_no =   $this->getOfficersControlNumber();
-    			$this->addUsers($control_no,$username, $password, $active);*/
+    			$this->addUsers($control_no,$username, $password, $active);
 				return $details;
 		}else{
 			return false;
