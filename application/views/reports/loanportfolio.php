@@ -44,15 +44,15 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 	Order by b.branchname"); ?>
 	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 	
-	<!-- <img src="<?php // echo base_url ('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"> -->
+	
 
 	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MONTHLY LOAN PORTFOLIO REPORT <br> For The Month Of <b>
 		<?php echo $yue ?> <?php echo $year ?></b></h3>
 
 		<br>
-	<table class="misreport" border="1">
+	<table class="misreport" border="1" style="margin-left:auto; margin-right:auto;">
 		<tr class="header">
-			<td class="label"><b>Branch:</td>
+			<td class="label" style="text-align: right;"><b>Branch:</td>
 		<?php	foreach ($getbranch->result() as $br) { ?>
 				<td class="branch"> <?php echo $br->branchname; ?> </td>
 		<?php }?>
@@ -234,7 +234,7 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 			<td class="label"><b>Loan Releases</b></td>
 			<td colspan="15"></td>
 		</tr>
-			<<tr>
+			<tr>
 				<td class="label1">(23 weeks)</td>
 				<?php
 	$totalrelease = 0;
@@ -784,7 +784,7 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 
 	</table>
 
-	<br>
+	<br><br><br>
 		<table class="signature" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Prepared by:</td>

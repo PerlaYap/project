@@ -247,11 +247,11 @@ GROUP BY BranchControl)ReturnedCapital ON ReturnedCapital.BranchControl=CapitalS
 ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC")
 ?>
 	<br>
-	<table class="misreport" border="1">
+	<table class="misreport" border="1"  style="margin-left:auto; margin-right:auto;">
 		<tr>
 			<td class="label"><b>SAVINGS BUILD-UP</b></td>
 			<?php foreach ($getSavings->result() as $data){
-			echo '<td>'.$data->BranchName.'</td>';
+			echo '<td class="branch">'.$data->BranchName.'</td>';
 			} ?>
 		</tr>
 
@@ -350,7 +350,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 
 	
 	<br>
-	<table class="misreport" border="1">
+	<table class="misreport" border="1"  style="margin-left:auto; margin-right:auto;">
 		<tr>
 			<td class="label">Preferred Share - Beg</td>
 			<?php
@@ -388,7 +388,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 	
 		</tr>
 	</table>
-	<br>
+	<br><br><br>
 		<table class="signature" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Prepared by:</td>

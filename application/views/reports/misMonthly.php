@@ -278,7 +278,7 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
 		<?php echo $yue ?> <?php echo $year ?></b></h3>
 
 	<br>
-	<table class="misreport" border="1">
+	<table class="misreport" border="1" style="margin-left:auto; margin-right:auto;">
 
 		<tr class="header">
 			<td class="label"><b>Branch:</td>
@@ -501,7 +501,7 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
 	</table>
 -->
 
-	
+	<br><br>
 		<table class="signature" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Prepared by:</td>
