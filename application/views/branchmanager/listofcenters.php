@@ -33,9 +33,21 @@
 <?php 
 $control = $row->ControlNo;
 
-$count = $this->db->query("SELECT bc.CaritasCenters_ControlNo, COUNT(Members_ControlNo) AS Member
-		FROM CaritasBranch_has_CaritasCenters bc, CaritasCenters_has_Members cc
-		WHERE bc.CaritasCenters_ControlNo = '$control' AND bc.CaritasCenters_ControlNo = cc.CaritasCenters_ControlNo"); 
+$count = $this->db->query("SELECT COUNT(*) as Member
+		FROM CaritasCenters_has_Members CM 
+		JOIN CaritasBranch_has_CaritasCenters BC ON CM.CARITASCENTERS_CONTROLNO = BC.CARITASCENTERS_CONTROLNO
+
+		  WHERE CM.MEMBERS_CONTROLNO IN (SELECT MM.CONTROLNO FROM members_has_membersmembershipstatus MM
+										WHERE  MM.CONTROLNO IN (SELECT M.CONTROLNO FROM MEMBERS M
+																WHERE M.APPROVED = 'YES'
+															
+																)
+										AND MM.STATUS !='Terminated' OR MM.Status!='Terminated Voluntarily' 
+										
+										) 
+								AND CM.CARITASCENTERS_CONTROLNO = '$control' AND BC.CARITASBRANCH_CONTROLNO = '$branch' 
+								
+								"); 
 			
 foreach ($count->result() as $ctt){ 
 ?>

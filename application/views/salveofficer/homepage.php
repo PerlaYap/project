@@ -35,7 +35,7 @@ LEFT JOIN
 ON Alpha.Members_ControlNo=Charlie.ControlNo)Omega 
 ON mem.ControlNo=Omega.Members_ControlNo WHERE Approved='YES')Zeta WHERE (Status!='Terminated' OR Status!='Terminated Voluntarily') AND BranchControl='$branchno'");
 
-$allmember = $this->db->query("SELECT * FROM `members` ");
+$allmember = $this->db->query("SELECT * FROM members M WHERE M.CONTROLNO IN (SELECT MM.CONTROLNO FROM members_has_membersmembershipstatus MM WHERE MM.STATUS !='Terminated' OR MM.Status!='Terminated Voluntarily') AND M.APPROVED = 'YES' ");
 $all_mem = $allmember->num_rows();
 
 $perbranchCenter = $this->db->query("SELECT IFNULL(COUNT(CenterControl),0) AS CenterNo FROM (SELECT CenterControl, BranchControl, BranchName FROM 
@@ -194,7 +194,7 @@ function gotoapprovedloan(){
 					<p class="stat"><?php echo $countm ?></p>
 				<?php endif;?>
 				<?php if($userrank=='mispersonnel') :?>
-				<p class="stat"><?php echo $all_mem ?></p>
+				<p class="stat"><?php echo $all_member ?></p>
 			<?php endif;?>
 			<p class="stat1">Members</p>
 			<p class="stat2">Updated last <?php echo $datetoday; ?></p>
