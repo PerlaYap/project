@@ -435,7 +435,7 @@ function gotoapprovedloan(){
 
 		<p class="footertext">
 			&#169; 2014 Microfinance Information Management System <br>
-			<a href="#">ABOUT US</a> | <a href="#">CONTACT US</a> | <a href="#">FAQs</a>
+			<a href="#">ABOUT US</a> | <a href="#">CONTACT US</a> | <a href="#">FAQs</a> | <a href="#">HELP</a>
 		</p>
 
 		<br><br>
