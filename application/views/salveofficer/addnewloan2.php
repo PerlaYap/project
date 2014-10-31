@@ -617,4 +617,37 @@ foreach ($dayoftheweek->result() as $row){
 				        <input type="submit" style="margin-left: 450px;" class="button" value="Send" />
 				    </label>  
 				</form>
+
+				<br><br>
 		</div>
+
+
+
+
+
+
+
+	<div style="margin-top: 3350px;">
+
+		<style type="text/css">
+			p.footertext{
+				color: #a7321a;
+				line-height: 15px;
+				font-size: 13px;
+				text-align: center;
+				margin-right: auto;
+				margin-left: auto;
+				bottom: 0;
+				position: relative;
+			}
+		</style>
+
+		<p class="footertext">
+			&#169; 2014 Microfinance Information Management System <br>
+
+			<a href="<?php echo site_url('general/gotoaboutus'); ?>">ABOUT US</a> | <a href="<?php echo site_url('general/gotocontactus'); ?>">CONTACT US</a> | <a href="<?php echo site_url('general/gotofaq'); ?>">FAQs</a> | <a href="#">HELP</a>
+
+		</p>
+
+		<br><br>
+	</div>
