@@ -1,3 +1,22 @@
+<script type="text/javascript">
+
+	 function cancelfunction () {
+	 	var txt;
+	 	var r = confirm("Are you sure you want to cancel?");
+	 	if (r== true) {
+	 		window.location.href="listofusers";
+	 	}
+	 }
+	 function resetpassword(){
+	 	var r = confirm("Are you sure you want to reset the password?");
+	 	if (r==true) {
+	 		document.getElementById("resetform").submit();
+	 	}
+	 	
+	 }
+
+	 </script>
+
 <?php 
 $control_no = $_GET['name'];
 
@@ -8,6 +27,12 @@ $getOfficer = $this->db->query("SELECT FirstName, MiddleName,  LastName, Personn
 
 	
 	foreach ($getOfficer->result() as $off) {
+		$fname = $off->FirstName;
+		$mname = $off->MiddleName;
+		$lname = $off->LastName;
+		$username = $off->PersonnelID;
+		$rank = $off->Rank;
+	}
 
 ?>
 
@@ -25,14 +50,14 @@ $getOfficer = $this->db->query("SELECT FirstName, MiddleName,  LastName, Personn
 				    <label>
 				        <span>Name :</span></label>
 				        
-				        <input id="name" readonly type="text" name="fname" value="<?php echo $off->FirstName; ?>" style="width: 170px;"  />
-				        <input id="name" readonly type="text" name="mname" value="<?php echo $off->MiddleName; ?>" style="width: 175px;" />
-				    	<input id="name" readonly type="text" name="lname" value="<?php echo $off->LastName; ?>" style="width: 180px;" />
+				        <input id="name" readonly type="text" name="fname" value="<?php echo $fname ?>" style="width: 170px;"  />
+				        <input id="name" readonly type="text" name="mname" value="<?php echo $mname ?>" style="width: 175px;" />
+				    	<input id="name" readonly type="text" name="lname" value="<?php echo $lname ?>" style="width: 180px;" />
 				   
 
 				    <label>
 				        <span>Personnel ID :</span> </label>
-				        <input id="personnelid" type="text" name="username"  value="<?php echo $off->PersonnelID; ?>" />
+				        <input id="personnelid" type="text" name="username" readonly='true' value="<?php echo $username  ?>" />
 				        	
 				       <!-- <label>
 				        <span>Password :</span> </label>
@@ -41,12 +66,12 @@ $getOfficer = $this->db->query("SELECT FirstName, MiddleName,  LastName, Personn
 				    <label>
 				        <span>Position :</span> </label>
 					     <select name="position" id="position" style="width:350px;">
-						     <?php if ($off->Rank =='salveofficer'){ ?>
+						     <?php if ($rank =='salveofficer'){ ?>
 
 										<option value="salveofficer" selected="selected"> Salve Officer </option>
 										<option value="branchmanager"> Branch Manager </option>
 										<option value="mispersonnel"> MIS Personnel </option>
-										<?php } else if($off->Rank =='branchmanager'){?>
+										<?php } else if($rank =='branchmanager'){?>
 										<option value="salveofficer"> Salve Officer </option>
 										<option value="branchmanager" selected='selected'> Branch Manager </option>
 										<option value="mispersonnel"> MIS Personnel </option>
@@ -61,6 +86,12 @@ $getOfficer = $this->db->query("SELECT FirstName, MiddleName,  LastName, Personn
 				    <br><br>
 				     <label>
 				        <span></span>
+
+				        
+				        <br>
+				        <span></span>
+
+
 				    <?php    if ($off->IsActive==1) { ?>
 	
 											<!-- <input type='hidden' name='active' value='0'> -->
@@ -72,14 +103,28 @@ $getOfficer = $this->db->query("SELECT FirstName, MiddleName,  LastName, Personn
 											<!-- <input type='hidden' name='active' value='1'> -->
 										<input type='submit' name='subs' value='Enable' class='button'/>
 									
-								<?php		}
-								 } ?>
+								<?php		} ?>
+								 
 
 
 
-				    <input type="submit" name='subs' class="button" value="Save" />    
+				    <input type="submit" name='subs' class="button" value="Save" />
+				    <input type='button' name='cancel'  onclick="cancelfunction()" value="Cancel">    
+				    
 				    </label>  
 				</form>
+
+				        <form id="resetform" action='resetpassword' method='post'>
+				        <input type='hidden' name='controlno'  value="<?php echo $control_no; ?>">
+				        <input id="name"  type="hidden" name="fname" value="<?php echo $fname ?>" style="width: 170px;"  />
+				        <input id="name"  type="hidden" name="mname" value="<?php echo $mname ?>" style="width: 175px;" />
+				    	<input id="name"  type="hidden" name="lname" value="<?php echo $lname ?>" style="width: 180px;" />
+				    	<input id="personnelid" type="hidden" name="username" value="<?php echo $username  ?>" />
+				    	<input type="hidden" name='position' value='<?php echo $rank ?>' />
+
+				        <!------------- RESET PASSWORD BUTTON (FOR LYKA) -------------->
+				        <input type='button' onclick='resetpassword()' value='Reset Password'>
+				        </form>
 			<br><br>
 		</div>
 	</body>

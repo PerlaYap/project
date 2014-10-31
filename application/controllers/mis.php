@@ -224,6 +224,17 @@ public function edituser(){
 */       
     }
 
+    public function resetpassword(){
+    	/*echo "my friend";*/
+    	$this->load->model('edituserdetails_model');
+
+    	$result['user'] = $this->edituserdetails_model->resetpassword();
+    	
+    	$this->load->view('mis/newuserreport', $result);
+
+
+    }
+
 
 
 
