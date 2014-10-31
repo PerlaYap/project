@@ -4,21 +4,25 @@
 
 <a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 
-	Name: <?php echo $user['Name'] ?>
-	<br>
-	Position: <?php echo $user['position'] ?>
-	<br>
-	<!-- Pls make emphasize -->
-	Username: <?php echo $user['username'] ?>
-	<br>
-	Tentative Password: <?php echo $user['password'] ?>
-	<br>
-	<!-- Pls make emphasize like bold, larger font, font color -->
+<br><br><br>
+	<div style="margin-left:auto; margin-right:auto; text-align:center;">
 
-	<br>
-	Note: Please  change your password after logging in for the first time.
+		Welcome <?php echo $user['Name']?> (<?php echo $user['position']?>)! Your account has been activated. <br><b>Please change your password after logging in for the first time.</b> <br><br>
+
+		
+		Username:  <b> <?php echo $user['username'] ?></b>
+		<br>
+		Tentative Password:  <b><?php echo $user['password'] ?></b>
+		<br>
+		
+
+		<br>
+		
 
 
+	</div>
+
+	<br><br>
 	<div style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button>
 	</div>
