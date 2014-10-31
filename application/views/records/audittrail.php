@@ -13,15 +13,34 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
         data.addColumn('string', 'Position');
-        data.addColumn('string', 'Date');
-        data.addColumn('string', 'Time');
+        data.addColumn('string', 'Date/Time');
+ 
         data.addColumn('string', 'Activity');
 
 
        /* data.addColumn('number', 'Salary');
         data.addColumn('boolean', 'Full Time Employee');*/
         data.addRows([
-          ['Lyka Ellace Dado',  'Salve Officer', 'October 19, 2014', '10:43am', 'Log in'],
+        	<?php foreach ($logs as $log) { 
+
+        		$name = $log->Name;
+        		$rank = $log->Rank;
+        		$datetime = $log->datetime;
+        		$activity = $log->Activity;
+
+        		if ($rank =='salveofficer') {
+        			$rank_1 ='Salve Officer';
+        		}elseif ($rank=='branchmanager') {
+        			$rank_1='Branch Manager';
+        		}elseif ($rank=='mispersonnel') {
+        			$rank_1='MIS Personnel';
+        		}
+
+        		?>
+        		['<?php echo $name ?>',  '<?php echo $rank_1 ?>', '<?php echo $datetime ?>', '<?php echo $activity ?>'],		
+        	<?php } ?>
+          /*['Lyka Ellace Dado',  'Salve Officer', 'October 19, 2014/10:43:00', 'Log in'],
+          ['Perla Yap',  'Salve Officer', 'October 20, 2014/10:43:00', 'Log out'],*/
         ]);
 
          var options = {

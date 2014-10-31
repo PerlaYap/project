@@ -61,7 +61,10 @@ class Records extends CI_Controller {
         }	
     public function audittrail(){
 		
-        $this->load->view("records/audittrail");
+		$this->load->model('audittrail_model');
+		$data['logs'] = $this->audittrail_model->getlog();
+
+        $this->load->view("records/audittrail",$data);
        
 	}
 

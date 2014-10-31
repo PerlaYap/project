@@ -208,8 +208,11 @@ if (!empty($H_fname) && !empty($H_mname) && !empty($H_lname)) {
     
 }
 
-    
-return true;
+$name = $firstname." ".$middlename." ".$lastname;
+return $name;
+
+/*    
+return true;*/
     }
 	 //adding functions
 

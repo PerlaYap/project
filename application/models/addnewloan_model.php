@@ -14,6 +14,7 @@ public function add_loanapplication(){
 
 	$memberId=$this->security->xss_clean($this->input->post('memberid'));
 	$memberControl= $this->getMemberControlNo($memberId);
+    $result['name'] = $this->getmembername($memberControl);
 	$branchNo=$this->security->xss_clean($this->input->post('branch'));
 	$branchControl= $this->getBranchNo($branchNo);
 
@@ -205,7 +206,10 @@ public function add_loanapplication(){
         $this->addBExpense($loanControlNo,$type,$amount);
     }
 
-return true;
+    $result['r'] =true;
+    
+
+return $result;
 
 }
 
@@ -334,6 +338,21 @@ public function getBranchNo($branch){
             return $householdcontrolNo;
         }
     }
+public function getmembername($memberControl){
+
+    $query = $this->db->query("SELECT * FROM `membersname` where ControlNo =$memberControl");
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $fname = $row->FirstName;
+            $mname = $row->MiddleName;
+            $lname = $row->LastName;
+
+            $name = $fname." ".$mname." ".$lname;
+            return $name;
+        }
+
+}
 
 
 

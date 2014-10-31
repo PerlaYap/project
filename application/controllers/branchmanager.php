@@ -145,7 +145,12 @@ class Branchmanager extends CI_Controller{
 
 		$result =$this->approvemember_model->approve();
 
-		if($result == 'True'){
+		if($result['result'] == 'True'){
+
+		$activity = "Approved membership application of ".$result['name'];
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
+
 		//alert for successfully approved and back to homepage
 		$message = "Successfully Approved Application.";
 
@@ -175,7 +180,7 @@ class Branchmanager extends CI_Controller{
 		$message = "Successfully Added Member's ID.";
 
 		echo "<script type='text/javascript'>alert('$message');</script>";
-		}else{
+		 }else{
 			$message = "Failed to add member's ID.";
 			echo "<script type='text/javascript'>alert('$message');</script>";
 		}
@@ -184,8 +189,7 @@ class Branchmanager extends CI_Controller{
         $this->load->view('navigation');
 		$this->load->view('salveofficer/homepage'); 
         $this->load->view('footer');
-	}
-		
+	}	
 	public function rejectedaccounts(){
 		$this->load->view("header");
 		$this->load->view("navigation");
@@ -208,8 +212,11 @@ class Branchmanager extends CI_Controller{
 		$this->load->model("rejectmember_model");
 		$result= $this->rejectmember_model->reject();
 
-		if($result =='True'){
-		//ask bm to give reason why rejected the application and change the status from pending to no
+		if($result['result'] =='True'){
+
+			$activity = "Disapproved the membership application of  ".$result['name']." .";
+	        $this->load->model("audittrail_model");
+	        $this->audittrail_model->setlog($activity);
 			$message = "Successfully Rejected Application.";
 
 			echo "<script type='text/javascript'>alert('$message');</script>";

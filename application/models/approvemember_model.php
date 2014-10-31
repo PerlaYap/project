@@ -21,11 +21,14 @@ class Approvemember_model extends CI_Model{
 		//Sql statement for updating application status -> Approved
 		$query = $this->db->query("UPDATE `microfinance2`.`members` SET `Approved` = 'YES' WHERE `members`.`ControlNo` = $controlno;");
 		$this->addMembersStatus($controlno);
+		$name = $this->getmembername($controlno);
 		if($query){
-			return "True";
+			$result['result'] ='True';
+			$result['name'] = $name;
 		}else{
-			return "False";
+			$result['result']='False';
 		}
+		return $result;
 
 	}
 	
@@ -48,5 +51,21 @@ class Approvemember_model extends CI_Model{
 	public function addMembersStatus($controlNo) {
 		$this->db->query("INSERT INTO members_has_membersmembershipstatus(`ControlNo`, `DateUpdated`, `Status`) VALUES ('$controlNo', NOW(), 'Active')");
 	}
+
+	public function getmembername($memberControl){
+
+    $query = $this->db->query("SELECT * FROM `membersname` where ControlNo =$memberControl");
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $fname = $row->FirstName;
+            $mname = $row->MiddleName;
+            $lname = $row->LastName;
+
+            $name = $fname." ".$mname." ".$lname;
+            return $name;
+        }
+
+} 
 }
 ?>

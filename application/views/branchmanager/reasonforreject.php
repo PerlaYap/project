@@ -19,7 +19,7 @@
 				    	<?php $memberno = $controlno; ?>
 				    <label>
 				        <span>Reason: </span>
-				        <textarea id="message" name="message" placeholder="Type Something..." style="width: 562px;resize:none;"></textarea>
+				        <textarea id="message" required name="message" placeholder="Type Something..." style="width: 562px;resize:none;"></textarea>
 				        
 				    </label>
 				   

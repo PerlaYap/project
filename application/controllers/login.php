@@ -8,14 +8,19 @@ class Login extends CI_Controller {
 
 	public function login_1(){
 		//loading login page in the view
+
 			$this->load->view('login');
 		}
     public function logout(){
+        $activity = "Log out";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
         /*kill session*/
         $this->session->sess_destroy();
         redirect('/','refresh');
     }
 	public function homepage(){
+
 		//loading salveofficer homepage in the view
         $this->load->view('header');
         $this->load->view('navigation');
@@ -28,7 +33,7 @@ class Login extends CI_Controller {
         $this->load->view('general/usereditpassword'); 
         $this->load->view('footer');
      }
-     public function editpasswordcheck(){
+    public function editpasswordcheck(){
         $this->load->model('editpassword_model');
         $message = $this->editpassword_model->editpwd();
 
@@ -91,6 +96,10 @@ class Login extends CI_Controller {
         		);
 
         	$this->session->set_userdata($newdata);
+            
+            $activity = "Log in";
+            $this->load->model("audittrail_model");
+            $this->audittrail_model->setlog($activity);
 
          
             header("Location: homepage");

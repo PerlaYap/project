@@ -73,14 +73,18 @@ class Salveofficer extends CI_Controller {
 
 			$result = $this->addnewmember_model->get_memberdetails();
 
-			if ($result == 1) { 
+		/*	if ($result == 1) { */
+		
+		$activity = "Added new member named ".$result." . (Pending)";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
 
 			$this->load->view('header');
 	        $this->load->view('navigation');
 			$this->load->view('salveofficer/homepage'); 
 	        $this->load->view('footer');
 			
-				}
+				/*}*/
 			}
 
 	public function search(){

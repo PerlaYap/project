@@ -23,8 +23,14 @@ class LoanApplication extends CI_Controller{
 		$this->load->model('addnewloan_model');
 
 		$result=$this->addnewloan_model->add_loanapplication();
+		
 
-		if ($result == 1) {
+		if ($result['r'] == 1) {
+
+			$activity = "Added new loan to ".$result['name']." (Pending)";
+	        $this->load->model("audittrail_model");
+	        $this->audittrail_model->setlog($activity);
+
 			$this->load->view('header');
 	        $this->load->view('navigation');
 			$this->load->view('salveofficer/homepage'); 
