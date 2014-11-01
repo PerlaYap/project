@@ -88,7 +88,7 @@ $SOpersonnel =$this->session->userdata('personnelno');
 
 
 			<div class="basic-grey">
-					<h1>Member Voluntary Termination
+					<h1>Member Withdrawal
 				        <span>Review member information so as to avoid descrepancies.</span>
 				    </h1>
 
