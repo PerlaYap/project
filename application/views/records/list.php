@@ -39,7 +39,7 @@
 			</tr>
 			<tr>
 				<td>04.</td>
-				<td class="docuname"><a href="<?php echo site_url('records/pdm'); ?>"> Past Due Accounts </a></td>
+				<td class="docuname"><a href="<?php echo site_url('records/pdm'); ?>"> Past Due Matured Accounts </a></td>
 				<td class="lastupdate">7/9/2014</td>
 			</tr>
 
@@ -51,7 +51,7 @@
 
 			<tr>
 				<td>06.</td>
-				<td class="docuname"><a href="<?php echo site_url('records/volunteer'); ?>"> Voluntarily Terminated Accounts </a></td>
+				<td class="docuname"><a href="<?php echo site_url('records/volunteer'); ?>"> Withdrawn Accounts </a></td>
 				<td class="lastupdate">7/9/2014</td>
 			</tr>
 			<tr>
