@@ -243,9 +243,9 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 							<li><a href="<?php echo site_url('reports/dailycollectionsheet'); ?>">Daily Collection Sheet</a></li>
 							<?php endif;?>
 							<?php if($userrank=='branchmanager') :?>
-							<li><a href="<?php echo site_url('reports/sbuandloan'); ?>">Savings Build-Up and Loan Report</a></li>
+						<!--	<li><a href="<?php echo site_url('reports/sbuandloan'); ?>">Savings Build-Up and Loan Report</a></li> -->
 							<!-- <li><a href="<?php //echo site_url('reports/summaryreport'); ?>">Summary Report</a></li> -->
-							<li><a href="<?php echo site_url('reports/dailycollectionsheet'); ?>">Daily Collection Sheet</a></li>
+						<!--	<li><a href="<?php echo site_url('reports/dailycollectionsheet'); ?>">Daily Collection Sheet</a></li> -->
 							<li><a href="<?php echo site_url('reports/centerperformance'); ?>">Collection Performance of Centers</a></li>
 							<li><a href="<?php echo site_url('reports/borrowerandsaver'); ?>">Borrower vs Saver</a></li>
 							<?php endif;?>
