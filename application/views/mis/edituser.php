@@ -20,9 +20,7 @@
 <?php 
 $control_no = $_GET['name'];
 
-$getOfficer = $this->db->query("SELECT FirstName, MiddleName,  LastName, PersonnelID, Rank,  BranchName, Password, IsActive  
-	FROM caritaspersonnel p, caritasbranch_has_caritaspersonnel bp,caritasbranch cb , users u
- where p.ControlNo = '$control_no' AND p.ControlNo = bp.CaritasPersonnel_ControlNo and bp.CaritasBranch_ControlNo = cb.ControlNo AND p.PersonnelID = u.username");
+$getOfficer = $this->db->query("SELECT p.`ControlNo`, `FirstName`, `MiddleName`, `LastName`, `Rank`, `PersonnelID`,`IsActive` FROM `caritaspersonnel` p join `users` u on p.ControlNo = u.ControlNo WHERE p.ControlNo =$control_no");
 		
 
 	
