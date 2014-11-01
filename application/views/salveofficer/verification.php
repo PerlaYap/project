@@ -12,7 +12,9 @@
  $(function() {
 $( "#datepicker" ).datepicker({
       changeMonth: true,
-      changeYear: true
+      changeYear: true,
+      maxDate: "-18y",
+      minDate: "-70y",
     });
 $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 });
@@ -36,52 +38,9 @@ $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 			
 			<label>
 				<span>Birthdate :</span> </label>
-				<input type="text" id="datepicker" name="birthday">
-					        <!--<select name="month" style="width:130px;" required>
-						        <option value="" selected="selected"></option>
-						        <option value="01">January</option>
-						        <option value="02">February</option>
-						        <option value="03">March</option>
-						        <option value="04">April</option>
-						        <option value="05">May</option>
-						        <option value="06">June</option>
-						        <option value="07">July</option>
-						        <option value="08">August</option>
-						        <option value="09">September</option>
-						        <option value="10">October</option>
-						        <option value="11">November</option>
-						        <option value="12">December</option>
-					        </select>
 
-					        <select name="day" style="width:80px;" required>
-						        <option value="" selected="selected"></option>
-						        <?php  for ($i=1; $i < 32 ; $i++) { ?>
-
-							        <?php if ($i<10) { ?>
-							        		
-							        <option value="<?php echo '0'.$i ?>"><?php echo '0'.$i ?></option>		
-
-							       	<?php } else{ ?>
-
-							       	<option value="<?php echo $i ?>"><?php echo $i ?></option>
-
-							      	<?php } ?>
-						      <?php  } ?>
-						        
-					
-						        
-					        </select>
-
-					        <select name="year" style="width:100px;" required>
-						        <option value="" selected="selected"></option>
-						        <?php  $yend =date('Y')-17;
-						        		$ystart = $yend-50;
-						        for ($y=$ystart; $y < $yend ; $y++) { ?>
-
-							       <option value="<?php echo $y ?>"><?php echo $y ?></option>
-
-						        <?php  } ?>
-					        </select>-->
+				<input type="text" id="datepicker" name="birthday" readonly='true' placeholder="YYYY-MM-DD" >
+					        
 
 					        <br><br><br>
 					       <label><span></span>

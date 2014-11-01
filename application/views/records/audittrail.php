@@ -4,24 +4,30 @@
 <script src="<?php echo base_url('Assets/js/general.js'); ?>"></script>
 
 <head>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["table"]});
-      google.setOnLoadCallback(drawTable);
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
 
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Name');
-        data.addColumn('string', 'Position');
-        data.addColumn('string', 'Date/Time');
- 
-        data.addColumn('string', 'Activity');
+  // Load the Visualization API and the controls package.
+  // Packages for all the other charts you need will be loaded
+  // automatically by the system.
+  google.load('visualization', '1.0', {'packages':['controls']});
 
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.setOnLoadCallback(drawDashboard);
 
-       /* data.addColumn('number', 'Salary');
-        data.addColumn('boolean', 'Full Time Employee');*/
-        data.addRows([
-        	<?php foreach ($logs as $log) { 
+  function drawDashboard() {
+    // Everything is loaded. Assemble your dashboard...
+
+    // Create our data table.
+           var data = google.visualization.arrayToDataTable([
+
+      [' ','Name',  'Position', 'Date/Time', 'Activity'],
+      <?php 
+
+      $y = 0;
+      $len = count($logs);
+
+      foreach ($logs as $log) { 
 
         		$name = $log->Name;
         		$rank = $log->Rank;
@@ -35,28 +41,83 @@
         		}elseif ($rank=='mispersonnel') {
         			$rank_1='MIS Personnel';
         		}
-
         		?>
-        		['<?php echo $name ?>',  '<?php echo $rank_1 ?>', '<?php echo $datetime ?>', '<?php echo $activity ?>'],		
-        	<?php } ?>
-          /*['Lyka Ellace Dado',  'Salve Officer', 'October 19, 2014/10:43:00', 'Log in'],
-          ['Perla Yap',  'Salve Officer', 'October 20, 2014/10:43:00', 'Log out'],*/
-        ]);
+        		<?php if ($y == $len-1) { ?>
+        		['<?php echo $y+1 ?>','<?php echo $name ?>',  '<?php echo $rank_1 ?>', '<?php echo $datetime ?>', '<?php echo $activity ?>']		
+        		<?php } else { ?>
+        		['<?php echo $y+1 ?>','<?php echo $name ?>',  '<?php echo $rank_1 ?>', '<?php echo $datetime ?>', '<?php echo $activity ?>'],		
+        			<?php } ?>
+        	<?php $y++; } ?>
+    ]);
 
-         var options = {
-          //title: 'Company Performance',
-          backgroundColor: 'transparent',
-          legend: { position: "none" },
-           'width':300,
-          'height':500,
-          
-        };
 
-        var table = new google.visualization.Table(document.getElementById('table_div'));
+     // Create a dashboard.
+        var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
 
-        table.draw(data, {showRowNumber: true});
+        //category picker
+          var categoryPicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'categoryPicker_div',
+      'options': {
+        'filterColumnIndex': 2,
+        'ui': {
+          'labelStacking': 'horizontal',
+          'label': 'Position:',
+          'allowTyping': true,
+          'allowMultiple': false
+        }
       }
-    </script>
+    });
+
+          // string filter (NAME)
+        var stringfilter = new google.visualization.ControlWrapper({
+      'controlType': 'StringFilter',
+      'containerId': 'stringFilter_control_div',
+       'state':{
+      	'value':''
+      },
+      'options': {
+        'filterColumnIndex': 1,
+        'matchType': 'any',
+        'ui':{
+        	'label':'Name:'
+        }
+      }
+
+    });
+
+        // String filter (Date)
+
+        var stringfilter_date = new google.visualization.ControlWrapper({
+      'controlType': 'StringFilter',
+      'containerId': 'stringFilter_datecontrol_div',
+      'options': {
+        'filterColumnIndex': 3,
+        'matchType': 'any',
+        'ui':{
+        	'label':'Date:'
+        }
+      }
+    });
+
+
+          //table
+       var table = new google.visualization.ChartWrapper({
+      'chartType': 'Table',
+      'containerId': 'table_div',
+      'options': {
+      }
+    });
+
+
+
+
+        dashboard.bind([stringfilter ,categoryPicker, stringfilter_date],table);
+    dashboard.draw(data);
+
+  }
+</script>
   </head>
 
 
@@ -75,123 +136,14 @@
 
 	<br>
 
-	<style type="text/css">
-		p.filter{
-			font-size: 14px;
-			margin-left: 145px;
-			
-		}
+	  <!--Div that will hold the dashboard-->
+    <div id="dashboard_div">
+      <!--Divs that will hold each control and chart-->
+      <div id="categoryPicker_div"></div>
+      <div id="stringFilter_control_div"></div>
+      <div id="stringFilter_datecontrol_div"></div>
+      <div id="table_div"></div>
+      
+    </div>
 
-		select.filtercategory, #filtername, #filterposition{
-			background: #FFF url('down-arrow.png') no-repeat right;
-		    background: #FFF url('down-arrow.png') no-repeat right);
-		    appearance:none;
-		    -webkit-appearance:none;
-		    -moz-appearance: none;
-		    text-indent: 0.01px;
-		    text-overflow: '';
-		    width: 100px;
-		    height: 25px;
-		}
-
-		.date{
-			position: absolute;
-			margin-top: -40px;
-			margin-left: 310px;
-			border:0;			
-		}
-
-		.filterbtn{
-			margin-top: -26px;
-			margin-left: 210px;
-		}
-
-		.user{
-			position: absolute;
-			margin-top: -42px;
-			margin-left: 310px;
-			border:0;
-		}
-
-		#filterposition{
-			width: 150px;
-		}
-
-		#filtername{
-			width: auto;
-
-		}
-
-	</style>
-
-	<p class="filter">FILTER: 
-		<select class="filtercategory" onchange="changeCategory(this.value)">
-			<option selected value="x">Category</option>
-			<option value="date">Date</option>
-			<option value="user">User</option>
-		</select>
-
-		<div id="date" class="date" style="display: none;">
-			<input type="text" style="width: 200px; height: 25px;"/>
-			<input type="button" value="Go" class="filterbtn" style="height: 28px;"/>
-		</div>
-
-
-
-
-
-		<div id="user" class="user" style="display: none;" onchange="enableName(this.value)">
-			<select id="filterposition">
-				<option selected value="x">Position</option>
-				<option value="so">Salve Officer</option>
-				<option value="bm">Branch Manager</option>
-			</select>
-
-			<select id="filtername" disabled>
-				<option selected value="x">Name</option>
-				<option value="a">Lyka Ellace Centino Dado</option>
-			</select>
-			<input type="button" value="Go"  style="height: 28px;"/>
-			
-		</div>
-
-		<div id="table_div" style="width: 1070px; height: auto; margin-left:auto; margin-right: auto;"></div>
-
-	</p> 
-
-	<br>
-
-    <!--<table class="dailycollectionsheet" border="1" style="margin-left:auto; margin-right: auto;">
-		<tr class="header">
-			<td class="num"><b>#</b></td>
-			<td style="width: 220px;"><b>NAME</b></td>
-			<td style="width: 150px;"><b>POSITION</b></td>
-			<td style="width: 180px;"><b>DATE</b></td>
-			<td style="width: 100px;"><b>TIME</b></td>
-			<td style="width: 320px;"><b>ACTIVITY</b></td>
-		</tr>
-
-		<tr>
-			<td>1</td>
-			<td>Lyka Dado</td>
-			<td>Salve Officer</td>
-			<td>01/20/2014</td>
-			<td>12:22pm</td>
-			<td style="text-align: left;">Log in</td>
-		-->	
-			
-			
-		</tr>
-
-		
-
-	</table>
-
-    <br>
-    
-
-    <br><br>
-	<!--<div style="width: 100%; text-align: center;">
-		<button onclick="window.print()">Print</button> 
-	</div>-->
 </body>
