@@ -70,6 +70,9 @@ class LoanApplication extends CI_Controller{
 
 			$message = "Successfully Approved Loan Application.";
 			echo "<script type='text/javascript'>alert('$message');</script>";
+		$activity = "Approved Loan Application of ".$result['name'].".";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
 
 			$this->load->view('header');
 	        $this->load->view('navigation');
@@ -92,6 +95,9 @@ class LoanApplication extends CI_Controller{
 
 			$message = "Successfully Rejected Application.";
 			echo "<script type='text/javascript'>alert('$message');</script>";
+			$activity = "Rejected Loan Application of ".$result['name'].".";
+	        $this->load->model("audittrail_model");
+	        $this->audittrail_model->setlog($activity);
 
 			$this->load->view('header');
 	        $this->load->view('navigation');
@@ -113,6 +119,10 @@ class LoanApplication extends CI_Controller{
 		$result= $this->approvalloan_model->currentloan();
 
 		$data=array('loanControl'=>$this->input->post('loanID'));
+
+		$activity = "Released Loan of ".$result['name']." amounted to P".$result['totalpayment'].".";
+	    $this->load->model("audittrail_model");
+	    $this->audittrail_model->setlog($activity);
 
 		$this->load->view("reports/paymentchecklist",$data);
 	}
