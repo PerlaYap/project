@@ -47,11 +47,10 @@ class Addbranch_model extends CI_Model{
 		}
 
 	
-	
-	
+	$result['branchname'] = $name;
+	$result['result'] = true;
 
- 
-return true;
+	return $result;
     }
 	 //adding functions
 

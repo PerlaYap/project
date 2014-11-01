@@ -317,7 +317,7 @@ window.onload = function() {
 								<input disabled="true" type="text" id="application" name="appnumber" style="width: 210px;" value="<?php echo $applicationNumber?>"/>
 								Amount of Shares :
 								<select id="capitalshare" name="capitalshare" style="width:210px;" disabled/>
-								<option value="100" selected="selected">100</option>
+								<option value="<?php echo $capitalShare ?>" selected="selected"><?php echo number_format($capitalShare,2) ?></option>
 								<option value="200">200</option>
 								<option value="300">300</option>
 								<option value="400">400</option>
@@ -327,9 +327,9 @@ window.onload = function() {
 
 						<label>
 							<span>Amount Requested :</span></label>
-							<input type="text" disabled="true" id="amountRequested" name="amountreq" style="width: 210px;" placeholder="Pesos" value="<?php echo $amountRequested ?>" />				        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							<input type="text" disabled="true" id="amountRequested" name="amountreq" style="width: 210px;" placeholder="Pesos" value="<?php echo number_format($amountRequested,2) ?>" />				        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 							Interest Amount :
-							<input type="text" disabled="true" id="interest" name="interest" style="width: 210px;" placeholder="%" value="<?php echo $interest ?>"/>
+							<input type="text" disabled="true" id="interest" name="interest" style="width: 210px;" placeholder="%" value="<?php echo number_format($interest,2) ?>"/>
 
 							<label>
 								<span>Loan Type :</span></label>
@@ -413,7 +413,7 @@ window.onload = function() {
 									</select>
 									<select disabled="true" id="establishYear" name="year" style="width:67px">
 										<option>Year</option>
-										<?php  for ($y=1900; $y < 2000 ; $y++) { ?>
+										<?php  for ($y=1900; $y < date('Y') ; $y++) { ?>
 										<option value="<?php echo $y ?>"><?php echo $y ?></option>
 										<?php  } ?>
 									</select>
@@ -451,7 +451,7 @@ window.onload = function() {
 
 									&nbsp&nbsp&nbsp
 									Unit Price :
-									<input type="text" name="unitprice" id="material" style="width: 80px;" value="<?php echo $result->UnitPrice ?>"/> &nbsp&nbsp 
+									<input type="text" name="unitprice" id="material" style="width: 80px;" value="<?php echo number_format($result->UnitPrice,2) ?>"/> &nbsp&nbsp 
 
 									<input type="button" class="addmore2" value="+" onclick="addMaterial()"/>
 									<?php	} ?>
@@ -566,34 +566,12 @@ window.onload = function() {
 					<?php foreach($sourceIncome->result() as $row){ ?>
 					<tr class="hoverthis">
 						<td class="CIdetail"><?php echo $row->IncomeType ?></td>
-						<td class="CIdetail2"><?php echo $row->Amount ?></td>
+						<td class="CIdetail2"><?php echo number_format($row->Amount,2) ?></td>
 					</tr>
 					<?php }?>
 					<tr class="hoverthis">
 						<td class="CItotal">Sub-total</td>
-						<td class="CItotal2"><?php echo $ISubtotal ?></td>
-					</tr>
-
-				</table>
-
-				<br>
-
-				<table class="creditinvestigation" border="1">
-					<tr class="hdrrr">
-						<td class="CIheader">FAMILY EXPENSE</td>
-						<td class="CIheader2">DAILY EXPENSE</td>
-					</tr>
-
-					<?php foreach($businessExpense->result() as $row) { ?>
-					<tr class="hoverthis">
-						<td class="CIdetail"><?php echo $row->ExpenseType ?></td>
-						<td class="CIdetail2"><?php echo $row->Amount ?></td>
-					</tr>
-					<?php } ?>
-
-					<tr class="hoverthis">
-						<td class="CItotal">Sub-total</td>
-						<td class="CItotal2"><?php echo $FSubtotal ?></td>
+						<td class="CItotal2"><?php echo number_format($ISubtotal,2) ?></td>
 					</tr>
 
 				</table>
@@ -606,16 +584,38 @@ window.onload = function() {
 						<td class="CIheader2">DAILY EXPENSE</td>
 					</tr>
 
-					<?php foreach ($familyExpense->result() as $row) { ?>
+					<?php foreach($businessExpense->result() as $row) { ?>
 					<tr class="hoverthis">
 						<td class="CIdetail"><?php echo $row->ExpenseType ?></td>
-						<td class="CIdetail2"><?php echo $row->Amount ?></td>
+						<td class="CIdetail2"><?php echo number_format($row->Amount,2) ?></td>
 					</tr>
 					<?php } ?>
 
 					<tr class="hoverthis">
 						<td class="CItotal">Sub-total</td>
-						<td class="CItotal2"><?php echo $BSubtotal ?></td>
+						<td class="CItotal2"><?php echo number_format($BSubtotal,2) ?></td>
+					</tr>
+
+				</table>
+
+				<br>
+
+				<table class="creditinvestigation" border="1">
+					<tr class="hdrrr">
+						<td class="CIheader">FAMILY EXPENSE</td>
+						<td class="CIheader2">DAILY EXPENSE</td>
+					</tr>
+
+					<?php foreach ($familyExpense->result() as $row) { ?>
+					<tr class="hoverthis">
+						<td class="CIdetail"><?php echo $row->ExpenseType ?></td>
+						<td class="CIdetail2"><?php echo number_format($row->Amount,2) ?></td>
+					</tr>
+					<?php } ?>
+
+					<tr class="hoverthis">
+						<td class="CItotal">Sub-total</td>
+						<td class="CItotal2"><?php echo number_format($FSubtotal,2) ?></td>
 					</tr>
 
 				</table>
@@ -623,12 +623,12 @@ window.onload = function() {
 				<table class="creditinvestigation" border="1">
 					<tr class="hoverthis">
 						<td class="CItotal">Total Income</td>
-						<td class="CItotal2"><?php echo $ITotal ?></td>
+						<td class="CItotal2"><?php echo number_format($ITotal,2) ?></td>
 					</tr>
 
 					<tr class="hoverthis">
 						<td class="CItotal">Total Expense</td>
-						<td class="CItotal2"><?php echo $ETotal ?></td>
+						<td class="CItotal2"><?php echo number_format($ETotal,2) ?></td>
 					</tr>
 
 				</table>
@@ -837,8 +837,8 @@ $expected = $diff*50;
 
 
 				
-						<p class="info00">Actual Amount of Savings: P<b> <?php echo $actual;?></b></p>
-						<p class="info00">Expected Amount of Savings: P<b> <?php echo $expected;?></b></p>
+						<p class="info00">Actual Amount of Savings: P<b> <?php echo number_format($actual,2);?></b></p>
+						<p class="info00">Expected Amount of Savings: P<b> <?php echo number_format($expected,2);?></b></p>
 						
 						<br>
 
@@ -851,7 +851,7 @@ $expected = $diff*50;
 								if(!$actual ==0){
 								if ($actual < $expected){
 									$kulang = $expected-$actual;
-									echo 'This member needs to save P'.$kulang.' more! ';
+									echo 'This member needs to save P'.number_format($kulang,2).' more! ';
 
 								} else{
 

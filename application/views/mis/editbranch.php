@@ -23,13 +23,13 @@ $getBranch = $this->db->query("SELECT BranchName, BranchID, BranchAddress, Conta
 
 			<label><span>Name :</span></label>
 			<?php	foreach ($getBranch->result() as $bra) { ?>
-			<input id="name"  type="text" name="branchcontrol" value="<?php echo $bra->ControlNo; ?>" style="width: 180px;" />   
-			<input id="name"  type="text" name="branch" value="<?php echo $bra->BranchName; ?>" style="width: 180px;" />   
+			<input id="name"  type="hidden" name="branchcontrol" value="<?php echo $bra->ControlNo; ?>" style="width: 180px;" />   
+			<input id="name"  type="text" name="branchname" value="<?php echo $bra->BranchName; ?>" style="width: 180px;" />   
 
 			<br>
 			<label><span>Branch ID :</span></label>
 
-			<input id="personnelid"  type="text" name="id"  value="<?php echo $bra->BranchID; ?>" />
+			<input id="personnelid"  type="text" name="id" readonly  value="<?php echo $bra->BranchID; ?>" />
 
 			<br>
 			<label><span>Contact Number :</span></label>

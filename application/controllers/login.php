@@ -38,11 +38,13 @@ class Login extends CI_Controller {
         $message = $this->editpassword_model->editpwd();
 
         if ($message == "PS") {
+
+            $activity = "Changed password.";
+            $this->load->model("audittrail_model");
+            $this->audittrail_model->setlog($activity);
+
             echo "<script type='text/javascript'>alert('Successfully Changed Password.')</script>";
-                $this->load->view('header');
-                $this->load->view('navigation');
-                $this->load->view('salveofficer/homepage'); 
-                $this->load->view('footer');            
+              $this->homepage();           
 
         }else if ($message =="WCoP") {
             echo "<script type='text/javascript'>alert('Confirm password did not match new password.')</script>";

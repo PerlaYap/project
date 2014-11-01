@@ -32,72 +32,81 @@ class Edituserdetails_model extends CI_Model{
 			$this->updateusers($controlno, $username, $password, $active);
 
 			
-			return true;
-     }
+			return true;  }
     public function changeposition(){
 			$controlno = $this->security->xss_clean($this->input->post('controlno'));
 			$position  = $this->security->xss_clean($this->input->post('position'));
 
 			$this->updateposition($controlno, $position);
-     }
+			$name = $this->getuser_name($controlno);
+			$result['result'] ='True';
+			$result['name'] = $name;
+			$result['position'] = $position;
+			return $result; 
+		}
     public function updateposition($controlno, $position){
      	$this->db->query("UPDATE `caritaspersonnel` SET `Rank`='$position'	WHERE `ControlNo`='$controlno';");
      }
-
-     public  function disableuser(){
+    public  function disableuser(){
      		$controlno = $this->security->xss_clean($this->input->post('controlno'));
      		$this->db->query("UPDATE `users` SET`IsActive` = '0'
 			WHERE `ControlNo`='$controlno';");
-     }
-     public  function enableuser(){
+
+			$name = $this->getuser_name($controlno);
+			$result['result'] ='True';
+			$result['name'] = $name;
+			return $result;
+
+     	}
+    public  function enableuser(){
      		$controlno = $this->security->xss_clean($this->input->post('controlno'));
      		$this->db->query("UPDATE `users` SET`IsActive` = '1'
 			WHERE `ControlNo`='$controlno';");
-     }
-	
+
+			
+			$name = $this->getuser_name($controlno);
+			$result['result'] ='True';
+			$result['name'] = $name;
+			return $result;
+
+     	}
 	public function updatecaritaspersonnel($controlno, $firstname, $middlename, $lastname, $position, $username){
 		$this->db->query("UPDATE `caritaspersonnel` SET `FirstName` = '$firstname', `MiddleName` = '$middlename',
 		`LastName` = '$lastname', `Rank`='$position', `PersonnelID` = '$username'
 		WHERE `ControlNo`='$controlno';");
 	 }
-
     public function updateusers($controlno, $username, $password, $active){
 		$this->db->query("UPDATE `users` SET `Username` = '$username', `IsActive` = '$active'
 			WHERE `ControlNo`='$controlno';");
 	 }
-
 	public function resetpassword(){
-			 $controlno = $this->security->xss_clean($this->input->post('controlno'));
+			$controlno = $this->security->xss_clean($this->input->post('controlno'));
 
-			 $firstname = $this->security->xss_clean($this->input->post('fname'));
-			 $middlename = $this->security->xss_clean($this->input->post('mname'));
-			 $lastname  = $this->security->xss_clean($this->input->post('lname'));
-			 $position  = $this->security->xss_clean($this->input->post('position'));
-			 $username  = $this->security->xss_clean($this->input->post('username'));
+			$firstname = $this->security->xss_clean($this->input->post('fname'));
+			$middlename = $this->security->xss_clean($this->input->post('mname'));
+			$lastname  = $this->security->xss_clean($this->input->post('lname'));
+			$position  = $this->security->xss_clean($this->input->post('position'));
+			$username  = $this->security->xss_clean($this->input->post('username'));
 
-			 $password = $this->generateRandStr(10);
+			$password = $this->generateRandStr(10);
 
 
 			$this->db->query("UPDATE `microfinance2`.`users` SET `Password` = '$password' WHERE `users`.`ControlNo` = $controlno;");
 
 			if ($position=='salveofficer') {
 			$position_1 = "Salve Officer";
-		}elseif ($position=='branchmanager') {
+			}elseif ($position=='branchmanager') {
 			$position_1 ="Branch Manager";
-		}elseif ($position=='mispersonnel') {
+			}elseif ($position=='mispersonnel') {
 			$position_1="MIS Personnel";
-		}
+			}
 
 			$details['Name'] = $firstname." ".$middlename." ".$lastname;
 			$details['position'] = $position_1;
 			$details['username'] = $username;
 			$details['password'] = $password;
 
-			return $details;
-
-
-
-	}
+			return $details;}
 	public function generateRandStr($length){ 
       $randstr = ""; 
       for($i=0; $i<$length; $i++){ 
@@ -110,9 +119,21 @@ class Edituserdetails_model extends CI_Model{
             $randstr .= chr($randnum+61); 
          } 
       } 
-      return $randstr; 
-   }
-    
+      return $randstr; }
+    public function getuser_name($controlno){
+
+	    $query = $this->db->query("SELECT `ControlNo`, `FirstName`, `MiddleName`, `LastName`, `Rank`, `PersonnelID` FROM `caritaspersonnel` WHERE `ControlNo`=$controlno");
+
+	        if ($query->num_rows() > 0) {
+	            $row = $query->row();
+	            $fname = $row->FirstName;
+	            $mname = $row->MiddleName;
+	            $lname = $row->LastName;
+
+	            $name = $fname." ".$mname." ".$lname;
+	            return $name;
+	        }
+    	}
     
 
 

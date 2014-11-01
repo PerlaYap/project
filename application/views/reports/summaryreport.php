@@ -90,29 +90,30 @@ else
 
 				    <label>
 				    	<span>Amount :</span>   </label>
-				    	<input type="text" style="width:200px;" value="<?php echo $amountRequested ?>" readOnly="true"/>
+				    												<!-- echo number_format("1000000",2)."<br>"; -->
+				    	<input type="text" style="width:200px;" value="<?php echo number_format($amountRequested,2) ?>" readOnly="true"/>
 				    
 				    	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				    	
 				    	Interest :
-				    	<input type="text" style="width:200px;" value="<?php echo $interest ?>" readOnly="true"/>
+				    	<input type="text" style="width:200px;" value="<?php echo number_format($interest,2) ?>" readOnly="true"/>
 
 				    <label>
 				    	<span>Amount Receivable (Weekly) :</span> 
-				    	<input type="text" style="width:557px;" value="<?php echo $dailyCollection ?>" readOnly="true"/>
+				    	<input type="text" style="width:557px;" value="<?php echo number_format($dailyCollection,2) ?>" readOnly="true"/>
 				    </label>
 
 				    <label>
 				    	<span>Capital Share :</span>   </label>
-				    	<input type="text" style="width:200px;" value="<?php echo $capitalShare ?>" readOnly="true"/>
+				    	<input type="text" style="width:200px;" value="<?php echo number_format($capitalShare,2) ?>" readOnly="true"/>
 				    
 				    	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				    	Service Charge :
-				    	<input type="text" style="width:200px;" value="<?php echo $serviceCharge ?>" readOnly="true"/>
+				    	<input type="text" style="width:200px;" value="<?php echo number_format($serviceCharge,2) ?>" readOnly="true"/>
 
 				    <label>
 				    	<span></span>
-				    	<?php echo '<h2 style="text-align:right; margin-right: 100px;">TOTAL AMOUNT TO BE RELEASE: '.$totalPayment.'</h2>'; ?>
+				    	<?php echo '<h2 style="text-align:right; margin-right: 100px;">TOTAL AMOUNT TO BE RELEASE: P'.number_format($totalPayment,2).'</h2>'; ?>
 				    </label>
 				    <br>
 				</form>
@@ -127,6 +128,7 @@ else
 				        <input type='hidden' name='activerelease' value=" <?php echo $activeLoan; ?> " >
 				        <input type='hidden' name='capitalshare' value=" <?php echo $capitalShare; ?> " >
 				        <input type='hidden' name='sonumber' value=" <?php echo $this->session->userdata('personnelno'); ?> " >
+				        <input type='hidden' name='totalpayment' value='<?php echo $totalPayment ?>' >
 				        <input type="submit" class="button" value="Release" style="margin-left: 300px;" />
 				       
 				    </form>

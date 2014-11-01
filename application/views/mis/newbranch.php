@@ -1,11 +1,15 @@
 <?php 
-
+$num = rand(1,1000);
 $manager = $this->db->query("SELECT CONCAT(FirstName, ' ', MiddleName, ' ', LastName) AS Name, ControlNo FROM CaritasPersonnel p 
 WHERE p.ControlNo  NOT IN (SELECT CaritasPersonnel_ControlNo FROM CaritasBranch_has_CaritasPersonnel) AND Rank = 'branchmanager'");
 
 $salveofficer =$this->db->query("SELECT CONCAT(FirstName, ' ', MiddleName, ' ', LastName) AS Name, ControlNo FROM CaritasPersonnel p WHERE 
 p.ControlNo  NOT IN (SELECT CaritasPersonnel_ControlNo FROM CaritasBranch_has_CaritasPersonnel) AND Rank = 'salveofficer'");
 ?>
+
+
+
+
 		<div class="content">
 			<br>
 			<!-- form action="function " -->
@@ -17,26 +21,26 @@ p.ControlNo  NOT IN (SELECT CaritasPersonnel_ControlNo FROM CaritasBranch_has_Ca
 				    <label>
 				        <span>ID Number :</span> </label>
 
-				        <input type="text" name="branchid" style="width:562px;" >
+				        <input type="text" name="branchid" style="width:562px;" value='<?php echo $num; ?>' readonly=true >
 
 				    </label>
 
 					<label>
 				        <span>Branch Name :</span> </label>
 
-				        <input type="text" name="branchname" style="width:562px;" >
+				        <input type="text" required='true' name="branchname" style="width:562px;" >
 
 				    
 				    
 				    <label>
 				        <span>Contact Number:</span> </label>
 
-				        <input type="text" name="contactno" style="width:562px;" >
+				        <input type="number" min='1000000' max='99999999999' required='true' name="contactno" style="width:562px;" oninvalid="setCustomValidity('Please enter a correct contact number.')" onchange="try{setCustomValidity('')}catch(e){}" >
 
 					<label>
 				        <span>Address :</span> </label>
 
-				        <input type="text" name="address" style="width:562px;" >
+				        <input type="text" required='true' name="address" style="width:562px;" >
 
 						
 					<label>
@@ -47,7 +51,7 @@ p.ControlNo  NOT IN (SELECT CaritasPersonnel_ControlNo FROM CaritasBranch_has_Ca
 				    			<option value=""></option>
 				 
 				    		<?php foreach ($manager->result() as $row) { ?>
-				 <option value='<?php echo$row->ControlNo?>'><?php echo $row->Name?></option> ;
+				 <option value='<?php echo $row->ControlNo?>'><?php echo $row->Name?></option> ;
 				    		 <?php } ?>
 						</select>
 
@@ -62,7 +66,7 @@ p.ControlNo  NOT IN (SELECT CaritasPersonnel_ControlNo FROM CaritasBranch_has_Ca
 				    	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				    	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				    	
-				 <input type='checkbox' name='officer[]' value='<?php echo $off->ControlNo; ?>'/><?php echo $off->Name;?>
+				 <input type='checkbox' name='officer[]' value='<?php echo $off->ControlNo; ?>' /><?php echo $off->Name;?>
 				    	
 				    	<br>
 				    		

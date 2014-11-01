@@ -2,6 +2,15 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
 
+
+<style type="text/css" media="print">
+.dontprint{
+	display: none;
+}
+
+</style>
+
+
 <a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 
 <br><br><br>
@@ -23,7 +32,7 @@
 	</div>
 
 	<br><br>
-	<div style="width: 100%; text-align: center;">
+	<div class='dontprint' style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button>
 	</div>
 

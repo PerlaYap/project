@@ -21,8 +21,6 @@ public function addnewofficer(){
 		$this->load->view("mis/addnewofficer");
 		 $this->load->view('footer');
 		}
-
-
 //for navigation
 	public function newbranch(){
 
@@ -31,7 +29,6 @@ public function addnewofficer(){
 		$this->load->view("mis/newbranch");
 		$this->load->view("footer");
 		}
-
 	public function search(){
     
         //load model
@@ -81,7 +78,7 @@ public function addnewofficer(){
     }
 
 
-	public function addnewofficerprocess(){
+public function addnewofficerprocess(){
 			//load model
 			$this->load->model('addnewofficer_model');
 
@@ -92,6 +89,9 @@ public function addnewofficer(){
 			$message = "Officer is successfully added.";
 
 			echo "<script type='text/javascript'>alert('$message');</script>";
+		$activity = "Added new ".$result['user']['position'] ." named ".$result['user']['Name'].".";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
 
 			$this->load->view('mis/newuserreport', $result);
 
@@ -119,9 +119,13 @@ public function addnewofficer(){
 
 			$result = $this->addbranch_model->get_branchdetails();
 
-			if($result == 'True'){
+			if($result['result'] == true){
 		
-			$message = "Branch is successfully added.";
+			$message = $result['branchname'] ." Branch is successfully added.";
+
+		$activity = "Added new branch (".$result['branchname'] .").";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
 
 			echo "<script type='text/javascript'>alert('$message');</script>";
 
@@ -151,7 +155,12 @@ public function addnewofficer(){
 	$this->load->model('editbranchdetails_model');
     $result = $this->editbranchdetails_model->setdetails();
 
-       if ($result) {
+       if ($result['result']==true ) {
+
+       	$activity = "Updated ".$result['branchname']." Branch.";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
+
            echo "<script type='text/javascript'>alert('Successfully Updated!')</script>";
        }else{
             echo "<script type='text/javascript'>alert('Failed to Update!')</script>";
@@ -195,13 +204,28 @@ public function edituser(){
 
 
 	if ($submit == "Save") {
-		$this->edituserdetails_model->changeposition();
+		$result = $this->edituserdetails_model->changeposition();
+		
+		$activity = "Updated the position of ".$result['name']." to ".$result['position'] .".";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
+
 		echo "<script type='text/javascript'>alert('Successfully Updated the Position!')</script>";
 	}elseif ($submit == "Disable") {
-		$this->edituserdetails_model->disableuser();
+		$result = $this->edituserdetails_model->disableuser();
+
+		$activity = "Disabled the account of ".$result['name'].".";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
+
 		echo "<script type='text/javascript'>alert('Successfully Disabled Profile!')</script>";
 	}elseif ($submit == "Enable") {
-		$this->edituserdetails_model->enableuser();
+		$result = $this->edituserdetails_model->enableuser();
+
+		$activity = "Enabled the account of ".$result['name'].".";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
+
 		echo "<script type='text/javascript'>alert('Successfully Enabled Profile!')</script>";
 	}else{
 		echo "<script type='text/javascript'>alert('Failed to update profile!')</script>";
@@ -229,6 +253,10 @@ public function edituser(){
     	$this->load->model('edituserdetails_model');
 
     	$result['user'] = $this->edituserdetails_model->resetpassword();
+
+    	$activity = "Reset password of ".$result['user']['Name']." .";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
     	
     	$this->load->view('mis/newuserreport', $result);
 

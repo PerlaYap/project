@@ -79,8 +79,8 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 						<ul>
 						
 							<li><a href="<?php echo site_url('mis/newbranch'); ?>">New Branch</a></li>
+							<li><a href="<?php echo site_url('mis/addnewofficer'); ?>">New User</a></li>
 							<li><a href="<?php echo site_url('mis/listofbranches'); ?>">List of Branches</a></li>
-								<li><a href="<?php echo site_url('mis/addnewofficer'); ?>">New User</a></li>
 							<li><a href="<?php echo site_url('mis/listofusers'); ?>">List of Users</a></li>
 						</ul>
 					</li>

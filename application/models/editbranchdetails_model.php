@@ -23,6 +23,7 @@ class Editbranchdetails_model extends CI_Model{
 			$address  = $this->security->xss_clean($this->input->post('address'));
 			$manager  = $this->security->xss_clean($this->input->post('manager'));
 			$officer  = $this->security->xss_clean($this->input->post('officer'));
+			$branchname  = $this->security->xss_clean($this->input->post('branchname'));
 			$officersize = count($officer);
 		
 			 
@@ -42,8 +43,9 @@ class Editbranchdetails_model extends CI_Model{
 			$this->addOfficer($control_no, $officer[$i]);
 		}
 
-			
-			return true;
+			$result['result'] = true;
+			$result['branchname'] = $branchname;
+			return $result;
 
 
      }

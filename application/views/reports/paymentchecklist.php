@@ -152,7 +152,7 @@ if($loanType=="23-Weeks"){
 		<table class="signature"  style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Received by:</td>
-				<td class="sig">&nbsp</td>
+				<td class="sig"><?php echo $name ?></td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
 				<td class="sig2">&nbsp</td>
 			</tr>
