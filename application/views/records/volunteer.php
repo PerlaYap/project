@@ -25,7 +25,7 @@ $terminate = $this->db->query("SELECT c.CenterNo, mn.FirstName, mn.MiddleName, m
 		?>
 
 <div class="content2">
-		<h2 class="hTitle">VOLUNTARILY TERMINATED ACCOUNTS</h2>
+		<h2 class="hTitle">WITHDRAWN ACCOUNTS</h2>
 			<div class="center">
 				
 				
