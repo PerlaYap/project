@@ -64,7 +64,7 @@
         'ui': {
           'labelStacking': 'horizontal',
           'label': 'Position:',
-          'allowTyping': true,
+          'allowTyping': false,
           'allowMultiple': false
         }
       }
