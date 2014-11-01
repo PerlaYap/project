@@ -19,7 +19,7 @@ class Audittrail_model extends CI_Model{
 	}
 	public function getlog(){
 		$branchno = $this->session->userdata('branchno');
-		$log = $this->db->query("SELECT * FROM `audittrail` where PersonnelNo in (Select CaritasPersonnel_ControlNo from caritasbranch_has_caritaspersonnel where caritasbranch_controlNo = $branchno)");
+		$log = $this->db->query("SELECT * FROM `audittrail` where PersonnelNo in (Select CaritasPersonnel_ControlNo from caritasbranch_has_caritaspersonnel where caritasbranch_controlNo = $branchno) order by DateTime DESC");
 		return $log->result();
 	}
 

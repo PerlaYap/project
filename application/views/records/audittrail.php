@@ -1,3 +1,6 @@
+<!---------------------------  -->
+		<!-- LYKA	- see audittrail(backup).php for your previous codes.  -->
+<!-- ---------------------------- -->
 <TITLE> Audit Trail</TITLE>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
@@ -55,7 +58,7 @@
         var dashboard = new google.visualization.Dashboard(
             document.getElementById('dashboard_div'));
 
-        //category picker
+        //category picker - position
           var categoryPicker = new google.visualization.ControlWrapper({
       'controlType': 'CategoryFilter',
       'containerId': 'categoryPicker_div',
@@ -65,7 +68,23 @@
           'labelStacking': 'horizontal',
           'label': 'Position:',
           'allowTyping': false,
-          'allowMultiple': false
+          'allowMultiple': false,
+          'selectedValuesLayout':'below'
+        }
+      }
+    });
+        //category picker - position
+          var categoryPicker_name = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'categoryPicker_name_div',
+      'options': {
+        'filterColumnIndex': 1,
+        'ui': {
+          'labelStacking': 'horizontal',
+          'label': 'Name:',
+          'allowTyping': false,
+          'allowMultiple': true,
+          'selectedValuesLayout':'below'
         }
       }
     });
@@ -78,10 +97,10 @@
       	'value':''
       },
       'options': {
-        'filterColumnIndex': 1,
+        'filterColumnIndex': 4,
         'matchType': 'any',
         'ui':{
-        	'label':'Name:'
+        	'label':'Activity:'
         }
       }
 
@@ -107,17 +126,30 @@
       'chartType': 'Table',
       'containerId': 'table_div',
       'options': {
+      	'page':'enable',
+      	'pageSize': 25
       }
     });
 
 
 
 
-        dashboard.bind([stringfilter ,categoryPicker, stringfilter_date],table);
+
+
+        dashboard.bind([stringfilter ,categoryPicker, stringfilter_date, categoryPicker_name],table);
     dashboard.draw(data);
 
   }
 </script>
+
+<style type="text/css" media="print">
+.dontprint{
+	display: none;
+}
+
+</style>
+
+
   </head>
 
 
@@ -139,9 +171,12 @@
 	  <!--Div that will hold the dashboard-->
     <div id="dashboard_div">
       <!--Divs that will hold each control and chart-->
-      <div id="categoryPicker_div"></div>
-      <div id="stringFilter_control_div"></div>
-      <div id="stringFilter_datecontrol_div"></div>
+      
+      <div id="categoryPicker_div" class='dontprint' style='float: left; padding: 20px' ></div>
+      <div id="categoryPicker_name_div" class='dontprint' style='float: left; padding: 20px' ></div>
+      <div id="stringFilter_datecontrol_div" class='dontprint' style='float: left; padding: 20px' ></div>
+      <div id="stringFilter_control_div" class='dontprint' style='float: left; padding: 20px'  ></div>
+      <br> <br><br><br> 
       <div id="table_div"></div>
       
     </div>
