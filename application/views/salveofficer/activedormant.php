@@ -24,7 +24,7 @@ $dormantaccount = $dormants->result();
   function drawChart() {
   
   var data = google.visualization.arrayToDataTable([
-      ['Month', 'Active','Past Due Mature', 'Dormant Borrower'],
+      ['Month', 'Active','Past Due Mature', 'Dormant Saver'],
       <?php
         for($a=0; $a<12; $a++){
           $date=$currentyear."-".($a+1)."-"."01";
