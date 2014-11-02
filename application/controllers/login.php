@@ -157,7 +157,7 @@ class Login extends CI_Controller {
         }
             $name = $fname." ".$mname." ".$lname;
 
-        $activity = "Withdraw the account of ".$name." (Voluntarily)." ;
+        $activity = "Withdraw the account of ".$name." (Force Termination)." ;
         $this->load->model("audittrail_model");
         $this->audittrail_model->setlog($activity);
 
