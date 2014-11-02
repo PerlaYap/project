@@ -104,9 +104,9 @@ class Recordcollection_model extends CI_Model{
 				if ($withdrawalamount > 0) {
 					$this->insertwithdrawaltransaction($loanappcontrolno2, $withdrawalamount, $datesubmitted, $memberno2 , $sopersonnel);
 				}
-				if ($savingamount > 0) {
+			/*	if ($savingamount > 0) {*/
 					$this->insertsavingstransaction($loanappcontrolno2, $savingamount, $datesubmitted, $memberno2 , $sopersonnel);	
-				}
+				/*}*/
 				
 				
 				$this->updatemembertransaction($loanappcontrolno2, $memberno2, $loanpayment2, $savingamount, $amounttopay2,$withdrawalamount );
@@ -147,10 +147,18 @@ class Recordcollection_model extends CI_Model{
 				$this->insertsavingstransaction($loanappcontrolno, $sbupayment, $datesubmitted, $memberid , $sopersonnel);
 				
 				$this->updatemembertransaction($loanappcontrolno, $memberid, $loanpayment, $sbupayment, $amounttopay,$withdrawal );
-				return true;
+
+				$data['result'] = true;
+				$data['saving'] = $sbupayment;
+				$data['loanpayment'] = $loanpayment;
+				$data['withdrawal'] = $withdrawal;
+				$data['membername'] = $this->getmembername($memberid);
+			
 		}else{
-			return false;
-		}	
+			$data['result'] = false;
+		}
+
+		return $data;	
 	}
 	public function updateloadpayment($loanappcontrol, $memberid, $loanpayment,$amounttopay){
 

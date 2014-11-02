@@ -69,6 +69,7 @@
 		<label>
 			<span>Amount:</span>
 			<input type="text" name='amounttochange' value="<?php echo $amount; ?>"/>
+			<input type='hidden' name='prev_amount' value='<?php echo $amount; ?>' >
 		</label>
 
 		<label>
@@ -77,7 +78,8 @@
 			<?php foreach ($tran_type->result() as $type) { $tt = $type->TransactionType; 
 
 				if ($t_type == $tt) { ?>
-				<option value="<?php echo $tt ?>" selected><?php echo $tt ?></option>	
+				<option value="<?php echo $tt ?>" selected><?php echo $tt ?></option>
+				<input type='hidden' name='prev_ttype' value='<?php echo $tt ?>'>	
 				<?php } else { ?>
 				<option value="<?php echo $tt ?>"><?php echo $tt ?></option>	
 				<?php } ?>	

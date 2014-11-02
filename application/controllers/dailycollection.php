@@ -55,7 +55,32 @@ class Dailycollection extends CI_Controller{
   public function individualloanpay(){
     $this->load->model('recordcollection_model');
     $result = $this->recordcollection_model->getindividualloanpayment();
-    if ($result==true) {
+
+    if ($result['result']==true) {
+
+        if (!empty($result['saving']) && !empty($result['withdrawal'] && !empty($result['loanpayment']) )) {
+          //all not empty added both
+          $activity = "Recorded loan payment of ".$result['loanpayment'] .", added ".$result['saving'] ." savings and withdrawn ".$result['withdrawal'] ." from ".$result['membername'] ." account.";
+
+        } elseif (!empty($result['saving']) && empty($result['withdrawal']) && !empty($result['loanpayment'])) {
+          //savings and loan payment only
+            $activity = "Recorded loan payment of ".$result['loanpayment'] ." and added ".$result['saving'] ." to savings of ".$result['membername'] .".";
+
+        } elseif (empty($result['saving']) && !empty($result['withdrawal']) && !empty($result['loanpayment'])) {
+          //withdrawal and loan payment only
+            $activity = "Recorded loan payment of ".$result['loanpayment'] ." and withdrawn ".$result['withdrawal'] ." from ".$result['membername'] ." account.";          
+        } elseif (empty($result['saving']) && !empty($result['withdrawal']) && empty($result['loanpayment'])) {
+            //withdrawal only
+            $activity = "Withdrawn ".$result['withdrawal'] ." from ".$result['membername'] ." savings account.";
+        }else{
+          //loan payment only
+            $activity = "Recorded loan payment of ".$result['loanpayment'] ." to ".$result['membername'] ." account.";
+        }
+
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
+
+
        echo "<script type='text/javascript'>alert('Successfully added collection!')</script>";
        $this->homepages();
     }else{

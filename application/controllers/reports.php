@@ -189,7 +189,19 @@ class Reports extends CI_Controller {
         $this->load->model('editcollection_model');
         $result = $this->editcollection_model->gettransaction();
 
-        if ($result) {
+        if ($result['result'] = true) {
+
+            /*$activity = "Added new member named ".$result." .";*/
+
+            if ($result['prev_ttype'] == $result['transaction_type']) {
+                    $activity = "Changed ".$result['transaction_type']." transaction (".$result['transactno'].") of ".$result['membername'].".  [PREVIOUS AMOUNT: ".$result['prev_amount'] ." | NEW AMOUNT: ".$result['amount'] ." ]" ;       
+                }else{
+                    $activity = "Changed transaction (".$result['transactno'] .") of ".$result['membername']."  [PREVIOUS TRASACTION TYPE: ".$result['prev_ttype']."  |  AMOUNT: ".$result['prev_amount']."] ---> [NEW TRANSACTION TYPE: ".$result['transaction_type']."  |  AMOUNT: ".$result['amount']."]" ;
+                }            
+
+            $this->load->model("audittrail_model");
+            $this->audittrail_model->setlog($activity);
+
            echo "<script type='text/javascript'>alert('Successfully Changed Transaction!')</script>";
        }else{
             echo "<script type='text/javascript'>alert('Failed to Change Transaction!')</script>";
