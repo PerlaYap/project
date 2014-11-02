@@ -1,5 +1,12 @@
 <title>MONTHLY ACCOUNT REPORT</title>
 
+
+<style type="text/css" media="print">
+.dontprint{
+	display: none;
+}
+</style>
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
 	
 	<?php //$month = $_POST['month'];
@@ -522,6 +529,6 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
 	
 	
 	<br><br>
-	<div style="width: 100%; text-align: center;">
+	<div class='dontprint' style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button> 
 	</div>

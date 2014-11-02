@@ -1,6 +1,15 @@
 <title>MIS Monthly Report</title>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
+
+
+<style type="text/css" media="print">
+.dontprint{
+	display: none;
+}
+
+
+</style>
 	
 	<?php //$month = $_POST['month'];
 			//$year = $_POST['year'];
@@ -47,7 +56,7 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 	
 	<!-- <img src="<?php // echo base_url ('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"> -->
-	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MIS REPORT <br> For The Month Of <b>
+	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> SAVINGS BUILD-UP and PREFERRED SHARE REPORT  <br> For The Month Of <b>
 		<?php echo $yue ?> <?php echo $year ?></b></h3>
 <?php
 $user = $this->session->userdata('firstname');
@@ -407,6 +416,6 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 			</tr>
 		</table>
 	<br><br>
-	<div style="width: 100%; text-align: center;">
+	<div class="dontprint" style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button> 
 	</div>

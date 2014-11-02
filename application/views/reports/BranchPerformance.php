@@ -9,6 +9,14 @@
 
  ?>
 <head>
+
+<style type="text/css" media="print">
+.dontprint{
+  display: none;
+}
+@page { size: landscape; }
+
+</style>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -64,7 +72,7 @@
 
     <div id="chart_div" style="width: 1300px; height: 500px; margin-left:auto; margin-right: auto;"></div>
 
-    <table class="signature" style="margin-left:auto; margin-right:auto;">
+    <!-- <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
         <td class="sig">&nbsp</td>
@@ -80,9 +88,9 @@
         <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
         <td class="sig2">&nbsp</td>
       </tr>
-    </table>
+    </table> -->
     <br><br>
-	<div style="width: 100%; text-align: center;">
+	<div class='dontprint' style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button> 
 	</div>
 </body>
