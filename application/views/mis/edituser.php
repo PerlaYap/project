@@ -90,24 +90,69 @@ $getOfficer = $this->db->query("SELECT p.`ControlNo`, `FirstName`, `MiddleName`,
 				        <span></span>
 
 
-				    <?php    if ($off->IsActive==1) { ?>
+				        <style type="text/css">
+
+				        	.disableUser, .enableUser{
+				        		width: 860px;
+				        		height: 40px;
+				        		margin-left: auto;
+				        		margin-right: auto;
+				        		background: transparent;
+				        		border: 2px solid #e94747;
+				        		border-radius: 5px;
+				        		color: #e94747;
+				        		font-size: 14px;
+				        		cursor: pointer;
+				        	}
+
+				        		.disableUser:hover, .enableUser:hover{
+				        			border: 3px solid #e94747;
+				        			font-weight: bold;
+				        			cursor: pointer;
+				        		}
+
+				        		.enableUser:hover{
+				        			border: 3px solid #34c169;
+				        		}
+
+				        	.enableUser{
+				        		color: #2ead5e;
+				        		border: 2px solid #34c169;
+				        	}
+
+				        	.resetPW{
+				        		border: 0;
+				        		font-size: 12px;
+				        		color: #777978;
+				        		background: transparent;
+				        		cursor: pointer;
+				        		position: absolute;
+				        		margin-top: -160px;
+				        		margin-left: 735px;				        	
+				        	}
+
+
+				        </style>
+
+				       <div style="position: absolute; margin-top: 85px; margin-left: -30px;">
+				    			<?php    if ($off->IsActive==1) { ?>
 	
 											<!-- <input type='hidden' name='active' value='0'> -->
 
-										<input type='submit' name='subs' value='Disable' class='button'/>
+										<input type='submit' name='subs' value='DISABLE USER' class='disableUser'/>
 										
 							<?php			}else{ ?> 
 											
 											<!-- <input type='hidden' name='active' value='1'> -->
-										<input type='submit' name='subs' value='Enable' class='button'/>
+										<input type='submit' name='subs' value='ENABLE USER' class='enableUser'/>
 									
 								<?php		} ?>
-								 
+						</div> 		 
 
 
 
-				    <input type="submit" name='subs' class="button" value="Save" />
-				    <input type='button' name='cancel'  onclick="cancelfunction()" value="Cancel">    
+				    <input type="submit" name='subs' class="button" value="Save" style="width: 105px; margin-left: 355px;" />
+				    <input type='button' name='cancel'  onclick="cancelfunction()" value="Cancel" class="button1" style="margin-top: 0px;margin-left: 5px;">    
 				    
 				    </label>  
 				</form>
@@ -120,10 +165,14 @@ $getOfficer = $this->db->query("SELECT p.`ControlNo`, `FirstName`, `MiddleName`,
 				    	<input id="personnelid" type="hidden" name="username" value="<?php echo $username  ?>" />
 				    	<input type="hidden" name='position' value='<?php echo $rank ?>' />
 
+
+
+
+
 				        <!------------- RESET PASSWORD BUTTON (FOR LYKA) -------------->
-				        <input type='button' onclick='resetpassword()' value='Reset Password'>
+				        <input type='button' onclick='resetpassword()' value='Reset Password' class="resetPW">
 				        </form>
-			<br><br>
+			<br><br><br><br>
 		</div>
 	</body>
 </html>
