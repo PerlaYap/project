@@ -49,8 +49,8 @@ class terminate_voluntary_model extends CI_Model{
 			WHERE lhm.Members_ControlNo='$control_no' and Status='Current'");
 		return $getLoanInfo->result();
 	 }
-	public function getloancontrolno (){
-		$control_no = $this->getcontrolno();
+	public function getloancontrolno ($control_no){
+		/*$control_no = $this->getcontrolno();*/
 		$getLoanInfo = $this->db->query("SELECT loanapplication_ControlNo AS LoanControl, ApplicationNumber, AmountRequested, Interest, DateApplied, DayoftheWeek, Status, LoanType FROM loanapplication_has_members lhm
 			LEFT JOIN loanapplication la ON lhm.LoanApplication_ControlNo=la.ControlNo
 			WHERE lhm.Members_ControlNo='$control_no' and Status='Current'");
@@ -60,9 +60,9 @@ class terminate_voluntary_model extends CI_Model{
 			return $row->LoanControl;
 		}
 	 }
-	public function getcomaker(){
+	public function getcomaker($control_no){
 
-		$loanappcontrol = $this->getloancontrolno();
+		$loanappcontrol = $this->getloancontrolno($control_no);
 
 		$comaker = $this->db->query("SELECT LastName, FirstName, MiddleName,MemberID, Address, ContactNo FROM `members` m join `member_comaker` mc on m.ControlNo = mc.`Members_ControlNo` join `membersname` mn on mn.ControlNo = mc.`Members_ControlNo` join `membersaddress` madd on madd.ControlNo = mc.`Members_ControlNo` join `memberscontact` mcon on mcon.ControlNo = mc.`Members_ControlNo` where `LoanApplication_ControlNo` =$loanappcontrol");
 

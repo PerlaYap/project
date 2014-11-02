@@ -203,18 +203,33 @@ $SOpersonnel =$this->session->userdata('personnelno');
 <!------------------------------------------------------------------------>
 <!------------------------------------------------------------------------>
 					<h1 style="text-align:center; color:#b7351b; border-top: 3px solid #f9f8f8;">
-
+						<?php if ($type =="force") { ?>
+							<br>REMAINING LOAN BALANCE<br>
+						<?php }else{ ?>
 						<br>
 						PLEASE SETTLE THE REMAINING LOAN BALANCE <br>
+						<?php } ?>
 						<b>Php <?php echo $loanexpense ?> .00</b> <br><br>
+						<?php if ($type=='voluntary'): ?>
 						<form action='payloanbalance' method='post' id='myform'>
 							<input type='hidden' name='controlno' value='<?php echo $memcontrol ?>'>
 							<input type ='hidden' name='loanbalance' value='<?php echo $loanexpense ?>'>
 							<input type='hidden' name='datetoday' value='<?php echo date("Y-m-j") ?>'>
 							<input type ='hidden' name='sopersonnel' value='<?php echo $SOpersonnel; ?>'/>
+							
 						<input type="submit" name='paymenttype' value="Cash Payment"/>
 						<input type="submit" name='paymenttype' onclick=" return verify_action()" value="Savings"/>
+							
 						</form>
+						<?php endif ?>
+
+						<?php if ($type=="force"): ?>
+							<form action='terminatenow' method='post'>
+				 			<input type='hidden' name='controlno' value='<?php echo $memcontrol ?>'>
+				 			<input type='submit' value ='Withdraw Profile' name='withdraw'>
+				 			<input type='button' value='Cancel' onclick='cancelfunction()'>
+				 		</form>
+						<?php endif ?>
 						<br><br>
 					</h1>
 				<br><br><br>
