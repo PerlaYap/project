@@ -102,30 +102,27 @@ class terminate_voluntary_model extends CI_Model{
 	public function getsopersonnel(){
 		$sopersonnel = $this->security->xss_clean($this->input->post('sopersonnel'));
 		return $sopersonnel;
-	}
+	 }
 	public function setterminatestatus($control_no){
 		 $this->db->query("INSERT INTO members_has_membersmembershipstatus(`ControlNo`, `DateUpdated`, `Status`) VALUES ('$control_no', NOW(), 'Terminated Voluntarily')");
-	}
+	 }
 	public function paythroughsavings($loantopay){
 
 		 $control_no = $loantopay['controlno'];
 		 $loanbalance = $loantopay['loanbalance'];
 		
-		foreach ($loantopay['savings'] as $save) {
+	 	 foreach ($loantopay['savings'] as $save) {
 		 $savingstot =$save->Savings;	
-		}
+		 }
 		 $savingstot;
 
-		if ($savingstot>=$loanbalance) {
+		 if ($savingstot>=$loanbalance) {
 			/*add transaction of payment ng loan amount equal sa full ng loan balance*/
 			/*withdrawal the money*/
 			/*update yung sa member*/
-		}elseif ($savingstot<$loanbalance) {
+		 }elseif ($savingstot<$loanbalance) {
 			
-		}
-
-
-		
+		 }
 	}
 
 

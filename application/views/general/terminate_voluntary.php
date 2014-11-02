@@ -84,6 +84,16 @@ $SOpersonnel =$this->session->userdata('personnelno');
 		}	
 	}
 
+	function cancelfunction () {
+	 	
+	 	var txt;
+	 	var r = confirm("Are you sure you want to cancel?");
+	 	if (r== true) {
+	 		
+	 		window.history.back();
+	 	}
+	 }
+
 </script>
 
 
@@ -210,7 +220,18 @@ $SOpersonnel =$this->session->userdata('personnelno');
 				<br><br><br>
 
 				 <?php } else{ ?>
-				 		NO CURRENT LOAN
+				 		<h1 style="text-align:center; color:#b7351b; border-top: 3px solid #f9f8f8;">
+				 			<br>
+				 			--- No current loan ---
+				 		</h1>
+				 		<br><br>
+
+				 		<form action='terminatenow' method='post'>
+				 			<input type='hidden' name='controlno' value='<?php echo $memcontrol ?>'>
+				 			<input type='submit' value ='Withdraw Profile' name='withdraw'>
+				 			<input type='button' value='Cancel' onclick='cancelfunction()'>
+				 		</form>
+
 					<?php } ?>
 
 		    </div>

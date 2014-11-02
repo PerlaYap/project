@@ -85,7 +85,7 @@ class Recordcollection_model extends CI_Model{
 		$data['result']=true;
 		$data['center']= $centerno;
 		return $data;
-	}
+	 }
 	public function getindividualcollection(){
 		$memberno2 = $this->security->xss_clean($this->input->post('memberid'));
 		$savingamount = $this->security->xss_clean($this->input->post('sbu'));
@@ -121,7 +121,7 @@ class Recordcollection_model extends CI_Model{
 		}
 		return $data;
 		
-	}
+	 }
 	public function getindividualloanpayment(){
 		$sopersonnel = $this->security->xss_clean($this->input->post('sopersonnel'));
 		$memberid = $this->security->xss_clean($this->input->post('memberid'));
@@ -159,7 +159,7 @@ class Recordcollection_model extends CI_Model{
 		}
 
 		return $data;	
-	}
+	 }
 	public function updateloadpayment($loanappcontrol, $memberid, $loanpayment,$amounttopay){
 
 		$getpasttransaction = $this->db->query("SELECT `ControlNo`,`LoanExpense`,`Savings`,`pastdue` FROM `members` WHERE `ControlNo` =$memberid");
@@ -198,25 +198,25 @@ class Recordcollection_model extends CI_Model{
 
 
 		}
-	}
+	 }
 	public function insertloantransaction($loanappno, $loanpayment, $datetime, $member, $so){
 
 		$this->db->query("INSERT INTO `microfinance2`.`transaction` ( `LoanAppControlNo`, `Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`) VALUES ('$loanappno', '$loanpayment', '$datetime', '$member', '2', '$so', 'Loan ');");
-	}
+	 }
 	public function insertwithdrawaltransaction($loanappno, $withdraw, $datetime, $member, $so){
 
 		$this->db->query("INSERT INTO `microfinance2`.`transaction` ( `LoanAppControlNo`,`Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`) VALUES ('$loanappno','$withdraw', '$datetime', '$member', '2', '$so', 'Withdrawal ');");
-	}
+	 }
 	public function insertsavingstransaction($loanappno, $savings, $datetime, $member, $so){
 		/*if ($savings>0) {*/
 
 			$this->db->query("INSERT INTO `microfinance2`.`transaction` ( `LoanAppControlNo`,`Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`) VALUES ('$loanappno','$savings', '$datetime', '$member', '2', '$so', 'Savings');");
-	/*	}	*/
-	}
+	 /*	}	*/
+	 }
 	public function insertpastduetransaction($loanappno, $pastdue, $datetime, $member, $so){
 
 		$this->db->query("INSERT INTO `microfinance2`.`transaction` ( `LoanAppControlNo`,`Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`) VALUES ('$loanappno','$pastdue', '$datetime', '$member', '2', '$so', 'Past Due');");
-	}
+	 }
 	public function updatemembertransaction($loanappcontrol, $memberid, $loanpayment, $savingspayment, $amounttopay, $withdrawals){
 		/*update LoanExpense, Savings, pastdue*/
 		
@@ -264,7 +264,7 @@ class Recordcollection_model extends CI_Model{
 
 
 		}
-	}
+	 }
 	public function getmembername($memberControl){
 
 	    $query = $this->db->query("SELECT * FROM `membersname` where ControlNo =$memberControl");

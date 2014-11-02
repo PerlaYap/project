@@ -22,6 +22,9 @@
 	 		window.history.back();
 	 	}
 	 }
+	 function gotodirectory(){
+	 	window.location.href="directory";
+	 }
 
 	 </script>
 
@@ -68,7 +71,8 @@
 						<br>
 
 					</h1>
-						
+						<form action='terminatenow' method ='post'>
+							<input type='hidden' name='controlno' value='<?php echo $controlno ?>'>
 						<label>
 					        <span>Savings :</span></label>
 					        <input id="name" type="text" name="fname" value="<?php echo $savingstot ?>" style="width: 562px;" disabled/>
@@ -82,6 +86,10 @@
 					        <input id="name" type="text" name="fname" value="<?php echo $savingstot-$loanbalance ?>" style="width: 562px; color:#b7351b; font-weight:bold;" disabled/>
 					        <br><br>
 					    <input type='submit' value='OK'>
+					    <input type='button' value='cancel' onclick="gotodirectory()">
+
+					    </form>
+
 
 						<br><br>
 					

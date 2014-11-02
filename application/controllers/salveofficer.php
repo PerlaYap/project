@@ -9,7 +9,6 @@ class Salveofficer extends CI_Controller {
 		$this->load->view("salveofficer/verification");
 		$this->load->view('footer');
 		}
-
 	public function verifymember(){
 		$this->load->model('verifymember_model');
 		$result['data'] = $this->verifymember_model->getverificationinfo();
@@ -31,10 +30,9 @@ class Salveofficer extends CI_Controller {
 			$this->load->view("Salveofficer/foundverification",$result);
 			$this->load->view('footer');
 		}
-
-	}
+	 }
 	public function gotoprofile(){
-		 $sub = $_GET['submitvalue'];
+		$sub = $_GET['submitvalue'];
 		if ($sub=="View Profile") {
 
 		$this->load->view('header');
@@ -50,16 +48,7 @@ class Salveofficer extends CI_Controller {
 			echo "Please Try Again.";
 		}
 		
-	}
-
-
-	/*public function addnewmember(){
-		$this->load->view('header');
-        $this->load->view('navigation');
-		$this->load->view("Salveofficer/addnewmember");
-		$this->load->view('footer');
-		}
-*/
+	 }
 	public function approvedaccounts(){
 		$this->load->view('header');
         $this->load->view('navigation');
@@ -73,11 +62,11 @@ class Salveofficer extends CI_Controller {
 
 			$result = $this->addnewmember_model->get_memberdetails();
 
-		/*	if ($result == 1) { */
-		
-		$activity = "Added new member named ".$result." . (Pending)";
-        $this->load->model("audittrail_model");
-        $this->audittrail_model->setlog($activity);
+			/*	if ($result == 1) { */
+			
+			$activity = "Added new member named ".$result." . (Pending)";
+	        $this->load->model("audittrail_model");
+	        $this->audittrail_model->setlog($activity);
 
 			$this->load->view('header');
 	        $this->load->view('navigation');
@@ -86,7 +75,6 @@ class Salveofficer extends CI_Controller {
 			
 				/*}*/
 			}
-
 	public function search(){
     
         //load model
@@ -174,7 +162,6 @@ class Salveofficer extends CI_Controller {
 	public function targetactualcenter(){
 		$this->load->view('salveofficer/targetactualcenter');
 	 }
-
 	public function terminate(){
 		$this->load->model('terminate_voluntary_model');
 		$controlno = $this->terminate_voluntary_model->getcontrolno();
@@ -189,8 +176,27 @@ class Salveofficer extends CI_Controller {
 		$data['savings'] = $this->terminate_voluntary_model->getsavings($controlno);
 		/*$controlno['name'] = $_POST['controlno'];*/
 		$this->load->view('general/terminate_voluntary',$data);
-	}
+	 }
+	public function terminatenow(){
+		$this->load->model('terminate_voluntary_model');
+		$controlno = $this->terminate_voluntary_model->getcontrolno();
+		$this->terminate_voluntary_model->setterminatestatus($controlno);
+		$profile = $this->terminate_voluntary_model->getprofileinfo($controlno);
+		foreach ($profile as $p) {
+			$fname = $p->FirstName;
+			$mname = $p->MiddleName;
+			$lname = $p->LastName;
+		}
+			$name = $fname." ".$mname." ".$lname;
 
+		$activity = "Withdraw the account of ".$name." (Voluntarily)." ;
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
+
+        	echo "<script type='text/javascript'>alert('Successfully withdraw the account of ".$name."')</script>";
+        	$this->directory();
+
+	 }
 	public function payloanbalance(){
 		$this->load->model('terminate_voluntary_model');
 
@@ -218,7 +224,6 @@ class Salveofficer extends CI_Controller {
 			}
 			$datetoday = $this->terminate_voluntary_model->getdatetoday();
 			$sopersonnel = $this->terminate_voluntary_model->getsopersonnel();
-			/*echo "<br>";*/
 
 			$loaninfo = $this->terminate_voluntary_model->getloaninfo($controlno);
 
@@ -239,42 +244,35 @@ class Salveofficer extends CI_Controller {
 						$amounttopay = $activerelease/40;
 					}
 
-
 				$savingspayment = 0;
 				
 				if ($loanbalance<=$sav) {
-					/*echo $loanbalance;
-					echo "<br>";
-					echo $sav;
-					echo "<br>";
-					echo "loanbalance <= savings";*/
-					/*echo "<br>Withdrawals:";*/
 					$withdrawals = $loanbalance;
 				}elseif ($loanbalance > $sav) {
-					/*echo "loanbalance > savings";*/
 					$withdrawals = $sav;
 				}else{
 					$withdrawals = 0;
 				}
 
 				$paymentrecieved = $withdrawals;
-				/*echo "withdrawals: ".$withdrawals;*/
+				
 				if (!$paymentrecieved == 0) {
 				$this->recordcollection_model->insertwithdrawaltransaction($loanappcontrol, $withdrawals, $datetoday, $controlno, $sopersonnel);
 
 				$this->recordcollection_model->insertloantransaction($loanappcontrol, $paymentrecieved, $datetoday, $controlno, $sopersonnel);
 
 				$this->recordcollection_model->updatemembertransaction($loanappcontrol, $controlno, $paymentrecieved, $savingspayment, $amounttopay, $withdrawals);
+
+				$name = $this->recordcollection_model->getmembername($controlno);
+
+					$activity = "Recorded loan collection to ".$name." account amounted to ".$paymentrecieved.".";
+			        $this->load->model("audittrail_model");
+			        $this->audittrail_model->setlog($activity);
 				}
-				
-			/*$this->terminate_voluntary_model->paythroughsavings($loantopay);*/
-			/*withdrawal money*/
-			/*if loanbalance <= */
 
 			$this->load->view('general/payloanbalance', $loantopay);
 		}
-	}
-
+	 }
 	public function payloanbalance_2(){
 		$this->load->model('terminate_voluntary_model');
 		$this->load->model('recordcollection_model');
@@ -305,9 +303,18 @@ class Salveofficer extends CI_Controller {
 
 		$savingspayment = 0;
 		$withdrawals = 0;
+
+		$name = $this->recordcollection_model->getmembername($controlno);
+
+
 		$this->recordcollection_model->insertloantransaction($loanappcontrol, $paymentrecieved, $datetoday, $controlno, $sopersonnel);
 
 		$this->recordcollection_model->updatemembertransaction($loanappcontrol, $controlno, $paymentrecieved, $savingspayment, $amounttopay, $withdrawals);
+
+
+		$activity = "Recorded loan collection to ".$name." account amounted to ".$paymentrecieved.".";
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
 
 		if ($paymentrecieved < $loanbalance) {
 			echo "<script type='text/javascript'>alert('Account Termination Failed! Please settle the remaining loan balance before terminating the account.')</script>";
@@ -316,13 +323,23 @@ class Salveofficer extends CI_Controller {
 			
 		}else if ($paymentrecieved == $loanbalance) {
 			$this->terminate_voluntary_model->setterminatestatus($controlno);
+			$profile = $this->terminate_voluntary_model->getprofileinfo($controlno);
+				foreach ($profile as $p) {
+					$fname = $p->FirstName;
+					$mname = $p->MiddleName;
+					$lname = $p->LastName;
+				}
+			$name = $fname." ".$mname." ".$lname;
+
+		$activity = "Withdraw the account of ".$name." (Voluntarily)." ;
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
+
 			$this->load->view('general/successtermination');
 			/*echo "<script type='text/javascript'>alert('Loan Fully Paid. Account terminated successfully.')</script>";*/
 			/*$this->directory();*/
 		}
-
-		
-	}
+	 }
 
 	
 
