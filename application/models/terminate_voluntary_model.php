@@ -12,12 +12,8 @@ class terminate_voluntary_model extends CI_Model{
 	public function getcontrolno(){
 
 		 $controlno = $this->security->xss_clean($this->input->post('controlno'));
-		 //this is to be send
-		 /* $profileinfo = $this->getprofileinfo($controlno);
-		 $branchcenter = $this->getbranchcenter($controlno);*/
 		 return $controlno;
-		 /*return $profileinfo->result();*/
-		}
+		 }
 	public function getprofileinfo($control_no){
 		/*$control_no = $this->getcontrolno();*/
 		$profileinfo = $this->db->query("SELECT  mem.ControlNo, MemberID,memname.LastName,memname.FirstName, memname.MiddleName, ContactNo,Birthday,BirthPlace, GenderID, Religion, Date(cm.DateEntered) as date, EducationalAttainment,CivilStatus, MFI,Address,AddressDate, Status, Type,BusinessType,CompanyName,CompanyContact,YearEntered, LoanExpense,Savings, CapitalShare 
@@ -35,7 +31,7 @@ class terminate_voluntary_model extends CI_Model{
                                 WHERE mem.ControlNo='$control_no'");
 		
 		return $profileinfo->result();
-	}
+	 }
 	public function getbranchcenter($control_no){
 		/*$control_no = $this->getcontrolno();*/
 		$branchcenter = $this->db->query("SELECT cm.`CaritasCenters_ControlNo`, cc.`CenterNo`, cbc.`CaritasBranch_ControlNo`, b.`BranchName`
@@ -45,14 +41,14 @@ class terminate_voluntary_model extends CI_Model{
 							cbc.`CaritasCenters_ControlNo` = cc.`ControlNo` and
 							b.`ControlNo` = cbc.`CaritasBranch_ControlNo`");
 			return $branchcenter->result();
-	}
+	 }
 	public function getloaninfo($control_no){
 		/*$control_no = $this->getcontrolno();*/
 		$getLoanInfo = $this->db->query("SELECT loanapplication_ControlNo AS LoanControl, ApplicationNumber, AmountRequested, Interest, DateApplied, DayoftheWeek, Status, LoanType FROM loanapplication_has_members lhm
 			LEFT JOIN loanapplication la ON lhm.LoanApplication_ControlNo=la.ControlNo
 			WHERE lhm.Members_ControlNo='$control_no' and Status='Current'");
 		return $getLoanInfo->result();
-	}
+	 }
 	public function getloancontrolno (){
 		$control_no = $this->getcontrolno();
 		$getLoanInfo = $this->db->query("SELECT loanapplication_ControlNo AS LoanControl, ApplicationNumber, AmountRequested, Interest, DateApplied, DayoftheWeek, Status, LoanType FROM loanapplication_has_members lhm
@@ -63,7 +59,7 @@ class terminate_voluntary_model extends CI_Model{
 			$row = $getLoanInfo->row();
 			return $row->LoanControl;
 		}
-	}
+	 }
 	public function getcomaker(){
 
 		$loanappcontrol = $this->getloancontrolno();
@@ -71,7 +67,7 @@ class terminate_voluntary_model extends CI_Model{
 		$comaker = $this->db->query("SELECT LastName, FirstName, MiddleName,MemberID, Address, ContactNo FROM `members` m join `member_comaker` mc on m.ControlNo = mc.`Members_ControlNo` join `membersname` mn on mn.ControlNo = mc.`Members_ControlNo` join `membersaddress` madd on madd.ControlNo = mc.`Members_ControlNo` join `memberscontact` mcon on mcon.ControlNo = mc.`Members_ControlNo` where `LoanApplication_ControlNo` =$loanappcontrol");
 
 		return $comaker->result();	
-	}
+	 }
 	public function getcapitalshare($control_no){
 
 		/*$control_no = $this->getcontrolno();*/
@@ -79,33 +75,32 @@ class terminate_voluntary_model extends CI_Model{
 		 $getTotalCapitalShare = $this->db->query("SELECT  SUM(CapitalShare) AS TotalShare FROM loanapplication_has_members lhm LEFT JOIN (SELECT * FROM LoanApplication la WHERE Status!='Rejected' AND Status!='Pending')A ON lhm.LoanApplication_ControlNo=A.ControlNo WHERE Members_ControlNo=$control_no AND ControlNo IS NOT NULL");
 
 		 return $getTotalCapitalShare->result(); 
-	}
+	  }
 	public function getsavings($control_no){
 		/*$control_no = $this->getcontrolno();*/
 
 		$gettotsavings = $this->db->query("SELECT `Savings` FROM `members` where `ControlNo` = $control_no");
 
 		return $gettotsavings->result();
-	}
+	 }
 	public function getloanbalance(){
 		 $loanbalance = $this->security->xss_clean($this->input->post('loanbalance'));
-		 return $loanbalance;
-	}
+		 return $loanbalance;}
 	public function getpaymentrecieved(){
 		$paymentrecieved = $this->security->xss_clean($this->input->post('paymentrecieved'));
 		return $paymentrecieved;
-	}
+	 }
 	public function getdatetoday(){
 		$datetoday = $this->security->xss_clean($this->input->post('datetoday'));
 		return $datetoday;
-	}
+	 }
 	public function getsopersonnel(){
 		$sopersonnel = $this->security->xss_clean($this->input->post('sopersonnel'));
 		return $sopersonnel;
 	 }
 	public function setterminatestatus($control_no){
-		 $this->db->query("INSERT INTO members_has_membersmembershipstatus(`ControlNo`, `DateUpdated`, `Status`) VALUES ('$control_no', NOW(), 'Terminated Voluntarily')");
-	 }
+		 
+		 $this->db->query("INSERT INTO members_has_membersmembershipstatus(`ControlNo`, `DateUpdated`, `Status`) VALUES ('$control_no', NOW(), 'Terminated Voluntarily')"); }
 	public function paythroughsavings($loantopay){
 
 		 $control_no = $loantopay['controlno'];
@@ -122,8 +117,51 @@ class terminate_voluntary_model extends CI_Model{
 			/*update yung sa member*/
 		 }elseif ($savingstot<$loanbalance) {
 			
-		 }
-	}
+		 } }
+	public function gettermination_report($control_no){
+		$result = $this->db->query("SELECT  
+								    m.controlno,
+								    concat(mn.FirstName,
+								            ' ',
+								            mn.MiddleName,
+								            ' ',
+								            mn.LastName) as Name,
+								    date(mt.DateUpdated) as DateEntered,
+								    cs.totcapitalshare,
+								    m.savings,
+								    (cs.totcapitalshare + m.savings) as recievable_amount,
+									st.status,
+									date(st.DateUpdated) as StatusUpdateDate
+								from
+								    members m
+								        left join
+								    membersname mn ON m.ControlNo = mn.ControlNo
+								        left join
+								    members_has_membertype mt ON mt.ControlNo = m.ControlNo
+								        left join
+								    totalcapitalshare cs ON cs.Members_ControlNo = m.ControlNo
+								        right join
+								    (SELECT 
+								        MemberControl, Status, DateUpdated
+								    FROM
+								        (SELECT 
+								        ControlNo AS MemberControl
+								    FROM
+								        Members_has_Membersmembershipstatus) A
+								    LEFT JOIN (SELECT 
+								        *
+								    FROM
+								        (SELECT 
+								        *
+								    FROM
+								        Members_has_MembersMembershipstatus
+								    ORDER BY DateUpdated DESC) A
+								    GROUP BY ControlNo) B ON A.MemberControl = B.ControlNo
+								where Status = 'Terminated Voluntarily' or Status = 'Terminated'
+								    group by MemberControl) st ON st.MemberControl = m.ControlNo
+								where m.controlno = 5;");
+
+		return $result->result(); }
 
 
     
