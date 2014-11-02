@@ -399,11 +399,13 @@ foreach ($pastDuePerformance->result() as $row) {
      <p class="info"><b>Educational Attainment: </b><?php echo $edu; ?> </p>
      <p class="info"><b>Religion: </b> <?php echo $religion; ?> </p>
 
-     <!-- lyka for edit -->
+     <?php if ($userrank=='branchmanager'): ?>
+      
      <form action='terminate' method='post'>
       <input type='hidden'  name='controlno' value='<?php echo $control_no ?>' >
       <input type="submit" class="editbtn" value="Withdraw" />
     </form>
+    <?php endif ?>
     <br>
     <form action='editprofile' method='post'>
       <input type='hidden'  name='controlno' value='<?php echo $control_no ?>' >
