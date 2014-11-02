@@ -2,6 +2,12 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
 
 
+<style type="text/css" media="print">
+.dontprint{
+	display: none;
+}
+
+</style>
 
 <?php 
 	date_default_timezone_set('Asia/Manila');
@@ -80,12 +86,12 @@
 			<tr>
 				<td class="collectDC" rowspan="2"><?php echo $num; ?>.</td>
 				<td class="collectDC2" rowspan="2"><?php echo $name; ?></td>
-				<td class="collectDC" rowspan="2"><?php echo $activerelease; ?></td>
-				<td class="collectDC" rowspan="2"><?php echo $pastdue; ?></td>
-				<td class="collectDC" rowspan="2"><input type="checkbox" name="" value=""><?php echo $amounttopay; ?></td>
+				<td class="collectDC" rowspan="2"><?php echo number_format($activerelease,2); ?></td>
+				<td class="collectDC" rowspan="2"><?php echo number_format($pastdue,2); ?></td>
+				<td class="collectDC" rowspan="2"><input type="checkbox" name="" value=""><?php echo number_format($amounttopay,2); ?></td>
 				<td class="collectDC" rowspan="2"></td>
-				<td class="collectDC" rowspan="2"><?php echo $savings ?></td>
-				<td class="collectDC"><input type="checkbox" name="" value="">50</td>
+				<td class="collectDC" rowspan="2"><?php echo number_format($savings,2) ?></td>
+				<td class="collectDC"><input type="checkbox" name="" value="">50.00</td>
 				<td class="collectDC" rowspan="2"></td>
 			</tr>
 				<tr>
@@ -134,7 +140,7 @@
 
 
 	<br>
-	<div style="width: 100%; text-align: center;">
+	<div class='dontprint' style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button>
 	</div>
 	<?php } else{ ?>

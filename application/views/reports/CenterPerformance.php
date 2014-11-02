@@ -14,6 +14,16 @@
   ?>
 
 <head>
+        <style type="text/css" media="print">
+      .dontprint{
+        display: none;
+      }
+      @page { size: portrait; 
+              size: 8.5in 11in;
+              margin: 0.5in;
+        }
+
+      </style>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -91,7 +101,7 @@
     </table>
 
     <br><br>
-	<div style="width: 100%; text-align: center;">
+	<div class='dontprint' style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button> 
 	</div>
 </body>

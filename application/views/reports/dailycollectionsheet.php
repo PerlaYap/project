@@ -3,9 +3,17 @@
 	
 <!-- 	<link rel="stylesheet" type="text/css" href="../../../Assets/css/reports.css"> -->
 
+<style type="text/css" media="print">
+.dontprint{
+	display: none;
+}
+
+
+</style>
 	
 <?php 
  $branch = $this->session->userdata('branchno');
+ $user = $this->session->userdata('firstname');
 $date=date('Y-m-d');
 $getCollection = $this->db->query("SELECT CenterNo, concat(LastName,', ',FirstName,' ', MiddleName) AS Name , (MemberCount * 50) AS TargetSavings,  TotalSavings AS ActualSaving, 
 IFNULL(Delta.Collection,0) AS Target23, Total23Loan, IFNULL(Echo.Collection,0) AS Target40, Total40Loan, SUM(TotalSavings+Total23Loan+Total40Loan) AS TotalCollected, TotalWithdrawal
@@ -201,11 +209,11 @@ $day = date('l', $extra);
 	<div class="info">
 
 
-		<br><br><br>
+		<br><br><br><br><br><br>
 
-		<table style="margin-left: 50px;;">
+		<!-- <table style="margin-left: 50px;;">
 			<tr><td class="BM">Signature of BM</td></tr>
-		</table>
+		</table> -->
 
 
 	</div>
@@ -215,9 +223,9 @@ $day = date('l', $extra);
 	<table class="signature" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Prepared by:</td>
-				<td class="sig">&nbsp</td>
+				<td class="sig"><?php echo $user ?></td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2">&nbsp</td>
+				<td class="sig2"><?php echo date('F d, Y', strtotime($date)); ?></td>
 			</tr>
 		</table>
 		<br>
@@ -232,7 +240,7 @@ $day = date('l', $extra);
 	</div>
 
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<div style="width: 100%; text-align: center;">
+	<div class='dontprint' style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button>
 	</div>
 	
