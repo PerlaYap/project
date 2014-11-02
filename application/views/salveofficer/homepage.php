@@ -89,7 +89,7 @@ ON B.ControlNo=A.ControlNo)Dos ON Uno.MemberControl=Dos.ControlNo
 LEFT JOIN
 MembersName mn ON mn.ControlNo=Uno.MemberControl
 LEFT JOIN CaritasCenters cc ON cc.ControlNo=Uno.CenterControl
-WHERE (Status='Past Due' OR Status='Dormant Saver')
+WHERE (Status='Past Due' OR Status='dormant saver')
 ORDER BY LastName");
 
 /*FOR UPDATES*/

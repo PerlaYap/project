@@ -313,7 +313,8 @@ CROSS JOIN
 CROSS JOIN
 (SELECT Count(ControlNo) AS TotalTranse FROM transaction trans 
   RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>32000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
-  ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$control_no') Delta5");
+  ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$control_no') Delta5
+WHERE (la.Status!='Rejected' AND la.Status!='Pending')");
 
 foreach ($pastDuePerformance->result() as $row) {
 	$pdmemberControl = $row->MemberControl;

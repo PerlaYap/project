@@ -170,7 +170,7 @@ WHERE Date<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY Date)A
 ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
 LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
 ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
-ON Alpha.MembersControl=Beta.Members_ControlNo WHERE Alpha.Status IS NOT NULL AND (Alpha.Status='Dormant Saver')
+ON Alpha.MembersControl=Beta.Members_ControlNo WHERE Alpha.Status IS NOT NULL AND (Alpha.Status='dormant saver')
 GROUP BY BranchControl) Echo
 ON Echo.BranchControl=cb.ControlNo
 LEFT JOIN

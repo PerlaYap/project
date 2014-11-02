@@ -59,8 +59,8 @@ class Login_model extends CI_Model{
 		 						}
 
 		 						if ($d>=6){
-		 							if($data->MembershipStatus!="Dormant Saver")
-		 								$this->addMembershipStatus($data->MemberControl,"Dormant Saver");
+		 							if($data->MembershipStatus!="dormant saver")
+		 								$this->addMembershipStatus($data->MemberControl,"dormant saver");
 		 						}else {
 		 							if($data->MembershipStatus!="Active Saver")
 		 								$this->addMembershipStatus($data->MemberControl,"Active Saver");
