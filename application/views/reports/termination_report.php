@@ -18,7 +18,7 @@
 		$dateentered = $d->DateEntered;
 		$tot_capital = $d->totcapitalshare;
 		$savings = $d->savings;
-		$Recievable = $d->recievable_amount;
+		$Recievable = $tot_capital + $savings;
 		$status = $d->status;
 		$term_date = $d->StatusUpdateDate;
 	}
@@ -59,6 +59,8 @@ Recieved by:    <?php echo $name ?>                      Date:
 
 <div class='dontprint' style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button> 
+
 	</div>
+
 
 

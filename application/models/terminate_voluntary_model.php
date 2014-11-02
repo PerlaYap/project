@@ -159,7 +159,7 @@ class terminate_voluntary_model extends CI_Model{
 								    GROUP BY ControlNo) B ON A.MemberControl = B.ControlNo
 								where Status = 'Terminated Voluntarily' or Status = 'Terminated'
 								    group by MemberControl) st ON st.MemberControl = m.ControlNo
-								where m.controlno = 5;");
+								where m.controlno = $control_no;");
 
 		return $result->result(); }
 

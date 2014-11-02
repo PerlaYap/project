@@ -180,7 +180,7 @@ class Salveofficer extends CI_Controller {
 	public function terminatenow(){
 		$this->load->model('terminate_voluntary_model');
 		$controlno = $this->terminate_voluntary_model->getcontrolno();
-	/*	$this->terminate_voluntary_model->setterminatestatus($controlno);
+		$this->terminate_voluntary_model->setterminatestatus($controlno);
 		$profile = $this->terminate_voluntary_model->getprofileinfo($controlno);
 		foreach ($profile as $p) {
 			$fname = $p->FirstName;
@@ -193,7 +193,7 @@ class Salveofficer extends CI_Controller {
         $this->load->model("audittrail_model");
         $this->audittrail_model->setlog($activity);
 
-        	echo "<script type='text/javascript'>alert('Successfully withdraw the account of ".$name."')</script>";*/
+        	echo "<script type='text/javascript'>alert('Successfully withdraw the account of ".$name."')</script>";
         	$this->termination_report($controlno);
         	/*$this->directory();*/
 
@@ -343,7 +343,10 @@ class Salveofficer extends CI_Controller {
         $this->load->model("audittrail_model");
         $this->audittrail_model->setlog($activity);
 
-			$this->load->view('general/successtermination');
+        	echo "<script type='text/javascript'>alert('Successfully withdraw the account of ".$name."')</script>";
+        	$this->termination_report($controlno);
+
+			/*$this->load->view('general/successtermination');*/
 			/*echo "<script type='text/javascript'>alert('Loan Fully Paid. Account terminated successfully.')</script>";*/
 			/*$this->directory();*/
 		}
