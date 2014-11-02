@@ -128,7 +128,8 @@ function putinput(size){
 			<input type ='hidden' name='sopersonnel' value='<?php echo $SOpersonnel; ?>'/>
 			<input  id="name" value="<?php echo date("Y-m-j") ; ?>" type="hidden" name="date" />
 			<input type='hidden' name='branchcontrolno' value='<?php echo $branchno ?>' />
-			<input type='hidden' name='centercontrolno' value='<?php echo $mem->CaritasCenters_ControlNo ?>' />
+	<!-- 		<input type='hidden' name='centercontrolno' value='<?php echo $mem->CaritasCenters_ControlNo ?>' /> -->
+			<!-- <input type='hidden' name='centerno' value='<?php echo $center ?>'> -->
 
 	<!-------------------------------------- GENERAL HIDDEN VALUES -------------------------------------------------->	
 
@@ -182,7 +183,9 @@ function putinput(size){
 	<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->
 
 			<input type='hidden' name='loanappcontrolno[]' value='<?php echo $mem->LoanApplication_ControlNo ?>' />
-			<input type='hidden' name='memberid[]' value='<?php echo $mem->Members_ControlNo; ?>'> 
+			<input type='hidden' name='memberid[]' value='<?php echo $mem->Members_ControlNo; ?>'>
+			<input type='hidden' name='centercontrolno' value='<?php echo $mem->CaritasCenters_ControlNo ?>' /> 
+
 
 	<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->		
 			

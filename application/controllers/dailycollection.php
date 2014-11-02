@@ -14,7 +14,11 @@ class Dailycollection extends CI_Controller{
     $this->load->model('recordcollection_model');
    $result = $this->recordcollection_model->getcollection();
 
-   if ($result) {
+   if ($result['result']==true ) {
+
+    $activity = "Recorded the loan and savings collection of center number ".$result['center'] ." .";
+    $this->load->model("audittrail_model");
+    $this->audittrail_model->setlog($activity);
     
     $this->homepages();
    }
@@ -23,16 +27,36 @@ class Dailycollection extends CI_Controller{
     $this->load->model('recordcollection_model');
     $result = $this->recordcollection_model->getindividualcollection();
 
-    if ($result) {
-      $this->homepages();
+    if ($result['result']==true) {
+
+        
+
+        if (!empty($result['saving']) && !empty($result['withdrawal'])) {
+          //both not empty added both
+          $activity = "Added ".$result['saving'] ." savings and withdrawn ".$result['withdrawal'] ." from ".$result['membername'] ." account.";
+        }elseif (!empty($result['saving']) && empty($result['withdrawal']) ) {
+          //savings only
+          $activity = "Added ".$result['saving'] ." to ".$result['membername'] ." savings account.";
+        }elseif (empty($result['saving']) && !empty($result['withdrawal'])) {
+          //withdrawal only
+          $activity = "Withdrawn ".$result['withdrawal'] ." from ".$result['membername'] ." savings account.";
+        }
+
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
+
+      echo "<script type='text/javascript'>alert('Successfully added transaction!')</script>";
+    }else{
+      echo "<script type='text/javascript'>alert('Failed to add transaction!')</script>";
     }
+    $this->homepages();
   }
 
   public function individualloanpay(){
     $this->load->model('recordcollection_model');
     $result = $this->recordcollection_model->getindividualloanpayment();
     if ($result==true) {
-       echo "<script type='text/javascript'>alert('Successfully Added transaction!')</script>";
+       echo "<script type='text/javascript'>alert('Successfully added collection!')</script>";
        $this->homepages();
     }else{
       echo "<script type='text/javascript'>alert('Transaction Failed!')</script>";

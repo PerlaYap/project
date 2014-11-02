@@ -34,7 +34,7 @@ $getCoordinator = $this->db->query("SELECT CONCAT(FirstName,' ', MiddleName, ' '
 
  					<label> 
  					<span>Control Number :</span></label>
- 					<input  type="text" name="control" value="<?php echo $control_no; ?>"/>
+ 					<input  type="text" readonly name="control" value="<?php echo $control_no; ?>"/>
 
 	  				 <label>
 				        <span>Center No :</span></label>
@@ -43,23 +43,23 @@ $getCoordinator = $this->db->query("SELECT CONCAT(FirstName,' ', MiddleName, ' '
 
 				          	?>
 	
-				        <input id="name" type="text" name="number" value="<?php echo $ctr->CenterNo; ?>" style="width: 180px;" />
+				        <input id="name" required type="text" name="number" value="<?php echo $ctr->CenterNo; ?>" style="width: 180px;" />
 
 				    
  					 <label>
 				        <span>Contact Number :</span> </label>
-				        <input id="contact" type="text" name="contact"  value="<?php echo $ctr->ContactNo; ?>" />
+				        <input id="contact" required type="text" name="contact"  value="<?php echo $ctr->ContactNo; ?>" />
 				    
 	  
 	   				 <label>
 	    			 <span>Address :</span> </label>
-				        <input id="address" type="text" name="address"  value="<?php echo $ctr->CenterAddress; ?>" />
+				        <input id="address" required type="text" name="address"  value="<?php echo $ctr->CenterAddress; ?>" />
 
 
 				        <label>
 						<span>Payment Day: </span></label>
 
-						<select name="day" style="width:197px;">
+						<select name="day" required style="width:197px;">
 							<?php if ($ctr->DayoftheWeek =='Monday'){ ?>
 							<option value="Monday" selected="selected"> Monday </option>
 										<option value="Tuesday">Tuesday</option>	
@@ -105,7 +105,7 @@ $getCoordinator = $this->db->query("SELECT CONCAT(FirstName,' ', MiddleName, ' '
 						<label>
 						<span>Coordinator: </span></label>
 
-						<select name="coordinator" style="width:197px;">
+						<select name="coordinator" required style="width:197px;">
 							
 			<?php if (!empty($preselected)){  ?>
 

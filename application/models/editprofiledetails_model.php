@@ -13,7 +13,14 @@ class Editprofiledetails_model extends CI_Model{
 	public function setdetails(){
 
 		if(isset($_POST['save'])){
-   
+   			
+   			/*get name*/
+   			$fname = $this->security->xss_clean($this->input->post('fname'));
+   			$mname = $this->security->xss_clean($this->input->post('mname'));
+   			$lname = $this->security->xss_clean($this->input->post('lname'));
+   			$membername = $fname." ".$mname." ".$lname;
+
+
 			/*getting inputs from user*/
 			$controlno = $this->security->xss_clean($this->input->post('controlno'));
 			$homeaddress = $this->security->xss_clean($this->input->post('haddress'));
@@ -80,15 +87,19 @@ class Editprofiledetails_model extends CI_Model{
 
 			 	$size = count($org);
 
-			for ($i=0; $i <$size ; $i++) { 
+			 	if (!empty($org) && !empty($pos) ) {
+			 		
+			 		for ($i=0; $i <$size ; $i++) { 
 
-				if($org[$i]=="" && $pos[$i]==""){
-				// if the org is empty, will delete it from the db
-					$this->deleteorganization($controlno, $orgorig[$i]);
-				}else{
-					$this->updateorganization($controlno, $org[$i], $orgorig[$i], $pos[$i]);	
-				}
-			}
+						if($org[$i]=="" && $pos[$i]==""){
+						// if the org is empty, will delete it from the db
+							$this->deleteorganization($controlno, $orgorig[$i]);
+						}else{
+							$this->updateorganization($controlno, $org[$i], $orgorig[$i], $pos[$i]);	
+						}
+					}
+			 	}
+			
 
 			 if (!empty($organization) && !empty($position)) {
 
@@ -108,8 +119,9 @@ class Editprofiledetails_model extends CI_Model{
 	        	
 	        //	$this->updatememberid($memberid, $controlno);
 	        }
-
-			return true;
+	        $result['result'] = true;
+	        $result['name'] = $membername;
+			return $result;
 
 
        }elseif (isset($_POST['cancel'])) {

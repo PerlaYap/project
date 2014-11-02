@@ -22,7 +22,7 @@ $coordinator = $this->db->query("SELECT CONCAT(FirstName,' ', MiddleName, ' ', L
 				    <label>
 				        <span>Center Number: </span> </label>
 
-				        <input type="text" name="centerno" style="width:562px;" >
+				        <input type="text" name="centerno" style="width:562px;" readonly value='<?php echo rand(1,100) ?>' >
 
 				  
 				    

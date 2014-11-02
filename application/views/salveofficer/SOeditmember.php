@@ -102,15 +102,15 @@ foreach ($getbranchandcenter->result() as $bc) {
 				    <label>
 				    	
 				        <span>Name :</span></label>
-				        <input id="name" disabled type="text" name="fname" value="<?php echo $lastname; ?>" style="width: 180px;" />
-				        <input id="name" disabled type="text" name="mname" value="<?php echo $FirstName; ?>" style="width: 170px;"  />
-				        <input id="name" disabled type="text" name="lname" value="<?php echo $middlename; ?>" style="width: 175px;" />
+				        <input id="name" readonly="true" type="text" name="fname" value="<?php echo $lastname; ?>" style="width: 180px;" />
+				        <input id="name" readonly="true" type="text" name="mname" value="<?php echo $FirstName; ?>" style="width: 170px;"  />
+				        <input id="name" readonly="true" type="text" name="lname" value="<?php echo $middlename; ?>" style="width: 175px;" />
 				    <label>
 				    	  <!-- if member has member id already, view it and disable it if wala pa, add memberid -->
 
 				        <!-- <span>Member's ID :</span></label> -->
 				        <?php //if (!empty($membersid)) {?>
-				        <input id="name" disabled  type="hidden" value="<?php echo $membersid ?>" name=""  style="width: 562px;" />	
+				        <input id="name" readonly  type="hidden" value="<?php echo $membersid ?>" name=""  style="width: 562px;" />	
 				        <?php //} else{?>
 				        
 				   

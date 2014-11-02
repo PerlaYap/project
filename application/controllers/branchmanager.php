@@ -61,7 +61,12 @@ class Branchmanager extends CI_Controller{
         $this->load->model('editprofiledetails_model');
        $result = $this->editprofiledetails_model->setdetails();
 
-       if ($result) {
+       if ($result['result']== true) {
+
+       			$activity = "Updated the profile of ".$result['name'] ." .";
+		        $this->load->model("audittrail_model");
+		        $this->audittrail_model->setlog($activity);
+
            echo "<script type='text/javascript'>alert('Successfully Updated Profile!')</script>";
        }else{
             echo "<script type='text/javascript'>alert('Failed to update profile!')</script>";
@@ -94,7 +99,11 @@ class Branchmanager extends CI_Controller{
 
 			$result = $this->addcenter_model->get_centerdetails();
 
-			if($result == 'True'){
+			if($result['result'] == 'True'){
+
+				$activity = "Added new center (Center No: ".$result['CenterNo'] .") .";
+		        $this->load->model("audittrail_model");
+		        $this->audittrail_model->setlog($activity);
 		
 			$message = "Center has successfully been added.";
 
@@ -123,8 +132,12 @@ class Branchmanager extends CI_Controller{
 
 			$result = $this->editcenterdetails_model->setdetails();
 
-			if($result == 'True'){
-		
+			if($result['result'] == true){
+			
+			$activity = "Updated center ".$result['centerno'].".";
+	        $this->load->model("audittrail_model");
+	        $this->audittrail_model->setlog($activity);
+
 			$message = "Center has successfully been updated.";
 
 			echo "<script type='text/javascript'>alert('$message');</script>";

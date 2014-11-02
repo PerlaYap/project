@@ -46,7 +46,9 @@ function removeOptions(selectbox)
 }
 
 $(function() {
-$( "#datepicker" ).datepicker();
+$( "#datepicker" ).datepicker({
+	maxDate: "+0d",
+});
 $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 });
 </script>
@@ -102,7 +104,7 @@ $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
 					<label>
 						<span>Date: </span></label>
-					        <input type="text" id="datepicker" name="dcday">
+					        <input type="text" id="datepicker" name="dcday" placeholder="YYYY-MM-DD">
 					        	<label>
 						<span></span>
 					     <input type="submit" class="button" value="Send" />

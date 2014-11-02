@@ -45,8 +45,11 @@ class Addcenter_model extends CI_Model{
 
 //	$this->addCaritasCenters_has_Coordinator($control_no, $coordinator);  
 
+	$result['result'] = true;
+	$result['CenterNo'] = $centerno;
 
-return true;
+	return $result;
+	
     }
 	 //adding functions
 

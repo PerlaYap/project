@@ -12,6 +12,8 @@ class Recordcollection_model extends CI_Model{
 	public function getcollection(){
 
 		/*echo "welcome to get collection"."<br>";*/
+		
+
 		$sopersonnel = $this->security->xss_clean($this->input->post('sopersonnel'));
 		$memberid = $this->security->xss_clean($this->input->post('memberid'));
 		$branchno = $this->security->xss_clean($this->input->post('branchcontrolno'));
@@ -79,7 +81,10 @@ class Recordcollection_model extends CI_Model{
 
 			}
 		}
-		return true;
+
+		$data['result']=true;
+		$data['center']= $centerno;
+		return $data;
 	}
 	public function getindividualcollection(){
 		$memberno2 = $this->security->xss_clean($this->input->post('memberid'));
@@ -99,14 +104,23 @@ class Recordcollection_model extends CI_Model{
 				if ($withdrawalamount > 0) {
 					$this->insertwithdrawaltransaction($loanappcontrolno2, $withdrawalamount, $datesubmitted, $memberno2 , $sopersonnel);
 				}
-
-				$this->insertsavingstransaction($loanappcontrolno2, $savingamount, $datesubmitted, $memberno2 , $sopersonnel);
+				if ($savingamount > 0) {
+					$this->insertsavingstransaction($loanappcontrolno2, $savingamount, $datesubmitted, $memberno2 , $sopersonnel);	
+				}
+				
 				
 				$this->updatemembertransaction($loanappcontrolno2, $memberno2, $loanpayment2, $savingamount, $amounttopay2,$withdrawalamount );
 
+			$data['result'] = true;
+			$data['saving'] = $savingamount;
+			$data['withdrawal'] = $withdrawalamount;
+			$data['membername'] = $this->getmembername($memberno2);
 			
+		}else{
+			 $data['result'] = false;
 		}
-		return true;
+		return $data;
+		
 	}
 	public function getindividualloanpayment(){
 		$sopersonnel = $this->security->xss_clean($this->input->post('sopersonnel'));
@@ -136,13 +150,7 @@ class Recordcollection_model extends CI_Model{
 				return true;
 		}else{
 			return false;
-		}
-
-
-
-
-
-		
+		}	
 	}
 	public function updateloadpayment($loanappcontrol, $memberid, $loanpayment,$amounttopay){
 
@@ -249,6 +257,20 @@ class Recordcollection_model extends CI_Model{
 
 		}
 	}
+	public function getmembername($memberControl){
+
+	    $query = $this->db->query("SELECT * FROM `membersname` where ControlNo =$memberControl");
+
+	        if ($query->num_rows() > 0) {
+	            $row = $query->row();
+	            $fname = $row->FirstName;
+	            $mname = $row->MiddleName;
+	            $lname = $row->LastName;
+
+	            $name = $fname." ".$mname." ".$lname;
+	            return $name;
+	        }
+		}
 
 }
 ?>

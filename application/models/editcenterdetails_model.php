@@ -55,7 +55,12 @@ if (!empty($preselected)){
 
 	$this->addCaritasCenters_has_Coordinator($control_no, $coordinator);  
 }
-			return true;
+			
+			$result['result'] = true;
+			$result['centerno'] = $number;
+
+
+			return $result;
 
 
      }
