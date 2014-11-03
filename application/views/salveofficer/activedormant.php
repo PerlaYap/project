@@ -1,3 +1,6 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/tables.css'); ?>">
+
+
 <?php 
 $branchno = $this->session->userdata('branchno');
 $userrank = $this->session->userdata('rank');
@@ -96,6 +99,9 @@ $dormantaccount = $dormants->result();
       <!--IF salve officer -->
       <?php if($userrank=='salveofficer') :?>
       <div id="chart_div" style="width: 900px; height: 500px;" ></div>
+
+
+      <input type="button"  class="table"/>
     <?php endif;?>
 
     <!-- If BM ---->

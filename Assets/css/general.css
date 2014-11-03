@@ -1235,3 +1235,10 @@ iframe.frame{
 	border-color: 0;
 }
 
+
+
+ .table{
+    background-image: url('../images/table.jpg');
+    border: 0;
+    background-color: transparent;
+}

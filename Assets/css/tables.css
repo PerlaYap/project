@@ -1,0 +1,11 @@
+ .table{
+ 	position:absolute;
+ 	margin-top: -280px;
+ 	margin-left: 820px;
+ 	width: 30px;
+ 	height: 35px;
+    background-image: url('../images/table.png');
+    border: 0;
+    background-color: transparent;
+
+}
