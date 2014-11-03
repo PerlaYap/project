@@ -93,9 +93,11 @@ $getOfficer = $this->db->query("SELECT p.`ControlNo`, `FirstName`, `MiddleName`,
 				        <style type="text/css">
 
 				        	.disableUser, .enableUser{
-				        		width: 860px;
-				        		height: 40px;
-				        		margin-left: auto;
+				        		width: 100px;
+				        		height:35px;
+				        		position: absolute;
+				        		margin-top: -280px;
+				        		margin-left: 500px;
 				        		margin-right: auto;
 				        		background: transparent;
 				        		border: 2px solid #e94747;

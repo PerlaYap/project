@@ -62,7 +62,7 @@ $dormantaccount = $dormants->result();
 
         //if salve officer
         <?php if($userrank=='salveofficer') :?>
-        'width':940,
+        'width':930,
         'height':400,
         <?php endif;?>
 
