@@ -4,6 +4,10 @@
 
  <?php  
  $branch = $this->session->userdata('branchno');
+ $user = $this->session->userdata('firstname');
+ 
+ date_default_timezone_set('Asia/Manila');
+    $datetoday = date('F d, Y');
 
  if($type==1){
  $lineBranch=$this->db->query("SELECT  Month(DateApplied) AS Month, Count(ControlNo) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
@@ -165,9 +169,9 @@ foreach($branchname->result() as $row){
      <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
-        <td class="sig">&nbsp</td>
+        <td class="sig">$user</td>
         <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2">&nbsp</td>
+        <td class="sig2">$datetoday</td>
       </tr>
     </table>
         
