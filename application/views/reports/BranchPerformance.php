@@ -65,7 +65,7 @@
 	
 	<h3>
 		CARITAS SALVE CREDIT COOPERATIVE <br> 
-		NUMBER OF PAST DUE PER BRANCH <br> 
+		COLLECTION PERFORMANCE OF BRANCHES <br> 
 		FOR THE MONTH OF <b> <?php echo $currentmonth." " .$currentyear ?> </b>
 
 	</h3>
