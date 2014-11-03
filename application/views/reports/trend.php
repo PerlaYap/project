@@ -60,6 +60,11 @@ foreach($branchname->result() as $row){
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>"> 
 
+    <style type="text/css" media="print">
+    .dontprint{
+      display: none;
+    }
+
 
 <html>
   <head>
@@ -168,7 +173,7 @@ foreach($branchname->result() as $row){
         
       <br><br>
 
-      <div style="width: 100%; text-align: center;">
+      <div class='dontprint' style="width: 100%; text-align: center;">
         <button onclick="window.print()">Print</button>
       </div>
 
