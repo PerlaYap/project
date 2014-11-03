@@ -1,14 +1,3 @@
-<style type="text/css" media="print">
-  .dontprint{
-    display: none;
-  }
-
-  @page { 
-    size: Landscape;
-    margin: 1 in;
-  }
-</style>
-
 <?php 
 $n = $this->session->userdata('branchno');
 $user = $this->session->userdata('firstname');
@@ -126,6 +115,6 @@ date_default_timezone_set('Asia/Manila');
     </table>
     <br><br>
 	<div style="width: 100%; text-align: center;">
-		<button onclick="window.print()" class="dontprint">Print</button> 
+		<button onclick="window.print()">Print</button> 
 	</div>
 </body>

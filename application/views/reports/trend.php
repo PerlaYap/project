@@ -1,16 +1,3 @@
-<style type="text/css" media="print">
-  .dontprint{
-    display: none;
-  }
-
-  @page { 
-    size: portrait;
-    margin: 0.5in;
-  }
-</style>
-
-
-
 <title>Yearly Trend</title>
 
 
@@ -152,78 +139,13 @@ foreach($branchname->result() as $row){
     <h3>
       CARITAS SALVE CREDIT COOPERATIVE <br> 
       <?php if ($type==1) echo $years; 
-      else if($type==2) echo $years." and ".$years1; ?> Yearly Trend <br> 
+      else if($type==2) echo $years." and ".$years1; ?>Yearly Trend <br> 
       <?php echo $branchName ?> Branch
     </h3>
 
     <br>
       <div id="chart_div" style="margin-right: auto; margin-left: 165px;" ></div>
       <BR>
-
-
-      << for yearly trend comparison >>
-
-       <table border="1" class="reportTable" style="margin-left: 340px;">
-          <tr>
-              <td class="thReport" colspan="2"> 2010</td>
-          </tr>
-          <tr>
-              <td class="thReport"> MONTH</td>
-              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
-          </tr>
-
-          <tr>
-              <td class="tdReport"> January</td>
-              <td class="tdReport"> 100</td>
-          </tr>
-          
-      </table>
-
-      <table border="1" class="reportTable" style="margin-left: 650px; margin-top:-97px;">
-          <tr>
-              <td class="thReport" colspan="2"> 2013</td>
-          </tr>
-          <tr>
-              <td class="thReport"> MONTH</td>
-              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
-          </tr>
-
-          <tr>
-              <td class="tdReport"> January</td>
-              <td class="tdReport"> 100</td>
-          </tr>
-          
-      </table>
-
-            << for yearly trend >>
-
-      <table border="1" class="reportTable">
-        
-          <tr>
-              <td class="thReport"> MONTH</td>
-              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
-          </tr>
-
-          <tr>
-              <td class="tdReport"> January</td>
-              <td class="tdReport"> 100</td>
-          </tr>
-
-      </table>
-
-
-    <br>
-
-
-
-
-
-
-
-
-
-
-
 
          <br>
     <table class="signature"  style="margin-left:auto; margin-right:auto;">
@@ -247,7 +169,7 @@ foreach($branchname->result() as $row){
       <br><br>
 
       <div style="width: 100%; text-align: center;">
-        <button onclick="window.print()" class="dontprint">Print</button>
+        <button onclick="window.print()">Print</button>
       </div>
 
   </body>
