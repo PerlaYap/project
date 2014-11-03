@@ -30,8 +30,8 @@
                 $len = count($pastduesbranch);
           foreach ($pastduesbranch as $pdb) { 
             $bname = $pdb->BranchName;
-            $num = $pdb->pdnum;
-            $loan = $pdb->loan;
+            $num = $pdb->PastDue;
+            $loan = $pdb->Loan;
             ?>
             <?php if ($y == $len-1) { ?>
                 ['<?php echo $bname ?>', <?php echo $num; ?>,<?php echo $loan; ?> ]
@@ -72,6 +72,33 @@
 
     <div id="chart_div" style="width: 1300px; height: 500px; margin-left:auto; margin-right: auto;"></div>
 
+    
+    <style type="text/css">
+      .hdrx{
+        padding: 5px 15px 5px 15px;
+        font-weight: bold;
+        font-size: 15px;s
+      }
+    </style>
+
+    <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
+      <tr>
+          <td class='hdrx'>CENTER</td>
+          <td class='hdrx'>NO. OF On-Time Payment</td>
+          <td class='hdrx'>NO. OF Past Due</td>
+      </tr>
+      <?php
+      foreach ($pastduesbranch as $data){ ?>
+      <tr>
+          <td class='hdrtxt'><?php echo $data->BranchName; ?></td>
+          <td class='hdrtxt'><?php echo $data->Loan; ?></td>
+          <td class='hdrtxt'><?php echo $data->PastDue; ?></td>
+      </tr>
+      <?php } ?>
+
+    </table>
+
+    <br><br>
     <!-- <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>

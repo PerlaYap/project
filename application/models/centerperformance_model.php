@@ -29,7 +29,7 @@ FROM (SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlN
 (SELECT CaritasCenters_ControlNo 
 FROM caritasbranch_has_caritascenters GROUP BY CaritasCenters_ControlNo ORDER BY CaritasCenters_ControlNo ASC)A
 LEFT JOIN (SELECT * FROM 
-(SELECT * FROM CaritasBranch_has_CaritasCenters WHERE Date<=LAST_DAY(DATE_ADD('$year-$month-10', INTERVAL 0 MONTH))
+(SELECT * FROM CaritasBranch_has_CaritasCenters WHERE Date<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH))
 ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
 ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo
 LEFT JOIN CaritasCenters cc ON cc.ControlNo=A.CaritasCenters_ControlNo
