@@ -146,7 +146,7 @@ $getOfficer = $this->db->query("SELECT p.`ControlNo`, `FirstName`, `MiddleName`,
 							<?php			}else{ ?> 
 											
 											<!-- <input type='hidden' name='active' value='1'> -->
-										<input type='submit' name='subs' value='&#10004' class='enableUser'/>
+										<input type='submit' name='subs' value=' &#10004     |enable' class='enableUser'/>
 									
 								<?php		} ?>
 						</div> 		 
