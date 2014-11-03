@@ -160,7 +160,61 @@ foreach($branchname->result() as $row){
     <br>
       <div id="chart_div" style="margin-right: auto; margin-left: 165px;" ></div>
       <BR>
-           <br>
+       << for yearly trend comparison >>
+
+       <table border="1" class="reportTable" style="margin-left: 340px;">
+          <tr>
+              <td class="thReport" colspan="2"> 2010</td>
+          </tr>
+          <tr>
+              <td class="thReport"> MONTH</td>
+              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
+          </tr>
+
+          <tr>
+              <td class="tdReport"> January</td>
+              <td class="tdReport"> 100</td>
+          </tr>
+          
+      </table>
+
+      <table border="1" class="reportTable" style="margin-left: 650px; margin-top:-97px;">
+          <tr>
+              <td class="thReport" colspan="2"> 2013</td>
+          </tr>
+          <tr>
+              <td class="thReport"> MONTH</td>
+              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
+          </tr>
+
+          <tr>
+              <td class="tdReport"> January</td>
+              <td class="tdReport"> 100</td>
+          </tr>
+          
+      </table>
+
+            << for yearly trend >>
+
+      <table border="1" class="reportTable">
+        
+          <tr>
+              <td class="thReport"> MONTH</td>
+              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
+          </tr>
+
+          <tr>
+              <td class="tdReport"> January</td>
+              <td class="tdReport"> 100</td>
+          </tr>
+
+      </table>
+
+
+
+
+
+           <br><br><br>
     <table class="signature"  style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Received by:</td>
