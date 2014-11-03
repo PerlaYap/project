@@ -7,7 +7,10 @@
 
 
 
-<?php $householdlist=$this->db->query("SELECT mhm.HouseholdNo, concat(hn.LastName,', ',hn.FirstName,' ', hn.MiddleName) AS Name
+<?php 
+$branchno = $this->session->userdata('branchno');
+
+$householdlist=$this->db->query("SELECT mhm.HouseholdNo, concat(hn.LastName,', ',hn.FirstName,' ', hn.MiddleName) AS Name
 FROM members_has_membershousehold mhm 
 LEFT JOIN householdname hn ON  mhm.HouseholdNo=hn.HouseholdNo
 RIGHT JOIN (SELECT ControlNo FROM members mem WHERE mem.MemberID='$mid')A ON A.ControlNo=mhm.ControlNo"); ?>
@@ -31,15 +34,21 @@ WHERE MemberID='$mid'");
 RIGHT JOIN (SELECT LoanApplication_ControlNo AS ControlNo FROM loanapplication_has_members lhm WHERE Members_ControlNo=(SELECT ControlNo FROM Members WHERE MemberID='$mid')) A ON A.ControlNo=lhl.LoanApplication_ControlNo
 LEFT JOIN loanbusiness lb ON lhl.LoanBusiness_ControlNo=lb.ControlNo GROUP BY BusinessName"); ?>
 
-<?php $membercomaker=$this->db->query("SELECT MemberID, concat(LastName,', ',FirstName,' ', MiddleName) AS Name FROM Members mem RIGHT JOIN
-(SELECT mhms.ControlNo
-FROM members_has_membersmembershipstatus mhms
-INNER JOIN ( SELECT MAX(DateUpdated) as LatestDate, ControlNo
-FROM members_has_membersmembershipstatus GROUP BY ControlNo) A
-ON mhms.ControlNo=A.ControlNo AND mhms.DateUpdated=A.LatestDate
-WHERE Status!='Terminated') B ON mem.ControlNo=B.ControlNo
-LEFT JOIN MembersName mn ON mem.ControlNo=mn.ControlNo
-WHERE Approved='YES' Order by LastName, FirstName"); ?>
+<?php $membercomaker=$this->db->query("SELECT Alpha.ControlNo, CONCAT(LastName,', ',FirstName,' ', MiddleName) AS Name, MemberID FROM (SELECT A.ControlNo, Status FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus ORDER BY ControlNo ASC, DateUpdated DESC)A GROUP BY ControlNo)B
+ON A.ControlNo=B.ControlNo WHERE Status!='Terminated' AND Status!='Terminated Voluntarily')Alpha
+LEFT JOIN
+(SELECT MemberControl, BranchControl FROM (SELECT A.Members_ControlNo AS MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo FROM caritascenters_has_members GROUP BY Members_ControlNo)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
+ON A.Members_ControlNo=B.Members_ControlNo)Alpha
+LEFT JOIN (SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl FROM (SELECT CaritasCenters_ControlNo FROM caritasbranch_has_caritascenters GROUP BY CaritasCenters_ControlNo)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
+ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo)Beta
+ON Alpha.CenterControl=Beta.CenterControl)Beta
+ON Alpha.ControlNo=Beta.MemberControl
+LEFT JOIN membersname mn ON mn.ControlNo=Alpha.ControlNo
+LEFT JOIN Members mem ON mem.ControlNo=Alpha.ControlNo
+WHERE BranchControl='$branchno'"); ?>
 
 <?php $memberinfo=$this->db->query("SELECT cb.ControlNo AS BranchControl, cb.BranchName,cc.ControlNo AS CenterControl, cc.CenterNo, B.FirstName, B.MiddleName, B.LastName, B.ControlNo, B.MemberID FROM caritasbranch_has_caritascenters cbhcc 
 LEFT JOIN caritasbranch cb ON cbhcc.CaritasBranch_ControlNo=cb.ControlNo
