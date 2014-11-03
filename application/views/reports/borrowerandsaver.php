@@ -1,3 +1,14 @@
+<style type="text/css" media="print">
+  .dontprint{
+    display: none;
+  }
+
+  @page { 
+    size: Landscape;
+    margin: 1 in;
+  }
+</style>
+
 <?php 
 $n = $this->session->userdata('branchno');
 $user = $this->session->userdata('firstname');
@@ -20,7 +31,7 @@ date_default_timezone_set('Asia/Manila');
 
 
 <head>
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
@@ -58,14 +69,14 @@ date_default_timezone_set('Asia/Manila');
 
 
 <body>
-	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
-	
-	<h3>
-		CARITAS SALVE CREDIT COOPERATIVE <br> 
+  <a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
+  
+  <h3>
+    CARITAS SALVE CREDIT COOPERATIVE <br> 
     NUMBER OF BORROWERS AND SAVERS <br> 
-		<?php echo $branch ?> BRANCH AS OF <?php echo $currentmonth.",".$currentyear ?></b>
+    <?php echo $branch ?> BRANCH AS OF <?php echo $currentmonth.",".$currentyear ?></b>
 
-	</h3>
+  </h3>
 
     <div id="chart_div" style="width: 1300px; height: 500px; margin-left:160PX;; margin-right: auto;"></div>
 
@@ -114,7 +125,7 @@ date_default_timezone_set('Asia/Manila');
       </tr>
     </table>
     <br><br>
-	<div style="width: 100%; text-align: center;">
-		<button onclick="window.print()">Print</button> 
-	</div>
+  <div style="width: 100%; text-align: center;">
+    <button onclick="window.print()" class="dontprint">Print</button> 
+  </div>
 </body>
