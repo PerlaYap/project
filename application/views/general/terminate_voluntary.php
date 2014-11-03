@@ -226,10 +226,16 @@ $SOpersonnel =$this->session->userdata('personnelno');
 				 		</h1>
 				 		<br><br>
 
+
+				 		<style type="text/css">
+
+				 		</style>
+
+
 				 		<form action='terminatenow' method='post'>
 				 			<input type='hidden' name='controlno' value='<?php echo $memcontrol ?>'>
-				 			<input type='submit' value ='Withdraw Profile' name='withdraw'>
-				 			<input type='button' value='Cancel' onclick='cancelfunction()'>
+				 			<input type='submit' value ='Withdraw Profile' name='withdraw' class="button" style="margin-left: 250px;">
+				 			<input type='button' value='Cancel' onclick='cancelfunction()' class="button1" style="margin-left:10px; margin-top: 0; width: 150px;">
 				 		</form>
 
 					<?php } ?>

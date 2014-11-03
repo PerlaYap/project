@@ -1305,6 +1305,24 @@ label.pwlabel{
 }
 
 
+.button1 {
+	    background: #b0b0b0;
+	    border: none;
+	    padding: 10px 25px 10px 25px;
+	    color: #FFF;
+	    cursor: pointer;
+	    position: absolute;
+	    margin-left: 260px;
+	    margin-top: -53px;
+	}
+	 .button1:hover {
+	    background: #815d5d;
+	    color: #e0dddd;
+	}
+
+
+
+
 
 
 
