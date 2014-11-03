@@ -211,7 +211,7 @@ public function edituser(){
         $this->audittrail_model->setlog($activity);
 
 		echo "<script type='text/javascript'>alert('Successfully Updated the Position!')</script>";
-	}elseif ($submit == "Disable") {
+	}elseif ($submit == "X") {
 		$result = $this->edituserdetails_model->disableuser();
 
 		$activity = "Disabled the account of ".$result['name'].".";
@@ -219,7 +219,7 @@ public function edituser(){
         $this->audittrail_model->setlog($activity);
 
 		echo "<script type='text/javascript'>alert('Successfully Disabled Profile!')</script>";
-	}elseif ($submit == "Enable") {
+	}elseif (strpos($submit, 'enable')) {
 		$result = $this->edituserdetails_model->enableuser();
 
 		$activity = "Enabled the account of ".$result['name'].".";

@@ -54,7 +54,7 @@ $dormantaccount = $dormants->result();
               ]);
 
     var options = {
-      title: 'ACTIVE ACCOUNTS',
+      title: 'Comparison of Accounts in the Branch ',
       hAxis: {title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true}},
       vAxis: {title: 'NO. OF ACCOUNTS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
       backgroundColor: 'transparent',
@@ -62,7 +62,7 @@ $dormantaccount = $dormants->result();
 
         //if salve officer
         <?php if($userrank=='salveofficer') :?>
-        'width':940,
+        'width':930,
         'height':400,
         <?php endif;?>
 

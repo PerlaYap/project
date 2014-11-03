@@ -48,9 +48,9 @@ $getOfficer = $this->db->query("SELECT p.`ControlNo`, `FirstName`, `MiddleName`,
 				    <label>
 				        <span>Name :</span></label>
 				        
-				        <input id="name" readonly type="text" name="fname" value="<?php echo $fname ?>" style="width: 170px;"  />
-				        <input id="name" readonly type="text" name="mname" value="<?php echo $mname ?>" style="width: 175px;" />
-				    	<input id="name" readonly type="text" name="lname" value="<?php echo $lname ?>" style="width: 180px;" />
+				        <input id="name" readonly type="text" name="fname" value="<?php echo $fname ?>" style="width: 140px;"  />
+				        <input id="name" readonly type="text" name="mname" value="<?php echo $mname ?>" style="width: 160px;" />
+				    	<input id="name" readonly type="text" name="lname" value="<?php echo $lname ?>" style="width: 170px;" />
 				   
 
 				    <label>
@@ -93,9 +93,11 @@ $getOfficer = $this->db->query("SELECT p.`ControlNo`, `FirstName`, `MiddleName`,
 				        <style type="text/css">
 
 				        	.disableUser, .enableUser{
-				        		width: 860px;
-				        		height: 40px;
-				        		margin-left: auto;
+				        		width: 35px;
+				        		height: 35px;
+				        		position: absolute;
+				        		margin-top: -281px;
+				        		margin-left: 700px;
 				        		margin-right: auto;
 				        		background: transparent;
 				        		border: 2px solid #e94747;
@@ -139,12 +141,12 @@ $getOfficer = $this->db->query("SELECT p.`ControlNo`, `FirstName`, `MiddleName`,
 	
 											<!-- <input type='hidden' name='active' value='0'> -->
 
-										<input type='submit' name='subs' value='DISABLE USER' class='disableUser'/>
+										<input type='submit' name='subs' value='X' class='disableUser'/>
 										
 							<?php			}else{ ?> 
 											
 											<!-- <input type='hidden' name='active' value='1'> -->
-										<input type='submit' name='subs' value='ENABLE USER' class='enableUser'/>
+										<input type='submit' name='subs' value=' &#10004     |enable' class='enableUser'/>
 									
 								<?php		} ?>
 						</div> 		 
