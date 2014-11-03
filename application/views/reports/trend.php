@@ -17,7 +17,11 @@
 
 
  <?php  
- $branch = $this->session->userdata('branchno');
+  $branch = $this->session->userdata('branchno');
+  $user = strtoupper($this->session->userdata('firstname'));
+  $datetoday = date('F d, Y');
+
+  $month = array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec");
 
  if($type==1){
  $lineBranch=$this->db->query("SELECT  Month(DateApplied) AS Month, Count(ControlNo) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
@@ -83,39 +87,18 @@ foreach($branchname->result() as $row){
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
+
           <?php 
-          if($type==1){
-          echo "['Month', '".$years."'],";
-          echo "['Jan',".$arrayline[1]."],";
-          echo "['Feb',".$arrayline[2]."],";
-          echo "['Mar',".$arrayline[3]."],";
-          echo "['Apr',".$arrayline[4]."],";
-          echo "['May',".$arrayline[5]."],";
-          echo "['Jun',".$arrayline[6]."],";
-          echo "['Jul',".$arrayline[7]."],";
-          echo "['Aug',".$arrayline[8]."],";
-          echo "['Sept',".$arrayline[9]."],";
-          echo "['Oct',".$arrayline[10]."],";
-          echo "['Nov',".$arrayline[11]."],";
-          echo "['Dec',".$arrayline[12]."],";}
-
-          else if($type==2){ ?>
-
-
+          if($type==1){?>
+            ['Month', '<?php echo $years ?>'],
+            <?php for($a=1;$a<13;$a++){ 
+              echo "['".$month[$a-1]."',".$arrayline[$a]."],";
+            }
+          } else if($type==2){ ?>
           ['Month', '<?php echo $years ?>', '<?php echo $years1 ?>'],
-          ['Jan',  <?php echo $arrayline[1] ?>, <?php echo $arrayline1[1] ?>],
-          ['Feb',  <?php echo $arrayline[2] ?>, <?php echo $arrayline1[2] ?>],
-          ['Mar',  <?php echo $arrayline[3] ?>, <?php echo $arrayline1[3] ?>],
-          ['Apr',  <?php echo $arrayline[4] ?>, <?php echo $arrayline1[4] ?>],
-          ['May',  <?php echo $arrayline[5] ?>, <?php echo $arrayline1[5] ?>],
-          ['Jun',  <?php echo $arrayline[6] ?>, <?php echo $arrayline1[6] ?>],
-          ['Jul',  <?php echo $arrayline[7] ?>, <?php echo $arrayline1[7] ?>],
-          ['Aug',  <?php echo $arrayline[8] ?>, <?php echo $arrayline1[8] ?>],
-          ['Sept', <?php echo $arrayline[9] ?>, <?php echo $arrayline1[9] ?>],
-          ['Oct',  <?php echo $arrayline[10] ?>, <?php echo $arrayline1[10] ?>],
-          ['Nov',  <?php echo $arrayline[11] ?>, <?php echo $arrayline1[11] ?>],
-          ['Dec',  <?php echo $arrayline[12] ?>, <?php echo $arrayline1[12] ?>],
-         <?php } ?>
+          <?php for($a=1;$a<13;$a++){
+              echo "['".$month[$a-1]."',".$arrayline[$a].",".$arrayline1[$a]."],";
+          }} ?>
         ]);
 
         var options = {
@@ -159,29 +142,76 @@ foreach($branchname->result() as $row){
 
     <br>
       <div id="chart_div" style="margin-right: auto; margin-left: 165px;" ></div>
-      <BR>
-           <br>
-    <table class="signature"  style="margin-left:auto; margin-right:auto;">
-      <tr>
-        <td class="sigBy">Received by:</td>
-        <td class="sig">&nbsp</td>
-        <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2">&nbsp</td>
-      </tr>
-    </table>
-    <br>
-     <table class="signature" style="margin-left:auto; margin-right:auto;">
-      <tr>
-        <td class="sigBy">Prepared by:</td>
-        <td class="sig">$user</td>
-        <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2">$datetoday</td>
-      </tr>
-    </table>
-        
-      <br>
 
-         <br>
+
+    <style type="text/css">
+      .hdrx{
+        padding: 5px 15px 5px 15px;
+        font-weight: bold;
+        font-size: 15px;s
+      }
+    </style>
+    
+    <?php if($type==1){ ?>
+    <!-- Ito Lyka 2 tables Side By side with space -->
+    <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
+      <tr>
+          <td class='hdrx'>Month</td>
+          <td class='hdrx'>NO. OF Loan Applications</td>
+      </tr>
+      <?php
+      for($a=1; $a<13;$a++){?>
+      <tr>
+          <td class='hdrtxt'><?php echo $month[$a-1]; ?></td>
+          <td class='hdrtxt'><?php echo $arrayline[$a]; ?></td>
+      </tr>
+      <?php } ?>
+
+    </table>
+    <?php }else if($type==2){ ?>
+      <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
+      <tr>
+          <td class='hdrx'>Month</td>
+          <td class='hdrx'>NO. OF Loan Applications</td>
+      </tr>
+      <?php
+      for($a=1; $a<13;$a++){?>
+      <tr>
+          <td class='hdrtxt'><?php echo $month[$a-1]; ?></td>
+          <td class='hdrtxt'><?php echo $arrayline[$a]; ?></td>
+      </tr>
+      <?php } ?>
+
+    </table>
+    <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
+      <tr>
+          <td class='hdrx'>Month</td>
+          <td class='hdrx'>NO. OF Loan Applications</td>
+      </tr>
+      <?php
+      for($a=1; $a<13;$a++){?>
+      <tr>
+          <td class='hdrtxt'><?php echo $month[$a-1]; ?></td>
+          <td class='hdrtxt'><?php echo $arrayline1[$a]; ?></td>
+      </tr>
+      <?php } ?>
+
+    </table>
+    <?php } ?>
+
+
+
+
+    <br><br>
+
+      <table class="signature" style="margin-left:auto; margin-right:auto;">
+      <tr>
+        <td class="sigBy">Prepared by:</td>
+        <td class="sig"><?php echo $user; ?></td>
+        <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
+        <td class="sig2"><?php echo $datetoday; ?></td>
+      </tr>
+    </table>
     <table class="signature"  style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Received by:</td>
@@ -191,14 +221,7 @@ foreach($branchname->result() as $row){
       </tr>
     </table>
     <br>
-     <table class="signature" style="margin-left:auto; margin-right:auto;">
-      <tr>
-        <td class="sigBy">Prepared by:</td>
-        <td class="sig">&nbsp</td>
-        <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2">&nbsp</td>
-      </tr>
-    </table>
+     
         
       <br><br>
 
