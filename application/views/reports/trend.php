@@ -1,3 +1,17 @@
+<style type="text/css" media="print">
+  .dontprint{
+    display: none;
+  }
+
+  @page { 
+    size: portrait;
+    margin: 0.5in;
+  }
+</style>
+
+
+
+
 <title>Yearly Trend</title>
 
 
@@ -146,6 +160,26 @@ foreach($branchname->result() as $row){
     <br>
       <div id="chart_div" style="margin-right: auto; margin-left: 165px;" ></div>
       <BR>
+           <br>
+    <table class="signature"  style="margin-left:auto; margin-right:auto;">
+      <tr>
+        <td class="sigBy">Received by:</td>
+        <td class="sig">&nbsp</td>
+        <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
+        <td class="sig2">&nbsp</td>
+      </tr>
+    </table>
+    <br>
+     <table class="signature" style="margin-left:auto; margin-right:auto;">
+      <tr>
+        <td class="sigBy">Prepared by:</td>
+        <td class="sig">$user</td>
+        <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
+        <td class="sig2">$datetoday</td>
+      </tr>
+    </table>
+        
+      <br>
 
          <br>
     <table class="signature"  style="margin-left:auto; margin-right:auto;">
@@ -169,7 +203,7 @@ foreach($branchname->result() as $row){
       <br><br>
 
       <div style="width: 100%; text-align: center;">
-        <button onclick="window.print()">Print</button>
+        <button onclick="window.print()" class="dontprint">Print</button>
       </div>
 
   </body>
