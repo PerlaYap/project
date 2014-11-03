@@ -57,7 +57,7 @@ $dormantaccount = $dormants->result();
               ]);
 
     var options = {
-      title: 'Comparison of Accounts in the Branch ',
+      title: 'Comparison of Accounts for the Year <?php echo $currentyear ?> ',
       hAxis: {title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true}},
       vAxis: {title: 'NO. OF ACCOUNTS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
       backgroundColor: 'transparent',
