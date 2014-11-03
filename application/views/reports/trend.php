@@ -143,67 +143,58 @@ foreach($branchname->result() as $row){
     <br>
       <div id="chart_div" style="margin-right: auto; margin-left: 165px;" ></div>
 
+      <?php if($type==1){ ?>
+      <table border="1" class="reportTable">
+          <tr>
+              <td class="thReport"> MONTH</td>
+              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
+          </tr>
 
-    <style type="text/css">
-      .hdrx{
-        padding: 5px 15px 5px 15px;
-        font-weight: bold;
-        font-size: 15px;s
-      }
-    </style>
-    
-    <?php if($type==1){ ?>
-    <!-- Ito Lyka 2 tables Side By side with space -->
-    <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
-      <tr>
-          <td class='hdrx'>Month</td>
-          <td class='hdrx'>NO. OF Loan Applications</td>
-      </tr>
-      <?php
-      for($a=1; $a<13;$a++){?>
-      <tr>
-          <td class='hdrtxt'><?php echo $month[$a-1]; ?></td>
-          <td class='hdrtxt'><?php echo $arrayline[$a]; ?></td>
-      </tr>
+          <?php for($a=1;$a<13;$a++){ ?>
+          <tr>
+              <td class="tdReport"><?php echo $month[$a-1]; ?></td>
+              <td class="tdReport"><?php echo $arrayline[$a]; ?></td>
+          </tr>
+          <?php } ?>
+      </table>
+      <?php } else if($type==2){ ?>
+
+       <table border="1" class="reportTable" style="margin-left: 340px;">
+          <tr>
+              <td class="thReport" colspan="2"><?php echo $years; ?></td>
+          </tr>
+          <tr>
+              <td class="thReport"> MONTH</td>
+              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
+          </tr>
+
+          <?php for($a=1;$a<13;$a++){ ?>
+          <tr>
+              <td class="tdReport"><?php echo $month[$a-1]; ?></td>
+              <td class="tdReport"><?php echo $arrayline[$a]; ?></td>
+          </tr>
+          <?php } ?>
+      </table>
+
+      <table border="1" class="reportTable" style="margin-left: 650px; margin-top:-97px;">
+          <tr>
+              <td class="thReport" colspan="2"><?php echo $years1; ?></td>
+          </tr>
+          <tr>
+              <td class="thReport"> MONTH</td>
+              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
+          </tr>
+          <?php for($a=1;$a<13;$a++){ ?>
+          <tr>
+              <td class="tdReport"><?php echo $month[$a-1]; ?></td>
+              <td class="tdReport"><?php echo $arrayline1[$a]; ?></td>
+          </tr>
+          <?php } ?>
+          
+      </table>
       <?php } ?>
 
-    </table>
-    <?php }else if($type==2){ ?>
-      <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
-      <tr>
-          <td class='hdrx'>Month</td>
-          <td class='hdrx'>NO. OF Loan Applications</td>
-      </tr>
-      <?php
-      for($a=1; $a<13;$a++){?>
-      <tr>
-          <td class='hdrtxt'><?php echo $month[$a-1]; ?></td>
-          <td class='hdrtxt'><?php echo $arrayline[$a]; ?></td>
-      </tr>
-      <?php } ?>
-
-    </table>
-    <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
-      <tr>
-          <td class='hdrx'>Month</td>
-          <td class='hdrx'>NO. OF Loan Applications</td>
-      </tr>
-      <?php
-      for($a=1; $a<13;$a++){?>
-      <tr>
-          <td class='hdrtxt'><?php echo $month[$a-1]; ?></td>
-          <td class='hdrtxt'><?php echo $arrayline1[$a]; ?></td>
-      </tr>
-      <?php } ?>
-
-    </table>
-    <?php } ?>
-
-
-
-
-    <br><br>
-
+      <br><br><br>
       <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
