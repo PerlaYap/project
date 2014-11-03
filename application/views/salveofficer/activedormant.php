@@ -54,7 +54,7 @@ $dormantaccount = $dormants->result();
               ]);
 
     var options = {
-      title: 'ACTIVE ACCOUNTS',
+      title: 'COMPARISON OF ACCOUNTS IN THE BRANCH',
       hAxis: {title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true}},
       vAxis: {title: 'NO. OF ACCOUNTS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
       backgroundColor: 'transparent',
