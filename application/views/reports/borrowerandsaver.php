@@ -18,12 +18,31 @@ date_default_timezone_set('Asia/Manila');
 
     $currentmonth = strtoupper(date("F"));
     $currentyear = date('Y');
-    $datetoday = date('F d, Y');
+    $datetoday1 = date('F d, Y');
+    $datetoday=date('Y-m-d');
     $branch = strtoupper($this->session->userdata('branch'));
 
-    $membertype = $this->db->query("SELECT CenterNo, y.* from caritascenters cc join (SELECT borrower.CenterControl, numsaver, numborrower from (SELECT c.CaritasCenters_ControlNo as centercontrol, m.ControlNo as member, m.Status, count(m.ControlNo) as numsaver from caritascenters_has_members c join members_has_membersmembershipstatus m on m.ControlNo = c.Members_ControlNo where c.CaritasCenters_ControlNo in (SELECT CaritasCenters_ControlNo from caritasbranch_has_caritascenters where CaritasBranch_ControlNo = $control_no) and m.Status = 'Active Saver' group by centercontrol)saver right join (SELECT c.CaritasCenters_ControlNo as centercontrol, m.ControlNo as member, m.Status, count(m.ControlNo) as numborrower from caritascenters_has_members c join members_has_membersmembershipstatus m on m.ControlNo = c.Members_ControlNo where c.CaritasCenters_ControlNo in (SELECT CaritasCenters_ControlNo from caritasbranch_has_caritascenters where CaritasBranch_ControlNo = $control_no) and m.Status = 'Borrower' group by centercontrol)borrower on saver.centercontrol = borrower.centercontrol)y on y.CenterControl = cc.ControlNo");
-    $mem_type = $membertype->result();
-
+    $memberNo=$this->db->query("SELECT Charlie.CenterControl AS CenterControl, CenterNo, SUM(Status='Borrower') AS Borrower, SUM(Status='Active Saver') AS Saver
+FROM (SELECT MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo AS MemberControl FROM CaritasCenters_has_Members GROUP BY Members_ControlNo ORDER BY Members_ControlNo ASC)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members WHERE DateEntered<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
+ON A.MemberControl=B.Members_ControlNo)Alpha
+LEFT JOIN
+(SELECT A.ControlNo AS MemberControl, Status FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo ORDER BY ControlNo ASC)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY ControlNo ASC, DateUpdated DESC)A GROUP BY ControlNo)B
+ON A.COntrolNo=B.ControlNo)Beta
+ON Alpha.MemberControl=Beta.MemberControl
+LEFT JOIN
+(SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl, CenterNo FROM 
+(SELECT CaritasCenters_ControlNo 
+FROM caritasbranch_has_caritascenters GROUP BY CaritasCenters_ControlNo ORDER BY CaritasCenters_ControlNo ASC)A
+LEFT JOIN (SELECT * FROM 
+(SELECT * FROM CaritasBranch_has_CaritasCenters WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH))
+ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
+ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo
+LEFT JOIN CaritasCenters cc ON cc.ControlNo=A.CaritasCenters_ControlNo)Charlie
+ON Alpha.CenterControl=Charlie.CenterControl
+WHERE BranchControl='$control_no' AND (Status='Borrower' OR Status='Active Saver')
+GROUP BY Charlie.CenterControl");
 
  ?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
@@ -38,15 +57,9 @@ date_default_timezone_set('Asia/Manila');
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Center', 'Borrower', 'Saver'],
-          <?php foreach ($mem_type as $mem) {
-            $borrower = $mem->numborrower;
-            $saver = $mem->numsaver;
-            if ($saver==NULL) {
-              $saver = 0;
-            };
-           ?>
+          <?php foreach ($memberNo->result() as $mem) { ?>
 
-          ['<?php echo $mem->CenterControl ?>', <?php echo $borrower ?>,<?php echo $saver ?>],
+          ['<?php echo $mem->CenterNo ?>', <?php echo $mem->Borrower ?>,<?php echo $mem->Saver ?>],
           <?php } ?>
         ]);
 
@@ -96,11 +109,14 @@ date_default_timezone_set('Asia/Manila');
           <td class='hdrx'>NO. OF BORROWERS</td>
           <td class='hdrx'>NO. OF SAVERS</td>
       </tr>
+      <?php
+      foreach($memberNo->result() AS $data){ ?>
       <tr>
-          <td class='hdrtxt'>2</td>
-          <td class='hdrtxt'>100</td>
-          <td class='hdrtxt'>150</td>
+          <td class='hdrtxt'><?php echo $data->CenterNo; ?></td>
+          <td class='hdrtxt'><?php echo $data->Borrower; ?></td>
+          <td class='hdrtxt'><?php echo $data->Saver; ?></td>
       </tr>
+      <?php } ?>
 
     </table>
 
@@ -112,7 +128,7 @@ date_default_timezone_set('Asia/Manila');
         <td class="sigBy">Prepared by:</td>
         <td class="sig"><?php echo $user ?></td>
         <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2"><?php echo $datetoday; ?></td>
+        <td class="sig2"><?php echo $datetoday1; ?></td>
       </tr>
     </table>
     <br>

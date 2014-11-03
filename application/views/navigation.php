@@ -249,6 +249,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 							<li><a href="<?php echo site_url('reports/centerperformance'); ?>">Collection Performance of Centers</a></li>
 							<li><a href="<?php echo site_url('reports/borrowerandsaver'); ?>">Borrower vs Saver</a></li>
 							<?php endif;?>
+							
 							<?php if($userrank=='mispersonnel') :?>
 							<li><a href="<?php echo site_url('reports/branchpastdue'); ?>">Collection Performance of Branches</a></li>
 							<!-- <li><a href="<?php // echo site_url('reports/dcsummary'); ?>">Daily Collection Summary</a></li> -->

@@ -8,9 +8,10 @@ class Centerperformance_model extends CI_Model{
 
 		$currentmonth = date("m");
 		$currentyear = date('Y');
+		$datetoday=date('Y-m-d');
 		$branch = $this->session->userdata('branchno');
 
-		$q_result = $this->ctrperquery($currentmonth, $currentyear, $branch);
+		$q_result = $this->ctrperquery($currentmonth, $currentyear, $branch, $datetoday);
 
 		return $q_result->result();
 		/*echo "<br>";
@@ -21,23 +22,39 @@ class Centerperformance_model extends CI_Model{
 		}*/
 
 	}
-	public function ctrperquery($currentmonth, $currentyear, $branchno){
+	public function ctrperquery($month, $year, $branchno, $date){
 
-	$pdcount = $this->db->query("SELECT loan.CenterNo, pastdue, loan FROM (SELECT  count(t.`TransactionType`) as pastdue ,m.CenterNo FROM `transaction` t 
-				join (SELECT cm.`CaritasCenters_ControlNo`, cm.`Members_ControlNo`, c.CenterNo, bc.CaritasBranch_ControlNo as branch FROM `caritascenters_has_members` cm
-				join `caritascenters` c on c.ControlNo = cm.`CaritasCenters_ControlNo`
-				join `caritasbranch_has_caritascenters`bc
-				on bc.CaritasCenters_ControlNo = c.ControlNo) m
-				on t.`Members_ControlNo` = m.`Members_ControlNo`
-				where t.`TransactionType` = 'Past Due' and month(t.`DateTime`)='$currentmonth' and year(t.DateTime)='$currentyear' and m.branch = '$branchno' group by m.CenterNo)pd
-                join (SELECT  count(t.`TransactionType`) as loan ,m.CenterNo FROM `transaction` t 
-				join (SELECT cm.`CaritasCenters_ControlNo`, cm.`Members_ControlNo`, c.CenterNo, bc.CaritasBranch_ControlNo as branch FROM `caritascenters_has_members` cm
-				join `caritascenters` c on c.ControlNo = cm.`CaritasCenters_ControlNo`
-				join `caritasbranch_has_caritascenters`bc
-				on bc.CaritasCenters_ControlNo = c.ControlNo) m
-				on t.`Members_ControlNo` = m.`Members_ControlNo`
-				where t.`TransactionType` = 'Loan' and month(t.`DateTime`)='$currentmonth' and year(t.DateTime)='$currentyear' and m.branch = '$branchno' group by m.CenterNo)loan
-                on pd.CenterNo = loan.CenterNo");
+	$pdcount = $this->db->query("SELECT Alpha.CenterControl, Alpha.CenterNo, IFNULL(Loan,0) AS Loan, IFNULL(PastDue,0) AS PastDue 
+FROM (SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl, CenterNo FROM 
+(SELECT CaritasCenters_ControlNo 
+FROM caritasbranch_has_caritascenters GROUP BY CaritasCenters_ControlNo ORDER BY CaritasCenters_ControlNo ASC)A
+LEFT JOIN (SELECT * FROM 
+(SELECT * FROM CaritasBranch_has_CaritasCenters WHERE Date<=LAST_DAY(DATE_ADD('$year-$month-10', INTERVAL 0 MONTH))
+ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
+ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo
+LEFT JOIN CaritasCenters cc ON cc.ControlNo=A.CaritasCenters_ControlNo
+WHERE CaritasBranch_ControlNo='$branchno')Alpha
+LEFT JOIN
+(SELECT CenterControl, CenterNo, SUM(TransactionType='Loan') AS Loan, SUM(Transactiontype='Past Due') AS PastDue 
+FROM (SELECT Members_ControlNo AS MemberControl, Amount, TransactionType FROM Transaction 
+WHERE (MONTH(DateTime)='$month' AND YEAR(DateTime)='$year') AND (TransactionType='Loan' OR TransactionType='Past Due'))Alpha
+LEFT JOIN
+(SELECT MemberControl, Alpha.CenterControl, BranchControl, CenterNo FROM (SELECT MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo AS MemberControl FROM CaritasCenters_has_Members GROUP BY Members_ControlNo ORDER BY Members_ControlNo ASC)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members WHERE DateEntered<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)) ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
+ON A.MemberControl=B.Members_ControlNo)Alpha
+LEFT JOIN
+(SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl, CenterNo FROM 
+(SELECT CaritasCenters_ControlNo 
+FROM caritasbranch_has_caritascenters GROUP BY CaritasCenters_ControlNo ORDER BY CaritasCenters_ControlNo ASC)A
+LEFT JOIN (SELECT * FROM 
+(SELECT * FROM CaritasBranch_has_CaritasCenters WHERE Date<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH))
+ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
+ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo
+LEFT JOIN CaritasCenters cc ON cc.ControlNo=A.CaritasCenters_ControlNo)Beta
+ON Alpha.CenterControl=Beta.CenterControl)Beta
+ON Alpha.MemberControl=Beta.MemberControl
+WHERE BranchControl='$branchno' GROUP BY CenterControl)Beta
+ON Alpha.CenterControl=Beta.CenterControl");
 	return $pdcount;
 
 	}

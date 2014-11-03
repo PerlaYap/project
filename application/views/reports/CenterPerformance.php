@@ -38,8 +38,8 @@
                   $len = count($pastdues);
           foreach ($pastdues as $pd) {
               $center = $pd->CenterNo;
-              $pdnum = $pd->pastdue;
-              $loan = $pd->loan;
+              $pdnum = $pd->PastDue;
+              $loan = $pd->Loan;
            ?>
            <?php if ($i == $len-1) {?>
               ['<?php echo $center ?>',  <?php echo $pdnum ?>,<?php echo $loan ?>]
@@ -81,7 +81,33 @@
 
     <div id="chart_div" style="width: 900px; height: 500px; margin-left:auto; margin-right: auto;"></div>
 
-    <br>
+    <style type="text/css">
+      .hdrx{
+        padding: 5px 15px 5px 15px;
+        font-weight: bold;
+        font-size: 15px;s
+      }
+    </style>
+    
+    <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
+      <tr>
+          <td class='hdrx'>CENTER</td>
+          <td class='hdrx'>NO. OF Past Due Payments</td>
+          <td class='hdrx'>NO. OF On-Time Payment</td>
+      </tr>
+      <?php
+      foreach ($pastdues as $data){ ?>
+      <tr>
+          <td class='hdrtxt'><?php echo $data->CenterNo; ?></td>
+          <td class='hdrtxt'><?php echo $data->PastDue; ?></td>
+          <td class='hdrtxt'><?php echo $data->Loan; ?></td>
+      </tr>
+      <?php } ?>
+
+    </table>
+
+
+    <br><br>
     <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
