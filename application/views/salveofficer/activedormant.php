@@ -101,12 +101,27 @@ $dormantaccount = $dormants->result();
       <div id="chart_div" style="width: 900px; height: 500px;" ></div>
 
 
-      <input type="button"  class="table"/>
+        <script type="text/javascript">
+            function openWin() {
+              myWindow = window.open("google.com.ph", "myWindow", "width=800, height=500");    // Opens a new window
+            }
+        </script>
+
+      <input type="button" onclick="openWin()" class="table"/>
     <?php endif;?>
 
     <!-- If BM ---->
     <?php if($userrank=='branchmanager') :?>
     <div id="chart_div" style="width: 700px; height: 300px;" ></div>
+
+
+       <script type="text/javascript">
+            function openWin() {
+              myWindow = window.open("google.com.ph", "myWindow", "width=800, height=500");    // Opens a new window
+            }
+        </script>
+
+    <input type="button" onclick="openWin()" class="table1"/>
   <?php endif;?>
 </body>
 </html>

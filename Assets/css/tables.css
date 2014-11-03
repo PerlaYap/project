@@ -7,5 +7,17 @@
     background-image: url('../images/table.png');
     border: 0;
     background-color: transparent;
+    cursor: pointer;
+}
 
+ .table1{
+ 	position:absolute;
+ 	margin-top: -140px;
+ 	margin-left: 520px;
+ 	width: 30px;
+ 	height: 35px;
+    background-image: url('../images/table.png');
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
 }
