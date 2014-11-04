@@ -1,4 +1,5 @@
 
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/tables.css'); ?>">
 <?php 
   $branchno = $this->session->userdata('branchno');
   $branchname = $this->session->userdata('branch');
@@ -86,5 +87,12 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
   </head>
   <body>
     <div id="chart_div" style="width: 900px; height: 500px;"></div>
+     <script type="text/javascript">
+            function openWin() {
+              myWindow = window.open("targettable", "myWindow", "width=800, height=500");    // Opens a new window
+            }
+        </script>
+
+    <input type="button" onclick="openWin()" class="table1"/>
   </body>
 </html>
