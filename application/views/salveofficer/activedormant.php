@@ -14,9 +14,6 @@ $currentyear = date('Y');
 
 $month = array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec");
 
-$dormants = $this->db->query("SELECT `CaritasBranch_ControlNo`,c.`CaritasCenters_ControlNo`, mm.ControlNo, mm.Status,count(mm.Status) as Count, month(mm.DateUpdated) as Month  FROM `caritasbranch_has_caritascenters` c join caritascenters_has_members m on c.`CaritasCenters_ControlNo` = m.`CaritasCenters_ControlNo` join members_has_membersmembershipstatus mm on m.Members_ControlNo = mm.ControlNo
-  where CaritasBranch_ControlNo = $branchno and year(mm.DateUpdated) = $currentyear and Status ='dormant saver' group by Month");
-$dormantaccount = $dormants->result();
 ?>
 <html>
 <head>
