@@ -148,7 +148,7 @@ foreach ($dayoftheweek->result() as $row){
 			maxLoan=(savings/.40);
 	}
 
-		$("input#maxLoan").val(maxLoan);
+		$("input#maxLoan").val(maxLoan.toFixed(2));
 	}
 
 	function icalculateSum(){
@@ -224,10 +224,29 @@ foreach ($dayoftheweek->result() as $row){
 
 			difference+=parseFloat(income)-parseFloat(expense);
 
-	$("input#incometotal").val(income);
-	$("input#expensetotal").val(expense);
-	$("input#difference").val(difference);
+	$("input#incometotal").val(income.toFixed(2));
+	$("input#expensetotal").val(expense.toFixed(2));
+	$("input#familyCIinput").val(difference.toFixed(2));
 	}
+
+	(function($) {
+        $.fn.currencyFormat = function() {
+            this.each( function( i ) {
+                $(this).change( function( e ){
+                    if( isNaN( parseFloat( this.value ) ) ) return;
+                    this.value = parseFloat(this.value).toFixed(2);
+                });
+            });
+            return this; //for chaining
+        }
+    })( jQuery );
+
+    // apply the currencyFormat behaviour to elements with 'currency' as their class
+    $( function() {
+        $('.incomeCIinput').currencyFormat();
+        $('.familyCIinput').currencyFormat();
+        $('.incomeCIinput').currencyFormat();
+    });
 
 </script>
 
