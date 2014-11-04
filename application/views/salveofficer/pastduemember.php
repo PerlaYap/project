@@ -24,7 +24,7 @@
  ?>
 <?php 
 
-$pastduecount = $this->db->query("SELECT member,centercontrol,CenterNo, LoanAppControlNo, Amount, DateTime,TransactionType, CenterNo, CONCAT(LastName,',',FirstName,'',MiddleName) as Name, pastdue as prev_pd, ContactNo, Address from (SELECT cm.Members_ControlNo as member, bc.caritascenters_controlno as centercontrol, c.CenterNo FROM caritasbranch_has_caritascenters bc, caritascenters_has_members cm, caritascenters c where bc.caritasbranch_controlno = '$branchno' and bc.caritascenters_controlno = cm.caritascenters_controlno and cm.caritascenters_controlno = c.controlno) s left join `transaction` t on t.Members_ControlNo = s.member join `membersname` nm on nm.ControlNo = s.member join `members` m on m.ControlNo = s.member
+$pastduecount = $this->db->query("SELECT member,centercontrol,CenterNo, LoanAppControlNo, Amount, DateTime,TransactionType, CenterNo, CONCAT(LastName,', ',FirstName,' ',MiddleName) as Name, pastdue as prev_pd, ContactNo, Address from (SELECT cm.Members_ControlNo as member, bc.caritascenters_controlno as centercontrol, c.CenterNo FROM caritasbranch_has_caritascenters bc, caritascenters_has_members cm, caritascenters c where bc.caritasbranch_controlno = '$branchno' and bc.caritascenters_controlno = cm.caritascenters_controlno and cm.caritascenters_controlno = c.controlno) s left join `transaction` t on t.Members_ControlNo = s.member join `membersname` nm on nm.ControlNo = s.member join `members` m on m.ControlNo = s.member
 join `memberscontact` c on c.ControlNo = s.member join `membersaddress`ad on ad.ControlNo = s.member where DateTime ='$datelastweek' and TransactionType='Past Due' and centercontrol =$center order by Name");
 
  $pdcount = $pastduecount->result_array();
