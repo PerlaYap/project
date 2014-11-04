@@ -351,6 +351,9 @@ class Salveofficer extends CI_Controller {
 			/*$this->directory();*/
 		}
 	 }
+	public function accountstable(){
+		$this->load->view('salveofficer/homepagetable');
+	}
 
 	
 

@@ -103,7 +103,7 @@ ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated V
 
         <script type="text/javascript">
             function openWin() {
-              myWindow = window.open("google.com.ph", "myWindow", "width=800, height=500");    // Opens a new window
+              myWindow = window.open("accountstable", "myWindow", "width=800, height=500");    // Opens a new window
             }
         </script>
 
@@ -117,7 +117,7 @@ ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated V
 
        <script type="text/javascript">
             function openWin() {
-              myWindow = window.open("google.com.ph", "myWindow", "width=800, height=500");    // Opens a new window
+              myWindow = window.open("accountstable", "myWindow", "width=800, height=500");    // Opens a new window
             }
         </script>
 
