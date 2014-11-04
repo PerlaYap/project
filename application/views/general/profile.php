@@ -589,7 +589,7 @@ foreach ($pastDuePerformance->result() as $row) {
 
          <div class = "personalinfo">
 
-           <div class="headername"><b>Active Loan Release: </b><?php echo $amount ?>Php</div>
+           <div class="headername"><b>Active Loan Release: Php </b><?php echo number_format($amount, 2); ?></div>
            <div class="skew"></div>
            <br><br>
 
@@ -607,7 +607,7 @@ foreach ($pastDuePerformance->result() as $row) {
          <br><br><p class='noresultfound'>- No Active Loan -</p><br><br>
          <?php } ?>
          <?php 			
-         $gettransaction = $this->db->query("SELECT transaction.`ControlNo`, `Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`, `LoanAppControlNo`, concat(LastName,', ', FirstName,' ', MiddleName) as name FROM `transaction` join `caritaspersonnel` p on transaction.CaritasPersonnel_ControlNo = p.ControlNo WHERE `LoanAppControlNo`='$love' and (`TransactionType` ='Loan' or `TransactionType` ='Past Due')  and `Members_ControlNo`='$control_no' "); ?>
+         $gettransaction = $this->db->query("SELECT transaction.`ControlNo`, `Amount`, `DateTime`, `Members_ControlNo`, `Passbook_ControlNo`, `CaritasPersonnel_ControlNo`, `TransactionType`, `LoanAppControlNo`, concat(LastName,', ', FirstName,' ', MiddleName) as name FROM `transaction` join `caritaspersonnel` p on transaction.CaritasPersonnel_ControlNo = p.ControlNo WHERE `LoanAppControlNo`='$love' and (`TransactionType` ='Loan' or `TransactionType` ='Past Due')  and `Members_ControlNo`='$control_no' order by DateTime "); ?>
 
          <div id="TransactionLog">
           <br>
@@ -742,7 +742,7 @@ foreach ($pastDuePerformance->result() as $row) {
        <br><br><br>
        <div id="TransactionLog">
 
-        <div class="headername"><b>Savings Build Up: <?php echo $totalsavings; ?> </div>
+        <div class="headername"><b>Savings Build Up: Php </b><?php echo number_format($totalsavings, 2); ?> </div>
         <div class="skew"></div>
         <br>
 						<!-- <form>
@@ -1081,8 +1081,8 @@ foreach ($pastDuePerformance->result() as $row) {
 
 
 
-         <p class="info00">Actual Amount of Savings: P<b> <?php echo $actual;?></b></p>
-         <p class="info00">Expected Amount of Savings: P<b> <?php echo $expected;?></b></p>
+         <p class="info00">Actual Amount of Savings: P<b> <?php echo number_format($actual, 2);?></b></p>
+         <p class="info00">Expected Amount of Savings: P<b> <?php echo number_format($expected, 2);?></b></p>
 
          <br>
 
@@ -1095,7 +1095,7 @@ foreach ($pastDuePerformance->result() as $row) {
             if(!$actual ==0){
               if ($actual < $expected){
                 $kulang = $expected-$actual;
-                echo 'This member needs to save P'.$kulang.' more! ';
+                echo 'This member needs to save P'.number_format($kulang, 2).' more! ';
 
               } else{
 

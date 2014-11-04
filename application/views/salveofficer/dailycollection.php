@@ -193,8 +193,8 @@ function putinput(size){
 				<tr class="row">
 					<td class="num" ><?php echo $y; ?>  </td>
 					<td class="collectmember"><?php echo $mem->Name; ?></td>
-					<td class="ploan"><?php echo $activerelease; ?></td>
-					<td class="pd"><?php echo $pastdue; ?></td>
+					<td class="ploan"><?php echo number_format($activerelease, 2); ?></td>
+					<td class="pd"><?php echo number_format($pastdue, 2); ?></td>
 					
 					<td class="payment">
 
@@ -222,7 +222,7 @@ function putinput(size){
 						<input type='hidden' name='amounttopay[]' value="<?php echo $amounttopay; ?>"/>
 					</td>	
 						
-					<td class="balance"><?php echo $mem->LoanExpense ?></td>
+					<td class="balance"><?php echo number_format($mem->LoanExpense, 2); ?></td>
 					<!-- <td class="savings"><?php echo $mem->Savings ?></td> -->
 
 				</tr>
@@ -241,12 +241,12 @@ function putinput(size){
 				<tr class="rowtotal">
 					<td class="num">  </td>
 					<td class="collectmember"style="text-align:right;"><b>TOTAL: &nbsp&nbsp&nbsp&nbsp&nbsp</b></td>
-					<td class="ploan" ><b><?php echo $activereleasetotal; ?> </b></td>
-					<td class="pd" ><b><?php echo $totalpastdue; ?> </b></td>
+					<td class="ploan" ><b><?php echo number_format($activereleasetotal, 2); ?> </b></td>
+					<td class="pd" ><b><?php echo number_format($totalpastdue, 2); ?> </b></td>
 					<!-- <td class="sbu"> <b><?php echo $totalsbucollected; ?></b></td> -->
 					<td id="payment"><b></b></td>	
 					<!-- <td class="withdraw"><b> <?php echo $totalwithdrawal; ?> </b></td> -->
-					<td class="balance"><b><?php echo $totalloanbalance; ?></b></td>
+					<td class="balance"><b><?php echo number_format($totalloanbalance, 2); ?></b></td>
 					<!-- <td class="savings"><b> <?php echo $totalsbu; ?></b></td> -->
 
 				</tr>
@@ -316,7 +316,7 @@ function putinput(size){
 						<td style="text-align:center"><input type="number" required class="inputSBU" id="<?php echo "inputSBU".$g; ?>" onChange="putinput(<?php echo "$sizev"; ?>);" disabled='true' name="f[]"/></td>
 						<input type='hidden' id="<?php echo "SBUhid".$g; ?>" name='sbu[]' />	
 						<td style="text-align:center"><input type="number" min='0' max='<?php echo $maxwithdrawal; ?>' name='withdrawal[]' class="inputSBU" placeholder="Click to Edit" /></td>
-						<td style="text-align:center"><?php echo $mem->Savings; ?></td>
+						<td style="text-align:center"><?php echo number_format($mem->Savings, 2); ?></td>
 					</tr>	
 						<?php $totalsave +=$mem->Savings; ?>
 				<?php } ?>
@@ -327,7 +327,7 @@ function putinput(size){
 					<td colspan="2" style="text-align: right;"> <b>TOTAL:</b> &nbsp&nbsp</td>
 					<td style="text-align:center"><b></b></td>
 					<td style="text-align:center"><b></b></td>
-					<td style="text-align:center"><b><?php echo $totalsave; ?></b></td>
+					<td style="text-align:center"><b><?php echo number_format($totalsave, 2); ?></b></td>
 				</tr>
 
 			</TABLE>
@@ -376,7 +376,7 @@ function putinput(size){
 					<td style="text-indent: 8px;"><?php echo $name;  ?></td>
 					<td style="text-align:center"><input type="number" value="50" required name="saveonly[]" class="inputSBU" placeholder="Click to Edit"/></td>
 					<td style="text-align:center"><input type="number"  name="withdrawonly[]" min="0" max="<?php echo $sbutot ?>" class="inputSBU" placeholder="Click to Edit"/></td>
-					<td style="text-align:center"><?php echo $sbutot;  ?></td>
+					<td style="text-align:center"><?php echo number_format($sbutot, 2);   ?></td>
 					</tr>
 
 					<?php $totsavings +=$sbutot; ?>
@@ -389,7 +389,7 @@ function putinput(size){
 					<td colspan="2" style="text-align: right;"> <b>TOTAL:</b> &nbsp&nbsp</td>
 					<td style="text-align:center"><b></b></td>
 					<td style="text-align:center"><b></b></td>
-					<td style="text-align:center"><b><?php echo $totsavings; ?></b></td>
+					<td style="text-align:center"><b><?php echo number_format($totsavings, 2); ?></b></td>
 				</tr>
 				<?php } else{?>
 				

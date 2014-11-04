@@ -73,15 +73,15 @@ join `memberscontact` c on c.ControlNo = s.member join `membersaddress`ad on ad.
 		</tr>
 		<tr>
 			<td class="PDlabel">Past Due Amount:</td>
-			<td class="PDcontent"><?php echo $amount; ?></td>
+			<td class="PDcontent"><?php echo number_format($amount, 2) ?></td>
 		</tr>
 		<tr>
 			<td class="PDlabel">Total Past Due:</td>
-			<td class="PDcontent"><?php echo $prv; ?></td>
+			<td class="PDcontent"><?php echo number_format($prv, 2); ?></td>
 		</tr>
 		<tr>
 			<td class="PDlabel">Contact Number:</td>
-			<td class="PDcontent"><?php echo $prv; ?></td>
+			<td class="PDcontent"><?php echo $contact; ?></td>
 		</tr>
 		<tr>
 			<td class="PDlabel">Permanent Address:</td> 
