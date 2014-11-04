@@ -1,3 +1,18 @@
+	
+<style type="text/css" media="print">
+.dontprint{
+	display: none;
+}
+
+	 @page { 
+    size: portrait;
+    margin: 0.5in;
+  }
+</style>
+
+
+
+
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
 	<script src="<?php echo base_url('Assets/js/jquery-1.11.1.js'); ?>"></script>
 
@@ -160,7 +175,7 @@ if($loanType=="23-Weeks"){
 
 	<br><br>
 	<div style="width: 100%; text-align: center;">
-		<button onclick="window.print()">Print</button>
+		<button onclick="window.print()" class="dontprint">Print</button>
 		<!-- <button onclick="">Back</button> -->
 	</div>
 
