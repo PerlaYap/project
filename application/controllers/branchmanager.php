@@ -1,3 +1,4 @@
+<!-- haleluya!!!! -->
 <?php if ( !  defined('BASEPATH')) exit('No direct script access allowed');
 
 class Branchmanager extends CI_Controller{
