@@ -212,8 +212,8 @@ $SOpersonnel =$this->session->userdata('personnelno');
 							<input type ='hidden' name='loanbalance' value='<?php echo $loanexpense ?>'>
 							<input type='hidden' name='datetoday' value='<?php echo date("Y-m-j") ?>'>
 							<input type ='hidden' name='sopersonnel' value='<?php echo $SOpersonnel; ?>'/>
-						<input type="submit" name='paymenttype' value="Cash Payment"/>
-						<input type="submit" name='paymenttype' onclick=" return verify_action()" value="Savings"/>
+						<input type="submit" name='paymenttype' value="Cash Payment"  class="button" style="margin-left:auto; margin-right:auto" />
+						<input type="submit" name='paymenttype' onclick=" return verify_action()" value="Savings" class="button" style="width:140px;"/>
 						</form>
 						<br><br>
 					</h1>

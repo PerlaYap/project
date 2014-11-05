@@ -53,8 +53,8 @@
 					        <input id="name" type="number" min='1' max='<?php echo $loanbalance ?>' name="paymentrecieved" required value="" style="width: 562px;"/>
 
 					        <br>
-					    <input type="submit" value="Submit"/>
-					    <input type="button" onclick="cancelfunction(<?php echo $controlno ?>)" value="Cancel"/>
+					    <input type="submit" value="Submit" class="button" style="margin-left:508px;"/>
+					    <input type="button" onclick="cancelfunction(<?php echo $controlno ?>)" value="Cancel" class="button1" style="margin-top:0px;margin-left:10px;"/>
 					    </form>
 						
 				<br>
@@ -127,8 +127,8 @@
 					        <input id="name" type="number" min=0  max=<?php echo $loanbalance-$savingstot ?> name="paymentrecieved"  style="width: 562px; color:#b7351b; font-weight:bold;" required/>
 
 						<br><br>
-						<input type="submit" value="Pay Remaining Balance"/>
-					    <input type="button" onclick="cancelfunction(<?php echo $controlno ?>)" value="Cancel"/>
+						<input type="submit" class="button" style="margin-left:410px;" value="Pay Remaining Balance"/>
+					    <input type="button" class="button1" style="margin-top:0px; margin-left:10px;" onclick="cancelfunction(<?php echo $controlno ?>)" value="Cancel"/>
 
 						</form>
 					
