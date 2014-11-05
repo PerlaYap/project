@@ -9,50 +9,9 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
 	
-	<?php //$month = $_POST['month'];
-			//$year = $_POST['year'];
-
-			$month = 7;
-			$year = 2014;
-
-			$prev = $year-1;
-			$prev2 = $year-2;
-
-			if ($month == 1){
-				$yue = 'January';
-				$month=13;
-				$year=-1;
-			} else if ($month == 2){
-				$yue = 'February';
-			} else if ($month == 3){
-				$yue = 'March';
-			} else if ($month == 4){
-				$yue = 'April';
-			} else if ($month == 5){
-				$yue = 'May';
-			} else if ($month == 6){
-				$yue = 'June';
-			} else if ($month == 7){
-				$yue = 'July';
-			} else if ($month == 8){
-				$yue = 'August';
-			} else if ($month == 9){
-				$yue = 'September';
-			} else if ($month == 10){
-				$yue = 'October';
-			} else if ($month == 11){
-				$yue = 'November';
-			} else{
-				$yue = 'December';
-			}
-
-			
-$user = $this->session->userdata('firstname');
-$datetoday = date('F d, Y');
-?>
-
-
 <?php
+$user = $this->session->userdata('firstname');
+$today = date('F d, Y');
 
 $misAccount =$this->db->query("SELECT ControlNo AS BranchControl, BranchName, IFNULL(NoMembers,0) AS BegMembers, IFNULL(NewMembers,0) AS NewMembers, IFNULL(TerminatedMembers,0) AS TerminatedMembers,
 IFNULL(ActiveMembers,0) AS ActiveMembers, IFNULL(TotalDormant,0) AS TotalDormant, IFNULL(TotalDanger,0) AS TotalPastDue,
@@ -282,7 +241,7 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
 	
 	<!-- <img src="<?php // echo base_url ('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"> -->
 	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MONTHLY ACCOUNT REPORT <br> For The Month Of <b>
-		<?php echo $yue ?> <?php echo $year ?></b></h3>
+		<?php echo $month ?> <?php echo $year ?></b></h3>
 
 	<br>
 	<table class="misreport" border="1" style="margin-left:auto; margin-right:auto;">
@@ -487,34 +446,13 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
 		
 	</table>
 
-	<br>
-<!--
-	<table class="misreport" border="1">
-		<tr>
-			<td class="label">PDM-No. of PD (2013)</td>
-			<td class="number1"></td>
-		
-		</tr>
-		<tr>
-			<td class="label">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'(2012)</td>
-			<td class="number1"></td>
-		
-		</tr>
-		<tr>
-			<td class="label">Total No. of PDM</td>
-			<td class="number1"></td>
-	
-		</tr>
-	</table>
--->
-
 	<br><br>
 		<table class="signature" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Prepared by:</td>
 				<td class="sig">&nbsp<?php echo $user; ?></td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2">&nbsp<?php echo $datetoday; ?></td>
+				<td class="sig2">&nbsp<?php echo $today; ?></td>
 			</tr>
 		</table>
 		<br>

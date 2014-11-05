@@ -10,54 +10,10 @@
 
 
 </style>
-	
-	<?php //$month = $_POST['month'];
-			//$year = $_POST['year'];
-
-			$month = 9;
-			$year = 2014;
-
-			$date=$year."-".$month."-"."01";
-
-			$prev = $year-1;
-			$prev2 = $year-2;
-
-			if ($month == 1){
-				$yue = 'January';
-				$month=13;
-				$year=-1;
-			} else if ($month == 2){
-				$yue = 'February';
-			} else if ($month == 3){
-				$yue = 'March';
-			} else if ($month == 4){
-				$yue = 'April';
-			} else if ($month == 5){
-				$yue = 'May';
-			} else if ($month == 6){
-				$yue = 'June';
-			} else if ($month == 7){
-				$yue = 'July';
-			} else if ($month == 8){
-				$yue = 'August';
-			} else if ($month == 9){
-				$yue = 'September';
-			} else if ($month == 10){
-				$yue = 'October';
-			} else if ($month == 11){
-				$yue = 'November';
-			} else{
-				$yue = 'December';
-			}
-
-
-$getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbranch b
-	Order by b.branchname"); ?>
 	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
-	
-	<!-- <img src="<?php // echo base_url ('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"> -->
-	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> SAVINGS BUILD-UP and PREFERRED SHARE REPORT  <br> For The Month Of <b>
-		<?php echo $yue ?> <?php echo $year ?></b></h3>
+
+<h3>CARITAS SALVE CREDIT COOPERATIVE <br> SAVINGS BUILD-UP and PREFERRED SHARE REPORT  <br> For The Month Of <b>
+		<?php echo $month ?> <?php echo $year ?></b></h3>
 <?php
 $user = $this->session->userdata('firstname');
 $datetoday = date('F d, Y');

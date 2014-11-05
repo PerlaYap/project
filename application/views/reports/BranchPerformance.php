@@ -1,15 +1,11 @@
 <TITLE> Branch Performance</TITLE>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
- <!-- <link rel="stylesheet" type="text/css" href="../../../Assets/css/reports.css">  -->
-<?php date_default_timezone_set('Asia/Manila');
-  
-    $currentmonth = strtoupper(date("F"));
-    $currentyear = date('Y');
-
- ?>
 <head>
-
+<?php
+$name=$this->session->userdata('firstname');
+$date = date('F d, Y');
+?>
 <style type="text/css" media="print">
 .dontprint{
   display: none;
@@ -66,7 +62,7 @@
 	<h3>
 		CARITAS SALVE CREDIT COOPERATIVE <br> 
 		COLLECTION PERFORMANCE OF BRANCHES <br> 
-		FOR THE MONTH OF <b> <?php echo $currentmonth." " .$currentyear ?> </b>
+		FOR THE MONTH OF <b> <?php echo $month." " .$year ?> </b>
 
 	</h3>
 
@@ -99,12 +95,13 @@
     </table>
 
     <br><br>
-    <!-- <table class="signature" style="margin-left:auto; margin-right:auto;">
+
+    <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
-        <td class="sig">&nbsp</td>
+        <td class="sig"><?php echo $name; ?></td>
         <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2">&nbsp</td>
+        <td class="sig2"><?php echo $date; ?></td>
       </tr>
     </table>
     <br>
@@ -115,7 +112,8 @@
         <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
         <td class="sig2">&nbsp</td>
       </tr>
-    </table> -->
+    </table>
+
     <br><br>
 	<div class='dontprint' style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button> 

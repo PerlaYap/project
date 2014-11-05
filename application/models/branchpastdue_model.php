@@ -3,18 +3,15 @@
 
 class Branchpastdue_model extends CI_Model{
 
-	public function getbranchpastdue(){
+	public function getbranchpastdue($dateTime){
 		date_default_timezone_set('Asia/Manila');
 
-		$currentmonth = date("m");
-		$currentyear = date('Y');
-		$datetoday=date('Y-m-d');
+		$month=date('m',$dateTime);
+		$year=date('Y',$dateTime);
+		$date=date('Y-m-d',$dateTime);
 
-		$q_result = $this->branchpastdue($currentmonth, $currentyear,$datetoday);
-	/*	foreach ($q_result as $key) {
-			echo $key->pdnum."<br>";
-			echo $key->BranchName."<br>";
-		}*/
+		$q_result = $this->branchpastdue($month, $year,$date);
+	
 		return $q_result;
 		
 	}

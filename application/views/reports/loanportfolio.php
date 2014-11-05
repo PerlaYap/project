@@ -14,45 +14,6 @@
 		$user = $this->session->userdata('firstname');
 		$datetoday = date('F d, Y');
 
-	//$month = $_POST['month'];
-			//$year = $_POST['year'];
-
-			$month = 7;
-			$year = 2014;
-
-			$prev = $year-1;
-			$prev2 = $year-2;
-
-			if ($month == 1){
-				$yue = 'January';
-				$month=13;
-				$year=-1;
-			} else if ($month == 2){
-				$yue = 'February';
-			} else if ($month == 3){
-				$yue = 'March';
-			} else if ($month == 4){
-				$yue = 'April';
-			} else if ($month == 5){
-				$yue = 'May';
-			} else if ($month == 6){
-				$yue = 'June';
-			} else if ($month == 7){
-				$yue = 'July';
-			} else if ($month == 8){
-				$yue = 'August';
-			} else if ($month == 9){
-				$yue = 'September';
-			} else if ($month == 10){
-				$yue = 'October';
-			} else if ($month == 11){
-				$yue = 'November';
-			} else{
-				$yue = 'December';
-			}
-
-$date=date('Y-m-d');
-
 $getportfolio = $this->db->query("SELECT ControlNo, BranchID, BranchName, TRUNCATE((IFNULL(BegTotalLoan23,0)-IFNULL(Beg23Collection,0)),2) AS BegTotalLoan23, TRUNCATE((IFNULL(BegTotalLoan40,0)-IFNULL(Beg40Collection,0)),2) AS BegTotalLoan40,
 TRUNCATE(IFNULL(LoanReleased23,0),2) AS LoanReleased23, TRUNCATE(IFNULL(LoanReleased40,0),2) AS LoanReleased40, TRUNCATE(IFNULL(TotalTarget23,0),2) AS TotalTarget23, TRUNCATE(IFNULL(TotalTarget40,0),2) AS TotalTarget40,
 TRUNCATE(IFNULL(Collected23,0),2) AS Collected23, TRUNCATE(IFNULL(Collected40,0),2) AS Collected40
@@ -155,7 +116,7 @@ $port=$getportfolio->result();
 	
 
 	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MONTHLY LOAN PORTFOLIO REPORT <br> For The Month Of <b>
-		<?php echo $yue ?> <?php echo $year ?></b></h3>
+		<?php echo $month ?> <?php echo $year ?></b></h3>
 
 		<br>
 	<table class="misreport" border="1" style="margin-left:auto; margin-right:auto;">

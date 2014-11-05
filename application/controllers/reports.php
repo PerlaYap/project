@@ -9,6 +9,13 @@ class Reports extends CI_Controller {
         $this->load->view("footer");
 	}
 
+    public function reportListMIS(){
+        $this->load->view('header');
+        $this->load->view('navigation');
+        $this->load->view("reports/mislist");
+        $this->load->view("footer");
+    }
+
     public function mismonthly(){   
         $this->load->view("reports/misMonthly");
     }
@@ -62,21 +69,15 @@ class Reports extends CI_Controller {
 		$data=array('branchControl'=>$this->input->post('dcbranchControl'), 
 					'centerControl'=>$this->input->post('dccenterControl'),
 					'reportDate'=>$dcday, 'day'=>$day );
-		
-		/*$this->load->view("header");
-		$this->load->view("navigation");*/
+	
 		$this->load->view("reports/dcsummary",$data);
-		/*$this->load->view("footer");*/
 		}
 
         public function getYearlyTrend(){
         $type=1;
         $data=array('years'=>$this->input->post('yearlyyear'),'type'=>$type);
         
-        /*$this->load->view("header");
-        $this->load->view("navigation");*/
         $this->load->view("reports/trend",$data);
-        /*$this->load->view("footer");*/
         }
 
         public function getYearlyComparisonTrend(){
@@ -84,12 +85,79 @@ class Reports extends CI_Controller {
         $data=array('years'=>$this->input->post('yearlyyear1'),
             'years1'=>$this->input->post('yearlyyear2'),'type'=>$type);
         
-        /*$this->load->view("header");
-        $this->load->view("navigation");*/
         $this->load->view("reports/trend",$data);
-        /*$this->load->view("footer");*/
         }
 
+        public function getSpecifiedReportMIS(){
+        $reportType=$this->input->post('reporttype');
+
+        if($reportType=="collection"){
+            $this->getCollectionReport();
+        }
+        else if($reportType=='account'){
+            $this->getAccountReport();
+        }
+        else if($reportType=='loanport'){
+            $this->getLoanPortfolio();
+        }
+        else if($reportType=='saving'){
+            $this->getSavings();
+        }
+    }
+
+    public function getCollectionReport(){
+        $this->load->model("branchpastdue_model");
+        $data=$this->input->post('monthyear');
+        $dateTime=strtotime($data);
+
+        $data1['pastduesbranch'] = $this->branchpastdue_model->getbranchpastdue($dateTime);
+        $data1['month']=date('F',$dateTime);
+        $data1['year']=date('Y',$dateTime);
+
+        $this->load->view("reports/branchperformance",$data1);
+        }
+
+        public function getAccountReport(){
+        $data=$this->input->post('monthyear');
+        $dateTime=strtotime($data);
+        $data1=array('datetoday'=>date('Y-m-d',$dateTime),
+            'month'=>date('F',$dateTime),
+            'year'=>date('Y',$dateTime));
+
+
+        $this->load->view("reports/misMonthly",$data1);
+        }
+
+        public function getLoanPortfolio(){
+        $data=$this->input->post('monthyear');
+        $dateTime=strtotime($data);
+        $data1=array('date'=>date('Y-m-d',$dateTime),
+            'month'=>date('F',$dateTime),
+            'year'=>date('Y',$dateTime));
+
+
+        $this->load->view("reports/loanportfolio",$data1);
+        }
+
+        public function getSavings(){
+        $data=$this->input->post('monthyear');
+        $dateTime=strtotime($data);
+        $data1=array('date'=>date('Y-m-d',$dateTime),
+            'month'=>date('F',$dateTime),
+            'year'=>date('Y',$dateTime));
+
+
+        $this->load->view("reports/sbushares",$data1);
+        }
+
+    /*
+        <option value="collection">Collection Performance of Branches</option>
+                    <option value="account">Monthly Account Report</option>
+                    <option value="loanport">Monthly Loan Portfolio Report</option>
+                    <option value="saving">Monthly Savings Build-Up and Capital Shares Report</option>
+    */
+
+        //Search
 		public function search(){
     
         //load model
@@ -166,16 +234,6 @@ class Reports extends CI_Controller {
     }
     public function borrowerandsaver(){
         $this->load->view('reports/borrowerandsaver'); 
-    }
-
-  
-
-
-    public function branchpastdue(){
-        $this->load->model("branchpastdue_model");
-       $data['pastduesbranch'] = $this->branchpastdue_model->getbranchpastdue();
-
-        $this->load->view('reports/branchperformance', $data);
     }
 
     public function editcollection(){
