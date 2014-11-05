@@ -24,8 +24,6 @@
 
 
 
-
-<< CENTER PERFORMANCE >>
 	<?php
 	$branchno = $this->session->userdata('branchno');
 	

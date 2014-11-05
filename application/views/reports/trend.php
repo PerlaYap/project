@@ -159,7 +159,7 @@ foreach($branchname->result() as $row){
       </table>
       <?php } else if($type==2){ ?>
 
-       <table border="1" class="reportTable" style="margin-left: 340px;">
+       <table border="1" class="reportTable" style="margin-left: 355px;">
           <tr>
               <td class="thReport" colspan="2"><?php echo $years; ?></td>
           </tr>
@@ -176,17 +176,17 @@ foreach($branchname->result() as $row){
           <?php } ?>
       </table>
 
-      <table border="1" class="reportTable" style="margin-left: 650px; margin-top:-97px;">
+      <table border="1" class="reportTable" style="margin-left: 635px; margin-top:-449px; position:absolute;">
           <tr>
-              <td class="thReport" colspan="2"><?php echo $years1; ?></td>
+              <td class="thReport" colspan="2"  style="border-left: hidden;"><?php echo $years1; ?></td>
           </tr>
           <tr>
-              <td class="thReport"> MONTH</td>
+              <td class="thReport" style="border-left: hidden;"> MONTH</td>
               <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
           </tr>
           <?php for($a=1;$a<13;$a++){ ?>
           <tr>
-              <td class="tdReport"><?php echo $month[$a-1]; ?></td>
+              <td class="tdReport" style="border-left: hidden;"><?php echo $month[$a-1]; ?></td>
               <td class="tdReport"><?php echo $arrayline1[$a]; ?></td>
           </tr>
           <?php } ?>

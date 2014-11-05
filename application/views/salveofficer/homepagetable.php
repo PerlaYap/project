@@ -33,7 +33,6 @@ $month = array("January","February","March","April","May","June","July","August"
 
 ?>
 
-<< ACCOUNT PERFORMANCE >>
 <table border=1>
 
 	<tr>

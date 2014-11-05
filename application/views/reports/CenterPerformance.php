@@ -92,8 +92,8 @@
     <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
       <tr>
           <td class='hdrx'>CENTER</td>
-          <td class='hdrx'>NO. OF Past Due Payments</td>
-          <td class='hdrx'>NO. OF On-Time Payment</td>
+          <td class='hdrx'>No. of Past Due Payments</td>
+          <td class='hdrx'>No. of On-Time Payment</td>
       </tr>
       <?php
       foreach ($pastdues as $data){ ?>
