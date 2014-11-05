@@ -20,6 +20,8 @@ class Editprofiledetails_model extends CI_Model{
    			$lname = $this->security->xss_clean($this->input->post('lname'));
    			$membername = $fname." ".$mname." ".$lname;
 
+   			$centerno = $this->security->xss_clean($this->input->post('centerno'));
+
 
 			/*getting inputs from user*/
 			$controlno = $this->security->xss_clean($this->input->post('controlno'));
@@ -65,6 +67,9 @@ class Editprofiledetails_model extends CI_Model{
 			for ($h=0; $h < $hsize ; $h++) { 
 				$this->updatehousehold($hholdno[$h], $hage[$h], $hcstat[$h] ,$hoccupy[$h]);
 				}
+	        }
+	        if (!empty($centerno)) {
+	        	$this->updatecenterno($centerno, $controlno);
 	        }
 
 			
@@ -130,6 +135,16 @@ class Editprofiledetails_model extends CI_Model{
        		return false;
        }
 
+	}
+
+	public function updatecenterno($centerno, $membercontrol){
+		$query = $this->db->query("SELECT * FROM `caritascenters_has_members` where Members_ControlNo = $membercontrol");
+		foreach ($query->result()	 as $d) {
+			$dated = $d->DateEntered;
+			$oldcenter = $d->CaritasCenters_ControlNo;
+		}
+
+		$this->db->query("UPDATE `microfinance2`.`caritascenters_has_members` SET `CaritasCenters_ControlNo` = '$centerno' WHERE `caritascenters_has_members`.`CaritasCenters_ControlNo` = $oldcenter AND `caritascenters_has_members`.`Members_ControlNo` = $membercontrol and `DateEntered`= '$dated' ");
 	}
 
 	public function updatemembers($controlno, $religion, $cstatus){

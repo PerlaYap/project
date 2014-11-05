@@ -1,5 +1,5 @@
 <?php $control_no =  $number; 
-
+	$branchno = $this->session->userdata('branchno');
 /*if ($number=="") {
 	$control_no = '2';
 }else{
@@ -33,9 +33,12 @@ $getOrganization =$this->db->query("SELECT * FROM `membersorganization` WHERE `C
 $getbranchandcenter = $this->db->query("SELECT cm.`CaritasCenters_ControlNo`, cc.`CenterNo`, cbc.`CaritasBranch_ControlNo`, b.`BranchName`
 FROM `caritascenters_has_members` cm, `caritascenters` cc, `caritasbranch_has_caritascenters` cbc,
 `caritasbranch` b
-where `Members_ControlNo` = 2 and cm.`CaritasCenters_ControlNo` = cc.`ControlNo` and
+where `Members_ControlNo` = $control_no and cm.`CaritasCenters_ControlNo` = cc.`ControlNo` and
 cbc.`CaritasCenters_ControlNo` = cc.`ControlNo` and
 b.ControlNo = cbc.`CaritasBranch_ControlNo`");
+
+$getcentersofbranch = $this->db->query("SELECT `CaritasCenters_ControlNo`, `CenterNo` FROM `caritasbranch_has_caritascenters` bc join `caritascenters` c on bc.`CaritasCenters_ControlNo` = c.ControlNo
+where `CaritasBranch_ControlNo` =$branchno");
 
 foreach ($getbranchandcenter->result() as $bc) {
 	$branch = $bc->BranchName;
@@ -117,7 +120,23 @@ foreach ($getbranchandcenter->result() as $bc) {
 				    <label>
 				        <span>Center No :</span> </label>
 				      
-				        <input id="" disabled type="text" name="centerno" value="<?php echo $center; ?>" style="width: 53px;"/>
+				        <!-- <input id="" disabled type="text" name="centerno" value="<?php echo $center; ?>" style="width: 53px;"/> -->
+				        <select style="width: 53px;" name='centerno'>
+				        	<?php foreach ($getcentersofbranch->result() as $bc):
+				        				$cen = $bc->CenterNo; 
+				        				$cen_control = $bc->CaritasCenters_ControlNo;
+				        				?>
+
+				        			<?php if ($center == $cen){ ?>
+				        					<option selected value='<?php echo $cen_control ?>' ><?php echo $cen ?></option>
+				        				<?php } else { ?>
+				        					<option value='<?php echo $cen_control ?>'><?php echo $cen ?></option>
+				        				<?php } ?>	
+				        	<?php endforeach ?>
+				        	<option></option>
+
+				        </select>
+
 				        &nbsp &nbsp &nbsp &nbsp
 				        
 				        Other Microfinance Institutions :</span>
