@@ -3,7 +3,12 @@
 <style type="text/css" media="print">
 .dontprint{
 	display: none;
-}
+	}
+@page { 
+    size: portrait;
+    margin: 0.5in;
+  }
+
 
 </style>
 
@@ -28,11 +33,11 @@
 			<img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" style="width: 150px; height: auto;" >
 		</a>
 		
-		<h3 style="margin-left:auto;margin-right:auto;">
+		<h4 style="margin-left:auto;margin-right:auto; font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;">
 			CARITAS SALVE CREDIT COOPERATIVE <br> 
 			Termination Report <br>
 			<?php echo $branch ?> Branch
-		</h3>
+		</h4>
 	</div>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/terminate.css'); ?>">
@@ -69,7 +74,7 @@
 <table class="signature" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Approved by:</td>
-				<td class="sig">&nbsp <?php echo $branch ?></td>
+				<td class="sig" style="width: 200px;">&nbsp <?php echo $branch ?></td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
 				<td class="sig2" style="width: 150px;">&nbsp<?php echo $datetoday; ?></td>
 			</tr>
@@ -78,7 +83,7 @@
 		<table class="signature"  style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Received by:</td>
-				<td class="sig">&nbsp <?php echo $name ?>    </td>
+				<td class="sig" style="width: 200px;">&nbsp <?php echo $name ?>    </td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
 				<td class="sig2" style="width: 150px;">&nbsp</td>
 			</tr>
