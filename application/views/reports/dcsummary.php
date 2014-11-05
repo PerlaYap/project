@@ -24,7 +24,7 @@ $wordDate=date('F d, Y', strtotime($reportDate));
 
 
 <?php 
-$getDailyCollection = $this->db->query("SELECT Sky.MemberControl, MemberID, Name, ActiveLoan, (ActiveLoan-TotalPaid) AS LoanLeft, 
+$getDailyCollection = $this->db->query("SELECT Sky.MemberControl, MemberID, Name, IFNULL(ActiveLoan,0) AS ActiveLoan, (IFNULL(ActiveLoan,0)-IFNULL(TotalPaid,0)) AS LoanLeft, 
 	IFNULL(Loan.ControlNo,'N/A') AS LoanControl, IFNULL(Loan.Amount,0) AS LoanPayment, IFNULL(PastDue.ControlNo,'N/A') AS PastDueControl, IFNULL(PastDue.Amount,0) AS PastDuePayment, 
 	IFNULL(Savings.ControlNo, 'N/A') AS SavingsControl, IFNULL(Savings.Amount,0) AS SavingsPayment, IFNULL(Withdrawal.ControlNo,'N/A') AS WithdrawalControl, IFNULL(Withdrawal.Amount,0) AS WithdrawalPayment
 	FROM (SELECT MemberID, Z.MemberControl, concat(LastName,', ',FirstName,' ', MiddleName) AS Name , ActiveLoan FROM (SELECT Members_ControlNo AS MemberControl FROM 
@@ -210,36 +210,7 @@ foreach ($getTotal->result() as $row) {
 	</style>
 
 	<div class="content">
-		<div class="noPrint" >
-			<!--<form action="getOtherDC" method="post" name="getOtherDC" >
-
-				<br><br>
-				<p style="text-align:center;">VIEW DAILY LOAN COLLECTION SUMMARY OF:  
-					<select id="branchList" name="dcbranchControl" onchange="getCenterList()">
-						<option value=" " selected></option>
-						<?php if($userrank=='mispersonnel') {?>
-						<?php
-						foreach ($branchList->result() as $row) { 
-							echo "<option value='".$row->BranchControl."'>".$row->BranchName."</option>" ;
-						} ?>
-						<?php }else{ 
-							echo "<option value='".$branch."'>".$branchname."</option>" ;
-						} ?>
-					</select> 
-
-					&nbsp &nbsp  
-
-					<select id="centers" name="dccenterControl">
-					</select>
-
-					&nbsp &nbsp 
-					<span>of Date: </span></label>
-					<input type="text" name="reportDate" style="width: 135px;" value="<?php echo $reportDate ?>" readOnly="true"/>
-					<input type="submit" value="Go" class="go"/>
-				</form>-->
-			</div>
-
-			<br>
+		<br>
 			<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo2"></a>
 			
 			<div class="yesPrint">
@@ -258,8 +229,8 @@ foreach ($getTotal->result() as $row) {
 					<tr class="headr">
 						<td class="DChdr" style="width:100px;" >Member ID </td>
 						<td class="DChdr"  style="width:270px;">Name</td>
-						<td class="DChdr2" style="width: 150px"  >Active Release</td>
-						<td class="DChdr2" style="width: 120px"   >Loan Balance </td>
+						<td class="DChdr2" style="width: 150px">Active Release</td>
+						<td class="DChdr2" style="width: 120px">Loan Balance </td>
 						<td class="DChdr2" style="width: 100px;"  colspan="1">Loan </td>
 						<td class="DChdr2" style="width: 100px;"  colspan="1">Past Due </td>
 						<td class="DChdr2" style="width: 100px;"  colspan="1">Savings </td>
@@ -273,14 +244,14 @@ foreach ($getTotal->result() as $row) {
 					foreach ($getDailyCollection->result() as $row) { ?>
 					<tr class="row">
 
-						<td class="DCcontent"><?php echo $row->MemberID ?></td>
-						<td class="DCcontent"><?php echo $row->Name ?></td>
-						<td class="DCcontent2"><?php echo $row->ActiveLoan ?></td>
-						<td class="DCcontent2"><?php echo $row->LoanLeft ?></td>
-						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->LoanControl ?>')"><?php echo $row->LoanPayment ?></a></td>
-						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->PastDueControl ?>')"><?php echo $row->PastDuePayment ?></a></td>
-						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->SavingsControl ?>')"><?php echo $row->SavingsPayment ?></a></td>
-						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->WithdrawalControl ?>')"><?php echo $row->WithdrawalPayment ?></a></td>
+						<td class="DCcontent"><?php echo $row->MemberID; ?></td>
+						<td class="DCcontent"><?php echo $row->Name; ?></td>
+						<td class="DCcontent2"><?php echo number_format($row->ActiveLoan,2); ?></td>
+						<td class="DCcontent2"><?php echo number_format($row->LoanLeft,2); ?></td>
+						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->LoanControl ?>')"><?php echo number_format($row->LoanPayment,2); ?></a></td>
+						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->PastDueControl ?>')"><?php echo number_format($row->PastDuePayment,2); ?></a></td>
+						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->SavingsControl ?>')"><?php echo number_format($row->SavingsPayment,2) ?></a></td>
+						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->WithdrawalControl ?>')"><?php echo number_format($row->WithdrawalPayment,2) ?></a></td>
 					</tr>
 					<?php $a++; }?>
 
@@ -289,10 +260,10 @@ foreach ($getTotal->result() as $row) {
 						<td class="DCtotal" style="text-align:right;" colspan="2"><b>TOTAL: &nbsp</b></td>
 						<td class="DCtotal2" ><b></b></td>	
 						<td class="DCtotal2" ><b></b></td>
-						<td class="DCtotal2" ><b><?php echo $LTotal ?> </b></td>
-						<td class="DCtotal2" ><b><?php echo $PDTotal ?> </b></td>
-						<td class="DCtotal2" ><b><?php echo $STotal ?> </b></td>
-						<td class="DCtotal2" ><b><?php echo $WTotal ?> </b></td>
+						<td class="DCtotal2" ><b><?php echo number_format($LTotal,2) ?> </b></td>
+						<td class="DCtotal2" ><b><?php echo number_format($PDTotal,2) ?> </b></td>
+						<td class="DCtotal2" ><b><?php echo number_format($STotal,2) ?> </b></td>
+						<td class="DCtotal2" ><b><?php echo number_format($WTotal,2) ?> </b></td>
 
 					</tr>
 

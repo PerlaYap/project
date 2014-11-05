@@ -267,7 +267,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 		<tr>
 			<td class="label1">Beginning</td>
 			<?php foreach($getSavings->result() as $data){
-				echo '<td class="number1">'.$data->BegSaving.'</td>';
+				echo '<td class="number1">'.number_format($data->BegSaving,2).'</td>';
 			} ?>
 
 		</tr>
@@ -283,7 +283,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 							$money=$money*1.503;
 						}
 					}
-					echo '<td class="number1">'.($money-$data->BegSaving).'</td>';
+					echo '<td class="number1">'.number_format(($money-$data->BegSaving),2).'</td>';
 				}
 			?>
 		</tr>
@@ -291,7 +291,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 		<tr>
 			<td class="label1">Savings Collection</td>
 			<?php foreach ($getSavings->result() as $data) {
-			echo '<td class="number1">'.$data->CurrentSaving.'</td>';
+			echo '<td class="number1">'.number_format($data->CurrentSaving,2).'</td>';
 		}?>
 		</tr>
 
@@ -300,7 +300,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 			<?php 
 				foreach($getSavings->result() as $data){
 					$money=($data->CurrentSaving)*1.503;
-					echo '<td class="number1">'.($money-$data->CurrentSaving).'</td>';
+					echo '<td class="number1">'.number_format(($money-$data->CurrentSaving),0).'</td>';
 				}
 			?>
 		</tr>
@@ -308,7 +308,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 		<tr>
 			<td class="label1">Withdrawal</td>
 			<?php foreach( $getSavings->result() as $data){
-				echo '<td class="number1">('.$data->CurrentWithdrawal.')</td>';
+				echo '<td class="number1">('.number_format($data->CurrentWithdrawal,2).')</td>';
 			} ?>
 	
 		</tr>
@@ -330,31 +330,10 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 				$interest2=($data->CurrentSaving)*1.503;
 				$interest2-=$data->CurrentSaving;
 
-				echo '<td class="number1">'.($interest1+$interest2+$data->Total).'</td>';
+				echo '<td class="number1"><b>'.number_format(($interest1+$interest2+$data->Total),2).'</b></td>';
 			} ?>
 
 		</tr>
-		<!--<tr>
-			<td class="label"><b>Dormant (Inactive)</b></td>
-			<td class="number1"></td>
-	
-		</tr>
-		<tr>
-			<td class="label">&nbsp&nbsp&nbsp&nbspReturn-Dormant</td>
-			<td class="number1"></td>
-		
-		</tr>
-		<tr>
-			<td class="label"><b>Dormant - End</b></td>
-			<td class="number1"></td>
-	
-		</tr>
-		<tr>
-			<td class="label"><b>Total Savings</b></td>
-			<td class="number2"></td>
-	
-		</tr>
--->
 	</table>
 
 	
@@ -364,7 +343,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 			<td class="label">Preferred Share - Beg</td>
 			<?php
 				foreach ($getCapital->result() as $data3) {
-					echo "<td class='number'>".$data3->BegCapital."</td>";
+					echo "<td class='number'>".number_format($data3->BegCapital,2)."</td>";
 				}
 			?>
 		</tr>
@@ -372,7 +351,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 			<td class="label">Purchased</td>
 			<?php
 				foreach ($getCapital->result() as $data3) {
-					echo "<td class='number'>".$data3->TotalCapital."</td>";
+					echo "<td class='number'>".number_format($data3->TotalCapital,2)."</td>";
 				}
 			?>
 	
@@ -381,7 +360,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 			<td class="label">Returned</td>
 			<?php
 				foreach ($getCapital->result() as $data3) {
-					echo "<td class='number'>(".$data3->ReturnedCapital.")</td>";
+					echo "<td class='number'>(".number_format($data3->ReturnedCapital,2).")</td>";
 				}
 			?>
 	
@@ -391,7 +370,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 			<td class="label">Preferred Share - End</td>
 			<?php
 				foreach ($getCapital->result() as $data3) {
-					echo "<td class='number'>".($data3->BegCapital + $data3->TotalCapital - $data3->ReturnedCapital)."</td>";
+					echo "<td class='number'><b>".number_format(($data3->BegCapital + $data3->TotalCapital - $data3->ReturnedCapital),2)."</b></td>";
 				}
 			?>
 	
