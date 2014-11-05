@@ -51,9 +51,105 @@
 				$yue = 'December';
 			}
 
+$date=date('Y-m-d');
 
-$getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbranch b
-	Order by b.branchname"); ?>
+$getportfolio = $this->db->query("SELECT ControlNo, BranchID, BranchName, TRUNCATE((IFNULL(BegTotalLoan23,0)-IFNULL(Beg23Collection,0)),2) AS BegTotalLoan23, TRUNCATE((IFNULL(BegTotalLoan40,0)-IFNULL(Beg40Collection,0)),2) AS BegTotalLoan40,
+TRUNCATE(IFNULL(LoanReleased23,0),2) AS LoanReleased23, TRUNCATE(IFNULL(LoanReleased40,0),2) AS LoanReleased40, TRUNCATE(IFNULL(TotalTarget23,0),2) AS TotalTarget23, TRUNCATE(IFNULL(TotalTarget40,0),2) AS TotalTarget40,
+TRUNCATE(IFNULL(Collected23,0),2) AS Collected23, TRUNCATE(IFNULL(Collected40,0),2) AS Collected40
+FROM CaritasBranch cb
+LEFT JOIN
+(SELECT SUM(AmountRequested) AS BegTotalLoan23, CaritasBranch_ControlNo AS BranchControl 
+FROM (SELECT ControlNo, AmountRequested, LoanType 
+FROM LoanApplication WHERE (Status!='Rejected' AND Status!='Pending' AND Status!='Active') AND DateReleased<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))A
+LEFT JOIN LoanApplication_has_Members lhm ON lhm.LoanApplication_ControlNo=A.ControlNo
+WHERE LoanType='23-Weeks' GROUP BY  BranchControl, LoanType)BegLoan23Weeks
+ON cb.ControlNo=BegLoan23Weeks.BranchControl
+LEFT JOIN
+(SELECT SUM(AmountRequested) AS BegTotalLoan40, CaritasBranch_ControlNo AS BranchControl 
+FROM (SELECT ControlNo, AmountRequested, LoanType 
+FROM LoanApplication WHERE (Status!='Rejected' AND Status!='Pending' AND Status!='Active') AND DateReleased<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))A
+LEFT JOIN LoanApplication_has_Members lhm ON lhm.LoanApplication_ControlNo=A.ControlNo
+WHERE LoanType='40-Weeks' GROUP BY  BranchControl)BegLoan40Weeks
+ON cb.ControlNo=BegLoan40Weeks.BranchControl
+LEFT JOIN
+(SELECT SUM(Amount) AS Beg23Collection, CaritasBranch_ControlNo AS BranchControl, LoanType FROM (SELECT LoanAppControlNo, Amount
+FROM Transaction 
+WHERE (TransactionType='Loan' OR TransactionType='Past Due') AND DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))A
+LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=A.LoanAppControlNo
+LEFT JOIN LoanApplication la ON la.ControlNo=A.LoanAppControlNo
+WHERE LoanType='23-Weeks' GROUP BY BranchControl)BegCollection23Weeks
+ON cb.ControlNo=BegCollection23Weeks.BranchControl
+LEFT JOIN
+(SELECT SUM(Amount) AS Beg40Collection, CaritasBranch_ControlNo AS BranchControl, LoanType FROM (SELECT LoanAppControlNo, Amount
+FROM Transaction 
+WHERE (TransactionType='Loan' OR TransactionType='Past Due') AND DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)))A
+LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=A.LoanAppControlNo
+LEFT JOIN LoanApplication la ON la.ControlNo=A.LoanAppControlNo
+WHERE LoanType='40-Weeks'
+GROUP BY BranchControl, LoanType)BegCollection40Weeks
+ON cb.ControlNo=BegCollection40Weeks.BranchControl
+LEFT JOIN
+(SELECT CaritasBranch_ControlNo AS BranchControl, SUM(AmountRequested) AS LoanReleased23 FROM (SELECT ControlNo, AmountRequested, LoanType FROM LoanApplication la
+WHERE (MONTH(DateReleased)=MONTH('$date') AND YEAR(DateReleased)=YEAR('$date')) AND (Status!='Pending' AND Status!='Rejected' AND Status!='Active'))la
+LEFT JOIN LoanApplication_has_Members lhm ON la.ControlNo=lhm.LoanApplication_ControlNo
+WHERE LoanType='23-Weeks' GROUP BY CaritasBranch_ControlNo)LoanReleased23
+ON cb.ControlNo=LoanReleased23.BranchControl
+LEFT JOIN
+(SELECT CaritasBranch_ControlNo AS BranchControl, SUM(AmountRequested) AS LoanReleased40 FROM (SELECT ControlNo, AmountRequested, LoanType FROM LoanApplication la
+WHERE (MONTH(DateReleased)=MONTH('$date') AND YEAR(DateReleased)=YEAR('$date')) AND (Status!='Pending' AND Status!='Rejected' AND Status!='Active'))la
+LEFT JOIN LoanApplication_has_Members lhm ON la.ControlNo=lhm.LoanApplication_ControlNo
+WHERE LoanType='23-Weeks' GROUP BY CaritasBranch_ControlNo)LoanReleased40
+ON cb.ControlNo=LoanReleased40.BranchControl
+LEFT JOIN
+(SELECT CaritasBranch_ControlNo AS BranchControl, SUM(MonthlyPayment) AS TotalTarget23
+FROM (SELECT ControlNo, DateReleased, DateEnd, LoanType,
+ROUND(((TRUNCATE(DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)),DateReleased)/7,0)-TRUNCATE((IF(Month(DateEnd)=Month('$date') AND YEAR(DateEnd)=YEAR('$date'),DATEDIFF(DateEnd,DateReleased)/7,DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)),DateReleased)/7)),0))* WeeklyPayment),2) AS MonthlyPayment
+FROM 
+(SELECT ControlNo, IF(LoanType='23-Weeks',(AmountRequested+Interest)/23, (AmountRequested+Interest)/40) AS WeeklyPayment, LoanType, DateReleased, 
+DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH) AS DateEnd
+FROM loanapplication 
+WHERE (Status='Current' OR Status='Full Payment') AND 
+(CAST(DATE_FORMAT('$date' ,CONCAT(YEAR(DateReleased),'-',MONTH(DateReleased),'-01')) as DATE)<='$date' 
+AND '$date'<=LAST_DAY(DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH))))Alpha)A
+LEFT JOIN LoanApplication_has_Members lhm ON lhm.LoanApplication_ControlNo=A.ControlNo
+WHERE LoanType='23-Weeks' GROUP BY CaritasBranch_ControlNo)TargetAmount23
+ON cb.ControlNo=TargetAmount23.BranchControl
+LEFT JOIN
+(SELECT CaritasBranch_ControlNo AS BranchControl, SUM(MonthlyPayment) AS TotalTarget40
+FROM (SELECT ControlNo, DateReleased, DateEnd, LoanType,
+ROUND(((TRUNCATE(DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)),DateReleased)/7,0)-TRUNCATE((IF(Month(DateEnd)=Month('$date') AND YEAR(DateEnd)=YEAR('$date'),DATEDIFF(DateEnd,DateReleased)/7,DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)),DateReleased)/7)),0))* WeeklyPayment),2) AS MonthlyPayment
+FROM 
+(SELECT ControlNo, IF(LoanType='23-Weeks',(AmountRequested+Interest)/23, (AmountRequested+Interest)/40) AS WeeklyPayment, LoanType, DateReleased, 
+DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH) AS DateEnd
+FROM loanapplication 
+WHERE (Status='Current' OR Status='Full Payment') AND 
+(CAST(DATE_FORMAT('$date' ,CONCAT(YEAR(DateReleased),'-',MONTH(DateReleased),'-01')) as DATE)<='$date' 
+AND '$date'<=LAST_DAY(DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH))))Alpha)A
+LEFT JOIN LoanApplication_has_Members lhm ON lhm.LoanApplication_ControlNo=A.ControlNo
+WHERE LoanType='40-Weeks' GROUP BY CaritasBranch_ControlNo)TargetAmount40
+ON cb.ControlNo=TargetAmount40.BranchControl
+LEFT JOIN
+(SELECT CaritasBranch_ControlNo AS BranchControl, SUM(Amount) AS Collected23
+FROM (SELECT LoanAppControlNo AS AppControl, SUM(Amount) AS Amount FROM Transaction 
+WHERE (TransactionType='Loan' OR TransactionType='Past Due') AND (MONTH(DateTime)=MONTH('$date') AND YEAR(DateTime)=YEAR('$date'))
+GROUP BY LoanAppControlNo)A
+LEFT JOIN LoanApplication_has_Members lhm ON lhm.LoanApplication_ControlNo=A.AppControl
+LEFT JOIN LoanApplication la ON la.ControlNo=A.AppControl
+WHERE LoanType='23-Weeks' GROUP BY CaritasBranch_ControlNo)Collected23
+ON cb.ControlNo=Collected23.BranchControl
+LEFT JOIN
+(SELECT CaritasBranch_ControlNo AS BranchControl, SUM(Amount) AS Collected40
+FROM (SELECT LoanAppControlNo AS AppControl, SUM(Amount) AS Amount FROM Transaction 
+WHERE (TransactionType='Loan' OR TransactionType='Past Due') AND (MONTH(DateTime)=MONTH('$date') AND YEAR(DateTime)=YEAR('$date'))
+GROUP BY LoanAppControlNo)A
+LEFT JOIN LoanApplication_has_Members lhm ON lhm.LoanApplication_ControlNo=A.AppControl
+LEFT JOIN LoanApplication la ON la.ControlNo=A.AppControl
+WHERE LoanType='40-Weeks' GROUP BY CaritasBranch_ControlNo)Collected40
+ON cb.ControlNo=Collected40.BranchControl
+WHERE ControlNo!=1 ORDER BY BranchName"); 
+
+$port=$getportfolio->result();
+?>
 	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 	
 	
@@ -65,9 +161,9 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 	<table class="misreport" border="1" style="margin-left:auto; margin-right:auto;">
 		<tr class="header">
 			<td class="label" style="text-align: right;"><b>Branch:</td>
-		<?php	foreach ($getbranch->result() as $br) { ?>
-				<td class="branch"> <?php echo $br->branchname; ?> </td>
-		<?php }?>
+			<?php foreach($port AS $data) { ?>
+				<td class="branch"><?php echo $data->BranchName; ?></td>
+			<?php } ?>
 				<td class="branch">Total</td>
 
 		<tr>
@@ -82,490 +178,101 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 			<tr>
 				<td class="label1">(23 weeks)</td>
 				<?php
-	$totalbalance = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$beg = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	");
-
-	$beg2 = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	 AND (t.TransactionType = 'Loan' or t.TransactionType = 'Past Due') ");
-
-				foreach ($beg->result() as $tl){ 
-					$amount  = $tl->Amount; 
-					$interest = $tl->Interest;
-					$expense = $tl->Expense;
-
-					$collection = $amount+$interest-$expense;
-
-					
-					foreach ($beg2->result() as $tt){ 
-					$amt  = $tt->Amount; 
-			
-					
-
-					$balance = $collection-$amt;
-
-					if ($balance==null){
-						$balance = 0;
-					}
-					?>
-			<td class="number"><?php echo $balance;  ?></td>
-	<?php   $totalbalance +=$balance; 
-} } 
-}
-?>	<td class="number"><?php echo $totalbalance;  ?></td>
+				$totalBeg23=0;
+				foreach($port AS $data){ 
+					$totalBeg23+=$data->BegTotalLoan23; ?>
+					<td class="number"><?php echo number_format($data->BegTotalLoan23,2); ?></td>
+				<?php } ?>
+				<td class="number"><b><?php echo number_format($totalBeg23, 2); ?></b></td>
 			</tr>
 			
 			<tr>
 				<td class="label1">(40 weeks)</td>
-				<?php
-	$totalbalance2 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$beg3 = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-	$beg4 = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(t.DateTime)='$month' AND year(t.DateTime)= '$year' AND (t.TransactionType = 'Loan' or t.TransactionType = 'Past Due') ");
-
-				foreach ($beg3->result() as $tl){ 
-					$amount  = $tl->Amount; 
-					$interest = $tl->Interest;
-					$expense = $tl->Expense;
-
-					$collection = $amount+$interest-$expense;
-
-					
-					foreach ($beg4->result() as $tt){ 
-					$amt  = $tt->Amount; 
-			
-					
-
-					$balance2 = $collection-$amt;
-
-					if ($balance2==null){
-						$balance2 = 0;
-					}
-					?>
-			<td class="number"><?php echo $balance2;  ?></td>
-	<?php   $totalbalance2 +=$balance2; 
-} } 
-}
-?>	<td class="number"><?php echo $totalbalance2;  ?></td>
-			
+				<?php 
+					$totalBeg40=0;
+					foreach($port AS $data){ 
+						$totalBeg40+=$data->BegTotalLoan40; ?>
+						<td class="number"><?php echo number_format($data->BegTotalLoan40,2); ?></td>
+				<?php } ?>
+				<td class="number"><b><?php echo number_format($totalBeg40, 2); ?></b></td>
 			</tr>
 			
 		<tr>
 			<td class="label2">Total Loan Receivable-Beg</td>
-			<?php
-	$totalbala = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$beg = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-	$beg2 = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	AND month(t.DateTime)='$month' AND year(t.DateTime)= '$year' AND (t.TransactionType = 'Loan' or t.TransactionType = 'Past Due') ");
-
-	$beg3 = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-	$beg4 = $this->db->query("SELECT  b.ControlNo, month(t.DateTime), year(t.DateTime), t.TransactionType, sum(t.Amount) AS Amount
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m,transaction t, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = t.members_controlno AND t.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(t.DateTime)='$month' AND year(t.DateTime)= '$year' AND (t.TransactionType = 'Loan' or t.TransactionType = 'Past Due') ");
-
-				foreach ($beg3->result() as $tl){ 
-					$amount  = $tl->Amount; 
-					$interest = $tl->Interest;
-					$expense = $tl->Expense;
-
-					$collection = $amount+$interest-$expense;
-
-					
-					foreach ($beg4->result() as $tt){ 
-					$amt  = $tt->Amount; 
-			
-
-					$balance2 = $collection-$amt;
-
-					if ($balance2==null){
-						$balance2 = 0;
-					}
-
-				foreach ($beg->result() as $tl){ 
-					$amount  = $tl->Amount; 
-					$interest = $tl->Interest;
-					$expense = $tl->Expense;
-
-					$collection = $amount+$interest-$expense;
-
-					
-					foreach ($beg2->result() as $tt){ 
-					$amt  = $tt->Amount; 
-			
-					
-
-					$balance = $collection-$amt;
-
-					if ($balance==null){
-						$balance = 0;
-					}
-
-					$totalbal = $balance+$balance2;
-					?>
-	
-	<td class="number"><?php echo $totalbal;  ?></td>
-	<?php   $totalbala +=$totalbal; 
-} } } } }
-
-?>	<td class="number"><?php echo $totalbala;  ?></td>
+			<?php foreach($port AS $data){?>
+				<td class="number"><b><?php echo number_format(($data->BegTotalLoan23 + $data->BegTotalLoan40),2); ?></b></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format(($totalBeg23+$totalBeg40),2); ?></b></td>
 		</tr>
+
 		<tr>
 			<td class="label"><b>Loan Releases</b></td>
 			<td colspan="15"></td>
 		</tr>
-			<tr>
-				<td class="label1">(23 weeks)</td>
-				<?php
-	$totalrelease = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
 
-	$release = $this->db->query("SELECT sum(l.AmountRequested) as Amount, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year' AND l.Status = 'Active'");
-
-				foreach ($release->result() as $rl){ 
-					$rel  = $rl->Amount; 
-
-					if ($rel==null){
-						$rel = 0;
-					}
-					?>
-
-			<td class="number"><?php echo $rel;  ?></td>
-	<?php   $totalrelease +=$rel; 
-} } 
-
-?>	<td class="number"><?php echo $totalrelease;  ?></td>
+		<tr>
+			<td class="label1">(23 weeks)</td>
+			<?php 
+				$totalRelease23=0; 
+				foreach($port AS $data){
+					$totalRelease23+=$data->LoanReleased23; ?>
+					<td class="number"><?php echo number_format($data->LoanReleased23,2); ?></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format($totalRelease23,2); ?></b></td>
+		</tr>
 			
-				
-			</tr>
-			
-			
-			<tr>
-				<td class="label1">(40 weeks)</td>
-				<?php
-	$totalrelease2 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$release2 = $this->db->query("SELECT sum(l.AmountRequested) as Amount, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year' AND l.Status = 'Active'");
-
-				foreach ($release2->result() as $rl){ 
-					$rel2  = $rl->Amount; 
-
-					if ($rel2==null){
-						$rel2 = 0;
-					}
-					?>
-
-			<td class="number"><?php echo $rel2;  ?></td>
-	<?php   $totalrelease2 +=$rel2; 
-} } 
-
-?>	<td class="number"><?php echo $totalrelease2;  ?></td>
-			
-			</tr>
+		<tr>
+			<td class="label1">(40 weeks)</td>
+			<?php
+				$totalRelease40=0;
+				foreach($port AS $data){
+					$totalRelease40+=$data->LoanReleased40;?>
+					<td class="number"><?php echo number_format($data->LoanReleased40,2); ?></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format($totalRelease40,2); ?></b></td>
+		</tr>
 			
 		<tr>
 			<td class="label2">Total Loan Release</td>
-			<?php
-	$totalrel = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$release = $this->db->query("SELECT sum(l.AmountRequested) as Amount, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year' AND l.Status = 'Active'");
-
-
-	$release2 = $this->db->query("SELECT sum(l.AmountRequested) as Amount, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year' AND l.Status = 'Active'");
-
-				foreach ($release2->result() as $rl){ 
-					$rel2  = $rl->Amount; 
-
-					if ($rel2==null){
-						$rel2 = 0;
-					}
-				foreach ($release->result() as $rl){ 
-					$rel  = $rl->Amount; 
-
-					if ($rel==null){
-						$rel = 0;
-					}
-
-					$lease = $rel+$rel2;
-					?>
-
-			<td class="number"><?php echo $lease;  ?></td>
-	<?php   $totalrel +=$lease; 
-} } } 
-
-?>	<td class="number"><?php echo $totalrel;  ?></td>
-		
+			<?php foreach($port AS $data){ ?>
+				<td class="number"><b><?php echo number_format(($data->LoanReleased23+$data->LoanReleased40),2); ?></b></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format(($totalRelease23+$totalRelease40),2); ?></b></td>
 		</tr>
 
 		<tr>
 			<td class="label"><b>Target Loan Collection</b></td>
 			<td colspan="15"></td>
 		</tr>
-			<tr>
-				<td class="label1">(23 weeks)</td>
-				<?php
-	$totaltarget = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$target = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied), sum(cm.Members_ControlNo) as member
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-	
-
-				foreach ($target->result() as $tl){ 
-					$amount  = $tl->Amount; 
-					$interest = $tl->Interest;
-					$expense = $tl->Expense;
-					$member = $tl->member;
-					
-					$x = ($amount+$interest)/23;
-
-					if ($x>0){
-					$y = $expense/$x;
-
-					if ($y>=4){
-						$fine = $x*4;
-					} else if ($y==3){
-						$fine = $x*3;
-					} else if ($y==2){
-						$fine = $x*2;
-					} else {
-						$fine = $x*1;
-					}
-
-					$count = $fine*$member;
-
-					if ($count==null){
-						$count = 0;
-					}
-
-				} else {
-					$count = 0;
-				}
-					
-					
-					
-
-					
-					?>
-			<td class="number"><?php echo $count;  ?></td>
-	<?php   $totaltarget +=$count; 
-} } 
-
-?>	<td class="number"><?php echo $totaltarget;  ?></td>
-	
 			
-		
-			</tr>
+		<tr>
+			<td class="label1">(23 weeks)</td>
+			<?php 
+				$totalTarget23=0;
+				foreach($port AS $data){
+					$totalTarget23+=$data->TotalTarget23; ?>
+					<td class="number"><?php echo number_format($data->TotalTarget23,2); ?></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format($totalTarget23,2); ?></b></td>
+		</tr>
 			
-			<tr>
-				<td class="label1">(40 weeks)</td>
-				<?php
-	$totaltarget2 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$target2 = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied), sum(cm.Members_ControlNo) as member
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-	
-
-				foreach ($target2->result() as $tl){ 
-					$amount  = $tl->Amount; 
-					$interest = $tl->Interest;
-					$expense = $tl->Expense;
-					$member = $tl->member;
-					
-					$x = ($amount+$interest)/40;
-
-					if ($x>0){
-					$y = $expense/$x;
-
-					if ($y>=4){
-						$fine = $x*4;
-					} else if ($y==3){
-						$fine = $x*3;
-					} else if ($y==2){
-						$fine = $x*2;
-					} else {
-						$fine = $x*1;
-					}
-
-					$count2 = $fine*$member;
-
-					if ($count2==null){
-						$count2 = 0;
-					}
-
-				} else {
-					$count2 = 0;
-				}
-					
-					
-					
-
-					
-					?>
-			<td class="number"><?php echo $count2;  ?></td>
-	<?php   $totaltarget2 +=$count2; 
-} } 
-
-?>	<td class="number"><?php echo $totaltarget2;  ?></td>
-				
-			</tr>
+		<tr>
+			<td class="label1">(40 weeks)</td>
+			<?php
+				$totalTarget40=0;
+				foreach($port AS $data){
+					$totalTarget40+=$data->TotalTarget40; ?>
+					<td class="number"><?php echo number_format($data->TotalTarget40,2); ?></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format($totalTarget40,2); ?></b></td>
+		</tr>
 			
 		<tr>
 			<td class="label2">Total Loan Collection</td>
-			<?php
-	$totaltarget3 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$target2 = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied), sum(cm.Members_ControlNo) as member
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-	$target = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied), sum(cm.Members_ControlNo) as member
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-	
-
-				foreach ($target->result() as $tl){ 
-					$amount  = $tl->Amount; 
-					$interest = $tl->Interest;
-					$expense = $tl->Expense;
-					$member = $tl->member;
-					
-					$x = ($amount+$interest)/23;
-
-					if ($x>0){
-					$y = $expense/$x;
-
-					if ($y>=4){
-						$fine = $x*4;
-					} else if ($y==3){
-						$fine = $x*3;
-					} else if ($y==2){
-						$fine = $x*2;
-					} else {
-						$fine = $x*1;
-					}
-
-					$count = $fine*$member;
-
-					if ($count==null){
-						$count = 0;
-					}
-
-				} else {
-					$count = 0;
-				}
-	
-
-				foreach ($target2->result() as $tl){ 
-					$amount  = $tl->Amount; 
-					$interest = $tl->Interest;
-					$expense = $tl->Expense;
-					$member = $tl->member;
-					
-					$x = ($amount+$interest)/40;
-
-					if ($x>0){
-					$y = $expense/$x;
-
-					if ($y>=4){
-						$fine = $x*4;
-					} else if ($y==3){
-						$fine = $x*3;
-					} else if ($y==2){
-						$fine = $x*2;
-					} else {
-						$fine = $x*1;
-					}
-
-					$count2 = $fine*$member;
-
-					if ($count2==null){
-						$count2 = 0;
-					}
-
-				} else {
-					$count2 = 0;
-				}
-					
-					
-					$count3 = $count +$count2;
-
-					
-					?>
-			<td class="number"><?php echo $count3;  ?></td>
-	<?php   $totaltarget3 +=$count3; 
-} } }
-
-?>	<td class="number"><?php echo $totaltarget3;  ?></td>
+			<?php foreach($port AS $data){ ?>
+				<td class="number"><b><?php echo number_format(($data->TotalTarget23+$data->TotalTarget40),2); ?></b></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format(($totalTarget23+$totalTarget40),2); ?></b></td>
 		
 		</tr>
 
@@ -573,225 +280,75 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 			<td class="label"><b>Loan Collection</b></td>
 			<td colspan="15"></td>
 		</tr>
-			<tr>
-				<td class="label1">(23 weeks)</td>
-				<?php
-	$totalcollect = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
 
-	$collect = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-				foreach ($collect->result() as $cl){ 
-					$amount  = $cl->Amount; 
-					$interest = $cl->Interest;
-					$expense = $cl->Expense;
-
-					$collection = $amount+$interest-$expense;
-
-					if ($collection==null){
-						$collection = 0;
-					}
-					?>
+		<tr>
+			<td class="label1">(23 weeks)</td>
+			<?php
+				$totalCollect23=0;
+				foreach($port AS $data){
+					$totalCollect23+=$data->Collected23; ?>
+					<td class="number">(<?php echo number_format($data->Collected23,2); ?>)</td>
+				<?php } ?>
+			<td class="number"><b>(<?php echo number_format($totalCollect23,2); ?>)</b></td>
+		</tr>
 			
-			<td class="number"><?php echo $collection;  ?></td>
-	<?php   $totalcollect +=$collection; 
- } } 
-
-?>	<td class="number"><?php echo $totalcollect;  ?></td>
-		
-			
-			</tr>
-			
-			<tr>
-				<td class="label1">(40 weeks)</td>
-				<?php
-	$totalcollect2 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$collect2 = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-				foreach ($collect2->result() as $cl){ 
-					$amount  = $cl->Amount; 
-					$interest = $cl->Interest;
-					$expense = $cl->Expense;
-
-					$collection2 = $amount+$interest-$expense;
-
-					if ($collection2==null){
-						$collection2 = 0;
-					}
-					?>
-			
-			<td class="number"><?php echo $collection2;  ?></td>
-	<?php   $totalcollect2 +=$collection2; 
- } } 
-
-?>	<td class="number"><?php echo $totalcollect2;  ?></td>
-			
-			</tr>
+		<tr>
+			<td class="label1">(40 weeks)</td>
+			<?php
+				$totalCollect40=0;
+				foreach($port AS $data){
+					$totalCollect40+=$data->Collected40; ?>
+					<td class="number">(<?php echo number_format($data->Collected40,2); ?>)</td>
+			<?php } ?>
+			<td class="number"><b>(<?php echo number_format($totalCollect40,2); ?>)</b></td>
+		</tr>
 			
 		<tr>
 			<td class="label2">Total Loan Collection</td>
-			<?php
-	$totalcollect3 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$collect = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-
-	$collect2 = $this->db->query("SELECT sum(l.AmountRequested) as Amount, sum(l.Interest) as Interest, sum(m.LoanExpense) as Expense, b.ControlNo, month(l.DateApplied), year(l.DateApplied)
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'
-	AND month(l.DateApplied)='$month' AND year(l.DateApplied)= '$year'");
-
-				foreach ($collect2->result() as $cl){ 
-					$amount  = $cl->Amount; 
-					$interest = $cl->Interest;
-					$expense = $cl->Expense;
-
-					$collection2 = $amount+$interest-$expense;
-
-					if ($collection2==null){
-						$collection2 = 0;
-					}
-
-				foreach ($collect->result() as $cl){ 
-					$amount  = $cl->Amount; 
-					$interest = $cl->Interest;
-					$expense = $cl->Expense;
-
-					$collection = $amount+$interest-$expense;
-
-					if ($collection==null){
-						$collection = 0;
-					}
-
-					$collection3 = $collection+$collection2;
-
-					?>
-			
-			<td class="number"><?php echo $collection3;  ?></td>
-	<?php   $totalcollect3 +=$collection3; 
- } } }
-
-?>	<td class="number"><?php echo $totalcollect3;  ?></td>
-		
+			<?php foreach($port AS $data){ ?>
+				<td class="number"><b>(<?php echo number_format(($data->Collected23+$data->Collected40),2); ?>)</b></td>
+			<?php } ?>
+			<td class="number"><b>(<?php echo number_format(($totalCollect23+$totalCollect40),2); ?>)</b></td>
 		</tr>
+
 		<tr>
 			<td class="label"><b>Loans Receivable-End</b></td>
 			<td colspan="15"></td>
 		</tr>
-			<tr>
-				<td class="label1">(23 weeks)</td>
-				<?php
-	$totalreceive = 0;
+
+		<tr>
+			<td class="label1">(23 weeks)</td>
+			<?php
+				$totalEnd23=0;
+				foreach($port AS $data){
+					$totalEnd23+=($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23); ?>
+					<td class="number"><?php echo number_format(($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23),2); ?></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format($totalEnd23,2); ?></b></td>
 	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$receive = $this->db->query("SELECT sum(m.LoanExpense) as Amount, b.ControlNo
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'");
-
-				foreach ($receive->result() as $rl){ 
-					$rec  = $rl->Amount; 
-
-					if ($rec==null){
-						$rec = 0;
-					}
-					?>
-
-			<td class="number"><?php echo $rec;  ?></td>
-	<?php   $totalreceive +=$rec; 
-} } 
-
-?>	<td class="number"><?php echo $totalreceive;  ?></td>
-	
-			</tr>
+		</tr>
 			
-			<tr>
-				<td class="label1">(40 weeks)</td>
-				<?php
-	$totalreceive2 = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$receive2 = $this->db->query("SELECT sum(m.LoanExpense) as Amount, b.ControlNo
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'");
-
-				foreach ($receive2->result() as $rl){ 
-					$rec2  = $rl->Amount; 
-
-					if ($rec2==null){
-						$rec2 = 0;
-					}
-					?>
-
-			<td class="number"><?php echo $rec2;  ?></td>
-	<?php   $totalreceive2 +=$rec2; 
-} } 
-
-?>	<td class="number"><?php echo $totalreceive2;  ?></td>
-		
-			</tr>
+		<tr>
+			<td class="label1">(40 weeks)</td>
+			<?php
+				$totalEnd40=0;
+				foreach($port AS $data){
+					$totalEnd40+=($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40); ?>
+					<td class="number"><?php echo number_format(($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40),2); ?></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format($totalEnd40,2); ?></b></td>
+		</tr>
 			
 		<tr>
 			<td class="label2">Total Loan Receivable-End</td>
-			
-		<?php
-	$totalrece = 0;
-	
-		foreach ($getbranch->result() as $br) { 
-		$control = $br->ControlNo;
-
-	$receive2 = $this->db->query("SELECT sum(m.LoanExpense) as Amount, b.ControlNo
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '40-Weeks'");
-
-	$receive = $this->db->query("SELECT sum(m.LoanExpense) as Amount, b.ControlNo
-	FROM caritasbranch b, CaritasBranch_has_CaritasCenters bc, CaritasCenters_Has_Members cm, members m, loanapplication_has_members lm, loanapplication l WHERE  b.ControlNo = '$control'
-	AND b.ControlNo = bc.CaritasBranch_ControlNo AND bc.CaritasCenters_ControlNo = cm.CaritasCenters_ControlNo AND cm.Members_ControlNo = m.ControlNo AND m.ControlNo = lm.Members_ControlNo AND lm.loanapplication_ControlNo = l.ControlNo AND l.loantype = '23-Weeks'");
-
-				foreach ($receive->result() as $rl){ 
-					$rec  = $rl->Amount; 
-
-					if ($rec==null){
-						$rec = 0;
-					}
-				foreach ($receive2->result() as $rl){ 
-					$rec2  = $rl->Amount; 
-
-					if ($rec2==null){
-						$rec2 = 0;
-					}
-
-					$totalrec = $rec+$rec2;
+			<?php
+				foreach($port AS $data){ 
+					$temp23=($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23);
+					$temp40=($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40);
 					?>
-
-								<td class="number"><?php echo $totalrec;  ?></td>
-	<?php   $totalrece +=$totalrec; 
-} } }
-
-?>	<td class="number"><?php echo $totalrece;  ?></td>
-		
-		
+					<td class="number"><b><?php echo number_format(($temp23+$temp40),2); ?></b></td>
+			<?php } ?>
+			<td class="number"><b><?php echo number_format(($totalEnd23+$totalEnd40),2); ?></b></td>
 		</tr>
 
 	</table>
