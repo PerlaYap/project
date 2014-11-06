@@ -23,19 +23,19 @@ FROM (SELECT A.ControlNo AS MembersControl, C.Status
 FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo ORDER BY ControlNo)A
 LEFT JOIN
 (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus mhms 
-WHERE DateUpdated<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL -1 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
+WHERE DateUpdated<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL -1 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
 ON A.ControlNo=C.ControlNo)Alpha
 LEFT JOIN
 (SELECT Members_ControlNo, BranchControl
 FROM (SELECT cchm.Members_ControlNo, A.CaritasCenters_ControlNo,A.DateEntered FROM CaritasCenters_has_Members cchm
 LEFT JOIN
-(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL -1 MONTH)) ORDER BY DateEntered DESC)A
+(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL -1 MONTH)) ORDER BY DateEntered DESC)A
 ON A.Members_ControlNo=cchm.Members_ControlNo GROUP BY Members_ControlNo)Alpha
 LEFT JOIN (SELECT CenterControl, BranchControl, BranchName FROM 
 (SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
 FROM caritasbranch_has_caritascenters cbhcc
 LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters 
-WHERE Date<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL -1 MONTH)) ORDER BY Date)A
+WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL -1 MONTH)) ORDER BY Date)A
 ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
 LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
 ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
@@ -53,13 +53,13 @@ LEFT JOIN
 (SELECT Members_ControlNo, BranchControl
 FROM (SELECT cchm.Members_ControlNo, A.CaritasCenters_ControlNo,A.DateEntered FROM CaritasCenters_has_Members cchm
 LEFT JOIN
-(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
+(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
 ON A.Members_ControlNo=cchm.Members_ControlNo GROUP BY Members_ControlNo)Alpha
 LEFT JOIN (SELECT CenterControl, BranchControl, BranchName FROM 
 (SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
 FROM caritasbranch_has_caritascenters cbhcc
 LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters 
-WHERE Date<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY Date)A
+WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY Date)A
 ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
 LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
 ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
@@ -77,13 +77,13 @@ LEFT JOIN
 (SELECT Members_ControlNo, BranchControl
 FROM (SELECT cchm.Members_ControlNo, A.CaritasCenters_ControlNo,A.DateEntered FROM CaritasCenters_has_Members cchm
 LEFT JOIN
-(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
+(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
 ON A.Members_ControlNo=cchm.Members_ControlNo GROUP BY Members_ControlNo)Alpha
 LEFT JOIN (SELECT CenterControl, BranchControl, BranchName FROM 
 (SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
 FROM caritasbranch_has_caritascenters cbhcc
 LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters 
-WHERE Date<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY Date)A
+WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY Date)A
 ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
 LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
 ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
@@ -95,19 +95,19 @@ FROM (SELECT A.ControlNo AS MembersControl, C.Status
 FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo ORDER BY ControlNo)A
 LEFT JOIN
 (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus mhms 
-WHERE DateUpdated<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
+WHERE DateUpdated<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
 ON A.ControlNo=C.ControlNo)Alpha
 LEFT JOIN
 (SELECT Members_ControlNo, BranchControl
 FROM (SELECT cchm.Members_ControlNo, A.CaritasCenters_ControlNo,A.DateEntered FROM CaritasCenters_has_Members cchm
 LEFT JOIN
-(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
+(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
 ON A.Members_ControlNo=cchm.Members_ControlNo GROUP BY Members_ControlNo)Alpha
 LEFT JOIN (SELECT CenterControl, BranchControl, BranchName FROM 
 (SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
 FROM caritasbranch_has_caritascenters cbhcc
 LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters 
-WHERE Date<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY Date)A
+WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY Date)A
 ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
 LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
 ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
@@ -120,19 +120,19 @@ FROM (SELECT A.ControlNo AS MembersControl, C.Status
 FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo ORDER BY ControlNo)A
 LEFT JOIN
 (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus mhms 
-WHERE DateUpdated<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
+WHERE DateUpdated<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
 ON A.ControlNo=C.ControlNo)Alpha
 LEFT JOIN
 (SELECT Members_ControlNo, BranchControl
 FROM (SELECT cchm.Members_ControlNo, A.CaritasCenters_ControlNo,A.DateEntered FROM CaritasCenters_has_Members cchm
 LEFT JOIN
-(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
+(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
 ON A.Members_ControlNo=cchm.Members_ControlNo GROUP BY Members_ControlNo)Alpha
 LEFT JOIN (SELECT CenterControl, BranchControl, BranchName FROM 
 (SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
 FROM caritasbranch_has_caritascenters cbhcc
 LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters 
-WHERE Date<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY Date)A
+WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY Date)A
 ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
 LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
 ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
@@ -143,7 +143,7 @@ LEFT JOIN
 (SELECT COUNT(ControlNo) AS LoanNo23, CaritasBranch_ControlNo AS BranchControl
 FROM (SELECT ControlNo, Status
 FROM LoanApplication
-WHERE Status!='Pending' AND Status!='Rejected' AND LoanType='23-Weeks' AND DateApplied<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)))Alpha
+WHERE Status!='Pending' AND Status!='Rejected' AND LoanType='23-Weeks' AND DateApplied<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)))Alpha
 LEFT JOIN
 (SELECT LoanApplication_ControlNo, CaritasBranch_ControlNo 
 FROM loanapplication_has_members) Beta
@@ -153,7 +153,7 @@ LEFT JOIN
 (SELECT COUNT(ControlNo) AS LoanNo40, CaritasBranch_ControlNo AS BranchControl
 FROM (SELECT ControlNo, Status
 FROM LoanApplication
-WHERE Status!='Pending' AND Status!='Rejected' AND LoanType='40-Weeks' AND DateApplied<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)))Alpha
+WHERE Status!='Pending' AND Status!='Rejected' AND LoanType='40-Weeks' AND DateApplied<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)))Alpha
 LEFT JOIN
 (SELECT LoanApplication_ControlNo, CaritasBranch_ControlNo 
 FROM loanapplication_has_members) Beta
@@ -182,19 +182,19 @@ FROM (SELECT A.ControlNo AS MembersControl, C.Status
 FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo ORDER BY ControlNo)A
 LEFT JOIN
 (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus mhms 
-WHERE DateUpdated<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
+WHERE DateUpdated<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
 ON A.ControlNo=C.ControlNo)Alpha
 LEFT JOIN
 (SELECT Members_ControlNo, BranchControl
 FROM (SELECT cchm.Members_ControlNo, A.CaritasCenters_ControlNo,A.DateEntered FROM CaritasCenters_has_Members cchm
 LEFT JOIN
-(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
+(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
 ON A.Members_ControlNo=cchm.Members_ControlNo GROUP BY Members_ControlNo)Alpha
 LEFT JOIN (SELECT CenterControl, BranchControl, BranchName FROM 
 (SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
 FROM caritasbranch_has_caritascenters cbhcc
 LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters 
-WHERE Date<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY Date)A
+WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY Date)A
 ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
 LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
 ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
@@ -207,19 +207,19 @@ FROM (SELECT A.ControlNo AS MembersControl, C.Status
 FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo ORDER BY ControlNo)A
 LEFT JOIN
 (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus mhms 
-WHERE DateUpdated<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
+WHERE DateUpdated<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)C
 ON A.ControlNo=C.ControlNo)Alpha
 LEFT JOIN
 (SELECT Members_ControlNo, BranchControl
 FROM (SELECT cchm.Members_ControlNo, A.CaritasCenters_ControlNo,A.DateEntered FROM CaritasCenters_has_Members cchm
 LEFT JOIN
-(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
+(SELECT * FROM CaritasCenters_has_Members WHERE DateEntered<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY DateEntered DESC)A
 ON A.Members_ControlNo=cchm.Members_ControlNo GROUP BY Members_ControlNo)Alpha
 LEFT JOIN (SELECT CenterControl, BranchControl, BranchName FROM 
 (SELECT cbhcc.CaritasCenters_ControlNo AS CenterControl, A.CaritasBranch_ControlNo AS BranchControl 
 FROM caritasbranch_has_caritascenters cbhcc
 LEFT JOIN (SELECT * FROM caritasbranch_has_caritascenters 
-WHERE Date<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY Date)A
+WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) ORDER BY Date)A
 ON cbhcc.CaritasCenters_ControlNo=A.CaritasCenters_ControlNo GROUP BY A.CaritasCenters_ControlNo)B
 LEFT JOIN CaritasBranch cb ON B.BranchControl=cb.ControlNo)Beta
 ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
@@ -231,7 +231,7 @@ LEFT JOIN
 FROM (SELECT CaritasCenters_ControlNo AS CenterControl 
 FROM caritasbranch_has_caritascenters cbhcc GROUP BY CaritasCenters_ControlNo)A
 LEFT JOIN (SELECT * FROM (SELECT * FROM caritasbranch_has_caritascenters 
-WHERE Date<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) 
+WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) 
 ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
 ON A.CenterControl=B.CaritasCenters_ControlNo GROUP BY CaritasBranch_ControlNo) Kilo
 ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName ASC")

@@ -14,14 +14,7 @@ class Login_model extends CI_Model{
 
 		$username = $this->security->xss_clean($this->input->post('username'));
 		$password = $this->security->xss_clean($this->input->post('password'));
-/*
-		$q = $logger->result();
-		 $size = count($q);
-		 $i=0;
-		 if ($logger->num_rows()>0) {
-		 	while ($i<$size) {
-		 		$row = $logger->row_array($i);
-		 		if ($row['Username'] == $username && $row['Password']== $password) { */
+
 		 			$logger=$this->db->query("SELECT branch.ControlNo as branchno, branch.BranchName, personnel.ControlNo as personnelno, personnel.FirstName, personnel.MiddleName, personnel.LastName, personnel.Rank, users.Username, users.Password
 		 				FROM caritasbranch branch , caritaspersonnel personnel, caritasbranch_has_caritaspersonnel cp , users
 		 				WHERE branch.ControlNo = cp.CaritasBranch_ControlNo AND cp.CaritasPersonnel_ControlNo = personnel.ControlNo AND personnel.ControlNo = users.ControlNo AND users.IsActive = 1 AND Username='$username' AND Password='$password'");
@@ -38,14 +31,14 @@ class Login_model extends CI_Model{
 		 				LEFT JOIN 
 		 				(SELECT A.ControlNo, UNO.DateUpdated, UNO.Status 
 		 					FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus GROUP BY ControlNo)A
-		 					LEFT JOIN (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus ORDER BY DateUpdated DESC)B GROUP BY ControlNo)UNO 
+		 					LEFT JOIN (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus WHERE DateUpdated<=LAST_DAY(DATE_ADD(NOW(), INTERVAL 0 MONTH)) ORDER BY DateUpdated DESC)B GROUP BY ControlNo)UNO 
 		 					ON UNO.ControlNo=A.ControlNo ORDER BY ControlNo Asc, DateUpdated DESC) DOS
 		 				ON mem.ControlNo=DOS.ControlNo
 		 				WHERE Approved='YES'");
 		 				
 		 				foreach($membersLoanChecker->result() as $data){
 
-		 					if($data->LoanStatus =="Full Payment" || $data->LoanStatus=="NULL"){
+		 					if($data->LoanStatus =="Full Payment" || $data->LoanStatus==NULL){
 		 						$member = $this->db->query("SELECT TIMESTAMPDIFF(month, 
 		 							(SELECT DateTime
 		 								FROM 
