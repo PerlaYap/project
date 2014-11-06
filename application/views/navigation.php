@@ -257,6 +257,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 							</ul>
 						</li>
 					<?php } ?>
+<<<<<<< HEAD
 
 
 
@@ -289,6 +290,9 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 					</li>
 					
 
+=======
+					
+>>>>>>> FETCH_HEAD
 					<li class="menu"><a href="<?php echo site_url('records/recordlist'); ?>" class="menu" style="cursor: pointer;">RECORDS</a></li>
 				</ul>
 			</nav>
