@@ -94,7 +94,8 @@
 			
 					<?php	if (!empty($_POST['center'])) {
 					$centerselected = $_POST['center'];
-					$getSavingsOnly = $this->db->query("SELECT * FROM (SELECT mem.`ControlNo`,CONCAT(`FirstName`,' ', `MiddleName`,' ', `LastName`)as Name,`Approved`, `Savings`,`CaritasCenters_ControlNo`,`LoanExpense` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`)member where member.`CaritasCenters_ControlNo`= $centerselected and `LoanExpense` = 0 and `Approved`= 'YES'");
+					$getSavingsOnly = $this->db->query("SELECT * FROM 
+						(SELECT mem.`ControlNo`,CONCAT(`LastName`, ', ',`FirstName`,' ', `MiddleName` )as Name,`Approved`, `Savings`,`CaritasCenters_ControlNo`,`LoanExpense` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`Order by LastName,FirstName)member where member.`CaritasCenters_ControlNo`= $centerselected and `LoanExpense` = 0 and `Approved`= 'YES' ");
 
 					$getsav = $getSavingsOnly->result(); ?>
 					<?php if (!empty($getsav)) { ?>
@@ -216,7 +217,9 @@
 			
 									<?php if (!empty($_POST['center'])) {
 										$centerselected = $_POST['center'];
-										$getMember = $this->db->query("SELECT * FROM (SELECT mem.`ControlNo`,CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`)as Name,  `LoanExpense`, `Savings`, `CapitalShare`,`pastdue`,`CaritasCenters_ControlNo` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`)member join (SELECT `LoanApplication_ControlNo`,`status`, `Members_ControlNo`,`AmountRequested`, `Interest`, `LoanType` FROM `loanapplication_has_members` lhm , `loanapplication` l WHERE lhm.`LoanApplication_ControlNo` = l.`ControlNo`) loan on member.ControlNo = loan.Members_ControlNo where member.`CaritasCenters_ControlNo`= $centerselected and `status`='Current'");
+										$getMember = $this->db->query("SELECT * FROM 
+											(SELECT mem.`ControlNo`,CONCAT(`LastName`, ', ',`FirstName`,' ', `MiddleName` )as Name,  `LoanExpense`, `Savings`, `CapitalShare`,`pastdue`,`CaritasCenters_ControlNo` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo` Order by LastName, FirstName)member join 
+											(SELECT `LoanApplication_ControlNo`,`status`, `Members_ControlNo`,`AmountRequested`, `Interest`, `LoanType` FROM `loanapplication_has_members` lhm , `loanapplication` l WHERE lhm.`LoanApplication_ControlNo` = l.`ControlNo`) loan on member.ControlNo = loan.Members_ControlNo where member.`CaritasCenters_ControlNo`= $centerselected and `status`='Current' ");
 										$borrower = $getMember->result();
 										if (!empty($borrower)) { ?>
 											
@@ -304,7 +307,7 @@
 						</label>
 						<label>
 							<span>Loan Receivable:</span>
-							<input  type='number' min='0' max='<?php echo $loanbalance ?>' id='loanreceivable' name='loan' required onChange="changesbu()" >
+							<input type='number' min='0' max='<?php echo $loanbalance ?>' id='loanreceivable' name='loan' required onChange="changesbu()" >
 						</label>
 
 					<h1><br><br>SAVINGS </h1>
