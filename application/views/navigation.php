@@ -233,7 +233,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 					<?php if($userrank=='salveofficer' || $userrank=='branchmanager') :?>
 					<li class="menu"><a href="<?php echo site_url('downloads/downloadlist'); ?>" class="menu" style="cursor: pointer;">DOWNLOADS</a></li>
 					<?php endif; ?>
-<<<<<<< Updated upstream
+
 
 					<?php if($userrank=='salveofficer'){ ?>
 						<li class="menu"><a href="#" class="menu" style="cursor: pointer;">REPORTS</a>
@@ -257,7 +257,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 						</li>
 					<?php } ?>
 
-=======
+
 					<li class="menu"><a href="<?php echo site_url('reports/reportList'); ?>" class="menu" style="cursor: pointer;">REPORTS</a>
 						<ul>
 							
@@ -286,8 +286,6 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 						</ul>
 					</li>
 					
-					
->>>>>>> Stashed changes
 
 					<li class="menu"><a href="<?php echo site_url('records/recordlist'); ?>" class="menu" style="cursor: pointer;">RECORDS</a></li>
 				</ul>
