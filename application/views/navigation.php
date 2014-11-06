@@ -257,40 +257,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 							</ul>
 						</li>
 					<?php } ?>
-<<<<<<< HEAD
-
-
-					<li class="menu"><a href="<?php echo site_url('reports/reportList'); ?>" class="menu" style="cursor: pointer;">REPORTS</a>
-						<ul>
-							
-							<!-- <li><a href="<?php echo site_url('reports/monthlycollection'); ?>">Monthly Collection</a></li> -->
-							<!-- <li><a href="<?php echo site_url('reports/portfolioatrisk'); ?>">Portfolio At Risk</a></li> -->
-							<!-- <li><a href="<?php echo site_url('reports/revenueandcost'); ?>">Revenue and Financial Costs</a></li> -->
-							<?php if($userrank=='salveofficer') :?>
-							<!--<li><a href="<?php echo site_url('reports/dailycollectionsheet'); ?>">Daily Collection Sheet</a></li> -->
-							<?php endif;?>
-							<?php if($userrank=='branchmanager') :?>
-						<!--	<li><a href="<?php echo site_url('reports/sbuandloan'); ?>">Savings Build-Up and Loan Report</a></li> -->
-							<!-- <li><a href="<?php //echo site_url('reports/summaryreport'); ?>">Summary Report</a></li> -->
-						<!--	<li><a href="<?php echo site_url('reports/dailycollectionsheet'); ?>">Daily Collection Sheet</a></li> -->
-							<li><a href="<?php echo site_url('reports/centerperformance'); ?>">Collection Performance of Centers</a></li>
-							<li><a href="<?php echo site_url('reports/borrowerandsaver'); ?>">Borrower vs Saver</a></li>
-							<?php endif;?>
-							
-							<?php if($userrank=='mispersonnel') :?>
-							<li><a href="<?php echo site_url('reports/branchpastdue'); ?>">Collection Performance of Branches</a></li>
-							<!-- <li><a href="<?php // echo site_url('reports/dcsummary'); ?>">Daily Collection Summary</a></li> -->
-							<li><a href="<?php echo site_url('reports/mismonthly'); ?>">Monthly Account Report</a></li>
-							<li><a href="<?php echo site_url('reports/loanportfolio'); ?>">Monthly Loan Portfolio Report</a></li>
-							<!--<li><a href="<?php echo site_url('reports/pdmmonthly'); ?>">Monthly Past Due Mature Report</a></li>-->
-							<li><a href="<?php echo site_url('reports/sbushares'); ?>">Monthly Savings Build-Up and Capital Shares Report</a></li>
-							<?php endif;?>
-						</ul>
-					</li>
 					
-
-=======
->>>>>>> FETCH_HEAD
 					<li class="menu"><a href="<?php echo site_url('records/recordlist'); ?>" class="menu" style="cursor: pointer;">RECORDS</a></li>
 				</ul>
 			</nav>
