@@ -245,6 +245,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 						<li class="menu"><a href="<?php echo site_url('reports/reportList'); ?>" class="menu" style="cursor: pointer;">REPORTS</a>
 							<ul>
 								<!--<li><a href="<?php echo site_url('reports/sbuandloan'); ?>">Savings Build-Up and Loan Report</a></li>-->
+								<li><a href="<?php echo site_url('reports/portfolioAtRisk'); ?>">Portfolio At Risk</a></li>
 								<li><a href="<?php echo site_url('reports/centerperformance'); ?>">Collection Performance of Centers</a></li>
 								<li><a href="<?php echo site_url('reports/borrowerandsaver'); ?>">Borrower vs Saver</a></li>
 							</ul>
@@ -252,10 +253,11 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 					<?php } else if($userrank=='mispersonnel') {?>
 						<li class="menu"><a href="<?php echo site_url('reports/reportListMIS'); ?>" class="menu" style="cursor: pointer;">REPORTS</a>
 							<ul>
-								<li><a href="<?php echo site_url('reports/pdmmonthly'); ?>">Monthly Past Due Mature Report</a></li>
+								<!--<li><a href="<?php echo site_url('reports/pdmmonthly'); ?>">Monthly Past Due Mature Report</a></li>-->
 							</ul>
 						</li>
 					<?php } ?>
+<<<<<<< HEAD
 
 
 					<li class="menu"><a href="<?php echo site_url('reports/reportList'); ?>" class="menu" style="cursor: pointer;">REPORTS</a>
@@ -287,6 +289,8 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 					</li>
 					
 
+=======
+>>>>>>> FETCH_HEAD
 					<li class="menu"><a href="<?php echo site_url('records/recordlist'); ?>" class="menu" style="cursor: pointer;">RECORDS</a></li>
 				</ul>
 			</nav>
