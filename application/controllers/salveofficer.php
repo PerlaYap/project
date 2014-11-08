@@ -291,6 +291,7 @@ class Salveofficer extends CI_Controller {
 		$datetoday = $this->terminate_voluntary_model->getdatetoday();
 		$sopersonnel = $this->terminate_voluntary_model->getsopersonnel();
 		$loaninfo = $this->terminate_voluntary_model->getloaninfo($controlno);
+		$savings = $this->terminate_voluntary_model->getsavingsfromform();
 
 		foreach ($loaninfo as $loan) {
 			$AmountRequested = $loan->AmountRequested;
@@ -317,19 +318,26 @@ class Salveofficer extends CI_Controller {
 
 		$this->recordcollection_model->insertloantransaction($loanappcontrol, $paymentrecieved, $datetoday, $controlno, $sopersonnel);
 
-		$this->recordcollection_model->updatemembertransaction($loanappcontrol, $controlno, $paymentrecieved, $savingspayment, $amounttopay, $withdrawals);
+		$this->recordcollection_model->updatemembertransaction($loanappcontrol, $controlno, $paymentrecieved, $savingspayment, $amounttopay, $withdrawals); 
 
 
 		$activity = "Recorded loan collection to ".$name." account amounted to ".$paymentrecieved.".";
         $this->load->model("audittrail_model");
         $this->audittrail_model->setlog($activity);
+       
+       /* echo "payment recieved: ".$paymentrecieved;
+        echo "<br>";
+        echo "loan balance: ".$loanbalance;
+        echo "<br>";
+        echo "savings:".$savings; */
 
-		if ($paymentrecieved < $loanbalance) {
+
+		if ($paymentrecieved < $loanbalance-$savings) {
 			echo "<script type='text/javascript'>alert('Account Termination Failed! Please settle the remaining loan balance before terminating the account.')</script>";
 
 			echo "<script type='text/javascript'>window.location.href='profiles?name='+".$controlno."</script>";
 			
-		}else if ($paymentrecieved == $loanbalance) {
+		}else if ($paymentrecieved == $loanbalance-$savings) {
 			$this->terminate_voluntary_model->setterminatestatus($controlno);
 			$profile = $this->terminate_voluntary_model->getprofileinfo($controlno);
 				foreach ($profile as $p) {

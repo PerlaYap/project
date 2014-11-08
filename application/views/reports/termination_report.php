@@ -74,7 +74,7 @@
 <table class="signature" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td class="sigBy">Approved by:</td>
-				<td class="sig" style="width: 200px;">&nbsp <?php echo $branch ?></td>
+				<td class="sig" style="width: 200px;">&nbsp <?php echo $user ?></td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
 				<td class="sig2" style="width: 150px;">&nbsp<?php echo $datetoday; ?></td>
 			</tr>
@@ -91,7 +91,7 @@
 
 
 
-<!-- Approved by:    <?php echo $branch ?>                      Date: <?php echo $datetoday ?>
+<!-- Approved by:    <?php echo $user ?>                      Date: <?php echo $datetoday ?>
 <br>
 Recieved by:    <?php echo $name ?>                      Date:	 -->
 

@@ -292,11 +292,11 @@ function gotoapprovedloan(){
 										</tr>
 										<tr class="updaterow" onclick="gotoloanforapproval();">
 											<td class="updatecontent" style="width: 30px;"> 03.</td>
-											<td class="updatecontent" style="width: 240px;"><a href="#"><?php echo $loanpending ?> Loan Application subject for approval</a></td>
+											<td class="updatecontent" style="width: 240px;"><a href="#"><?php echo $loanpending ?> Loan Application Subjected for Approval</a></td>
 										</tr>
 										<tr class="updaterow" onclick="gotoapprovedloan();">
 											<td class="updatecontent" style="width: 30px;"> 04.</td>
-											<td class="updatecontent" style="width: 240px;"><a href="#"><?php echo $loanapproved ?> Loan Application Ready to be Release</a></td>
+											<td class="updatecontent" style="width: 240px;"><a href="#"><?php echo $loanapproved ?> Loan Application Ready to be Released</a></td>
 										</tr>
 										
 									</table>

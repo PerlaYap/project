@@ -50,7 +50,9 @@ class Login_model extends CI_Model{
 		 						foreach($member->result() as $number){
 		 							$d=$number->time;
 		 						}
-
+		 						if ($data->MembershipStatus!="Terminated Voluntarily" && $data->MembershipStatus!="Terminated" ) {
+		 							
+		 						
 		 						if ($d>=6){
 		 							if($data->MembershipStatus!="dormant saver")
 		 								$this->addMembershipStatus($data->MemberControl,"dormant saver");
@@ -58,6 +60,7 @@ class Login_model extends CI_Model{
 		 							if($data->MembershipStatus!="Active Saver")
 		 								$this->addMembershipStatus($data->MemberControl,"Active Saver");
 		 						}
+		 					}
 		 					}
 
 		 					else{
@@ -72,7 +75,7 @@ class Login_model extends CI_Model{
 		 						foreach($member->result() as $number){
 		 							$d=$number->time;
 		 						}
-
+		 						if ($data->MembershipStatus!="Terminated Voluntarily" && $data->MembershipStatus!="Terminated" ) {
 		 						if ($d>=6){
 		 							if($data->MembershipStatus!="Past Due")
 		 								$this->addMembershipStatus($data->MemberControl,"Past Due");
@@ -80,6 +83,7 @@ class Login_model extends CI_Model{
 		 							if($data->MembershipStatus!="Borrower")
 		 								$this->addMembershipStatus($data->MemberControl,"Borrower");
 		 						}
+		 					}
 
 		 					}
 		 				}

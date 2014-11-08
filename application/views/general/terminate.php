@@ -9,8 +9,8 @@
 
 $userrank = $this->session->userdata("rank");
 $branch = $this->session->userdata('branchno');
-/*$control_no = $_GET['name'];*/
-$control_no = $name;
+$control_no = $_GET['name'];
+/*$control_no = $name;*/
 /*SQL QUERIES*/
 
 

@@ -75,7 +75,7 @@
 							<input type='hidden' name='controlno' value='<?php echo $controlno ?>'>
 						<label>
 					        <span>Savings :</span></label>
-					        <input id="name" type="text" name="fname" value="<?php echo $savingstot ?>" style="width: 562px;" disabled/>
+					        <input id="name" type="text" name="savings" value="<?php echo $savingstot ?>" style="width: 562px;" disabled/>
 
 					    <label>
 					        <span>Loan Balance :</span></label>

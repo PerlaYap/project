@@ -83,6 +83,10 @@ class terminate_voluntary_model extends CI_Model{
 
 		return $gettotsavings->result();
 	 }
+	 public function getsavingsfromform (){
+	 	$savings = $this->security->xss_clean($this->input->post('savings'));
+		 return $savings;
+	 }
 	public function getloanbalance(){
 		 $loanbalance = $this->security->xss_clean($this->input->post('loanbalance'));
 		 return $loanbalance;}

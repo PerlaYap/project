@@ -4,6 +4,11 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/reports.css'); ?>">
 
+<style type="text/css" media="print">
+  .dontprint{
+    display: none;
+  }
+  </style>
 
 <?php 
 	$branchno = $this->session->userdata('branchno');
@@ -107,7 +112,7 @@ Permanent Address: <?php echo $address; ?><br>
 
 
 	<br><br>
-	<div style="width: 100%; text-align: center;">
+	<div class='dontprint' style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button> 
 		<button onclick="window.close()">Close</button>
 	</div>
