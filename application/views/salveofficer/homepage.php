@@ -331,7 +331,6 @@ function gotoapprovedloan(){
 								<p class="HPheadtxt03">  <?php echo $datetoday; ?></p>
 
 								
-								
 
 
 
@@ -345,7 +344,8 @@ function gotoapprovedloan(){
 									<?php if(!empty($term->result())){ ?>
 									<tr class="updaterow">
 										<td class="updatecontent" style="width: 30px;color:#232222;"><b>#</b></td>
-										<td class="updatecontent" style="width: 100px;"><b>NAME</b></td>
+										<td class="updatecontent" style="width: 80px;"><b>NAME</b></td>
+										<td class="updatecontent" style="width: 80px;"><b>STATUS</b></td>
 										<td class="updatecontent" style="width: 50px;color:#232222;"><b>CENTER</b></td>						
 									</tr>
 
@@ -357,6 +357,7 @@ function gotoapprovedloan(){
 										<tr class="updaterow">
 											<td class="updatecontent" style="width: 30px; color:#232222;"> <?php echo $number; ?></td>
 											<td class="updatecontent" style="width: 240px;"><a href="javascript:void(0)" onclick="send('<?php echo $t->MemberControl ?>')"><?php echo $t->LastName;  ?>, <?php echo $t->FirstName ?></a></td>
+											<td class="updatecontent" style="width: 30px; text-align:center; color:#232222;"><!-- --></td>						
 											<td class="updatecontent" style="width: 30px; text-align:center; color:#232222;"><?php echo $t->CenterNo; ?></td>						
 										</tr>
 
