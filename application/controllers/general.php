@@ -133,6 +133,12 @@ class General extends CI_Controller {
         $this->load->view('general/faq');
         $this->load->view("footer"); 
     }
+    public function gotohelp(){
+            $this->load->view('header');
+        $this->load->view('navigation');
+        $this->load->view('general/help');
+        $this->load->view("footer"); 
+    }
 }
 
 ?>

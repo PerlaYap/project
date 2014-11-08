@@ -437,7 +437,7 @@ function gotoapprovedloan(){
 		<p class="footertext">
 			&#169; 2014 Microfinance Cooperative Information Management System <br>
 
-			<a href="<?php echo site_url('general/gotoaboutus'); ?>">ABOUT US</a> | <a href="<?php echo site_url('general/gotocontactus'); ?>">CONTACT US</a> | <a href="<?php echo site_url('general/gotofaq'); ?>">FAQs</a> | <a href="#">HELP</a>
+			<a href="<?php echo site_url('general/gotoaboutus'); ?>">ABOUT US</a> | <a href="<?php echo site_url('general/gotocontactus'); ?>">CONTACT US</a> | <a href="<?php echo site_url('general/gotofaq'); ?>">FAQs</a> | <a href="<?php echo site_url('general/gotohelp'); ?>">HELP</a>
 
 		</p>
 
