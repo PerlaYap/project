@@ -209,7 +209,8 @@ foreach ($getTotal->result() as $row) {
 	    }
 	</style>
 
-	<div class="content">
+<body style="background: none;">
+	<div class="content" style="background:none;">
 		<br>
 			<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo2"></a>
 			
@@ -227,14 +228,14 @@ foreach ($getTotal->result() as $row) {
 
 				<TABLE class="loancollection">
 					<tr class="headr">
-						<td class="DChdr" style="width:100px;" >Member ID </td>
-						<td class="DChdr"  style="width:270px;">Name</td>
-						<td class="DChdr2" style="width: 150px">Active Release</td>
-						<td class="DChdr2" style="width: 120px">Loan Balance </td>
-						<td class="DChdr2" style="width: 100px;"  colspan="1">Loan </td>
-						<td class="DChdr2" style="width: 100px;"  colspan="1">Past Due </td>
-						<td class="DChdr2" style="width: 100px;"  colspan="1">Savings </td>
-						<td class="DChdr2" style="width: 100px;"  colspan="1">Withdrawal </td>
+						<td class="DChdr" style="width:100px; background: white; color: black;" >Member ID </td>
+						<td class="DChdr"  style="width:270px;background: white; color: black;">Name</td>
+						<td class="DChdr2" style="width: 150px; background: white; color: black;">Active Release</td>
+						<td class="DChdr2" style="width: 120px; background: white; color: black;">Loan Balance </td>
+						<td class="DChdr2" style="width: 100px; background: white; color: black;"  colspan="1">Loan </td>
+						<td class="DChdr2" style="width: 100px; background: white; color: black;"  colspan="1">Past Due </td>
+						<td class="DChdr2" style="width: 100px; background: white; color: black;"  colspan="1">Savings </td>
+						<td class="DChdr2" style="width: 100px; background: white; color: black;"  colspan="1">Withdrawal </td>
 					</tr>
 
 					<TR>
@@ -244,26 +245,26 @@ foreach ($getTotal->result() as $row) {
 					foreach ($getDailyCollection->result() as $row) { ?>
 					<tr class="row">
 
-						<td class="DCcontent"><?php echo $row->MemberID; ?></td>
-						<td class="DCcontent"><?php echo $row->Name; ?></td>
-						<td class="DCcontent2"><?php echo number_format($row->ActiveLoan,2); ?></td>
-						<td class="DCcontent2"><?php echo number_format($row->LoanLeft,2); ?></td>
-						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->LoanControl ?>')"><?php echo number_format($row->LoanPayment,2); ?></a></td>
-						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->PastDueControl ?>')"><?php echo number_format($row->PastDuePayment,2); ?></a></td>
-						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->SavingsControl ?>')"><?php echo number_format($row->SavingsPayment,2) ?></a></td>
-						<td class="DCcontent2"><a href="javascript:void(0)" onclick="send('<?php echo $row->WithdrawalControl ?>')"><?php echo number_format($row->WithdrawalPayment,2) ?></a></td>
+						<td class="DCcontent"  style="background: white; color: black;"><?php echo $row->MemberID; ?></td>
+						<td class="DCcontent" style="background: white; color: black;"><?php echo $row->Name; ?></td>
+						<td class="DCcontent2" style="background: white; color: black;"><?php echo number_format($row->ActiveLoan,2); ?></td>
+						<td class="DCcontent2" style="background: white; color: black;"><?php echo number_format($row->LoanLeft,2); ?></td>
+						<td class="DCcontent2" style="background: white; color: black;"><a href="javascript:void(0)" onclick="send('<?php echo $row->LoanControl ?>')"><?php echo number_format($row->LoanPayment,2); ?></a></td>
+						<td class="DCcontent2" style="background: white; color: black;"><a href="javascript:void(0)" onclick="send('<?php echo $row->PastDueControl ?>')"><?php echo number_format($row->PastDuePayment,2); ?></a></td>
+						<td class="DCcontent2" style="background: white; color: black;"><a href="javascript:void(0)" onclick="send('<?php echo $row->SavingsControl ?>')"><?php echo number_format($row->SavingsPayment,2) ?></a></td>
+						<td class="DCcontent2" style="background: white; color: black;"><a href="javascript:void(0)" onclick="send('<?php echo $row->WithdrawalControl ?>')"><?php echo number_format($row->WithdrawalPayment,2) ?></a></td>
 					</tr>
 					<?php $a++; }?>
 
 					<tr class="rowtotal">
 
-						<td class="DCtotal" style="text-align:right;" colspan="2"><b>TOTAL: &nbsp</b></td>
-						<td class="DCtotal2" ><b></b></td>	
-						<td class="DCtotal2" ><b></b></td>
-						<td class="DCtotal2" ><b><?php echo number_format($LTotal,2) ?> </b></td>
-						<td class="DCtotal2" ><b><?php echo number_format($PDTotal,2) ?> </b></td>
-						<td class="DCtotal2" ><b><?php echo number_format($STotal,2) ?> </b></td>
-						<td class="DCtotal2" ><b><?php echo number_format($WTotal,2) ?> </b></td>
+						<td class="DCtotal" style="text-align:right; background: white; color: black;" colspan="2"><b>TOTAL: &nbsp</b></td>
+						<td class="DCtotal2" style="background: white; color: black;"><b></b></td>	
+						<td class="DCtotal2" style="background: white; color: black;"><b></b></td>
+						<td class="DCtotal2" style="background: white; color: black;"><b><?php echo number_format($LTotal,2) ?> </b></td>
+						<td class="DCtotal2" style="background: white; color: black;"><b><?php echo number_format($PDTotal,2) ?> </b></td>
+						<td class="DCtotal2" style="background: white; color: black;"><b><?php echo number_format($STotal,2) ?> </b></td>
+						<td class="DCtotal2" style="background: white; color: black;"><b><?php echo number_format($WTotal,2) ?> </b></td>
 
 					</tr>
 
@@ -295,3 +296,5 @@ foreach ($getTotal->result() as $row) {
 			</div>
 
 		</div>
+
+		</body>
