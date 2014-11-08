@@ -127,32 +127,54 @@ class Login extends CI_Controller {
         $this->load->view('footer');
 
         }
-     public function terminate(){
-
-      
-        $this->load->view("general/terminate");
-      
-       
-        }
-
-        public function forceterminate(){
      
+        public function terminate(){
+        $this->load->model('terminate_voluntary_model');
+        $controlno = $_GET['name'];
+        $data['profileinfo'] = $this->terminate_voluntary_model->getprofileinfo($controlno);
+        $data['branchcenter'] = $this->terminate_voluntary_model->getbranchcenter($controlno);
+        $this->terminate_voluntary_model->getloancontrolno($controlno);
+        $loan_info = $this->terminate_voluntary_model->getloaninfo($controlno);
+            if (!empty($loan_info)) {
+                $data['loaninfo'] = $loan_info;
+                $data['comaker'] = $this->terminate_voluntary_model->getcomaker($controlno);
+            }
+        $data['capitalshare'] = $this->terminate_voluntary_model->getcapitalshare($controlno);
+        $data['savings'] = $this->terminate_voluntary_model->getsavings($controlno);
+        $data['type'] ="force";
+        /*$controlno['name'] = $_POST['controlno'];*/
+        $this->load->view('general/terminate_voluntary',$data);
+     }
 
-      $this->load->model('terminate_model');
-      $result = $this->terminate_model->getdetails();
+     public function terminatenow(){
+        $this->load->model('terminate_voluntary_model');
+        $controlno = $this->terminate_voluntary_model->getcontrolno();
+        $this->terminate_voluntary_model->setterminatestatus($controlno);
+        $profile = $this->terminate_voluntary_model->getprofileinfo($controlno);
+        foreach ($profile as $p) {
+            $fname = $p->FirstName;
+            $mname = $p->MiddleName;
+            $lname = $p->LastName;
+        }
+            $name = $fname." ".$mname." ".$lname;
 
-       if ($result) {
-           echo "<script type='text/javascript'>alert('Successfully Terminated!')</script>";
-       }else{
-            echo "<script type='text/javascript'>alert('Failed to terminate!')</script>";
-       }
+               $activity = "Withdraw the account of ".$name." (Voluntarily)." ;
+        $this->load->model("audittrail_model");
+        $this->audittrail_model->setlog($activity);
 
-        $this->load->view('header');
-        $this->load->view('navigation');
-        $this->load->view('salveofficer/homepage'); 
-        $this->load->view('footer');
-       
-    }
+                   echo "<script type='text/javascript'>alert('Successfully withdraw the account of ".$name."')</script>";
+            $this->termination_report($controlno);
+            /*$this->directory();*/
+
+               }
+        public function termination_report($controlno){
+
+        $this->load->model('terminate_voluntary_model');
+        $result['data'] = $this->terminate_voluntary_model->gettermination_report($controlno);
+        $this->load->view('reports/termination_report', $result);
+
+     }
+
 
     public function profiles(){
 

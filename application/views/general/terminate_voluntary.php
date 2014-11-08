@@ -98,7 +98,13 @@ $SOpersonnel =$this->session->userdata('personnelno');
 
 
 			<div class="basic-grey">
-					<h1>Member Withdrawal
+					<h1> <?php if ($type =='force'): ?>
+							Member Termination
+					<?php endif ?>
+					<?php if ($type == 'voluntary'): ?>
+						Member Withdrawal
+					<?php endif ?>
+						
 				        <span>Review member information so as to avoid descrepancies.</span>
 				    </h1>
 
@@ -203,10 +209,15 @@ $SOpersonnel =$this->session->userdata('personnelno');
 <!------------------------------------------------------------------------>
 <!------------------------------------------------------------------------>
 					<h1 style="text-align:center; color:#b7351b; border-top: 3px solid #f9f8f8;">
-
+												<?php if ($type =="force") { ?>
+							<br>REMAINING LOAN BALANCE<br>
+						<?php }else{ ?>
 						<br>
 						PLEASE SETTLE THE REMAINING LOAN BALANCE <br>
+						
+							<?php } ?>
 						<b>Php <?php echo $loanexpense ?> .00</b> <br><br>
+							<?php if ($type=='voluntary'): ?>
 						<form action='payloanbalance' method='post' id='myform'>
 							<input type='hidden' name='controlno' value='<?php echo $memcontrol ?>'>
 							<input type ='hidden' name='loanbalance' value='<?php echo $loanexpense ?>'>
@@ -215,6 +226,15 @@ $SOpersonnel =$this->session->userdata('personnelno');
 						<input type="submit" name='paymenttype' value="Cash Payment"  class="button" style="margin-left:auto; margin-right:auto" />
 						<input type="submit" name='paymenttype' onclick=" return verify_action()" value="Savings" class="button" style="width:140px;"/>
 						</form>
+						<?php endif ?>
+
+						<?php if ($type=="force"): ?>
+							<form action='terminatenow' method='post'>
+				 			<input type='hidden' name='controlno' value='<?php echo $memcontrol ?>'>
+				 			<input type='submit' value ='Terminate Membership' name='withdraw' class="button" style="margin-left: -200px;">
+				 			<input type='button' value='Cancel' onclick='cancelfunction()' class="button1" style="margin-left:10px; margin-top: 0; width: 150px;">
+				 		</form>
+						<?php endif ?>
 						<br><br>
 					</h1>
 				<br><br><br>
@@ -226,17 +246,18 @@ $SOpersonnel =$this->session->userdata('personnelno');
 				 		</h1>
 				 		<br><br>
 
-
-				 		<style type="text/css">
-
-				 		</style>
-
-
 				 		<form action='terminatenow' method='post'>
 				 			<input type='hidden' name='controlno' value='<?php echo $memcontrol ?>'>
-				 			<input type='submit' value ='Withdraw Profile' name='withdraw' class="button" style="margin-left: 250px;">
+				 			<?php if ($type=='force'): ?>
+				 				<input type='submit' value ='Terminate Membership' name='withdraw' class="button" style="margin-left: 250px;">
+				 			<?php endif ?>
+				 			<?php if ($type=='voluntary'): ?>
+				 				<input type='submit' value ='Withdraw Membership' name='withdraw' class="button" style="margin-left: 250px;">
+				 			<?php endif ?>
+				 			
 				 			<input type='button' value='Cancel' onclick='cancelfunction()' class="button1" style="margin-left:10px; margin-top: 0; width: 150px;">
 				 		</form>
+				 		<br><br>
 
 					<?php } ?>
 
