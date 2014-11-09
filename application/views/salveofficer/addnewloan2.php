@@ -463,12 +463,12 @@ foreach ($dayoftheweek->result() as $row){
 						        <select name="hrelation" style="width:405px;">
 						        	<option value=" " selected=" "></option>
 						        	<option value="Aunt">Aunt</option>
-						        	<option value="Child">Child</option>
 						        	<option value="Cousin">Cousin</option>
 						        	<option value="Grandparent">Grandparent</option>
 						        	<option value="In-Law">In-Law</option>
-						        	<option value="Spouse">Spouse</option>
 						        	<option value="Parent">Parent</option>
+						        	<option value="Sibling">Sibling</option>
+						        	<option value="Spouse">Spouse</option>
 						        	<option value="Uncle">Uncle</option>
 
 						        </select>

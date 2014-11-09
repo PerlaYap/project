@@ -71,7 +71,7 @@ foreach($allcenter->result() as $data2){
 $pd = $this->db->query("SELECT count(cm.Members_ControlNo) as member, c.centerno FROM caritasbranch_has_caritascenters bc, caritascenters c ,caritascenters_has_members cm, members_has_membersmembershipstatus mm where bc.caritasbranch_controlno = '$branchno' and bc.caritascenters_controlno = c.controlno and c.controlno = cm.caritascenters_controlno and cm.Members_ControlNo = mm.controlno and mm.status = 'Past Due'");*/
 
 
-$term = $this->db->query("SELECT MemberControl, LastName, FirstName, CenterNo FROM (SELECT MemberControl, Alpha.CenterControl, Beta.BranchControl FROM(SELECT MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo AS MemberControl FROM CaritasCenters_has_Members GROUP BY Members_ControlNo)A
+$term = $this->db->query("SELECT MemberControl, LastName, FirstName, CenterNo, Status FROM (SELECT MemberControl, Alpha.CenterControl, Beta.BranchControl FROM(SELECT MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo AS MemberControl FROM CaritasCenters_has_Members GROUP BY Members_ControlNo)A
 LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members ORDER BY DateEntered DESC)A GROUP BY Members_ControlNo)B
 ON A.MemberControl=B.Members_ControlNo)Alpha
 LEFT JOIN 
@@ -330,10 +330,6 @@ function gotoapprovedloan(){
 								<p class="HPheadtxt02">  FOR TERMINATION</p>
 								<p class="HPheadtxt03">  <?php echo $datetoday; ?></p>
 
-								
-
-
-
 								<table style="margin-right: auto; margin-top:30px; border-collapse: collapse;">
 									
 									
@@ -357,7 +353,7 @@ function gotoapprovedloan(){
 										<tr class="updaterow">
 											<td class="updatecontent" style="width: 30px; color:#232222;"> <?php echo $number; ?></td>
 											<td class="updatecontent" style="width: 240px;"><a href="javascript:void(0)" onclick="send('<?php echo $t->MemberControl ?>')"><?php echo $t->LastName;  ?>, <?php echo $t->FirstName ?></a></td>
-											<td class="updatecontent" style="width: 30px; text-align:center; color:#232222;"><!-- --></td>						
+											<td class="updatecontent" style="width: 30px; text-align:center; color:#232222;"><?php echo $t->Status; ?></td>						
 											<td class="updatecontent" style="width: 30px; text-align:center; color:#232222;"><?php echo $t->CenterNo; ?></td>						
 										</tr>
 

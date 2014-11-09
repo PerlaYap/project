@@ -1,4 +1,4 @@
-<TITLE>TERMINATION REPORT</TITLE>
+
 
 <style type="text/css" media="print">
 .dontprint{
@@ -26,8 +26,16 @@
 		$Recievable = $tot_capital + $savings;
 		$status = $d->status;
 		$term_date = $d->StatusUpdateDate;
+		$comment = $d->Comment;
 	}
  ?>
+
+ <?php if ($status == 'Terminated'): ?>
+ 	<TITLE>TERMINATION REPORT</TITLE>
+ <?php endif ?>
+ <?php if ($status =='Terminated Voluntarily'): ?>
+ 	<TITLE>WITHDRAWAL REPORT</TITLE>
+ <?php endif ?>
  	<div style="margin-left: auto;margin-right:auto; text-align:center;">
 		<a href="<?php echo site_url('login/homepage'); ?>" > 
 			<img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" style="width: 150px; height: auto;" >
@@ -35,7 +43,13 @@
 		
 		<h4 style="margin-left:auto;margin-right:auto; font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;">
 			CARITAS SALVE CREDIT COOPERATIVE <br> 
-			Termination Report <br>
+
+			 <?php if ($status == 'Terminated'): ?>
+				 	Termination Report
+				 <?php endif ?>
+			 <?php if ($status =='Terminated Voluntarily'): ?>
+				 	Withdrawal Report
+				 <?php endif ?> <br>
 			<?php echo $branch ?> Branch
 		</h4>
 	</div>
@@ -54,6 +68,11 @@
 	<label>
 		<span>Date Terminated :</span></label>
 		<input id="name" type="text" name="fname" value="<?php echo $term_date ?> " style="width: 562px;" disabled/>  
+
+	<label>
+		<span>Reason for Termination :</span></label>
+		<input id="name" type="textbox" name="fname" value="<?php echo $comment ?>" style="width: 562px;" disabled/> 
+
 
 	<label>
 		<span>Total Capital Share :</span></label>

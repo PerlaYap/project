@@ -135,7 +135,8 @@ class terminate_voluntary_model extends CI_Model{
 								    m.savings,
 								    (cs.totcapitalshare + m.savings) as recievable_amount,
 									st.status,
-									date(st.DateUpdated) as StatusUpdateDate
+									date(st.DateUpdated) as StatusUpdateDate,
+									m.Comment
 								from
 								    members m
 								        left join
@@ -166,6 +167,16 @@ class terminate_voluntary_model extends CI_Model{
 								where m.controlno = $control_no;");
 
 		return $result->result(); }
+
+	public function setterminationreason($controlno){
+
+			$lifestatus = $this->security->xss_clean($this->input->post('lifestatus'));
+			$reason = $this->security->xss_clean($this->input->post('term_reason'));
+
+			$comment="(".$lifestatus.")"."-".$reason;
+
+		$this->db->query("UPDATE `microfinance2`.`members` SET `Comment` = '$comment' WHERE `members`.`ControlNo` = $controlno;");
+	}
 
 
     

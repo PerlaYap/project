@@ -184,6 +184,7 @@ class Salveofficer extends CI_Controller {
 		$controlno = $this->terminate_voluntary_model->getcontrolno();
 		$this->terminate_voluntary_model->setterminatestatus($controlno);
 		$profile = $this->terminate_voluntary_model->getprofileinfo($controlno);
+		$data['profile'] = $profile;
 		foreach ($profile as $p) {
 			$fname = $p->FirstName;
 			$mname = $p->MiddleName;
@@ -196,10 +197,20 @@ class Salveofficer extends CI_Controller {
         $this->audittrail_model->setlog($activity);
 
         	echo "<script type='text/javascript'>alert('Successfully withdraw the account of ".$name."')</script>";
-        	$this->termination_report($controlno);
+        	$this->load->view('general/termination_reason', $data);
+        	/*$this->termination_report($controlno);*/
         	/*$this->directory();*/
 
 	 }
+	 public function termination_reason(){
+            $this->load->model('terminate_voluntary_model');
+            $controlno = $this->terminate_voluntary_model->getcontrolno();
+            $this->terminate_voluntary_model->setterminationreason($controlno);
+
+             echo "<script type='text/javascript'>alert('Reason for termination is now Recorded.')</script>";
+
+             $this->termination_report($controlno);
+        }
 	 public function termination_report($controlno){
 
 	 	$this->load->model('terminate_voluntary_model');
