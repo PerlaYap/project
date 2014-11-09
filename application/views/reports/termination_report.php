@@ -41,7 +41,7 @@
 			<img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" style="width: 150px; height: auto;" >
 		</a>
 		
-		<h4 style="margin-left:auto;margin-right:auto; font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;">
+		<h3 style="margin-left:auto;margin-right:auto; font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;">
 			CARITAS SALVE CREDIT COOPERATIVE <br> 
 
 			 <?php if ($status == 'Terminated'): ?>
@@ -51,40 +51,40 @@
 				 	Withdrawal Report
 				 <?php endif ?> <br>
 			<?php echo $branch ?> Branch
-		</h4>
+		</h3>
 	</div>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/terminate.css'); ?>">
 
-<div class="basic-grey">
+<div class="basic-grey" style="background:none;">
 	<label>
 		<span>Name :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo $name ?>" style="width: 562px;" disabled/>
+		<input id="name" type="text" name="fname" value="<?php echo $name ?>" style="width: 630px; background:none;" disabled/>
 				  
 	<label>
 		<span>Date Joined :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo $dateentered ?> " style="width: 562px;" disabled/>  
+		<input id="name" type="text" name="fname" value="<?php echo $dateentered ?> " style="width: 630px; background:none;" disabled/>  
 
 	<label>
 		<span>Date Terminated :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo $term_date ?> " style="width: 562px;" disabled/>  
+		<input id="name" type="text" name="fname" value="<?php echo $term_date ?> " style="width: 630px; background:none;" disabled/>  
 
 	<label>
 		<span>Reason for Termination :</span></label>
-		<input id="name" type="textbox" name="fname" value="<?php echo $comment ?>" style="width: 562px;" disabled/> 
+		<input id="name" type="text" name="fname" value="<?php echo $comment ?>" style="width: 630px; background:none;" disabled/> 
 
 
 	<label>
 		<span>Total Capital Share :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo number_format($tot_capital,2) ?>" style="width: 562px;" disabled/> 
+		<input id="name" type="text" name="fname" value="<?php echo number_format($tot_capital,2) ?>" style="width: 630px; background:none;" disabled/> 
 
 	<label>
 		<span>Total Savings :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo number_format($savings,2) ?>" style="width: 562px;" disabled/>  
+		<input id="name" type="text" name="fname" value="<?php echo number_format($savings,2) ?>" style="width: 630px;background:none;" disabled/>  
 
 	<label>
 		<span>Amount Receivable: :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo number_format($Recievable,2) ?>" style="width: 562px; font-weight:bold; color:#821818" disabled/> 
+		<input id="name" type="text" name="fname" value="<?php echo number_format($Recievable,2) ?>" style="width: 630px; background:none; font-weight:bold; color:#821818" disabled/> 
 
 </div>
 

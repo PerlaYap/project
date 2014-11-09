@@ -87,12 +87,21 @@ div.header{
 	margin-top: -1%;
 }
 
+h3, p, nav, ul, li{
+	font-family: "Times New Roman", Times, serif;
+	color: #1a1c1a;
+}
+
+h3{
+	text-align: center;
+	font-size: 15px;
+}
+
 img.caritaslogo{
-	position: absolute;
+	
 	display: block;
-	margin-left: 180px;
+	margin-left: auto;
 	margin-right: auto;
-	margin-top: 55px;
 	width: 170px;
 	height: auto;
 

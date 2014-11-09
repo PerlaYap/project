@@ -95,7 +95,13 @@ $SOpersonnel =$this->session->userdata('personnelno');
 	 }
 
 </script>
+			<br><br>
+			<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 
+			<h3>
+				CARITAS SALVE CREDIT COOPERATIVE <br> 
+				Membership Withdrawal <br> 
+			</h3>
 
 			<div class="basic-grey">
 					<h1> <?php if ($type =='force'): ?>
