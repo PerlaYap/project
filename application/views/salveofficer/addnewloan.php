@@ -2,12 +2,9 @@
 $branchno = $this->session->userdata('branchno');
 date_default_timezone_set('Asia/Manila');
 
-$getmemberid=$this->db->query("SELECT MemberID, concat(LastName,', ',FirstName,' ', MiddleName) AS Name FROM (SELECT MemberControl FROM (SELECT mhms.ControlNo
-	FROM members_has_membersmembershipstatus mhms
-	INNER JOIN ( SELECT MAX(DateUpdated) as LatestDate, ControlNo
-		FROM members_has_membersmembershipstatus GROUP BY ControlNo) C
-ON mhms.ControlNo=C.ControlNo AND mhms.DateUpdated=C.LatestDate
-WHERE Status!='Terminated') D
+$getmemberid=$this->db->query("SELECT MemberID, concat(LastName,', ',FirstName,' ', MiddleName) AS Name FROM (SELECT MemberControl FROM (SELECT A.ControlNo,Status FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus GROUP BY ControlNo)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus ORDER BY ControlNo ASC, DateUpdated DESC)A GROUP BY ControlNo)B
+ON A.ControlNo=B.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily')) D
 INNER JOIN
 (SELECT Members_ControlNo AS MemberControl FROM caritascenters_has_members cchm
 	INNER JOIN (SELECT CenterControl FROM (SELECT CaritasBranch_ControlNo AS BranchControl, CaritasCenters_ControlNo AS CenterControl, MAX(Date)

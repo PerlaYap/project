@@ -142,9 +142,21 @@ $port=$getportfolio->result();
 				$totalBeg23=0;
 				foreach($port AS $data){ 
 					$totalBeg23+=$data->BegTotalLoan23; ?>
-					<td class="number"><?php echo number_format($data->BegTotalLoan23,2); ?></td>
+					<td class="number"><?php 
+					if($data->BegTotalLoan23<0){
+						echo "(".number_format(abs($data->BegTotalLoan23),2).")";
+					}
+					else
+						echo number_format($data->BegTotalLoan23,2);
+					?>
+					</td>
 				<?php } ?>
-				<td class="number"><b><?php echo number_format($totalBeg23, 2); ?></b></td>
+				<?php 
+				if($totalBeg23<0){ ?>
+					<td class="number"><b>(<?php echo number_format(abs($totalBeg23), 2); ?>)</b></td>
+				<?php } else { ?>
+					<td class="number"><b><?php echo number_format($totalBeg23, 2); ?></b></td>
+				<?php } ?>
 			</tr>
 			
 			<tr>
@@ -152,18 +164,34 @@ $port=$getportfolio->result();
 				<?php 
 					$totalBeg40=0;
 					foreach($port AS $data){ 
-						$totalBeg40+=$data->BegTotalLoan40; ?>
-						<td class="number"><?php echo number_format($data->BegTotalLoan40,2); ?></td>
+						$totalBeg40+=$data->BegTotalLoan40;
+						if($data->BegTotalLoan40<0){?>
+							<td class="number">(<?php echo number_format(abs($data->BegTotalLoan40),2); ?>)</td>
+					<?php } else { ?>
+							<td class="number"><?php echo number_format($data->BegTotalLoan40,2); ?></td>
+				<?php }} ?>
+
+				<?php if($totalBeg40<0){ ?>
+					<td class="number"><b>(<?php echo number_format(abs($totalBeg40), 2); ?>)</b></td>
+				<?php } else { ?>
+					<td class="number"><b><?php echo number_format($totalBeg40, 2); ?></b></td>
 				<?php } ?>
-				<td class="number"><b><?php echo number_format($totalBeg40, 2); ?></b></td>
 			</tr>
 			
 		<tr>
 			<td class="label2">Total Loan Receivable-Beg</td>
-			<?php foreach($port AS $data){?>
-				<td class="number"><b><?php echo number_format(($data->BegTotalLoan23 + $data->BegTotalLoan40),2); ?></b></td>
+			<?php foreach($port AS $data){
+				if(($data->BegTotalLoan23 + $data->BegTotalLoan40)<0){ ?>
+					<td class="number"><b>(<?php echo number_format(abs($data->BegTotalLoan23 + $data->BegTotalLoan40),2); ?>)</b></td>
+				<?php } else { ?>
+					<td class="number"><b><?php echo number_format(($data->BegTotalLoan23 + $data->BegTotalLoan40),2); ?></b></td>
+				<?php }} ?>
+
+			<?php if(($totalBeg23+$totalBeg40) <0) { ?>
+				<td class="number"><b>(<?php echo number_format(abs($totalBeg23+$totalBeg40),2); ?>)</b></td>
+			<?php } else { ?>
+				<td class="number"><b><?php echo number_format(($totalBeg23+$totalBeg40),2); ?></b></td>
 			<?php } ?>
-			<td class="number"><b><?php echo number_format(($totalBeg23+$totalBeg40),2); ?></b></td>
 		</tr>
 
 		<tr>
@@ -177,8 +205,9 @@ $port=$getportfolio->result();
 				$totalRelease23=0; 
 				foreach($port AS $data){
 					$totalRelease23+=$data->LoanReleased23; ?>
-					<td class="number"><?php echo number_format($data->LoanReleased23,2); ?></td>
+						<td class="number"><?php echo number_format($data->LoanReleased23,2); ?></td>
 			<?php } ?>
+
 			<td class="number"><b><?php echo number_format($totalRelease23,2); ?></b></td>
 		</tr>
 			
@@ -248,9 +277,9 @@ $port=$getportfolio->result();
 				$totalCollect23=0;
 				foreach($port AS $data){
 					$totalCollect23+=$data->Collected23; ?>
-					<td class="number">(<?php echo number_format($data->Collected23,2); ?>)</td>
+					<td class="number"><?php echo number_format($data->Collected23,2); ?></td>
 				<?php } ?>
-			<td class="number"><b>(<?php echo number_format($totalCollect23,2); ?>)</b></td>
+			<td class="number"><b><?php echo number_format($totalCollect23,2); ?></b></td>
 		</tr>
 			
 		<tr>
@@ -259,17 +288,17 @@ $port=$getportfolio->result();
 				$totalCollect40=0;
 				foreach($port AS $data){
 					$totalCollect40+=$data->Collected40; ?>
-					<td class="number">(<?php echo number_format($data->Collected40,2); ?>)</td>
+					<td class="number"><?php echo number_format($data->Collected40,2); ?></td>
 			<?php } ?>
-			<td class="number"><b>(<?php echo number_format($totalCollect40,2); ?>)</b></td>
+			<td class="number"><b><?php echo number_format($totalCollect40,2); ?></b></td>
 		</tr>
 			
 		<tr>
 			<td class="label2">Total Loan Collection</td>
 			<?php foreach($port AS $data){ ?>
-				<td class="number"><b>(<?php echo number_format(($data->Collected23+$data->Collected40),2); ?>)</b></td>
+				<td class="number"><b><?php echo number_format(($data->Collected23+$data->Collected40),2); ?></b></td>
 			<?php } ?>
-			<td class="number"><b>(<?php echo number_format(($totalCollect23+$totalCollect40),2); ?>)</b></td>
+			<td class="number"><b><?php echo number_format(($totalCollect23+$totalCollect40),2); ?></b></td>
 		</tr>
 
 		<tr>
@@ -282,10 +311,18 @@ $port=$getportfolio->result();
 			<?php
 				$totalEnd23=0;
 				foreach($port AS $data){
-					$totalEnd23+=($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23); ?>
-					<td class="number"><?php echo number_format(($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23),2); ?></td>
-			<?php } ?>
-			<td class="number"><b><?php echo number_format($totalEnd23,2); ?></b></td>
+					$totalEnd23+=($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23); 
+					if(($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23)<0) {?>
+						<td class="number">(<?php echo number_format(abs($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23),2); ?>)</td>
+					<?php } else { ?>
+						<td class="number"><?php echo number_format(($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23),2); ?></td>
+					<?php }} ?>
+
+					<?php if($totalEnd23<0) {?>
+						<td class="number"><b>(<?php echo number_format(abs($totalEnd23),2); ?>)</b></td>
+					<?php } else { ?>
+						<td class="number"><b><?php echo number_format($totalEnd23,2); ?></b></td>
+					<?php } ?>
 	
 		</tr>
 			
@@ -294,10 +331,18 @@ $port=$getportfolio->result();
 			<?php
 				$totalEnd40=0;
 				foreach($port AS $data){
-					$totalEnd40+=($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40); ?>
-					<td class="number"><?php echo number_format(($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40),2); ?></td>
+					$totalEnd40+=($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40); 
+					if(($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40)<0) {?>
+						<td class="number">(<?php echo number_format(abs($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40),2); ?>)</td>
+					<?php } else { ?>
+						<td class="number"><?php echo number_format(($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40),2); ?></td>
+					<?php } ?>
 			<?php } ?>
-			<td class="number"><b><?php echo number_format($totalEnd40,2); ?></b></td>
+			<?php if ($totalEnd40<0) { ?>
+				<td class="number"><b>(<?php echo number_format(abs($totalEnd40),2); ?>)</b></td>
+				<?php } else { ?>
+				<td class="number"><b><?php echo number_format($totalEnd40,2); ?></b></td>
+				<?php } ?>
 		</tr>
 			
 		<tr>
@@ -306,10 +351,17 @@ $port=$getportfolio->result();
 				foreach($port AS $data){ 
 					$temp23=($data->BegTotalLoan23+$data->LoanReleased23-$data->Collected23);
 					$temp40=($data->BegTotalLoan40+$data->LoanReleased40-$data->Collected40);
-					?>
-					<td class="number"><b><?php echo number_format(($temp23+$temp40),2); ?></b></td>
+					if(($temp23+$temp40)<0){?>
+					<td class="number"><b>(<?php echo number_format(abs($temp23+$temp40),2); ?>)</b></td>
+					<?php } else {?>
+						<td class="number"><b><?php echo number_format(($temp23+$temp40),2); ?></b></td>
+			<?php }} ?>
+
+			<?php if(($totalEnd23+$totalEnd40)<0) { ?>
+				<td class="number"><b>(<?php echo number_format(abs($totalEnd23+$totalEnd40),2); ?>)</b></td>
+				<?php } else { ?>
+				<td class="number"><b><?php echo number_format(($totalEnd23+$totalEnd40),2); ?></b></td>
 			<?php } ?>
-			<td class="number"><b><?php echo number_format(($totalEnd23+$totalEnd40),2); ?></b></td>
 		</tr>
 
 	</table>
