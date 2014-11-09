@@ -322,6 +322,7 @@ function gotoapprovedloan(){
 							</div>
 
 							<div class="targetactual2">
+							<p style="position:absolute; font-family:Calibri, sans-serif; font-size: 12px; margin-left: 850px;margin-top:270px; "> See Table</p>
 								<iframe src=" <?php echo base_url('salveofficer/targetactualcenter') ?> " width="900px" height="400px;" frameborder="0" scrolling="no"></iframe>
 							</div>
 
@@ -331,6 +332,7 @@ function gotoapprovedloan(){
 								<p class="HPheadtxt03">  <?php echo $datetoday; ?></p>
 
 								<table style="margin-right: auto; margin-top:30px; border-collapse: collapse;">
+
 									
 									
 									<?php 
@@ -382,12 +384,18 @@ function gotoapprovedloan(){
 								<!------------------------- IF SO -------------------------------->
 								<div class="activedormant">
 									<iframe src=" <?php echo base_url('salveofficer/activedormant') ?> " width="900px" height="400px;" frameborder="0" scrolling="no"></iframe>
+									<p style="position:absolute; font-family:Calibri, sans-serif; font-size: 12px; margin-left: 850px;margin-top:-135px; "> See Table</p>
+
 								</div>
 
 
 
 								<div class="targetactual">
 									<iframe src=" <?php echo base_url('salveofficer/targetactualcenter') ?> " width="900px" height="400px;" frameborder="0" scrolling="no"></iframe>
+							<p style="position:absolute; font-family:Calibri, sans-serif; font-size: 12px; margin-left: 850px;margin-top:-135px; "> See Table</p>
+
+    								
+
 								</div>
 
 

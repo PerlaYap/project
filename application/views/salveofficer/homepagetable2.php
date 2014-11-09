@@ -69,6 +69,42 @@ ON Alpha.MemberControl=Beta.MemberControl WHERE BranchControl='$branchno' GROUP 
 ON BigOne.CenterControl=BigTwo.CenterControl");
 ?>
 
+
+
+<style type="text/css">
+	img.caritaslogo{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 170px;
+		height: auto;
+	}
+
+	h3{
+		text-align: center;
+		font-size: 14px;
+		margin-left:auto;
+		margin-right:auto; 
+		margin-top: -3px;
+		font-family: Times New Roman;
+		line-height: 15px;
+	}	
+</style>
+
+
+		<a href="<?php echo site_url('login/homepage'); ?>" > 
+			<img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>"  class="caritaslogo" >
+		</a>
+		
+		<h3>
+			CARITAS SALVE CREDIT COOPERATIVE <br>
+			Comparison of Center Performance
+		</h3>
+
+
+<br>
+
+
 <table border=1>
 	<tr>
 		<td class="header" style="width: 150px;"> Center </td>

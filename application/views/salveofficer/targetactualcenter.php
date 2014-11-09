@@ -93,6 +93,8 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
             }
         </script>
 
-    <input type="button" onclick="openWin()" class="table1"/>
+    <input type="button" onclick="openWin()" class="table"/>
+    
+
   </body>
 </html>

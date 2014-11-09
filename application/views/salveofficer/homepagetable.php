@@ -33,10 +33,44 @@ $month = array("January","February","March","April","May","June","July","August"
 
 ?>
 
-<table border=1>
+<style type="text/css">
+	img.caritaslogo{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 170px;
+		height: auto;
+	}
+
+	h3{
+		text-align: center;
+		font-size: 14px;
+		margin-left:auto;
+		margin-right:auto; 
+		margin-top: -3px;
+		font-family: Times New Roman;
+		line-height: 15px;
+	}	
+</style>
+
+
+		<a href="<?php echo site_url('login/homepage'); ?>" > 
+			<img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>"  class="caritaslogo" >
+		</a>
+		
+		<h3>
+			CARITAS SALVE CREDIT COOPERATIVE <br>
+			Comparison of Accounts as of <br>
+			<?php echo $currentmonth; ?> 2014
+
+		</h3>
+
+
+<br>
+<table border=1 style="margin-left:auto; margin-right:auto;">
 
 	<tr>
-		<td class="header" colspan="4"><?php echo "Year ".$currentyear; ?></td>
+		<td class="header" colspan="4"><?php echo $currentyear; ?></td>
 	</tr>
 
 	<tr>
