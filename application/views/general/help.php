@@ -245,7 +245,7 @@
 	<p class="hdrAbout"><a name="IV" class="aHDR">IV. BASIC USER FUNCTIONS</a></p>
 	
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="IVA" class="aHDR">A. VIEW PROFILE AND CHANGE PASSWORD</a></p>
-		<img src="<?php echo base_url('Assets/images/11.png');?>" style="width:1050px;">
+		<img src="<?php echo base_url('Assets/images/10.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
