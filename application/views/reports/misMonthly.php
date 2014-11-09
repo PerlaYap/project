@@ -241,7 +241,7 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
 	
 	<!-- <img src="<?php // echo base_url ('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"> -->
 	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MONTHLY ACCOUNT REPORT <br> For The Month Of <b>
-		<?php echo $month ?> <?php echo $year ?></b></h3>
+		<?php echo $monthWord ?> <?php echo $year ?></b></h3>
 
 	<br>
 	<table class="misreport" border="1" style="margin-left:auto; margin-right:auto;">

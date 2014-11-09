@@ -13,12 +13,12 @@
 	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 
 <h3>CARITAS SALVE CREDIT COOPERATIVE <br> SAVINGS BUILD-UP and PREFERRED SHARE REPORT  <br> For The Month Of <b>
-		<?php echo $month ?> <?php echo $year ?></b></h3>
+		<?php echo $monthWord ?> <?php echo $year ?></b></h3>
 <?php
 $user = $this->session->userdata('firstname');
 $datetoday = date('F d, Y');
 
-$getInterest =$this->db->query("SELECT FirstTable.BranchControl, Saving-Withdrawal AS PerMonth, FirstTable.Month, FirstTable.Year FROM 
+$getInterest =$this->db->query("SELECT FirstTable.BranchControl, IFNULL(Saving,0)-IFNULL(Withdrawal,0) AS PerMonth, FirstTable.Month, FirstTable.Year FROM 
 (SELECT SUM(Amount) AS Saving, BranchControl, Month(DateTime) AS Month, Year(DateTime) AS Year FROM 
 (SELECT ControlNo, Amount, Members_ControlNo AS MemberControl, DateTime, TransactionType
 FROM Transaction 
@@ -49,7 +49,7 @@ ON (Alpha.MemberControl=Beta.MemberControl AND DateEntered<=DateTime<IFNULL(Date
 WHERE DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH))
 GROUP BY Month(DateTime),Year(DateTime),BranchControl) SecondTable
 ON FirstTable.BranchControl=SecondTable.branchControl
-ORDER BY (FirstTable.Month && FirstTable.Year)")
+ORDER BY FirstTable.Year ASC, FirstTable.Month ASC ")
 ?>
 <?php 
 
@@ -235,11 +235,11 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 					$money=0;
 					foreach($getInterest->result() as $data2){
 						if($data2->BranchControl==$data->ControlNo){
-							$money+=$data2->PerMonth;
-							$money=$money*1.503;
+							$money+=($data2->PerMonth);
+							$money=$money*1.0042;
 						}
 					}
-					echo '<td class="number1">'.number_format(($money-$data->BegSaving),2).'</td>';
+					echo '<td class="number1">'.number_format(($money-($data->BegSaving)),2).'</td>';
 				}
 			?>
 		</tr>
@@ -247,7 +247,7 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 		<tr>
 			<td class="label1">Savings Collection</td>
 			<?php foreach ($getSavings->result() as $data) {
-			echo '<td class="number1">'.number_format($data->CurrentSaving,2).'</td>';
+			echo '<td class="number1">'.number_format(($data->CurrentSaving),2).'</td>';
 		}?>
 		</tr>
 
@@ -255,8 +255,8 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 			<td class="label1">Savings Collection Int</td>
 			<?php 
 				foreach($getSavings->result() as $data){
-					$money=($data->CurrentSaving)*1.503;
-					echo '<td class="number1">'.number_format(($money-$data->CurrentSaving),0).'</td>';
+					$money=($data->CurrentSaving)*1.0042;
+					echo '<td class="number1">'.number_format(($money-$data->CurrentSaving),2).'</td>';
 				}
 			?>
 		</tr>
@@ -277,13 +277,13 @@ ON cb.ControlNo=Sole.BranchControl WHERE ControlNo!='1' ORDER BY BranchName ASC"
 				foreach ($getInterest->result() as $data2) {
 					if($data->ControlNo==$data2->BranchControl){
 						$interest1+=$data2->PerMonth;
-						$interest1=$interest1*1.503;
+						$interest1=$interest1*1.0042;
 					}
 				}
 
 				$interest1-=$data->BegSaving;
 
-				$interest2=($data->CurrentSaving)*1.503;
+				$interest2=($data->CurrentSaving)*1.0042;
 				$interest2-=$data->CurrentSaving;
 
 				echo '<td class="number1"><b>'.number_format(($interest1+$interest2+$data->Total),2).'</b></td>';

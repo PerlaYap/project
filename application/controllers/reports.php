@@ -121,7 +121,8 @@ class Reports extends CI_Controller {
         $data=$this->input->post('monthyear');
         $dateTime=strtotime($data);
         $data1=array('datetoday'=>date('Y-m-d',$dateTime),
-            'month'=>date('F',$dateTime),
+            'month'=>date('m',$dateTime),
+            'monthWord'=>date('F',$dateTime),
             'year'=>date('Y',$dateTime));
 
 
@@ -132,7 +133,8 @@ class Reports extends CI_Controller {
         $data=$this->input->post('monthyear');
         $dateTime=strtotime($data);
         $data1=array('date'=>date('Y-m-d',$dateTime),
-            'month'=>date('F',$dateTime),
+            'month'=>date('m',$dateTime),
+            'monthWord'=>date('F',$dateTime),
             'year'=>date('Y',$dateTime));
 
 
@@ -143,7 +145,8 @@ class Reports extends CI_Controller {
         $data=$this->input->post('monthyear');
         $dateTime=strtotime($data);
         $data1=array('date'=>date('Y-m-d',$dateTime),
-            'month'=>date('F',$dateTime),
+            'month'=>date('m',$dateTime),
+            'monthWord'=>date('F',$dateTime),
             'year'=>date('Y',$dateTime));
 
 
