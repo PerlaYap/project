@@ -119,6 +119,7 @@ ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated V
         </script>
 
     <input type="button" onclick="openWin()" class="table1"/>
+    <p style="position:absolute; font-family:Calibri, sans-serif; font-size: 12px; margin-left: 520px;margin-top:-100px; "> See Table</p>
   <?php endif;?>
 </body>
 </html>
