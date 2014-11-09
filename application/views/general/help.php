@@ -44,6 +44,8 @@
 		Microfinance Cooperative Information Management System
 	</p>
 	<BR>
+	<!--	<img src="<?php echo base_url('Assets/images/1.png');?>" style="width:1050px;"><br>
+		<img src="<?php echo base_url('Assets/images/2.png');?>" style="width:1050px;"><br> -->
 
 	<p class="hdrAbout"><a name="top" class="aHDR">TABLE OF CONTENTS</a></p>
 	<ol style="margin-top: -10px; margin-left: 10px;" type="I">
@@ -63,7 +65,7 @@
 				<li><a href="#IVB">VIEW MEMBER PROFILE (USING MEMBER DIRECTORY)</a></li>
 				<li><a href="#IVC">VIEW MEMBER PROFILE (USING SEARCH)</a></li>
 				<li><a href="#IVD">VIEW LIST OF ACCOUNTS</a></li>
-				<li><a href="#IVE">VIEW REPORTS</a></li>
+				
 			</OL>
 
 		<li><a href="#V">BRANCH MANAGER FUNCTIONS</a></li>
@@ -98,6 +100,12 @@
 				<li><a href="#VIIC">TARGET VS ACTUAL LOAN COLLECTION PER CENTER IN A BRANCH GRAPH</a></li>
 				<li><a href="#VIID">BORROWER VS SAVER GRAPH</a></li>
 				<li><a href="#VIIE">AUDIT TRAIL</a></li>
+				<li><a href="#VIIF">YEARLY TREND OF LOAN APPLICATIONS PER BRANCH</a></li>
+				<li><a href="#VIIG">COMPARISON OF YEARLY TREND OF LOAN APLLICATIONS PER BRANCH</a></li>
+				<li><a href="#VIIH">COLLECTION PERFORMANCE OF BRANCHES</a></li>
+				<li><a href="#VIII">MONTHLY ACCOUNT REPORT</a></li>
+				<li><a href="#VIIJ">MONTHLY LOAN PORTFOLIO REPORT</a></li>
+				<li><a href="#VIIK">MONTHLY SAVINGS-BUILD-UP AND CAPITAL SHARES REPORT</a></li>
 			</OL>
 
 	</ol>
@@ -119,14 +127,10 @@
 	<!------------------------------------------- -------------------------------------------------->
 	<!------------------------------------------- -------------------------------------------------->
 	<p class="hdrAbout"><a name="I" class="aHDR">I. SYSTEM INFORMATION</a></p>
-	<p class="textAbout">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
+	
+
+		<img src="<?php echo base_url('Assets/images/3.png');?>" style="width:1050px;">
+
 
 	<br><br>
 	<p class="textAbout"><a href="#top">Back to Top</a></p>
@@ -152,14 +156,10 @@
 	<!------------------------------------------- -------------------------------------------------->
 	<!------------------------------------------- -------------------------------------------------->
 	<p class="hdrAbout"><a name="II" class="aHDR">II. STANDARD PROCEDURES</a></p>
-	<p class="textAbout">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
+		
+		
+		<img src="<?php echo base_url('Assets/images/4.png');?>" style="width:1050px;"><br>
+		<img src="<?php echo base_url('Assets/images/5.png');?>" style="width:1050px;">
 
 	<br><br>
 	<p class="textAbout"><a href="#top">Back to Top</a></p>
@@ -194,31 +194,12 @@
 	<!------------------------------------------- -------------------------------------------------->
 	<!------------------------------------------- -------------------------------------------------->
 	<p class="hdrAbout"><a name="III" class="aHDR">III. MIS FUNCTIONS</a></p>
-	<p class="textAbout">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-
-	<br><br>
-	<p class="textAbout"><a href="#top">Back to Top</a></p>
-	<br><br>
-
-		<!------------------------------------------- -------------------------------------------------->
+	
+	<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="IIIA" class="aHDR">A. ADD NEW USER</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/6.png');?>" style="width:1050px;">
 		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
@@ -228,14 +209,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="IIIB" class="aHDR">B. VIEW AND EDIT USER PROFILE</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/7.png');?>" style="width:1050px;">
 		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
@@ -245,15 +219,8 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="IIIC" class="aHDR">C. ADD BRANCH</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
 		
+		<img src="<?php echo base_url('Assets/images/8.png');?>" style="width:1050px;">		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -262,14 +229,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="IIID" class="aHDR">D. VIEW AND EDIT BRANCH INFO</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/9.png');?>" style="width:1050px;">
 		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
@@ -279,93 +239,13 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!------------------------------------------- -------------------------------------------------->
 	<!------------------------------------------- -------------------------------------------------->
 	<!------------------------------------------- -------------------------------------------------->
 	<p class="hdrAbout"><a name="IV" class="aHDR">IV. BASIC USER FUNCTIONS</a></p>
-	<p class="textAbout">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-
-	<br><br>
-	<p class="textAbout"><a href="#top">Back to Top</a></p>
-	<br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!------------------------------------------- -------------------------------------------------->
-	<!------------------------------------------- -------------------------------------------------->
-	<!------------------------------------------- -------------------------------------------------->
-	<p class="hdrAbout"><a name="IV" class="aHDR">IV. BASIC USER FUNCTIONS</a></p>
-	<p class="textAbout">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-
-	<br><br>
-	<p class="textAbout"><a href="#top">Back to Top</a></p>
-	<br><br>
-
-		<!------------------------------------------- -------------------------------------------------->
-		<!------------------------------------------- -------------------------------------------------->
-		<!------------------------------------------- -------------------------------------------------->
+	
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="IVA" class="aHDR">A. VIEW PROFILE AND CHANGE PASSWORD</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/11.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -375,14 +255,8 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="IVB" class="aHDR">B. VIEW MEMBER PROFILE (USING MEMBER DIRECTORY)</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/12.png');?>" style="width:1050px;"><br>
+		<img src="<?php echo base_url('Assets/images/13.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -392,14 +266,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="IVC" class="aHDR">C. VIEW MEMBER PROFILE (USING SEARCH)</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/14.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -409,33 +276,11 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="IVD" class="aHDR">D. VIEW LIST OF ACCOUNTS</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/15.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
 
-		<!------------------------------------------- -------------------------------------------------->
-		<!------------------------------------------- -------------------------------------------------->
-		<!------------------------------------------- -------------------------------------------------->
-		<p class="hdrAbout" style="margin-left: 50px;"><a name="IVE" class="aHDR">E. VIEW REPORTS</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
-		<br><br>
-		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
-		<br><br>
 
 
 
@@ -470,31 +315,13 @@
 	<!------------------------------------------- -------------------------------------------------->
 	<!------------------------------------------- -------------------------------------------------->
 	<p class="hdrAbout"><a name="V" class="aHDR">V. BRANCH MANAGER FUNCTIONS</a></p>
-	<p class="textAbout">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-
-	<br><br>
-	<p class="textAbout"><a href="#top">Back to Top</a></p>
-	<br><br>
+	
 
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VA" class="aHDR">A. ADD CENTER</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/18.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -504,14 +331,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VB" class="aHDR">B. VIEW AND EDIT CENTER INFO</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/19.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -520,14 +340,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VC" class="aHDR">C. APPROVE/REJECT MEMBERSHIP APPLICATIONS</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/21.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -536,14 +349,9 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VD" class="aHDR">D. APPROVE/REJECT LOAN APPLICATIONS</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		
+		<img src="<?php echo base_url('Assets/images/22.png');?>" style="width:1050px;"><br>
+		<img src="<?php echo base_url('Assets/images/23.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -552,14 +360,8 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VE" class="aHDR">E. RELEASE LOAN</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/24.png');?>" style="width:1050px;"><br>
+		<img src="<?php echo base_url('Assets/images/25.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -568,14 +370,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VF" class="aHDR">F. TERMINATE MEMBER</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/26.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -585,14 +380,8 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VG" class="aHDR">G. WITHDRAW MEMBER</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/27.png');?>" style="width:1050px;"><br>
+		<img src="<?php echo base_url('Assets/images/28.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -632,32 +421,15 @@
 	<!------------------------------------------- -------------------------------------------------->
 	<!------------------------------------------- -------------------------------------------------->
 	<p class="hdrAbout"><a name="VI" class="aHDR">VI. SALVE OFFICER FUNCTIONS</a></p>
-	<p class="textAbout">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-
-	<br><br>
-	<p class="textAbout"><a href="#top">Back to Top</a></p>
-	<br><br>
+	
 
 
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIA" class="aHDR">A. ADD NEW MEMBER</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/29.png');?>" style="width:1050px;"><br>
+		<img src="<?php echo base_url('Assets/images/30.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -667,14 +439,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIB" class="aHDR">B. EDIT PROFILE</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/31.png');?>" style="width:1050px;">		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -683,14 +448,8 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIC" class="aHDR">C. ADD LOAN APPLICATION</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/32.png');?>" style="width:1050px;"><br>
+		<img src="<?php echo base_url('Assets/images/33.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -700,14 +459,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VID" class="aHDR">D. VIEW PENDING AND REJECTED MEMBERSHIP APPLICATIONS</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/34.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -717,14 +469,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIE" class="aHDR">E. VIEW APPROVED AND REJECTED LOAN APPLICATIONS</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/35.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -733,14 +478,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIF" class="aHDR">F. GENERATE DAILY COLLECTION SHEET</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/36.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -750,14 +488,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIG" class="aHDR">G. RECORD DAILY COLLECTION 56</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/37.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -767,14 +498,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIH" class="aHDR">H. ADD ADDITIONAL COLLECTION</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/38.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -783,14 +507,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="V1I" class="aHDR">I. EDIT COLLECTION</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/39.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -799,14 +516,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIJ" class="aHDR">J. VIEW PAST DUES</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/40.png');?>" style="width:1050px;">
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
@@ -833,31 +543,13 @@
 	<!------------------------------------------- -------------------------------------------------->
 	<!------------------------------------------- -------------------------------------------------->
 	<p class="hdrAbout"><a name="VII" class="aHDR">VII. REPORT GENERATION</a></p>
-	<p class="textAbout">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-
-	<br><br>
-	<p class="textAbout"><a href="#top">Back to Top</a></p>
-	<br><br>
+	
 
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIIA" class="aHDR">A. COLLECTION PERFORMANCE OF CENTERS</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/41.png');?>" style="width:1050px;">
 		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
@@ -867,14 +559,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIIB" class="aHDR">B. ACTIVE ACCOUNTS GRAPH</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/42.png');?>" style="width:1050px;">
 		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
@@ -884,14 +569,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIIC" class="aHDR">C. TARGET VS ACTUAL LOAN COLLECTION PER CENTER IN A BRANCH GRAPH</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/43.png');?>" style="width:1050px;">
 		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
@@ -901,14 +579,7 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIID" class="aHDR">D. BORROWER VS SAVER GRAPH</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/44.png');?>" style="width:1050px;">
 		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
@@ -918,19 +589,74 @@
 		<!------------------------------------------- -------------------------------------------------->
 		<!------------------------------------------- -------------------------------------------------->
 		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIIE" class="aHDR">E. AUDIT TRAIL</a></p>
-		<p class="textAbout" style="margin-left: 50px;">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<img src="<?php echo base_url('Assets/images/45.png');?>" style="width:1050px;">
 		
 		<br><br>
 		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
 		<br><br>
 
+
+
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIIF" class="aHDR">F. YEARLY TREND OF LOAN APPLICATIONS PER BRANCH</a></p>
+		<img src="<?php echo base_url('Assets/images/46.png');?>" style="width:1050px;">
+		
+		<br><br>
+		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
+		<br><br>
+
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIIG" class="aHDR">G. COMPARISON OF YEARLY TREND OF LOAN APPLICATIONS PER BRANCH</a></p>
+		<img src="<?php echo base_url('Assets/images/47.png');?>" style="width:1050px;">
+		
+		<br><br>
+		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
+		<br><br>
+
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIIH" class="aHDR">H. COLLECTION PERFORMANCE OF BRANCHES</a></p>
+		<img src="<?php echo base_url('Assets/images/48.png');?>" style="width:1050px;">
+		
+		<br><br>
+		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
+		<br><br>
+
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIII" class="aHDR">I. MONTHLY ACCOUNT REPORT</a></p>
+		<img src="<?php echo base_url('Assets/images/49.png');?>" style="width:1050px;">
+		
+		<br><br>
+		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
+		<br><br>
+
+
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIIJ" class="aHDR">J. MONTHLY LOAN PORTFOLIO REPORT</a></p>
+		<img src="<?php echo base_url('Assets/images/50.png');?>" style="width:1050px;">
+		
+		<br><br>
+		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
+		<br><br>
+
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<!------------------------------------------- -------------------------------------------------->
+		<p class="hdrAbout" style="margin-left: 50px;"><a name="VIIK" class="aHDR">K. MONTHLY SAVINGS BUILD-UP AND CAPITAL SHARES REPORT</a></p>
+		<img src="<?php echo base_url('Assets/images/51.png');?>" style="width:1050px;">
+		
+		<br><br>
+		<p class="textAbout" style="margin-left: 50px;"><a href="#top">Back to Top</a></p>
+		<br><br>
 
 
 
