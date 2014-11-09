@@ -864,13 +864,11 @@ foreach ($pastDuePerformance->result() as $row) {
          <p class="info">Number of Loan Cycle: <b><?php echo $pdloanCount ?></b> </p>
          <p class="info">Overall Percentage of Past Due: <b><?php echo $pdpercent."% " ?>
           <?php 
-          if($pdloanCount>3){
+          
             if($pdpercent<=5) echo "EXCELLENT MEMBER";
             else if($pdpercent <=10 AND $pdpercent>5) echo "Very Good Member";
             else if($pdpercent<=20 AND $pdpercent>10) echo "Good Member";
-            else echo "Poor Member";}
-            else
-              echo "EXCELLENT MEMBER";
+            else echo "Poor Member";
             ?>
 
           </b> </p>
