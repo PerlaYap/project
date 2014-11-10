@@ -99,9 +99,11 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 					</li>
 				<?php endif;?>	
 																<!-- put some style to this echo -->
-					
-					<li class="menu"><a href="#" class="menu">MEMBERSHIP 
+					<?php if ($userrank!='mispersonnel'): ?>
 						
+					<li class="menu"><a href="#" class="menu">MEMBERSHIP 
+					
+					<?php endif ?>
 						
 							<?php 
 							
@@ -236,7 +238,8 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 
 
 					<?php if($userrank=='salveofficer'){ ?>
-						<li class="menu"><a href="#" class="menu" style="cursor: pointer;">REPORTS</a>
+					<li class="menu"><a href="<?php echo site_url('reports/reportList'); ?>" class="menu" style="cursor: pointer;">REPORTS</a>
+						<!-- <li class="menu"><a href="#" class="menu" style="cursor: pointer;">REPORTS</a> -->
 							<ul>
 								<li><a href="<?php echo site_url('reports/dailycollectionsheet'); ?>">Daily Collection Sheet</a></li>
 							</ul>
