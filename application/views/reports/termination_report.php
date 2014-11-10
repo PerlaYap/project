@@ -76,6 +76,8 @@
 		<span>Total Capital Share :</span></label>
 		<input id="name" type="text" name="fname" value="<?php echo number_format($tot_capital,2) ?>" style="width: 630px; background:none;" disabled/> 
 
+<?php if ($status=='Terminated Voluntarily'): ?>
+	
 	<label>
 		<span>Total Savings :</span></label>
 		<input id="name" type="text" name="fname" value="<?php echo number_format($savings,2) ?>" style="width: 630px;background:none;" disabled/>  
@@ -83,6 +85,8 @@
 	<label>
 		<span>Amount Receivable: :</span></label>
 		<input id="name" type="text" name="fname" value="<?php echo number_format($Recievable,2) ?>" style="width: 630px; background:none; font-weight:bold; color:#821818" disabled/> 
+
+	<?php endif ?>
 
 </div>
 
