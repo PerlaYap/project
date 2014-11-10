@@ -71,7 +71,7 @@ ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
 ON Alpha.MembersControl=Beta.Members_ControlNo 
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MembersControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MembersControl
-WHERE Alpha.Status IS NOT NULL AND Status='Terminated', order by CenterNo, Name");}
+WHERE Alpha.Status IS NOT NULL AND Status='Terminated' order by CenterNo, Name");}
 ?>
 
 <div class="content2">
