@@ -104,7 +104,10 @@ class terminate_voluntary_model extends CI_Model{
 	 }
 	public function setterminatestatus($control_no){
 		 
-		 $this->db->query("INSERT INTO members_has_membersmembershipstatus(`ControlNo`, `DateUpdated`, `Status`) VALUES ('$control_no', NOW(), 'Terminated Voluntarily')"); }
+		$this->db->query("INSERT INTO members_has_membersmembershipstatus(`ControlNo`, `DateUpdated`, `Status`) VALUES ('$control_no', NOW(), 'Terminated Voluntarily')"); }
+	public function setterminatestatus_term($control_no){
+		$this->db->query("INSERT INTO members_has_membersmembershipstatus(`ControlNo`, `DateUpdated`, `Status`) VALUES ('$control_no', NOW(), 'Terminated')"); 
+	}
 	public function paythroughsavings($loantopay){
 
 		 $control_no = $loantopay['controlno'];
@@ -167,16 +170,14 @@ class terminate_voluntary_model extends CI_Model{
 								where m.controlno = $control_no;");
 
 		return $result->result(); }
-
 	public function setterminationreason($controlno){
 
 			$lifestatus = $this->security->xss_clean($this->input->post('lifestatus'));
 			$reason = $this->security->xss_clean($this->input->post('term_reason'));
 
 			$comment="(".$lifestatus.")"."-".$reason;
-
-		$this->db->query("UPDATE `microfinance2`.`members` SET `Comment` = '$comment' WHERE `members`.`ControlNo` = $controlno;");
-	}
+			$this->db->query("UPDATE `microfinance2`.`members` SET `Comment` = '$comment' WHERE `members`.`ControlNo` = $controlno;");
+	 }
 
 
     

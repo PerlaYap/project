@@ -97,7 +97,7 @@ if($loanType=="23-Weeks"){
 		</tr>
 		<tr>
 			<td class="pLabel">Active Release:</td>
-			<td class="pName"><b><?php echo $activeLoan ?></b></td>
+			<td class="pName"><b><?php echo number_format($activeLoan,2) ?></b></td>
 		</tr>
 		<tr>
 			<td class="pLabel">Date Applied:</td>

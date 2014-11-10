@@ -192,7 +192,7 @@ class Salveofficer extends CI_Controller {
 		}
 			$name = $fname." ".$mname." ".$lname;
 
-		$activity = "Withdraw the account of ".$name." (Voluntarily)." ;
+		$activity = "Withdraw the account of ".$name." (Withdraw Voluntarily)." ;
         $this->load->model("audittrail_model");
         $this->audittrail_model->setlog($activity);
 
@@ -353,6 +353,7 @@ class Salveofficer extends CI_Controller {
 		}else if ($paymentrecieved == $loanbalance-$savings) {
 			$this->terminate_voluntary_model->setterminatestatus($controlno);
 			$profile = $this->terminate_voluntary_model->getprofileinfo($controlno);
+			$data['profile'] = $profile;
 				foreach ($profile as $p) {
 					$fname = $p->FirstName;
 					$mname = $p->MiddleName;
@@ -365,7 +366,8 @@ class Salveofficer extends CI_Controller {
         $this->audittrail_model->setlog($activity);
 
         	echo "<script type='text/javascript'>alert('Successfully withdraw the account of ".$name."')</script>";
-        	$this->termination_report($controlno);
+        	$this->load->view('general/termination_reason', $data);
+        	/*$this->termination_report($controlno);*/
 
 			/*$this->load->view('general/successtermination');*/
 			/*echo "<script type='text/javascript'>alert('Loan Fully Paid. Account terminated successfully.')</script>";*/

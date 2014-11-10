@@ -95,7 +95,7 @@
 					<?php	if (!empty($_POST['center'])) {
 					$centerselected = $_POST['center'];
 					$getSavingsOnly = $this->db->query("SELECT * FROM 
-						(SELECT mem.`ControlNo`,CONCAT(`LastName`, ', ',`FirstName`,' ', `MiddleName` )as Name,`Approved`, `Savings`,`CaritasCenters_ControlNo`,`LoanExpense` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`Order by LastName,FirstName)member where member.`CaritasCenters_ControlNo`= $centerselected and `LoanExpense` = 0 and `Approved`= 'YES' ");
+						(SELECT mem.`ControlNo`,CONCAT(`LastName`, ', ',`FirstName`,' ', `MiddleName` )as Name,`Approved`, `Savings`,`CaritasCenters_ControlNo`,`LoanExpense` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`Order by LastName,FirstName)member where member.`CaritasCenters_ControlNo`= $centerselected and `LoanExpense` = 0 and `Approved`= 'YES' order by Name ");
 
 					$getsav = $getSavingsOnly->result(); ?>
 					<?php if (!empty($getsav)) { ?>
@@ -219,7 +219,7 @@
 										$centerselected = $_POST['center'];
 										$getMember = $this->db->query("SELECT * FROM 
 											(SELECT mem.`ControlNo`,CONCAT(`LastName`, ', ',`FirstName`,' ', `MiddleName` )as Name,  `LoanExpense`, `Savings`, `CapitalShare`,`pastdue`,`CaritasCenters_ControlNo` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo` Order by LastName, FirstName)member join 
-											(SELECT `LoanApplication_ControlNo`,`status`, `Members_ControlNo`,`AmountRequested`, `Interest`, `LoanType` FROM `loanapplication_has_members` lhm , `loanapplication` l WHERE lhm.`LoanApplication_ControlNo` = l.`ControlNo`) loan on member.ControlNo = loan.Members_ControlNo where member.`CaritasCenters_ControlNo`= $centerselected and `status`='Current' ");
+											(SELECT `LoanApplication_ControlNo`,`status`, `Members_ControlNo`,`AmountRequested`, `Interest`, `LoanType` FROM `loanapplication_has_members` lhm , `loanapplication` l WHERE lhm.`LoanApplication_ControlNo` = l.`ControlNo`) loan on member.ControlNo = loan.Members_ControlNo where member.`CaritasCenters_ControlNo`= $centerselected and `status`='Current' order by Name ");
 										$borrower = $getMember->result();
 										if (!empty($borrower)) { ?>
 											

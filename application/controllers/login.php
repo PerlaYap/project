@@ -5,7 +5,6 @@ class Login extends CI_Controller {
     public function index(){
 		$this->login_1();
 	   }
-
 	public function login_1(){
 		//loading login page in the view
 
@@ -126,9 +125,8 @@ class Login extends CI_Controller {
         $this->load->view('general/search', $data);
         $this->load->view('footer');
 
-        }
-     
-        public function terminate(){
+        }   
+    public function terminate(){
         $this->load->model('terminate_voluntary_model');
         $controlno = $_GET['name'];
         $data['profileinfo'] = $this->terminate_voluntary_model->getprofileinfo($controlno);
@@ -149,7 +147,7 @@ class Login extends CI_Controller {
      public function terminatenow(){
         $this->load->model('terminate_voluntary_model');
         $controlno = $this->terminate_voluntary_model->getcontrolno();
-        $this->terminate_voluntary_model->setterminatestatus($controlno);
+        $this->terminate_voluntary_model->setterminatestatus_term($controlno);
         $profile = $this->terminate_voluntary_model->getprofileinfo($controlno);
         $data['profile'] = $profile;
         foreach ($profile as $p) {
@@ -159,19 +157,18 @@ class Login extends CI_Controller {
         }
             $name = $fname." ".$mname." ".$lname;
 
-               $activity = "Withdraw the account of ".$name." (Voluntarily)." ;
+               $activity = "Withdraw the account of ".$name." (Terminated Involuntarily)." ;
         $this->load->model("audittrail_model");
         $this->audittrail_model->setlog($activity);
 
                    echo "<script type='text/javascript'>alert('Successfully withdraw the account of ".$name."')</script>";
                   /* $this->termination_reason($controlno);*/
                   $this->load->view('general/termination_reason', $data);
-/*            $this->termination_report($controlno);*/
-            /*$this->directory();*/
+                    /*$this->termination_report($controlno);*/
+                    /*$this->directory();*/
 
                }
-
-        public function termination_reason(){
+    public function termination_reason(){
             $this->load->model('terminate_voluntary_model');
             $controlno = $this->terminate_voluntary_model->getcontrolno();
             $this->terminate_voluntary_model->setterminationreason($controlno);
@@ -180,15 +177,13 @@ class Login extends CI_Controller {
 
              $this->termination_report($controlno);
         }
-        public function termination_report($controlno){
+    public function termination_report($controlno){
 
         $this->load->model('terminate_voluntary_model');
         $result['data'] = $this->terminate_voluntary_model->gettermination_report($controlno);
         $this->load->view('reports/termination_report', $result);
 
      }
-
-
     public function profiles(){
 
         $this->load->view('header');
@@ -223,12 +218,9 @@ class Login extends CI_Controller {
         $this->load->view('navigation');
         $this->load->view('salveofficer/homepage'); 
         $this->load->view('footer');
-       
-    }
-    
+     }    
     public function pastduemember(){
         $this->load->view("salveofficer/pastduemember");
-        
     }
 }
 ?>
