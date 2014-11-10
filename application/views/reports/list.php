@@ -80,14 +80,15 @@ $( "#datepicker1" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 						<option value="daily">Daily Members Collection</option>
 						<?php if($userrank=='branchmanager'){ ?>
 						<option value="dailyManager">Daily Salve Officer Collection</option>
-						<?php } else if($userrank=="salveofficer"){ ?>
-						<option value="dailySO">Daily Center Collection</option>
-						<?php } ?>	
-						<!--<option value="weekly">Weekly</option>
-						<option value="monthly">Monthly</option>-->
 						<option value="yearly">Yearly Trend Report</option>
 						<option value="yearlyCompare">Yearly Trend Comparison</option>
-
+						<?php } else if($userrank=="salveofficer"){ ?>
+						<option value="dailySO">Daily Center Collection</option>
+						
+						<!--<option value="weekly">Weekly</option>
+						<option value="monthly">Monthly</option>-->
+						
+						<?php } ?>	
 
 
 					</select>
