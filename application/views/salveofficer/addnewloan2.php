@@ -226,7 +226,7 @@ foreach ($dayoftheweek->result() as $row){
 
 	$("input#incometotal").val(income.toFixed(2));
 	$("input#expensetotal").val(expense.toFixed(2));
-	$("input#familyCIinput").val(difference.toFixed(2));
+	$("input#difference").val(difference.toFixed(2));
 	}
 
 	(function($) {
