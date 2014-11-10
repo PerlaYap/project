@@ -41,8 +41,10 @@ ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
 ON Alpha.MembersControl=Beta.Members_ControlNo 
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MembersControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MembersControl
-WHERE Alpha.Status IS NOT NULL AND Status='Borrower' AND BranchControl='$branchno'");}
+WHERE Alpha.Status IS NOT NULL AND Status='Borrower' AND BranchControl='$branchno' order by CenterNo, Name");
+}
 else{
+
 $borrower = $this->db->query("SELECT Alpha.MembersControl, CONCAT(LastName,', ', FirstName,' ', MiddleName) AS Name, MemberID, Status, BranchName, CenterNo, DateUpdated
 FROM (SELECT A.ControlNo AS MembersControl, C.Status, DATE_FORMAT(DateUpdated,'%b %d %Y') AS DateUpdated
 FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo ORDER BY ControlNo)A
@@ -68,7 +70,7 @@ ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
 ON Alpha.MembersControl=Beta.Members_ControlNo 
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MembersControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MembersControl
-WHERE Alpha.Status IS NOT NULL AND Status='Borrower'");}
+WHERE Alpha.Status IS NOT NULL AND Status='Borrower' order by CenterNo, Name");}
 ?>
 <div class="content2">
 		<h2 class="hTitle">BORROWER ACCOUNTS</h2>

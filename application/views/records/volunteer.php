@@ -8,7 +8,10 @@
 			function send(control_no){
 				
 				window.location.href= "profiles?name="+ control_no;
-			} 
+			}
+			function report(control_no) {
+              myWindow = window.open("terminationreport?name="+control_no, "myWindow", "width=1000, height=800");    
+            } 
 
 			</script>
 
@@ -41,7 +44,7 @@ ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
 ON Alpha.MembersControl=Beta.Members_ControlNo 
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MembersControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MembersControl
-WHERE Alpha.Status IS NOT NULL AND Status='Terminated Voluntarily' AND BranchControl='$branchno'");}
+WHERE Alpha.Status IS NOT NULL AND Status='Terminated Voluntarily' AND BranchControl='$branchno' order by CenterNo, Name");}
 else{
 $terminate = $this->db->query("SELECT Alpha.MembersControl, CONCAT(LastName,', ', FirstName,' ', MiddleName) AS Name, MemberID, Status, BranchName, CenterNo, DateUpdated
 FROM (SELECT A.ControlNo AS MembersControl, C.Status, DATE_FORMAT(DateUpdated,'%b %d %Y') AS DateUpdated
@@ -68,19 +71,20 @@ ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
 ON Alpha.MembersControl=Beta.Members_ControlNo 
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MembersControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MembersControl
-WHERE Alpha.Status IS NOT NULL AND Status='Terminated Voluntarily'");}
+WHERE Alpha.Status IS NOT NULL AND Status='Terminated Voluntarily' order by CenterNo, Name");}
 ?>
 
 <div class="content2">
 		<h2 class="hTitle">WITHDRAWN ACCOUNTS</h2>
 			<div class="center">
 				
-				
+				<?php if (!empty($terminate->result())): ?>
 				<table class="center">
 					<tr class="header">
 						<th class="tablecount"> </th>
 					
 						<th class="tablename">NAME</th>
+						<th class="tablecenter">REPORT</th>
 						<th class="tablecenter">MEMBER ID</th>
 						<th class="tablecenter">BRANCH</th>
 						<th class="tablecenter">CENTER</th>
@@ -94,6 +98,7 @@ WHERE Alpha.Status IS NOT NULL AND Status='Terminated Voluntarily'");}
  					<tr class="account">
  						<td><?php echo $number; ?></td>
  						<td><a href="javascript:void(0)" onclick="send('<?php echo $tt->MembersControl ?>')"><?php echo $tt->Name; ?></a></td>
+ 						<td><a href="javascript:void(0)" onclick="report('<?php echo $tt->MembersControl ?>')">view</a></td>
  						<td><?php echo $tt->MemberID; ?></td>
  						<td><?php echo $tt->BranchName; ?></td>
  						<td><?php echo $tt->CenterNo; ?></td>
@@ -106,4 +111,8 @@ WHERE Alpha.Status IS NOT NULL AND Status='Terminated Voluntarily'");}
  	
 					
 				</table> 
+				<?php endif ?>
+				<?php if (empty($terminate->result())): ?>
+					<p class="noresultfound"><br>- No Account Withdrawn - <br><br> </p>
+				<?php endif ?>
 

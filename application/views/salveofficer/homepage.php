@@ -282,28 +282,36 @@ function gotoapprovedloan(){
 									<table style="margin-right: auto; margin-top:30px; border-collapse: collapse;">
 										
 										<!-- <tr onclick="gotocenter(<?php echo $centercontrolno; ?>)"  class="updaterow" > -->
+										<?php if ($pending != 0): ?>
 										<tr class="updaterow" onclick="gotopendingmember();" >
-											<td class="updatecontent" style="width: 30px;"> 01.</td>
-											<td class="updatecontent" style="width: 240px;"><a href="#"><?php echo $pending ?> Pending Membership Application</a></td>
+											<!-- <td class="updatecontent" style="width: 30px;"></td> -->
+											<td class="updatecontent" style="width: 270px;"><a href="#"><?php echo $pending ?> Pending Membership Application</a></td>
 										</tr>
+										<?php endif ?>
+										<?php if ($rejected!=0): ?>
 										<tr class="updaterow" onclick="gotorejectedmember();">
-											<td class="updatecontent" style="width: 30px;"> 02.</td>
-											<td class="updatecontent" style="width: 240px;"><a href="#"><?php echo $rejected ?> Rejected Membership Application</a></td>
+											<!-- <td class="updatecontent" style="width: 30px;"></td> -->
+											<td class="updatecontent" style="width: 270px;"><a href="#"><?php echo $rejected ?> Rejected Membership Application</a></td>
 										</tr>
+										<?php endif ?>
+										<?php if ($loanpending!=0): ?>
 										<tr class="updaterow" onclick="gotoloanforapproval();">
-											<td class="updatecontent" style="width: 30px;"> 03.</td>
-											<td class="updatecontent" style="width: 240px;"><a href="#"><?php echo $loanpending ?> Loan Application Subjected for Approval</a></td>
+											<!-- <td class="updatecontent" style="width: 30px;"></td> -->
+											<td class="updatecontent" style="width: 270px;"><a href="#"><?php echo $loanpending ?> Loan Application Subjected for Approval</a></td>
 										</tr>
+										<?php endif ?>
+										<?php if ($loanapproved!=0): ?>
 										<tr class="updaterow" onclick="gotoapprovedloan();">
-											<td class="updatecontent" style="width: 30px;"> 04.</td>
-											<td class="updatecontent" style="width: 240px;"><a href="#"><?php echo $loanapproved ?> Loan Application Ready to be Released</a></td>
+											<!-- <td class="updatecontent" style="width: 30px;"></td> -->
+											<td class="updatecontent" style="width: 270px;"><a href="#"><?php echo $loanapproved ?> Loan Application Ready to be Released</a></td>
 										</tr>
+										<?php endif ?>
 										
 									</table>
 									<?php }else{ ?>
 									<!---IF WALANG CONTENT---->
 
-									<p style="text-align: center; margin-top: 50px;">- No Updates(s) -</p>
+									<p style="text-align: center; margin-top: 50px;">- No Update(s) -</p>
 
 									<!---IF WALANG CONTENT---->
 									<?php }  ?>

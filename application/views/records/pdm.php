@@ -41,7 +41,7 @@ ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
 ON Alpha.MembersControl=Beta.Members_ControlNo 
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MembersControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MembersControl
-WHERE Alpha.Status IS NOT NULL AND Status='Past Due' AND BranchControl='$branchno'");}
+WHERE Alpha.Status IS NOT NULL AND Status='Past Due' AND BranchControl='$branchno' order by CenterNo, Name");}
 else{
 $pdm = $this->db->query("SELECT Alpha.MembersControl, CONCAT(LastName,', ', FirstName,' ', MiddleName) AS Name, MemberID, Status, BranchName, CenterNo, DateUpdated
 FROM (SELECT A.ControlNo AS MembersControl, C.Status, DATE_FORMAT(DateUpdated,'%b %d %Y') AS DateUpdated
@@ -68,13 +68,14 @@ ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
 ON Alpha.MembersControl=Beta.Members_ControlNo 
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MembersControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MembersControl
-WHERE Alpha.Status IS NOT NULL AND Status='Past Due'");}
+WHERE Alpha.Status IS NOT NULL AND Status='Past Due' order by CenterNo, Name");}
 ?>
 
 <div class="content2">
 		<h2 class="hTitle">PAST DUE MATURE ACCOUNTS</h2>
 			<div class="center">
 				
+				<?php if (!empty($pdm->result())): ?>
 				
 				<table class="center">
 					<tr class="header">
@@ -104,6 +105,10 @@ WHERE Alpha.Status IS NOT NULL AND Status='Past Due'");}
  					<?php } ?>
 
  	
-					
-				</table> 
+				</table>
+				<?php endif ?>
+				<?php if (empty($pdm->result())): ?>
+					<p class="noresultfound"><br>- No Past Due Matured Account - <br><br> </p>
+				<?php endif ?>
+
 

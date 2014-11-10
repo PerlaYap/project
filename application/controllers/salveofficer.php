@@ -202,7 +202,7 @@ class Salveofficer extends CI_Controller {
         	/*$this->directory();*/
 
 	 }
-	 public function termination_reason(){
+	public function termination_reason(){
             $this->load->model('terminate_voluntary_model');
             $controlno = $this->terminate_voluntary_model->getcontrolno();
             $this->terminate_voluntary_model->setterminationreason($controlno);
@@ -211,7 +211,7 @@ class Salveofficer extends CI_Controller {
 
              $this->termination_report($controlno);
         }
-	 public function termination_report($controlno){
+	public function termination_report($controlno){
 
 	 	$this->load->model('terminate_voluntary_model');
 	 	$result['data'] = $this->terminate_voluntary_model->gettermination_report($controlno);

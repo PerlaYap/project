@@ -67,6 +67,18 @@ class Records extends CI_Controller {
         $this->load->view("records/audittrail",$data);
        
 	}
+	public function terminationreport(){
+		 $control_no = $_GET['name'];
+		$this->termination_report($control_no);
+	}
+
+	public function termination_report($controlno){
+
+	 	$this->load->model('terminate_voluntary_model');
+	 	$result['data'] = $this->terminate_voluntary_model->gettermination_report($controlno);
+	 	$this->load->view('reports/termination_report', $result);
+
+	 }
 
 	}
 	

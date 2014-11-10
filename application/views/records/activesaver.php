@@ -41,8 +41,11 @@ ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
 ON Alpha.MembersControl=Beta.Members_ControlNo 
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MembersControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MembersControl
-WHERE Alpha.Status IS NOT NULL AND (Status='Active Saver' OR Status='Active') AND BranchControl='$branchno'");}
-else{
+WHERE Alpha.Status IS NOT NULL AND (Status='Active Saver' OR Status='Active') AND BranchControl='$branchno' order by CenterNo, Name");
+}
+else
+{
+
 $active = $this->db->query("SELECT Alpha.MembersControl, CONCAT(LastName,', ', FirstName,' ', MiddleName) AS Name, MemberID, Status, BranchName, CenterNo, DateUpdated
 FROM (SELECT A.ControlNo AS MembersControl, C.Status, DATE_FORMAT(DateUpdated,'%b %d %Y') AS DateUpdated
 FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo ORDER BY ControlNo)A
@@ -68,14 +71,14 @@ ON Alpha.CaritasCenters_ControlNo=Beta.CenterControl) Beta
 ON Alpha.MembersControl=Beta.Members_ControlNo 
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.MembersControl
 LEFT JOIN MembersName mn ON mn.ControlNo=Alpha.MembersControl
-WHERE Alpha.Status IS NOT NULL AND (Status='Active Saver' OR Status='Active')");}
+WHERE Alpha.Status IS NOT NULL AND (Status='Active Saver' OR Status='Active') order by CenterNo, Name");}
 ?>
 
 <div class="content2">
 		<h2 class="hTitle">ACTIVE SAVER ACCOUNTS</h2>
 			<div class="center">
 				
-				
+				<?php if (!empty($active->result())): ?>
 				<table class="center">
 					<tr class="header">
 						<th class="tablecount"> </th>
@@ -105,5 +108,9 @@ WHERE Alpha.Status IS NOT NULL AND (Status='Active Saver' OR Status='Active')");
 
  	
 					
-				</table> 
+				</table>
+				<?php endif ?>
+				<?php if (empty($active->result())): ?>
+					<p class="noresultfound"><br>- No Active Account - <br><br> </p>
+				<?php endif ?> 
 
