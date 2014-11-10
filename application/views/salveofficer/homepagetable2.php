@@ -115,7 +115,7 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 <br>
 
 
-<table border=1>
+<table border=1 style="margin-left:auto; margin-right:auto;">
 	<tr>
 		<td class="header" style="width: 150px;"> Center </td>
 		<td class="header"> Target </td>
