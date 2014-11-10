@@ -116,7 +116,7 @@ $( "#datepicker1" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
 					<label>
 						<span>Date: </span></label>
-					        <input type="text" id="datepicker" name="dcday" placeholder="YYYY-MM-DD">
+					        <input type="text" id="datepicker" name="dcday1" placeholder="YYYY-MM-DD">
 					        	<label>
 						<span></span>
 					     <input type="submit" class="button" value="Send" />
@@ -128,7 +128,7 @@ $( "#datepicker1" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 				<div id="dailySM">
 					<label>
 						<span>Branch: </span>
-						<select id="branchList" name="dcbranchControl" style="width: 135px;" onchange="getCenterList()">
+						<select id="branchList" name="dcbranchControl1" style="width: 135px;" onchange="getCenterList()">
 							<option value=" " selected></option>
 								<?php if($userrank=='mispersonnel') {?>
 								<?php

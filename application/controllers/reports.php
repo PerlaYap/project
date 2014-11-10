@@ -67,7 +67,7 @@ class Reports extends CI_Controller {
 		}
 
         public function getDCSummary(){
-		$dcday = $this->input->post('dcday');
+		$dcday = $this->input->post('dcday1');
 		$extra=strtotime($dcday);
 		$day = date('l', $extra);
 		
@@ -85,7 +85,7 @@ class Reports extends CI_Controller {
             $day = date('l', $extra);
         
 
-            $data=array('branchno'=>$this->input->post('dcbranchControl'),
+            $data=array('branchno'=>$this->input->post('dcbranchControl1'),
                     'date'=>$dcday, 'day'=>$day );
     
             $this->load->view("reports/dailycollectionsheetSO",$data);
@@ -97,7 +97,7 @@ class Reports extends CI_Controller {
             $day = date('l', $extra);
         
 
-            $data=array('branchno'=>$this->input->post('dcbranchControl'),
+            $data=array('branchno'=>$this->input->post('dcbranchControl1'),
                     'date'=>$dcday, 'day'=>$day );
     
             $this->load->view("reports/dailycollectionsheetManager",$data);

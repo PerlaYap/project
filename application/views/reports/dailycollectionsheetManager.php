@@ -245,7 +245,7 @@ foreach($branchname->result() as $row){
 				<td class="sigBy">Prepared by:</td>
 				<td class="sig"><?php echo $user ?></td>
 				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2"><?php echo date('F d, Y', strtotime($date)); ?></td>
+				<td class="sig2"><?php echo date('F d, Y'); ?></td>
 			</tr>
 		</table>
 		<br>

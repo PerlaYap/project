@@ -13,13 +13,11 @@
 </style>
 
 
-<?php 	$branch = $this->session->userdata('branchno');
-$branchname = $this->session->userdata('branch'); 
+<?php
 $user = $this->session->userdata('firstname');
 
-date_default_timezone_set('Asia/Manila');
 $datetoday = date('F d, Y');
-$wordDate=date('F d, Y', strtotime($reportDate));
+$wordDate=date('M d, Y', strtotime($reportDate));
 ?>
 
 
@@ -172,34 +170,6 @@ foreach ($getTotal->result() as $row) {
 		$nBranch =$row->BranchName;
 		$nCenter =$row->CenterNo;
 	}?>
-
-	<script type="text/javascript">
-	function getCenterList(){
-		var branchControl=parseInt(document.getElementById('branchList').value);
-
-		removeOptions(document.getElementById("centers"));
-		<?php foreach($centerList->result() as $row){
-			echo 'if(branchControl=='.$row->BranchControl.'){';
-			echo 'var select = document.getElementById("centers");';
-			echo 'select.options[select.options.length] = new Option('.$row->CenterNo.', '.$row->CenterControl.');';
-			echo '}';
-		} ?>
-
-		function removeOptions(selectbox){
-			var i;
-			for(i=selectbox.options.length-1;i>=0;i--)
-			{
-				selectbox.remove(i);
-			}
-		}
-
-	}
-
-	function send(control_no){
-
-		window.location.href= "editcollection?name="+ control_no;
-	} 
-	</script>
 
 	<style type="text/css" media="print">
 	    .page
