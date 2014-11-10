@@ -8,8 +8,6 @@
     size: portrait;
     margin: 0.5in;
   }
-
-
 </style>
 
 <?php 

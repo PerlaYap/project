@@ -1,3 +1,16 @@
+
+
+<style type="text/css" media="print">
+.dontprint{
+	display: none;
+	}
+@page { 
+    size: portrait;
+    margin: 0.5in;
+  }
+</style>
+
+
 <style type="text/css">
 table{
 	border-collapse: collapse;
@@ -114,3 +127,11 @@ $month = array("January","February","March","April","May","June","July","August"
 		<?php }
 		?>
 	</table>
+
+<br>
+<br>
+<br>
+
+<div class='dontprint' style="width: 100%; text-align: center;">
+	<button onclick="window.print()">Print</button> 
+</div>
