@@ -66,13 +66,10 @@ WHERE STATUS='Active' GROUP BY DateApplied"); ?>
 						<div class="col-1-4">
 									<div class="content1">
 										<div class="red-accent"></div>
-										<?php if($result->LoanCount>3){ 
-											if($result->Percent<20){
-												?>
-												<img src="<?php echo base_url('Assets/images/star.png'); ?>" class="star">
-												<?php }}else{ ?>
-												<img src="<?php echo base_url('Assets/images/star.png'); ?>" class="star">
-												<?php } ?>			
+										<?php if($result->Percent<20){ ?>
+											<img src="<?php echo base_url('Assets/images/star.png'); ?>" class="star">
+										<?php }?>
+														
 										<br>
 										<p class="col-name"><?php echo $result->Name; ?></p>
 										<p class="col-branch"><b>Application No. :</b> <?php echo $result->ApplicationNumber; ?></p>

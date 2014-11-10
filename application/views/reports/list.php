@@ -51,6 +51,13 @@ $( "#datepicker" ).datepicker({
 });
 $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 });
+
+$(function() {
+$( "#datepicker1" ).datepicker({
+	maxDate: "+0d",
+});
+$( "#datepicker1" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+});
 </script>
 
 
@@ -70,7 +77,12 @@ $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
 					<select style="width: 562px;" name="reporttype" onchange="show(this.value)">
 						<option value=" " selected></option>
-						<option value="daily">Daily</option>
+						<option value="daily">Daily Members Collection</option>
+						<?php if($userrank=='branchmanager'){ ?>
+						<option value="dailyManager">Daily Salve Officer Collection</option>
+						<?php } else if($userrank=="salveofficer"){ ?>
+						<option value="dailySO">Daily Center Collection</option>
+						<?php } ?>	
 						<!--<option value="weekly">Weekly</option>
 						<option value="monthly">Monthly</option>-->
 						<option value="yearly">Yearly Trend Report</option>
@@ -113,62 +125,32 @@ $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 					
 				</div>
 
-			<!--	<div id="weekly">
+				<div id="dailySM">
 					<label>
-						<span>Start Date: </span></label>
-						<input type="text" style="width: 135px;" placeholder="MM/DD/YYYY"/>
-						
-						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-						End Date: 
-						<input type="text" style="width: 135px;" placeholder="MM/DD/YYYY"/>
+						<span>Branch: </span>
+						<select id="branchList" name="dcbranchControl" style="width: 135px;" onchange="getCenterList()">
+							<option value=" " selected></option>
+								<?php if($userrank=='mispersonnel') {?>
+								<?php
+								foreach ($branchList->result() as $row) { 
+									echo "<option value='".$row->BranchControl."'>".$row->BranchName."</option>" ;
+								} ?>
+								<?php }else{ 
+									echo "<option value='".$branch."'>".$branchname."</option>" ;
+								 } ?>
+						</select>
+					</label>
 
 					<label>
+						<span>Date: </span></label>
+					        <input type="text" id="datepicker1" name="dcday" placeholder="YYYY-MM-DD">
+					        	<label>
 						<span></span>
 					     <input type="submit" class="button" value="Send" />
-					</label>
-				</div>
-
-				<div id="monthly">
 					
-				<form action="mismonthly" method="post" class="basic-grey">
-					<label>
-						<span>Month:  </span></label>
-						 <select name="month" style="width:130px;"/>
-						        <option value="" selected="selected"></option>
-						        <option value="January">January</option>
-						        <option value="February">February</option>
-						        <option value="March">March</option>
-						        <option value="April">April</option>
-						        <option value="May">May</option>
-						        <option value="June">June</option>
-						        <option value="July">July</option>
-						        <option value="August">August</option>
-						        <option value="September">September</option>
-						        <option value="October">October</option>
-						        <option value="November">November</option>
-						        <option value="December">December</option>
-					        </select>
-						
-						&nbsp&nbsp&nbsp&nbsp&nbsp
 
-						<span>Year:  </span>
-					  
-					  		<select name="year" style="width:80px;">
-						        <option value="" selected="selected" ></option>
-						        <?php  for ($y=2011; $y <= 2014 ; $y++) { ?>
-							       <option value="<?php echo $y ?>"><?php echo $y ?></option>
-						        <?php  } ?>
-					        </select>
-					        
-					    </label>
-				
-
-					<label>
-						<span></span>
-					     <input type="submit" class="button" value="Send" />
-					</label>
-			</form>
-			</div>-->
+					
+				</div>
 
 			<div id="yearly">
 					<label style="margin-top: 0px;">

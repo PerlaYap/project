@@ -38,6 +38,12 @@ class Reports extends CI_Controller {
 		if($reportType=="daily"){
 			$this->getDCSummary();
 		}
+        else if($reportType=="dailySO"){
+            $this->getDCSO();
+        }
+        else if($reportType=="dailyManager"){
+            $this->getDCManager();
+        }
         else if($reportType=='yearly'){
             $this->getYearlyTrend();
         }
@@ -72,6 +78,30 @@ class Reports extends CI_Controller {
 	
 		$this->load->view("reports/dcsummary",$data);
 		}
+
+        public function getDCSO(){
+            $dcday = $this->input->post('dcday');
+            $extra=strtotime($dcday);
+            $day = date('l', $extra);
+        
+
+            $data=array('branchno'=>$this->input->post('dcbranchControl'),
+                    'date'=>$dcday, 'day'=>$day );
+    
+            $this->load->view("reports/dailycollectionsheetSO",$data);
+        }
+
+        public function getDCManager(){
+            $dcday = $this->input->post('dcday');
+            $extra=strtotime($dcday);
+            $day = date('l', $extra);
+        
+
+            $data=array('branchno'=>$this->input->post('dcbranchControl'),
+                    'date'=>$dcday, 'day'=>$day );
+    
+            $this->load->view("reports/dailycollectionsheetManager",$data);
+        }
 
         public function getYearlyTrend(){
         $type=1;
@@ -226,7 +256,7 @@ class Reports extends CI_Controller {
     	$this->load->view('reports/sbuandloanreport'); 
     }
     public function dailycollectionsheet(){
-    	$this->load->view('reports/dailycollectionsheet'); 
+    	$this->load->view('reports/dailycollectionsheetSO'); 
     }
     public function centerperformance(){
 

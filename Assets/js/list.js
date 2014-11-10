@@ -1,5 +1,6 @@
 function hide(){
 	document.getElementById('daily').style.display = "none";
+	document.getElementById('dailySM').style.display = "none";
 	document.getElementById('yearly').style.display = "none";
 	document.getElementById('yearlyCompare').style.display = "none";
 	
@@ -15,6 +16,8 @@ function show(date){
 
 	if (date=="daily"){
 		document.getElementById('daily').style.display = "";
+	}else if(date=="dailySO"||date=="dailyManager"){
+		document.getElementById('dailySM').style.display="";
 	}else if (date=="yearly"){
 		document.getElementById('yearly').style.display = "";
 	}else if (date=="yearlyCompare"){
