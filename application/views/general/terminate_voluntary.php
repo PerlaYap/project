@@ -100,7 +100,15 @@ $SOpersonnel =$this->session->userdata('personnelno');
 
 			<h3>
 				CARITAS SALVE CREDIT COOPERATIVE <br> 
-				Membership Withdrawal <br> 
+
+				<?php if ($type =='force'): ?>
+							Membership Termination
+					<?php endif ?>
+					<?php if ($type == 'voluntary'): ?>
+						Membership Withdrawal
+					<?php endif ?>
+
+				<!-- Membership Withdrawal --> <br> 
 			</h3>
 
 			<div class="basic-grey">
