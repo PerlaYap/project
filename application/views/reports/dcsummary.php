@@ -12,6 +12,14 @@
 .yesPrint{ display: block !important; }
 </style>
 
+<script type="text/javascript">
+	
+
+	function send(control_no){
+
+		window.location.href= "editcollection?name="+ control_no;
+	} 
+</script>
 
 <?php
 $user = $this->session->userdata('firstname');
