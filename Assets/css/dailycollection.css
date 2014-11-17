@@ -510,3 +510,52 @@ img.caritaslogo2{
 	height: auto;
 	margin-left: auto;
 }
+
+
+
+td.header{
+	background-color:#828285; 
+	color:#e8e8e9;
+	height: 15px;
+	text-align: center;
+	font-weight: bold;
+	width: 858px;
+}
+
+td.hdrDC{
+	text-align: center;
+	font-size: 13px;
+	background-color: #e8e8e9;
+	color: #828285;
+	padding: 5px 10px 5px 10px;
+}
+
+td.dcData{
+	height: 25px;
+	text-align: center;
+	border-right: hidden;
+}
+
+td.dcData1{
+	height: 25px;
+	text-indent: 5px;
+	border-right: hidden;
+}
+
+td.dcData2{
+	height: 25px;
+	text-align: center;
+	
+}
+
+input.dcInput{
+	width: 50px;
+	border: 0;
+	background-color: #e8e8e9; 
+	text-align: right;
+}
+
+tr.dcHover:hover{
+	background-color: #dfdadb;
+}
+

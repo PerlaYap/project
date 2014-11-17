@@ -64,7 +64,7 @@ function putinput(size){
 
 	<div class="content">
 		<br><br>
-		<form action="" method="post" name=""  class="basic-grey">
+		<form action="" method="post" name=""  class="basic-grey" style="width: 954px; margin-top:-23px;">
 			<h1><br>Daily Collection
 				<span>Collection for the month of <b><?php echo date("F, Y") ; ?></b><br></span>
 			</h1>
@@ -118,344 +118,71 @@ function putinput(size){
 			</label>
 		</form>
 
-		<div id="dailycollect">
-			<?php if (!empty($_POST)) { ?>
-			<!-- <a href="#" class="previous"> << Previous Month </a><a href="#"class="next"> Next Month >> </a> -->
+		<table border=1 style="border-collapse:collapse; margin-left:auto; margin-right:auto; table">
+			<tr> 
+				<td class="header" colspan="9">DAILY COLLECTION</td> 
+			</tr>
+			<tr>
+				<td rowspan="2" class="hdrDC" style="width: 10px;"><b>#</b></td>
+				<td rowspan="2" class="hdrDC" style="width:260px; "><b>MEMBER NAME</b></td>
+				<td colspan="4" class="hdrDC"><b>LOAN</b></td>
+				<td colspan="2" class="hdrDC"><b>SAVINGS</b></td>
+				<td rowspan="2" class="hdrDC"><b>WITHDRAWAL</b></td>
+			</tr>
+			<tr>
+				<td class="hdrDC">Active Release</td>
+				<td class="hdrDC">Past Due</td>
+				<td class="hdrDC">Payment</td>
+				<td class="hdrDC">Loan Balance</td>
 
-			<form action="recordcollection" name="loancollection" method="post">
+				<td class="hdrDC">Savings Build-Up</td>
+				<td class="hdrDC">Savings Collection</td>
+			</tr>
 
-	<!-------------------------------------- GENERAL HIDDEN VALUES -------------------------------------------------->
-			<input type ='hidden' name='sopersonnel' value='<?php echo $SOpersonnel; ?>'/>
-			<input  id="name" value="<?php echo date("Y-m-j") ; ?>" type="hidden" name="date" />
-			<input type='hidden' name='branchcontrolno' value='<?php echo $branchno ?>' />
-	<!-- 		<input type='hidden' name='centercontrolno' value='<?php echo $mem->CaritasCenters_ControlNo ?>' /> -->
-			<!-- <input type='hidden' name='centerno' value='<?php echo $center ?>'> -->
+			<tr class="dcHover">
+				<td class="dcData">1</td>
+				<td class="dcData1">Cara Ruiz Manalo</td>
+				<td class="dcData">4,000.00</td>
+				<td class="dcData">250</td>
+				<td class="dcData">	<input type="text" class="dcInput"/>	</td>
+				<td class="dcData">4,000.00</td>
+				<td class="dcData">5,050.00</td>
+				<td class="dcData">	<input type="text" class="dcInput"/>	</td>
+				<td class="dcData2">	<input type="text" class="dcInput"/>	</td>
+			</tr>
 
-	<!-------------------------------------- GENERAL HIDDEN VALUES -------------------------------------------------->	
+			<tr class="dcHover">
+				<td class="dcData">2</td>
+				<td class="dcData1">Jolo Manaois Navidad</td>
+				<td class="dcData">-</td>
+				<td class="dcData">-</td>
+				<td class="dcData">	<input type="text" class="dcInput" disabled/>	</td>
+				<td class="dcData">-</td>
+				<td class="dcData">6,100.00</td>
+				<td class="dcData">	<input type="text" class="dcInput"/>	</td>
+				<td class="dcData2">	<input type="text" class="dcInput"/>	</td>
+			</tr>
 
+			<tr>
+				<td colspan="9" style="height:4px; padding:0;"></td>
+			</tr>
 
-			<TABLE class="loancollection">
-				<tr>
-					<th colspan="6" style="background-color:#828285; color:#e8e8e9;">DAILY LOAN COLLECTION</th>
-				</tr>
-
-			<?php 
-				$hasmember = $getMember->result();
-			if (!empty($hasmember)) { ?>
-				
-			
-				<tr class="headr">
-					<th style="width: 20px;">#</th>
-					<th style="width: 280px;">Member</th>
-					<th style="width: 140px;">Active Release</th>
-					<th style="width: 140px;">Past Due</th>
-					<!-- <th>SBU</th> -->
-					<th style="width: 140px;">Loan Received</th>
-					<!-- <th>Withdrawal</th> -->
-					<th style="width: 140px;">Loan Balance</th>
-					<!-- <th>SBU <br>Total</th> -->
-				</tr>
-
-
-				
-				<?php 
-
-				$num=0;
-				$activereleasetotal=0;
-				$totalpastdue =0;
-				$totalsbucollected =0;
-				$totalloanrecieved ="";
-				$totalwithdrawal =0;
-				$totalloanbalance =0;
-				$totalsbu =0;
-				$y =0;
-				$elsize = count($hasmember);
-
-				foreach ($hasmember as $mem) {
-
-
-					$activerelease =$mem->AmountRequested + $mem->Interest;
-					$pastdue =$mem->pastdue;
-					$y+=1;
-
-					
-				 ?>
-	<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->
-
-			<input type='hidden' name='loanappcontrolno[]' value='<?php echo $mem->LoanApplication_ControlNo ?>' />
-			<input type='hidden' name='memberid[]' value='<?php echo $mem->Members_ControlNo; ?>'>
-			<input type='hidden' name='centercontrolno' value='<?php echo $mem->CaritasCenters_ControlNo ?>' /> 
-
-
-	<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->		
+			<tr class="dcHover">
+				<td class="dcData" colspan="2" style="text-align: right;"><b>Total:</b></td>
+				<td class="dcData"><b>4,000.00</b</td>
+				<td class="dcData"><b>250.00</b></td>
+				<td class="dcData"><b>500.00</b></td>
+				<td class="dcData"><b>4,000.00</b></td>
+				<td class="dcData"><b>11,150.00</b></td>
+				<td class="dcData"><b>100.00</b></td>
+				<td class="dcData2"><b>0.00</b></td>
+			</tr>
 			
 
-				<tr class="row">
-					<td class="num" ><?php echo $y; ?>  </td>
-					<td class="collectmember"><?php echo $mem->Name; ?></td>
-					<td class="ploan"><?php echo number_format($activerelease, 2); ?></td>
-					<td class="pd"><?php echo number_format($pastdue, 2); ?></td>
-					
-					<td class="payment">
 
 
-						<select id='<?php echo "loanpayment".$y; ?>' name='loanpayment[]' onChange="sbudisable(<?php echo "$elsize"; ?>);" required>
+		</table>
 
-							<?php $loantype = $mem->LoanType;
-								if ($loantype =='23-Weeks') {
-									$amounttopay = $activerelease/23;
-								}else if ($loantype =='40-Weeks') {
-										$amounttopay = $activerelease/40;
-								}
-							 ?>
-							
-							<option value='0' selected >Unpaid</option>
-
-							<option value='<?php echo $amounttopay;?>'><?php echo $amounttopay; ?></option>
-							<?php if ($pastdue >0) { ?>
-								<?php for ($k=2; $k <= $pastdue/$amounttopay+1; $k++) { ?>
-								<option value='<?php echo $amounttopay*$k; ?>'><?php echo $amounttopay*$k; ?></option>		
-							<?php	} ?>
-							<?php } ?>
-
-						</select>
-						<input type='hidden' name='amounttopay[]' value="<?php echo $amounttopay; ?>"/>
-					</td>	
-						
-					<td class="balance"><?php echo number_format($mem->LoanExpense, 2); ?></td>
-					<!-- <td class="savings"><?php echo $mem->Savings ?></td> -->
-
-				</tr>
-				
-				
-
-
-				<?php
-					$activereleasetotal +=$activerelease;
-					$totalpastdue +=$pastdue;
-					$totalloanbalance +=$mem->LoanExpense;
-			} ?>
-
-				
-
-				<tr class="rowtotal">
-					<td class="num">  </td>
-					<td class="collectmember"style="text-align:right;"><b>TOTAL: &nbsp&nbsp&nbsp&nbsp&nbsp</b></td>
-					<td class="ploan" ><b><?php echo number_format($activereleasetotal, 2); ?> </b></td>
-					<td class="pd" ><b><?php echo number_format($totalpastdue, 2); ?> </b></td>
-					<!-- <td class="sbu"> <b><?php echo $totalsbucollected; ?></b></td> -->
-					<td id="payment"><b></b></td>	
-					<!-- <td class="withdraw"><b> <?php echo $totalwithdrawal; ?> </b></td> -->
-					<td class="balance"><b><?php echo number_format($totalloanbalance, 2); ?></b></td>
-					<!-- <td class="savings"><b> <?php echo $totalsbu; ?></b></td> -->
-
-				</tr>
-
-			<?php } else{ ?>
-					<tr>
-					<th style="width: 20px; text-indent:3px;"></th>
-					<th style="width: 350px;"></th>
-					<th style="width: 150px;"></th>
-					<th style="width: 150px;"></th>
-					<th style="width: 200px;"></th>
-				</tr>
-				<tr>
-
-					<td colspan="5"><center>NO MEMBER FOUND!</center></td>
-				</tr>
-				<?php } ?>
-
-
-			</TABLE>
-
-			
-		 <!-- Change to Button to Submit Date, BranchControl, CenterControl> -->
-		
-			
-				<div class="basic-grey" style="margin-top:-8px; margin-left: 94px; width: 799px;"></label>
-					<!-- <input  type="submit" class="button" value="Submit" style="margin-left: 550px; margin-top:0px; position:absolute;"/> -->
-
-					<input  type="button" name="gotosavings" class="button" value="Go to Savings" style="margin-left: 660px;" onclick="GoToSavings()"/>
-
-				</div>
-				
-			
-				<br><br>
-		
-		
-		</div>
-
-		<div id="savingscollect" style="display:none;">
-				<!-- ------------------------------------------ -->
-				<!-- ---- SAVINGS ACCOUNT WITH CURRENT LOAN ---- -->	
-				<!-- ------------------------------------------ -->
-
-			<TABLE class="loancollection">
-				<tr>
-					<th colspan="5" style="background-color:#828285; color:#e8e8e9;">SAVINGS ACCOUNT WITH CURRENT LOAN</th>
-				</tr>
-				<tr>
-					<th style="width: 20px; text-indent:3px;">#</th>
-					<th style="width: 350px;">MEMBER</th>
-					<th style="width: 150px;">SBU</th>
-					<th style="width: 150px;">WITHDRAWAL</th>
-					<th style="width: 200px;">PREVIOUS SBU TOTAL</th>
-				</tr>
-
-				<?php $g=0;
-						$sizev = count($hasmember);
-						$totalsave = 0;
-				foreach ($hasmember as $mem) { 
-						$g+=1;
-						$maxwithdrawal = $mem->Savings - $mem->AmountRequested*0.4;
-				?>
-				
-					<tr>
-						<td style="text-indent: 3px;"><?php echo $g?></td>
-						<td style="text-indent: 8px;"><?php echo $mem->Name; ?></td>
-						<td style="text-align:center"><input type="number" required class="inputSBU" id="<?php echo "inputSBU".$g; ?>" onChange="putinput(<?php echo "$sizev"; ?>);" disabled='true' name="f[]"/></td>
-						<input type='hidden' id="<?php echo "SBUhid".$g; ?>" name='sbu[]' />	
-						<td style="text-align:center"><input type="number" min='0' max='<?php echo $maxwithdrawal; ?>' name='withdrawal[]' class="inputSBU" placeholder="Click to Edit" /></td>
-						<td style="text-align:center"><?php echo number_format($mem->Savings, 2); ?></td>
-					</tr>	
-						<?php $totalsave +=$mem->Savings; ?>
-				<?php } ?>
-
-				<tr class="border"colspan"6"><td style="height:1px; padding:0px;"></td> </tr>
-
-				<tr>
-					<td colspan="2" style="text-align: right;"> <b>TOTAL:</b> &nbsp&nbsp</td>
-					<td style="text-align:center"><b></b></td>
-					<td style="text-align:center"><b></b></td>
-					<td style="text-align:center"><b><?php echo number_format($totalsave, 2); ?></b></td>
-				</tr>
-
-			</TABLE>
-
-			<br><br>
-				<!-- ------------------------------------------ -->
-				<!-- ----------SAVINGS ACCOUNT ONLY------------- -->	
-				<!-- ------------------------------------------ -->
-			<TABLE class="loancollection">
-				<tr>
-					<th colspan="5" style="background-color:#828285; color:#e8e8e9;">SAVINGS ACCOUNT ONLY</th>
-				</tr>
-				<?php 
-						$num = 0;
-						$getsav=$getSavingsOnly->result();
-						if (!empty($getsav)) {
-							$totsavings = 0;
-				?>			
-				
-				<tr>
-					<th style="width: 20px; text-indent:3px;">#</th>
-					<th style="width: 350px;">MEMBER</th>
-					<th style="width: 150px;">SBU</th>
-					<th style="width: 150px;">WITHDRAWAL</th>
-					<th style="width: 200px;">PREVIOUS SBU TOTAL</th>
-				</tr>
-				
-
-				<?php foreach ($getsav as $savmem) { 
-
-						$name=$savmem->Name;
-						$sbutot = $savmem->Savings;
-						$memberno2 = $savmem->ControlNo;
-	?>
-
-	<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->		
-
-			<input type="hidden" value="<?php echo $memberno2 ?>" name="memberno2[]" />
-			
-
-	<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->		
-
-
-					<tr>
-					<td style="text-indent: 3px;"><?php echo $num+=1; ?></td>
-					<td style="text-indent: 8px;"><?php echo $name;  ?></td>
-					<td style="text-align:center"><input type="number" value="50" required name="saveonly[]" class="inputSBU" placeholder="Click to Edit"/></td>
-					<td style="text-align:center"><input type="number"  name="withdrawonly[]" min="0" max="<?php echo $sbutot ?>" class="inputSBU" placeholder="Click to Edit"/></td>
-					<td style="text-align:center"><?php echo number_format($sbutot, 2);   ?></td>
-					</tr>
-
-					<?php $totsavings +=$sbutot; ?>
-				
-				<?php } ?>
-				
-				<tr class="border"colspan"6"><td style="height:1px; padding:0px;"></td> </tr>
-
-				<tr>
-					<td colspan="2" style="text-align: right;"> <b>TOTAL:</b> &nbsp&nbsp</td>
-					<td style="text-align:center"><b></b></td>
-					<td style="text-align:center"><b></b></td>
-					<td style="text-align:center"><b><?php echo number_format($totsavings, 2); ?></b></td>
-				</tr>
-				<?php } else{?>
-				
-				<tr>
-					<th style="width: 20px; text-indent:3px;"></th>
-					<th style="width: 350px;"></th>
-					<th style="width: 150px;"></th>
-					<th style="width: 150px;"></th>
-					<th style="width: 200px;"></th>
-				</tr>
-				<tr>
-
-					<td colspan="5"><center>NO MEMBER FOUND!</center></td>
-				</tr>
-	
-
-				<?php } ?>
-
-			</TABLE>
-
-
-			
-			
-
-				<div class="basic-grey" style="margin-top:-8px; margin-left: 94px; width: 799px;">
-					<input  type="submit" class="button" name="submitbtn" value="Submit" style="margin-left: 505px; margin-top:0px; position:absolute;"/>
-
-					<input  type="button" class="button" value="Go to Daily Collection" style="margin-left: 616px; z-index:1;" onclick="GoToDailyCollection()"/>
-				</div>
-				
-			
-				<br><br>
-
-		</div>
-		
-		
-		<?php } ?>
-		</form>		
-		<br><br><br><br>	
-	</div>
-
-
-	</div>
-	<div style="margin-top: 580px;">
-
-		<style type="text/css">
-			p.footertext{
-				color: #a7321a;
-				line-height: 15px;
-				font-size: 13px;
-				text-align: center;
-				margin-right: auto;
-				margin-left: auto;
-				bottom: 0;
-			}
-		</style>
-
-		<p class="footertext">
-			&#169; 2014 Microfinance Cooperative Information Management System <br>
-
-			<a href="<?php echo site_url('general/gotoaboutus'); ?>">ABOUT US</a> | 
-			<a href="<?php echo site_url('general/gotocontactus'); ?>">CONTACT US</a> | 
-			<!-- <a href="<?php echo site_url('general/gotofaq'); ?>">FAQs</a> | --> 
-			<a href="<?php echo site_url('general/gotohelp'); ?>">HELP</a>
-
-		</p>
-
-		<br><br>
-	</div>
+<br><br>
+<br><br>
+<br><br>
