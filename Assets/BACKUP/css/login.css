@@ -1,0 +1,97 @@
+p{
+	font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+	font-size: 14px;
+	color: #1a1c1a;
+}
+
+
+	a:link {text-decoration: none; color:#676060;}      
+	a:visited {text-decoration: none; color:#676060}  
+	a:hover {text-decoration: none; color:#813834;}  
+	a:active {text-decoration: none; color:#676060;}
+
+a.highlight{color: #bf1b12;}
+
+body{
+	background-color: black;
+	background-image: url('../images/background-2.jpg');
+	background-repeat: repeat;
+
+}
+
+img.caritaslogo{
+	position: absolute;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 250px;
+	height: auto;
+}
+
+div.header{
+	background-color: #a7321a;
+	position: absolute;
+	width: 101%;
+	height: 70px;
+	margin-left: -1%;
+	margin-top: -1%;
+	box-shadow: 3px 3px 5px #aeacac;
+}
+
+img.caritaslogo{
+	margin-left:550px;
+	margin-top: 100px;
+	width: 250px;
+	height: auto;
+}
+
+div.loginform{
+	width: 300px;
+	height: auto;
+	margin-top: 280px;
+	margin-left: 510px;
+	position: absolute;
+}
+.loginform form input[type="text"],
+.loginform form input[type="password"] {
+	background: #eae7e7 url(http://cssdeck.com/uploads/media/items/8/8bcLQqF.png) no-repeat;;
+	border: 1px solid #c8c8c8;
+	color: #777;
+	font: 13px Helvetica, Arial, sans-serif;
+	margin: 16px 0 10px;
+	padding: 15px 10px 15px 40px;
+	width: 80%;
+}
+.loginform form input[type="text"]:focus,
+.loginform form input[type="password"]:focus {
+	-webkit-box-shadow: 0 0 2px #ed1c24 inset;
+	-moz-box-shadow: 0 0 2px #ed1c24 inset;
+	-ms-box-shadow: 0 0 2px #ed1c24 inset;
+	-o-box-shadow: 0 0 2px #ed1c24 inset;
+	box-shadow: 0 0 2px #ed1c24 inset;
+	background-color: #fff;
+	border: 1px solid #ed1c24;
+	outline: none;
+}
+
+#username { background-position: 10px 10px !important }
+#password { background-position: 10px -53px !important }
+
+.loginform form input[type="submit"] {
+	background: rgb(254,231,154);
+	border-radius: 30px;
+	box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+	border: 1px solid #D69E31;
+	color: #85592e;
+	cursor: pointer;
+	float: left;
+	font: bold 15px Helvetica, Arial, sans-serif;
+	height: 35px;
+	margin: 20px 0 35px 80px;
+	position: relative;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+	width: 120px;
+}
+.loginform form input[type="submit"]:hover {
+	background: rgb(254,193,81);
+}
