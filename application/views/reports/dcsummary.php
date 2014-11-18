@@ -187,6 +187,14 @@ foreach ($getTotal->result() as $row) {
 	    }
 	</style>
 
+	<script type="text/javascript">
+
+	function send(control_no){
+		window.location.href="editcollection?name="+control_no;
+	}
+
+	</script>
+
 <body style="background: none;">
 	<div class="content" style="background:none;">
 		<br>
