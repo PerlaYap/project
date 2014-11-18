@@ -258,11 +258,7 @@ foreach ($dayoftheweek->result() as $row){
 				        <span>Please fill all the texts in the fields.</span>
 				    </h1>
 
-				    <label>
-				    		<span>
-				    		</span>
-				    		-------------------------------------------------  MEMBER INFORMATION  -------------------------------------------------
-				    </label>
+				    z
 				    
 				    <label>
 				        <span>Name :</span></label>

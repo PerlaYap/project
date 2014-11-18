@@ -251,18 +251,27 @@ foreach ($dayoftheweek->result() as $row){
 </script>
 
 
+
 			<div class="content2">
+
 				<br>
 				<form action="addnewloanprocess1" method="post" name="addnewloanprocess1" class="basic-grey" onSubmit="return check();">
-					<h1>New Loan Application
+				<br>
+				
+
+					
+
+
+
+
+
+
+
+
+
+				    <h1>New Loan Application
 				        <span>Please fill all the texts in the fields.</span>
 				    </h1>
-
-				    <label>
-				    		<span>
-				    		</span>
-				    		-------------------------------------------------  MEMBER INFORMATION  -------------------------------------------------
-				    </label>
 				    
 				    <label>
 				        <span>Name :</span></label>
@@ -289,12 +298,30 @@ foreach ($dayoftheweek->result() as $row){
 				        <input type="text" readOnly="true" style="width:53px;" value="<?php echo $centerNo ?>" >
 				        <input type="hidden" name="centercontrol" value="<?php echo $centerControl?>" />
 
-				  	<label>
-				    		<span>
-				    		</span>
-				    		-------------------------------------------------  LOAN INFORMATION  -------------------------------------------------
 
-				    </label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				    <br><br><br><br>
+				  	<h1>Loan Information
+				        <span>Please fill all the texts in the fields.</span>
+				    </h1>
 
 				    <label>
 				        <span>Amount of Shares :</span> 
@@ -326,13 +353,35 @@ foreach ($dayoftheweek->result() as $row){
 					    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 					    Day of Payment :
 					    <input type="text" readOnly="true" id="day" name="paymentday" style="width: 210px;" value="<?php echo $dayoftheweek ?>"/>
-					<label>
-				    		<span>
-				    		</span>
-				    		----------------------------------------------  BUSINESS INFORMATION  ----------------------------------------------
+					
 
-				    </label>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<br><br><br><br>
+					<h1>Business Information
+				        <span>Please fill all the texts in the fields.</span>
+				    </h1>
+					
 				    <label>
 				        <span>Business :</span>
 				        <select required="true" style="width:572px;" name="loanbusiness" id="selectMenu" onchange="showBusiness(this.value)">
@@ -403,12 +452,35 @@ foreach ($dayoftheweek->result() as $row){
 				    </label>
 				</div>
 
-				    <label>
-				    		<span>
-				    		</span>
-				    		------------------------------------------------  MATERIAL INVENTORY  -----------------------------------------------
 
-				    </label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<br><br><br><br>
+				<h1>Material Inventory
+				    <span>Please fill all the texts in the fields.</span>
+				</h1>
+
+				   
 
 				    <label>
 				        <span>Name :</span></label>
@@ -430,12 +502,30 @@ foreach ($dayoftheweek->result() as $row){
 			   &nbsp&nbsp&nbsp   &nbsp&nbsp&nbsp	   &nbsp&nbsp&nbsp		   &nbsp&nbsp&nbsp	   &nbsp&nbsp&nbsp	 &nbsp&nbsp&nbsp		   &nbsp&nbsp&nbsp	   &nbsp&nbsp&nbsp		
 
 			   Subtotal: <input id="materialtotal" type="text" name="" style="width:100px;" disabled/>
-				    <label>
-				    		<span>
-				    		</span>
-				    		---------------------------------------------  CO-MAKER INFORMATION  ---------------------------------------------
+				    
 
-				    </label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<br><br><br><br>
+					<h1>Co-Maker Information
+				        <span>Please fill all the texts in the fields.</span>
+				    </h1>
 
 				    <label>
 				        <span>Co-Maker :</span>
@@ -499,12 +589,31 @@ foreach ($dayoftheweek->result() as $row){
 					    </div>
 
 					  
-					  <label>
-				    		<span>
-				    		</span>
-				    		------------------------------------------- MEMBER CO-MAKER INFORMATION  -----------------------------------
 
-				    </label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<br><br><br><br>
+					<h1>Member Co-Maker Information
+				        <span>Please fill all the texts in the fields.</span>
+				    </h1>
 
 					   		<label>
 						    	<span>Co-Maker:</span> 
@@ -544,6 +653,36 @@ foreach ($dayoftheweek->result() as $row){
 				    </label>-->
 				
 				<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 				<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Credit Investigation
 				    <span></span>
@@ -653,29 +792,3 @@ foreach ($dayoftheweek->result() as $row){
 
 
 
-
-
-	<div style="margin-top: 3350px;">
-
-		<style type="text/css">
-			p.footertext{
-				color: #a7321a;
-				line-height: 15px;
-				font-size: 13px;
-				text-align: center;
-				margin-right: auto;
-				margin-left: auto;
-				bottom: 0;
-				position: relative;
-			}
-		</style>
-
-		<p class="footertext">
-			&#169; 2014 Microfinance Cooperative Information Management System <br>
-
-			<a href="<?php echo site_url('general/gotoaboutus'); ?>">ABOUT US</a> | <a href="<?php echo site_url('general/gotocontactus'); ?>">CONTACT US</a> | <a href="<?php echo site_url('general/gotofaq'); ?>">FAQs</a> | <a href="#">HELP</a>
-
-		</p>
-
-		<br><br>
-	</div>
