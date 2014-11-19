@@ -250,6 +250,8 @@ foreach ($dayoftheweek->result() as $row){
 
 </script>
 
+	
+
 
 
 			<div class="content2">
@@ -260,7 +262,15 @@ foreach ($dayoftheweek->result() as $row){
 				
 
 					
+				<style type="text/css">
+					p.reqd{
+						color: #c43434;
+    					font: 12px Georgia, "Times New Roman", Times, serif;
+    					display: inline;
+    					vertical-align: super;
+					}
 
+				</style>
 
 
 
@@ -319,12 +329,12 @@ foreach ($dayoftheweek->result() as $row){
 
 
 				    <br><br><br><br>
-				  	<h1>Loan Information
+				  	<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Loan Information
 				        <span>Please fill all the texts in the fields.</span>
 				    </h1>
 
 				    <label>
-				        <span>Amount of Shares :</span> 
+				        <span>Amount of Shares:<p class="reqd">*</p></span> 
 				       	<select required="true" name="capitalshare" style="width:580px;">
 						    <option value="100" selected="selected">100</option>
 						    <option value="200">200</option>
@@ -335,7 +345,7 @@ foreach ($dayoftheweek->result() as $row){
 				    </label>  
 
 				    <label>
-				        <span>Amount Requested :</span></label>
+				        <span>Amount Requested:<p class="reqd">*</p></span></label>
 					 	<input required="true" type="text" id="loanamount" name="amountreq" style="width: 210px;" placeholder="Pesos" />	
 
 					 	&nbsp&nbsp&nbsp&nbsp
@@ -343,7 +353,7 @@ foreach ($dayoftheweek->result() as $row){
 				        <input type="text" readOnly="true" id="maxLoan" name="" style="width: 210px; color:#962a2a" />
 				
 				    <label>
-				        <span>Loan Type :</span></label>
+				        <span>Loan Type: <p class="reqd">*</p></span></label>
 				        <select required="true" name="loantype" style="width:220px;">
 						    <option value="" selected="selected"></option>
 						    <option value="23-Weeks">23-weeks</option>
@@ -378,12 +388,12 @@ foreach ($dayoftheweek->result() as $row){
 
 
 					<br><br><br><br>
-					<h1>Business Information
-				        <span>Please fill all the texts in the fields.</span>
+					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Business Information
+				        <span>What do we do with this again??????</span>
 				    </h1>
 					
 				    <label>
-				        <span>Business :</span>
+				        <span>Business:<p class="reqd">*</p></span>
 				        <select required="true" style="width:572px;" name="loanbusiness" id="selectMenu" onchange="showBusiness(this.value)">
 						    <option value=" "></option>
 						    <option value="newbusiness">New Business</option>
@@ -396,16 +406,16 @@ foreach ($dayoftheweek->result() as $row){
 				   
 				    <div id="newbusiness">
 				    <label>
-				    	<span>Name :</span> 
+				    	<span>Name:<p class="reqd">*</p></span> 
 				        <input id="business" type="text" name="businessname" style="width:562px;" /> 
 				    </label>
 
 					<label>
-				    	<span>Type :</span> </label>
+				    	<span>Type:<p class="reqd">*</p></span> </label>
 				        <input id="business" type="text" name="type" style="width:220px;" /> 
 				    
 				    	&nbsp&nbsp
-						Date Established :
+						Date Established:<p class="reqd">*</p>
 				    	
 				    	<select name="month" style="width:85px">
 				    		<option>Month</option>
@@ -442,12 +452,12 @@ foreach ($dayoftheweek->result() as $row){
 				    
 
 				    <label>
-				    	<span>Address :</span> 
+				    	<span>Address:<p class="reqd">*</p></span> 
 				        <input id="baddress" type="text" name="businessaddress" style="width:562px;" /> 
 				    </label>
 
 				    <label>
-				    	<span>Contact :</span> 
+				    	<span>Contact:<p class="reqd">*</p></span> 
 				        <input id="business" type="text" name="contact" style="width:562px;" placeholder="7 or 11 digit number" /> 
 				    </label>
 				</div>
@@ -476,22 +486,22 @@ foreach ($dayoftheweek->result() as $row){
 
 
 				<br><br><br><br>
-				<h1>Material Inventory
-				    <span>Please fill all the texts in the fields.</span>
+				<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Material Inventory
+				    <span>Itooooooo rin :></span>
 				</h1>
 
 				   
 
 				    <label>
-				        <span>Name :</span></label>
+				        <span>Name:<p class="reqd">*</p></span></label>
 				        <input required="true" type="text" name="materials" class="material_1" style="width: 250px;"/>
 
 				        &nbsp&nbsp&nbsp
-				        Qty :
+				        Qty:<p class="reqd">*</p>
 					    <input required="true" type="text" name="quantity" class="quantity_1" style="width: 26px;"/>
 
 				        &nbsp&nbsp&nbsp
-				        Unit Price :
+				        Unit Price:<p class="reqd">*</p>
 						<input required="true"  type="text" name="unitprice" class="unitprice_1" style="width: 80px;" placeholder="Peso"/> &nbsp&nbsp 
 						
 						<input type="button" class="addmore2" value="+" onclick="addMaterial()"/>
@@ -523,7 +533,7 @@ foreach ($dayoftheweek->result() as $row){
 
 
 					<br><br><br><br>
-					<h1>Co-Maker Information
+					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Co-Maker Information
 				        <span>Please fill all the texts in the fields.</span>
 				    </h1>
 
@@ -611,7 +621,7 @@ foreach ($dayoftheweek->result() as $row){
 
 
 					<br><br><br><br>
-					<h1>Member Co-Maker Information
+					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Member Co-Maker Information
 				        <span>Please fill all the texts in the fields.</span>
 				    </h1>
 
@@ -685,7 +695,7 @@ foreach ($dayoftheweek->result() as $row){
 
 
 				<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Credit Investigation
-				    <span></span>
+				    <span>MONETARY VALUE FORMAT</span>
 				</h1>
 
 				<!--<input id="" type="text" name="" style="width:200px;" />-->
