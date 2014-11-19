@@ -19,7 +19,7 @@
         ]);
 
         var options = {
-          title: 'Target vs Actual Comparison of Accounts per Center',
+          title: 'Target vs Actual Comparison of Collections per Center',
           hAxis: {title: 'Year', titleTextStyle: {color: 'red'}},
           backgroundColor: 'transparent',
           'width':940,

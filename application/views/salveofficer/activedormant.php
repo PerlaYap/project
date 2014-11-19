@@ -18,10 +18,10 @@ $month = array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov
 <html>
 <head>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script type="text/javascript">
-  google.load("visualization", "1", {packages:["corechart"]});
-  google.setOnLoadCallback(drawChart);
-  function drawChart() {
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
   
   var data = google.visualization.arrayToDataTable([
       ['Month', 'Active','Past Due Mature', 'Dormant Saver'],
@@ -55,10 +55,11 @@ ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated V
 
     var options = {
       title: 'Comparison of Accounts for the Year <?php echo $currentyear ?> ',
-      hAxis: {title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true}},
+      hAxis: {slantedText:true, slantedTextAngle:45, title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true} },
       vAxis: {title: 'NO. OF ACCOUNTS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
       backgroundColor: 'transparent',
       colors:['#2795be','#a63923', '#FFA500' ],
+
 
         //if salve officer
         <?php if($userrank=='salveofficer') :?>
@@ -86,7 +87,7 @@ ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated V
           
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
       </script>
