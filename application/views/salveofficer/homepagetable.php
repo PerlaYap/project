@@ -73,8 +73,7 @@ $month = array("January","February","March","April","May","June","July","August"
 		
 		<h3>
 			CARITAS SALVE CREDIT COOPERATIVE <br>
-			Comparison of Accounts as of <br>
-			<?php echo $currentmonth; ?> 2014
+			Comparison of Accounts<br>
 
 		</h3>
 

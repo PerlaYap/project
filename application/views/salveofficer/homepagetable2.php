@@ -119,7 +119,9 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 	<tr>
 		<td class="header" style="width: 150px;"> Center </td>
 		<td class="header"> Target </td>
-		<td class="header"> Actual </td>
+		<td class="header"> On-Time </td>
+		<td class="header"> Past Due </td>
+		<td class="header"> Advance </td>
 	</tr>
 
 	<?php
@@ -128,6 +130,8 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 		<td class="data"><?php echo $data->CenterNo ?></td>
 		<td class="data"><?php echo $data->Target ?></td>
 		<td class="data"><?php echo $data->Actual ?></td>
+		<td class="data"></td>
+		<td class="data"></td>
 
 	</tr>
 
