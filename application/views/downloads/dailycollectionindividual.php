@@ -126,7 +126,7 @@
 				<td class="BM2">Signature Above Printed Name of Coordinator</td>
 			</tr>
 			<tr>
-				<td style="font-size: 13px;"><br></td>
+				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
 			</tr>
 			<tr>
 				<td class="BM2">Date</td>

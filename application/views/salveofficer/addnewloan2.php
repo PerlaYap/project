@@ -150,6 +150,7 @@ foreach ($dayoftheweek->result() as $row){
 
 		$("input#maxLoan").val(maxLoan.toFixed(2));
 	}
+	
 
 	function icalculateSum(){
 	var sum=0;
@@ -623,7 +624,7 @@ foreach ($dayoftheweek->result() as $row){
 
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Member Co-Maker Information
-				        <span>tanggalin nalang natin ito, since meron yung na sa taas.</span>
+				        <span>tanggalin nalang natin ito, since ilalagay ito sa taas.</span>
 				    </h1>
 
 					   		<label>

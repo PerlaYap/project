@@ -35,7 +35,9 @@ table{
 
 </style>
 <?php
-$datetoday = date('F d, Y');
+	$userrank = $this->session->userdata('rank');
+	$name = $this->session->userdata('firstname');
+	 $datetoday = date('F d, Y');
 $day = date('l');
 $currentmonth = strtoupper(date("F"));
 $currentyear = date('Y');
@@ -74,6 +76,7 @@ $month = array("January","February","March","April","May","June","July","August"
 		<h3>
 			CARITAS SALVE CREDIT COOPERATIVE <br>
 			Comparison of Accounts<br>
+			As of <?php echo date("m-d-Y"); ?>
 
 		</h3>
 
@@ -82,13 +85,14 @@ $month = array("January","February","March","April","May","June","July","August"
 <table border=1 style="margin-left:auto; margin-right:auto;">
 
 	<tr>
-		<td class="header" colspan="4"><?php echo $currentyear; ?></td>
+		<td class="header" colspan="5"><?php echo $currentyear; ?></td>
 	</tr>
 
 	<tr>
 		<td class="header" style="width: 150px;"> Month </td>
-		<td class="header"> Active </td>
-		<td class="header"> Past Due Mature </td>
+		<td class="header"> Borrower </td>
+		<td class="header"> Past Due Matured </td>
+		<td class="header"> Active Saver </td>
 		<td class="header"> Dormant Saver</td>
 	</tr>
 
@@ -119,7 +123,9 @@ $month = array("January","February","March","April","May","June","July","August"
 			<td class="data"><?php echo $month[$a]; ?></td>
 			<td class="data"><?php echo $count; ?></td>
 			<td class="data"><?php echo $count1; ?></td>
-			<td class="data"><?php echo $count2; ?></td>
+			<td class="data"></td>
+			<td class="data"><?php echo $count2; ?>	</td>
+
 
 		</tr>
 
@@ -127,10 +133,49 @@ $month = array("January","February","March","April","May","June","July","August"
 		?>
 	</table>
 
+
 <br>
 <br>
 <br>
 
+<table style="margin-left: 300px;" >
+			<tr>
+				<td style="font-size: 13px;"><?php echo $name; ?></td>
+			</tr>
+				<?php if($userrank=='branchmanager'){?>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of Branch Manager</td>
+			</tr>
+			<?php }else{ ?>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of Salve Officer</td>
+			</tr>
+			<?php } ?>
+			<tr>
+				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
+			</tr>
+			<tr>
+				
+				<td class="BM2">Date</td>
+			</tr>
+		</table>
+
+		<table style="margin-left: 750px; margin-top: -132px;" >
+			<tr>
+				<td style="font-size: 13px;">Marvin Lao</td>
+			</tr>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of MIS</td>
+			</tr>
+			<tr>
+				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
+			</tr>
+			<tr>
+				<td class="BM2">Date</td>
+			</tr>
+		</table>
+
+		
 <div class='dontprint' style="width: 100%; text-align: center;">
 	<button onclick="window.print()">Print</button> 
 </div>

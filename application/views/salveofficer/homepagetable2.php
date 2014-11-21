@@ -36,6 +36,10 @@
 
 	<?php
 	$branchno = $this->session->userdata('branchno');
+	$userrank = $this->session->userdata('rank');
+	$name = $this->session->userdata('firstname');
+	 $datetoday = date('F d, Y');
+
 	
 	$targetactual = $this->db->query("SELECT BigOne.CenterControl, CenterNo, Target, Actual FROM 
 		(SELECT CenterControl, CenterNo, IFNULL(SUM(MonthlyPayment),0) AS Target FROM (SELECT MemberControl, Alpha.CenterControl, BranchControl, CenterNo FROM (SELECT A.Members_ControlNo AS MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo FROM caritascenters_has_members GROUP BY Members_ControlNo ORDER BY Members_ControlNo ASC)A
@@ -108,7 +112,8 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 		
 		<h3>
 			CARITAS SALVE CREDIT COOPERATIVE <br>
-			Comparison of Center Performance
+			Comparison of Center Performance <br>
+			As of <?php echo date("m-d-Y"); ?>
 		</h3>
 
 
@@ -128,8 +133,8 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 	foreach($targetactual->result() AS $data){ ?>
 	<tr>
 		<td class="data"><?php echo $data->CenterNo ?></td>
-		<td class="data"><?php echo $data->Target ?></td>
-		<td class="data"><?php echo $data->Actual ?></td>
+		<td class="data"><?php echo number_format($data->Target,2) ?></td>
+		<td class="data"><?php echo number_format($data->Actual,2) ?></td>
 		<td class="data"></td>
 		<td class="data"></td>
 
@@ -141,7 +146,44 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 <br>
 <br>
 <br>
+<table style="margin-left: 300px;" >
+			<tr>
+				<td style="font-size: 13px;"><?php echo $name; ?></td>
+			</tr>
+				<?php if($userrank=='branchmanager'){?>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of Branch Manager</td>
+			</tr>
+			<?php }else{ ?>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of Salve Officer</td>
+			</tr>
+			<?php } ?>
+			<tr>
+				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
+			</tr>
+			<tr>
+				
+				<td class="BM2">Date</td>
+			</tr>
+		</table>
 
+		<table style="margin-left: 750px; margin-top: -132px;" >
+			<tr>
+				<td style="font-size: 13px;">Marvin Lao</td>
+			</tr>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of MIS</td>
+			</tr>
+			<tr>
+				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
+			</tr>
+			<tr>
+				<td class="BM2">Date</td>
+			</tr>
+		</table>
+
+		
 <div class='dontprint' style="width: 100%; text-align: center;">
 	<button onclick="window.print()">Print</button> 
 </div>
