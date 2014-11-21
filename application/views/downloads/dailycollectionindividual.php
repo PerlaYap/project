@@ -16,8 +16,21 @@
     $day = date('l');
  	$branchno = $this->session->userdata('branchno');
  	$branch = $this->session->userdata('branch');
- 	$so = $this->session->userdata('firstname');
+ 
  	$center = $_GET['center'];
+ 	$userrank = $this->session->userdata('rank');
+	$name2 = $this->session->userdata('firstname');
+	
+
+ 		$getManager=$this->db->query("SELECT CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`) AS NAME FROM CaritasPersonnel CL 
+											JOIN CARITASBRANCH_HAS_CARITASPERSONNEL BP ON CL.CONTROLNO = BP.CARITASPERSONNEL_ControlNo
+											JOIN CARITASBRANCH B ON BP.CARITASBRANCH_CONTROLNO = B.CONTROLNO
+											
+														WHERE CL.RANK = 'BRANCHMANAGER' 
+														AND B.ControlNo = $branchno ");
+	foreach ($getManager->result() as $row){ 
+		$Manager=$row->NAME;
+	}
 
  	$getMember = $this->db->query("SELECT * FROM (SELECT mem.`ControlNo`,CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`)as Name,  `LoanExpense`, `Savings`, `CapitalShare`,`pastdue`,`CaritasCenters_ControlNo` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`)member join (SELECT `LoanApplication_ControlNo`,`status`, `Members_ControlNo`,`AmountRequested`, `Interest`, `LoanType` FROM `loanapplication_has_members` lhm , `loanapplication` l WHERE lhm.`LoanApplication_ControlNo` = l.`ControlNo`) loan on member.ControlNo = loan.Members_ControlNo where member.`CaritasCenters_ControlNo`= $center and `status`='Current' order by Name");
  	$hasmember = $getMember->result();
@@ -38,7 +51,11 @@
 		<p style="font-size:14px; margin-left:225px;">
 			Name of Branch: <b> <?php echo $branch; ?> </b>		<br>
 			Center No. : <b><?php echo $_GET['name'];?></b>  			<br>
-			Salve Officer: <b><?php echo $so; ?></b>		<br>
+			<?php if($userrank=='branchmanager'){?>
+			Branch Manager: <b><?php echo $name2; ?></b>		<br>
+			<?php } else { ?>
+			Salve Officer: <b><?php echo $name2; ?></b>		<br>
+			<?php }?>
 			Day: <b><?php echo $datetoday." (".$day.")" ?></b>
 		</p>
 
@@ -105,13 +122,19 @@
 
 		<br><br><br>
 
-		<table style="margin-left: 300px;" >
+	<table style="margin-left: 300px;" >
 			<tr>
-				<td style="font-size: 13px;"><?php echo $so; ?></td>
+				<td style="font-size: 13px;"><?php echo $name2; ?></td>
 			</tr>
+				<?php if($userrank=='branchmanager'){?>
 			<tr>
-				<td class="BM2">Signature Above Printed Name of SO</td>
+				<td class="BM2">Signature Above Printed Name of Branch Manager</td>
 			</tr>
+			<?php }else{ ?>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of Salve Officer</td>
+			</tr>
+			<?php } ?>
 			<tr>
 				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
 			</tr>
@@ -122,9 +145,22 @@
 		</table>
 
 		<table style="margin-left: 750px; margin-top: -132px;" >
+			
+			<?php if($userrank=='branchmanager'){?>
 			<tr>
-				<td class="BM2">Signature Above Printed Name of Coordinator</td>
+				<td style="font-size: 13px;">Marvin Lao</td>
 			</tr>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of MIS</td>
+			</tr>
+			<?php }else{ ?>
+			<tr>
+				<td style="font-size: 13px;"><?php echo $Manager ?></td>
+			</tr>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of Branch Manager</td>
+			</tr>
+			<?php } ?>
 			<tr>
 				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
 			</tr>

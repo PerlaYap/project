@@ -35,7 +35,16 @@
 
 
 	<?php
-	$branchno = $this->session->userdata('branchno');
+		$branchno = $this->session->userdata('branchno');
+	$getManager=$this->db->query("SELECT CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`) AS NAME FROM CaritasPersonnel CL 
+											JOIN CARITASBRANCH_HAS_CARITASPERSONNEL BP ON CL.CONTROLNO = BP.CARITASPERSONNEL_ControlNo
+											JOIN CARITASBRANCH B ON BP.CARITASBRANCH_CONTROLNO = B.CONTROLNO
+											
+														WHERE CL.RANK = 'BRANCHMANAGER' 
+														AND B.ControlNo = $branchno ");
+	foreach ($getManager->result() as $row){ 
+		$Manager=$row->NAME;
+	}
 	$userrank = $this->session->userdata('rank');
 	$name = $this->session->userdata('firstname');
 	 $datetoday = date('F d, Y');
@@ -114,6 +123,7 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 			CARITAS SALVE CREDIT COOPERATIVE <br>
 			Comparison of Center Performance <br>
 			As of <?php echo date('F d, Y'); ?>
+
 		</h3>
 
 
@@ -168,13 +178,23 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 			</tr>
 		</table>
 
-		<table style="margin-left: 750px; margin-top: -132px;" >
+	<table style="margin-left: 750px; margin-top: -132px;" >
+			
+			<?php if($userrank=='branchmanager'){?>
 			<tr>
 				<td style="font-size: 13px;">Marvin Lao</td>
 			</tr>
 			<tr>
 				<td class="BM2">Signature Above Printed Name of MIS</td>
 			</tr>
+			<?php }else{ ?>
+			<tr>
+				<td style="font-size: 13px;"><?php echo $Manager ?></td>
+			</tr>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of Branch Manager</td>
+			</tr>
+			<?php } ?>
 			<tr>
 				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
 			</tr>
