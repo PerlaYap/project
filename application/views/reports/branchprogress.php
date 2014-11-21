@@ -41,8 +41,8 @@
   
   
     <div id="chart_div" style="width: 900px; height: 500px; margin-left: auto; margin-right: auto;"></div>
-    <br>
-    <table class="signature" style="margin-left:auto; margin-right:auto;">
+    <br><br>
+    <!-- <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
         <td class="sig">&nbsp</td>
@@ -58,7 +58,38 @@
         <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
         <td class="sig2">&nbsp</td>
       </tr>
+    </table> -->
+
+     <table class="signature" style="margin-left:31.5%; margin-right:auto;">
+      <tr>
+        <td class="sigBy">Prepared by:</td>
+      </tr>
+      <tr>
+        <td class="sigName">Marvin Lao*</td>
+      </tr>
+      <tr>
+        <td class="sigPosition">Branch Manager*</td>
+      </tr>
+      <tr>
+        <td class="sigPosition">November 21, 2014*</td>
+      </tr>
     </table>
+
+    <table class="signature" style="margin-left: 53%; margin-right:auto; margin-top: -111px;">
+      <tr>
+        <td class="sigBy">Received by:</td>
+      </tr>
+      <tr>
+        <td class="sigName">Name</td>
+      </tr>
+      <tr>
+        <td class="sigPosition"> Position</td>
+      </tr>
+      <tr>
+        <td class="sigPosition">November 21, 2014</td>
+      </tr>
+    </table>
+    
     <br><br><br>
 	<div style="width: 100%; text-align: center;">
 		<button onclick="window.print()">Print</button>

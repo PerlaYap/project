@@ -355,11 +355,7 @@ table.signature{
 	border-collapse: collapse;
 }
 
-	.sigBy{
-		font-size: 14px;
-		text-align: right;
-
-	}
+	
 
 	.sig{
 		width: 160px;
@@ -416,3 +412,28 @@ table.pastdue{
 	}
 
 
+
+.sigBy{
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
+
+}
+
+
+.sigName{
+	height: 50px;
+	text-align: center;
+	width: 200px;
+	vertical-align: bottom;
+	padding: 0;
+	font-size: 14px;
+}
+.sigPosition{
+	text-align: center;
+	width:200px;
+	vertical-align: top;
+	padding:0;
+	font-size: 14px;
+
+}
