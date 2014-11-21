@@ -12,6 +12,9 @@
 <?php
 $user = $this->session->userdata('firstname');
 $today = date('F d, Y');
+	$userrank = $this->session->userdata('rank');
+	$name = $this->session->userdata('firstname');
+	 $datetoday = date('F d, Y');
 
 $misAccount =$this->db->query("SELECT ControlNo AS BranchControl, BranchName, IFNULL(NoMembers,0) AS BegMembers, IFNULL(NewMembers,0) AS NewMembers, IFNULL(TerminatedMembers,0) AS TerminatedMembers,
 IFNULL(ActiveMembers,0) AS ActiveMembers, IFNULL(TotalDormant,0) AS TotalDormant, IFNULL(TotalDanger,0) AS TotalPastDue,
@@ -465,7 +468,7 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
 			</tr>
 		</table> -->
 
-		 <table class="signature" style="margin-left:31.5%; margin-right:auto;">
+	<!--	 <table class="signature" style="margin-left:31.5%; margin-right:auto;">
 		      <tr>
 		        <td class="sigBy">Prepared by:</td>
 		      </tr>
@@ -494,7 +497,44 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
 		        <td class="sigPosition">November 21, 2014</td>
 		      </tr>
 		    </table>
-	
+	-->
+
+	<table style="margin-left: 300px;" >
+      <tr>
+        <td style="font-size: 13px;"><?php echo $name; ?></td>
+      </tr>
+        <?php if($userrank=='branchmanager'){?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of Branch Manager</td>
+      </tr>
+      <?php }else{ ?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of MIS</td>
+      </tr>
+      <?php } ?>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+      </tr>
+      <tr>
+        
+        <td class="BM2">Date</td>
+      </tr>
+    </table>
+
+    <table style="margin-left: 750px; margin-top: -132px;" >
+      <tr>
+        <td style="font-size: 13px;">Ann Evan Echavez</td>
+      </tr>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of General Manager</td>
+      </tr>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+      </tr>
+      <tr>
+        <td class="BM2">Date</td>
+      </tr>
+    </table>
 	
 	<br><br>
 	<div class='dontprint' style="width: 100%; text-align: center;">

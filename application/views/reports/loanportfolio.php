@@ -13,6 +13,8 @@
 
 		$user = $this->session->userdata('firstname');
 		$datetoday = date('F d, Y');
+$userrank = $this->session->userdata('rank');
+	$name = $this->session->userdata('firstname');
 
 $getportfolio = $this->db->query("SELECT ControlNo, BranchID, BranchName, TRUNCATE((IFNULL(BegTotalLoan23,0)-IFNULL(Beg23Collection,0)),2) AS BegTotalLoan23, TRUNCATE((IFNULL(BegTotalLoan40,0)-IFNULL(Beg40Collection,0)),2) AS BegTotalLoan40,
 TRUNCATE(IFNULL(LoanReleased23,0),2) AS LoanReleased23, TRUNCATE(IFNULL(LoanReleased40,0),2) AS LoanReleased40, TRUNCATE(IFNULL(TotalTarget23,0),2) AS TotalTarget23, TRUNCATE(IFNULL(TotalTarget40,0),2) AS TotalTarget40,
@@ -385,7 +387,7 @@ $port=$getportfolio->result();
 			</tr>
 		</table> -->
 
-		 <table class="signature" style="margin-left:31.5%; margin-right:auto;">
+	<!--	 <table class="signature" style="margin-left:31.5%; margin-right:auto;">
 		      <tr>
 		        <td class="sigBy">Prepared by:</td>
 		      </tr>
@@ -413,7 +415,45 @@ $port=$getportfolio->result();
 		      <tr>
 		        <td class="sigPosition">November 21, 2014</td>
 		      </tr>
-		    </table>
+		    </table> -->
+
+		    
+    <table style="margin-left: 300px;" >
+      <tr>
+        <td style="font-size: 13px;"><?php echo $name; ?></td>
+      </tr>
+        <?php if($userrank=='branchmanager'){?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of Branch Manager</td>
+      </tr>
+      <?php }else{ ?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of MIS</td>
+      </tr>
+      <?php } ?>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+      </tr>
+      <tr>
+        
+        <td class="BM2">Date</td>
+      </tr>
+    </table>
+
+    <table style="margin-left: 750px; margin-top: -132px;" >
+      <tr>
+        <td style="font-size: 13px;">Ann Evan Echavez</td>
+      </tr>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of General Manager</td>
+      </tr>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+      </tr>
+      <tr>
+        <td class="BM2">Date</td>
+      </tr>
+    </table>
 
 	<br><br>
 	<div class='dontprint' style="width: 100%; text-align: center;">

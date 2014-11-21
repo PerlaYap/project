@@ -21,6 +21,9 @@ date_default_timezone_set('Asia/Manila');
     $datetoday1 = date('F d, Y');
     $datetoday=date('Y-m-d');
     $branch = strtoupper($this->session->userdata('branch'));
+      $userrank = $this->session->userdata('rank');
+  $name = $this->session->userdata('firstname');
+   $datetoday2 = date('F d, Y');
 
     $memberNo=$this->db->query("SELECT Charlie.CenterControl AS CenterControl, CenterNo, SUM(Status='Borrower') AS Borrower, SUM(Status='Active Saver') AS Saver
 FROM (SELECT MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo AS MemberControl FROM CaritasCenters_has_Members GROUP BY Members_ControlNo ORDER BY Members_ControlNo ASC)A
@@ -123,7 +126,7 @@ GROUP BY Charlie.CenterControl");
 
     <br><br>
 
-    <table class="signature" style="margin-left:auto; margin-right:auto;">
+   <!-- <table class="signature" style="margin-left:auto; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
         <td class="sig"><?php echo $user ?></td>
@@ -139,7 +142,47 @@ GROUP BY Charlie.CenterControl");
         <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
         <td class="sig2">&nbsp</td>
       </tr>
+    </table>-->
+
+    <table style="margin-left: 300px;" >
+      <tr>
+        <td style="font-size: 13px;"><?php echo $name; ?></td>
+      </tr>
+        <?php if($userrank=='branchmanager'){?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of Branch Manager</td>
+      </tr>
+      <?php }else{ ?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of Salve Officer</td>
+      </tr>
+      <?php } ?>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday2 ?></td>
+      </tr>
+      <tr>
+        
+        <td class="BM2">Date</td>
+      </tr>
     </table>
+
+    <table style="margin-left: 750px; margin-top: -132px;" >
+      <tr>
+        <td style="font-size: 13px;">Marvin Lao</td>
+      </tr>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of MIS</td>
+      </tr>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday2 ?></td>
+      </tr>
+      <tr>
+        <td class="BM2">Date</td>
+      </tr>
+    </table>
+
+
+
     <br><br>
   <div style="width: 100%; text-align: center;">
     <button onclick="window.print()" class="dontprint">Print</button> 

@@ -5,6 +5,9 @@
 <?php
 $name=$this->session->userdata('firstname');
 $date = date('F d, Y');
+  $userrank = $this->session->userdata('rank');
+  
+   $datetoday = date('F d, Y');
 ?>
 <style type="text/css" media="print">
 .dontprint{
@@ -114,7 +117,7 @@ $date = date('F d, Y');
       </tr>
     </table>-->
 
-     <table class="signature" style="margin-left:31.5%; margin-right:auto;">
+    <!-- <table class="signature" style="margin-left:31.5%; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
       </tr>
@@ -142,8 +145,44 @@ $date = date('F d, Y');
       <tr>
         <td class="sigPosition">November 21, 2014</td>
       </tr>
+    </table>-->
+
+<table style="margin-left: 300px;" >
+      <tr>
+        <td style="font-size: 13px;"><?php echo $name; ?></td>
+      </tr>
+        <?php if($userrank=='branchmanager'){?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of Branch Manager</td>
+      </tr>
+      <?php }else{ ?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of MIS</td>
+      </tr>
+      <?php } ?>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+      </tr>
+      <tr>
+        
+        <td class="BM2">Date</td>
+      </tr>
     </table>
 
+    <table style="margin-left: 750px; margin-top: -132px;" >
+      <tr>
+        <td style="font-size: 13px;">Ann Evan Echavez</td>
+      </tr>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of General Manager</td>
+      </tr>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+      </tr>
+      <tr>
+        <td class="BM2">Date</td>
+      </tr>
+    </table>
 
 
 

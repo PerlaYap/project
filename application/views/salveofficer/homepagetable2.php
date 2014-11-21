@@ -113,7 +113,7 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 		<h3>
 			CARITAS SALVE CREDIT COOPERATIVE <br>
 			Comparison of Center Performance <br>
-			As of <?php echo date("m-d-Y"); ?>
+			As of <?php echo date('F d, Y'); ?>
 		</h3>
 
 
@@ -183,7 +183,7 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 			</tr>
 		</table>
 
-		
+
 <div class='dontprint' style="width: 100%; text-align: center;">
 	<button onclick="window.print()">Print</button> 
 </div>

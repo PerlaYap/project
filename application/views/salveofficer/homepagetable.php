@@ -76,7 +76,7 @@ $month = array("January","February","March","April","May","June","July","August"
 		<h3>
 			CARITAS SALVE CREDIT COOPERATIVE <br>
 			Comparison of Accounts<br>
-			As of <?php echo date("m-d-Y"); ?>
+			As of <?php echo date('F d, Y'); ?>
 
 		</h3>
 

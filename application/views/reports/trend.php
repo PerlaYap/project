@@ -20,6 +20,9 @@
   $branch = $this->session->userdata('branchno');
   $user = strtoupper($this->session->userdata('firstname'));
   $datetoday = date('F d, Y');
+  $userrank = $this->session->userdata('rank');
+  $name = $this->session->userdata('firstname');
+  
 
   $month = array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec");
 
@@ -212,7 +215,7 @@ foreach($branchname->result() as $row){
       </tr>
     </table> -->
 
-     <table class="signature" style="margin-left:31.5%; margin-right:auto;">
+  <!--   <table class="signature" style="margin-left:31.5%; margin-right:auto;">
       <tr>
         <td class="sigBy">Prepared by:</td>
       </tr>
@@ -239,6 +242,42 @@ foreach($branchname->result() as $row){
       </tr>
       <tr>
         <td class="sigPosition">November 21, 2014</td>
+      </tr>
+    </table>-->
+    <table style="margin-left: 300px;" >
+      <tr>
+        <td style="font-size: 13px;"><?php echo $name; ?></td>
+      </tr>
+        <?php if($userrank=='branchmanager'){?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of Branch Manager</td>
+      </tr>
+      <?php }else{ ?>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of Salve Officer</td>
+      </tr>
+      <?php } ?>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+      </tr>
+      <tr>
+        
+        <td class="BM2">Date</td>
+      </tr>
+    </table>
+
+    <table style="margin-left: 750px; margin-top: -132px;" >
+      <tr>
+        <td style="font-size: 13px;">Marvin Lao</td>
+      </tr>
+      <tr>
+        <td class="BM2">Signature Above Printed Name of MIS</td>
+      </tr>
+      <tr>
+        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+      </tr>
+      <tr>
+        <td class="BM2">Date</td>
       </tr>
     </table>
     <br>
