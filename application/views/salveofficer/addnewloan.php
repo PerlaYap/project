@@ -53,8 +53,8 @@ $(function() {
 				
 			</select>
 			<span>Loan Date :</span></label>
-				<input type="text" id="datepicker" style="width:210px;" name="loandate">
-
+			<!--	<input type="text" id="datepicker" style="width:210px;" name="loandate"> -->
+					<input type="text" readOnly="true" style="width:210px;" name="loandate" value="<?php echo date("Y-m-d") ?>">
 							<br>
 							<label>
 								<span></span>

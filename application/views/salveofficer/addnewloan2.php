@@ -280,7 +280,7 @@ foreach ($dayoftheweek->result() as $row){
 
 
 				    <h1>New Loan Application
-				        <span>Please fill all the texts in the fields.</span>
+				        <span>Please fill in the following fields.</span>
 				    </h1>
 				    
 				    <label>
@@ -330,7 +330,7 @@ foreach ($dayoftheweek->result() as $row){
 
 				    <br><br><br><br>
 				  	<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Loan Information
-				        <span>Please fill all the texts in the fields.</span>
+				        <span>Please fill in the following fields.</span>
 				    </h1>
 
 				    <label>
@@ -389,7 +389,7 @@ foreach ($dayoftheweek->result() as $row){
 
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Business Information
-				        <span>What do we do with this again??????</span>
+				        <span>tanggalin na yung business field since lahat existing businesses, lagay nalang ng type of business with fixed values</span>
 				    </h1>
 					
 				    <label>
@@ -487,7 +487,7 @@ foreach ($dayoftheweek->result() as $row){
 
 				<br><br><br><br>
 				<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Material Inventory
-				    <span>Itooooooo rin :></span>
+				    <span>(agay tayo material types dito with fixed values :) tanggalin na ata yung quantity dito, diretso na amount</span>
 				</h1>
 
 				   
@@ -534,7 +534,8 @@ foreach ($dayoftheweek->result() as $row){
 
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Co-Maker Information
-				        <span>Please fill all the texts in the fields.</span>
+				        <span>yung business rule dito yung 1st-3rd loan cycle ni member, co-maker yung hihingin, yung comaker dapat member ng company at 3 times lang siya pwede maging comaker at kung 4th loan cycle na, dapat guarantor na, yung guarantor pwede siya relative/ friend/ any individual na malapit sa bahay ni member, basta kilala siya ni member by 2 years; ayusin natin yung fixed values ng relationship part
+				         </span>
 				    </h1>
 
 				    <label>
@@ -622,7 +623,7 @@ foreach ($dayoftheweek->result() as $row){
 
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Member Co-Maker Information
-				        <span>Please fill all the texts in the fields.</span>
+				        <span>tanggalin nalang natin ito, since meron yung nasa taas.</span>
 				    </h1>
 
 					   		<label>
