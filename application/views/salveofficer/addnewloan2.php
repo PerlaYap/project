@@ -330,11 +330,11 @@ foreach ($dayoftheweek->result() as $row){
 
 				    <br><br><br><br>
 				  	<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Loan Information
-				        <span>Please fill in the following fields.</span>
+				        <span>Pakiautomatic yung pagcalculate kung yung loan amount ay nageexceed sa maximum. Pakiayus din yung values sa capital shares, 100-5000 siya. pakicheck din kung mageexceed na siya sa 5000 kung bibili man siya, bawal na siya dapat bumili kung ganun</span>
 				    </h1>
 
 				    <label>
-				        <span>Amount of Shares:<p class="reqd">*</p></span> 
+				        <span>Cost of Shares for Purchase:<p class="reqd">*</p></span> 
 				       	<select required="true" name="capitalshare" style="width:580px;">
 						    <option value="100" selected="selected">100</option>
 						    <option value="200">200</option>
@@ -623,7 +623,7 @@ foreach ($dayoftheweek->result() as $row){
 
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Member Co-Maker Information
-				        <span>tanggalin nalang natin ito, since meron yung nasa taas.</span>
+				        <span>tanggalin nalang natin ito, since meron yung na sa taas.</span>
 				    </h1>
 
 					   		<label>
