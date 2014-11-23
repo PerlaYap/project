@@ -559,3 +559,23 @@ tr.dcHover:hover{
 	background-color: #dfdadb;
 }
 
+.BM2{
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: black;
+	height: 50px;
+	width: 270px;
+	vertical-align: text-top;
+	color: black;
+	text-align: center;
+	padding:0;
+}
+
+.BM1{
+	font-weight: bold;
+	height: 50px;
+	width: 270px;
+	color:black;
+	vertical-align: bottom;
+	text-align: center;
+}

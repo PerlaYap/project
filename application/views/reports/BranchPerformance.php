@@ -147,9 +147,9 @@ $date = date('F d, Y');
       </tr>
     </table>-->
 
-<table style="margin-left: 300px;" >
+<table style="margin-left: 140px;" >
       <tr>
-        <td style="font-size: 13px;"><?php echo $name; ?></td>
+        <td class="BM1" style="font-size: 13px;"><?php echo $name; ?></td>
       </tr>
         <?php if($userrank=='branchmanager'){?>
       <tr>
@@ -161,7 +161,7 @@ $date = date('F d, Y');
       </tr>
       <?php } ?>
       <tr>
-        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
       </tr>
       <tr>
         
@@ -169,15 +169,15 @@ $date = date('F d, Y');
       </tr>
     </table>
 
-    <table style="margin-left: 750px; margin-top: -132px;" >
+    <table style="margin-left: 600px; margin-top: -207px;" >
       <tr>
-        <td style="font-size: 13px;">Ann Evan Echavez</td>
+        <td class="BM1" style="font-size: 13px;">Ann Evan Echavez</td>
       </tr>
       <tr>
         <td class="BM2">Signature Above Printed Name of General Manager</td>
       </tr>
       <tr>
-        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
+        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
       </tr>
       <tr>
         <td class="BM2">Date</td>
