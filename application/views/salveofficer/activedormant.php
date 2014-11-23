@@ -24,21 +24,64 @@ $month = array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov
       function drawChart() {
   
   var data = google.visualization.arrayToDataTable([
-      ['Month', 'Active','Past Due Mature', 'Dormant Saver'],
+      ['Month', 'Active Saver', 'Dormant Saver', 'Borrower', 'Past Due Mature'],
       <?php
         for($a=0; $a<12; $a++){
           $date=$currentyear."-".($a+1)."-"."01";
-          $active = $this->db->query("SELECT COUNT(A.ControlNo) AS NoActive  FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus GROUP BY ControlNo)A
-                                    LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)) ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
-                                    ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily' AND Status!='Past Due' AND Status!='dormant saver')");
-          $past = $this->db->query("SELECT COUNT(A.ControlNo) AS NoActive  FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus GROUP BY ControlNo)A
-LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH))  ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
-ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily') AND Status='Past Due'");
-          $dormant = $this->db->query("SELECT COUNT(A.ControlNo) AS NoActive  FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus GROUP BY ControlNo)A
-                                    LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)) ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
-                                    ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily') AND Status='dormant saver'");
-          
-          foreach($active->result() as $data){
+          $borrower = $this->db->query("SELECT COUNT(MemberControl) AS NoActive FROM (SELECT Members_ControlNo AS MemberControl FROM (SELECT A.Members_ControlNo, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo FROM caritascenters_has_members GROUP BY Members_ControlNo)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
+                                      ON A.Members_ControlNo=B.Members_ControlNo)A
+                                      LEFT JOIN (SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl FROM (SELECT CaritasCenters_ControlNo FROM caritasbranch_has_caritascenters)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
+                                      ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo)B
+                                      ON A.CenterControl=B.CenterControl
+                                      WHERE BranchControl='$branchno') Alpha
+                                      LEFT JOIN (SELECT A.ControlNo FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus GROUP BY ControlNo)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
+                                      ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily') AND Status='Borrower')Beta
+                                      ON Alpha.MemberControl=Beta.ControlNo
+                                      WHERE ControlNo IS NOT NULL");
+         $past = $this->db->query("SELECT COUNT(MemberControl) AS NoActive FROM (SELECT Members_ControlNo AS MemberControl FROM (SELECT A.Members_ControlNo, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo FROM caritascenters_has_members GROUP BY Members_ControlNo)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
+                                      ON A.Members_ControlNo=B.Members_ControlNo)A
+                                      LEFT JOIN (SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl FROM (SELECT CaritasCenters_ControlNo FROM caritasbranch_has_caritascenters)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
+                                      ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo)B
+                                      ON A.CenterControl=B.CenterControl
+                                      WHERE BranchControl='$branchno') Alpha
+                                      LEFT JOIN (SELECT A.ControlNo FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus GROUP BY ControlNo)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
+                                      ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily') AND Status='Past Due')Beta
+                                      ON Alpha.MemberControl=Beta.ControlNo
+                                      WHERE ControlNo IS NOT NULL");
+          $dormant = $this->db->query("SELECT COUNT(MemberControl) AS NoActive FROM (SELECT Members_ControlNo AS MemberControl FROM (SELECT A.Members_ControlNo, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo FROM caritascenters_has_members GROUP BY Members_ControlNo)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
+                                      ON A.Members_ControlNo=B.Members_ControlNo)A
+                                      LEFT JOIN (SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl FROM (SELECT CaritasCenters_ControlNo FROM caritasbranch_has_caritascenters)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
+                                      ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo)B
+                                      ON A.CenterControl=B.CenterControl
+                                      WHERE BranchControl='$branchno') Alpha
+                                      LEFT JOIN (SELECT A.ControlNo FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus GROUP BY ControlNo)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
+                                      ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily') AND Status='dormant saver')Beta
+                                      ON Alpha.MemberControl=Beta.ControlNo
+                                      WHERE ControlNo IS NOT NULL");
+          $activeSaver = $this->db->query("SELECT COUNT(MemberControl) AS NoActive FROM (SELECT Members_ControlNo AS MemberControl FROM (SELECT A.Members_ControlNo, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo FROM caritascenters_has_members GROUP BY Members_ControlNo)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
+                                      ON A.Members_ControlNo=B.Members_ControlNo)A
+                                      LEFT JOIN (SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl FROM (SELECT CaritasCenters_ControlNo FROM caritasbranch_has_caritascenters)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
+                                      ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo)B
+                                      ON A.CenterControl=B.CenterControl
+                                      WHERE BranchControl='$branchno') Alpha
+                                      LEFT JOIN (SELECT A.ControlNo FROM (SELECT ControlNo FROM Members_has_MembersMembershipStatus GROUP BY ControlNo)A
+                                      LEFT JOIN (SELECT * FROM (SELECT * FROM Members_has_MembersMembershipStatus WHERE DateUpdated<=LAST_DAY(DATE_ADD('2014-11-11', INTERVAL 0 MONTH)) ORDER BY ControlNo ASC, DateUpdated DESC)B GROUP BY ControlNo)C
+                                      ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated Voluntarily') AND Status='Active Saver')Beta
+                                      ON Alpha.MemberControl=Beta.ControlNo
+                                      WHERE ControlNo IS NOT NULL");
+       
+          foreach($borrower->result() as $data){
             $count=$data->NoActive;
           }
           foreach($past->result() as $data1){
@@ -47,8 +90,11 @@ ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated V
           foreach($dormant->result() as $data2){
             $count2=$data2->NoActive;
           }
+          foreach($activeSaver->result() as $data2){
+            $count3=$data2->NoActive;
+          }
           ?>
-          ['<?php echo $month[$a]; ?>', <?php echo $count; ?>,<?php echo $count1; ?>, <?php echo $count2; ?>],
+          ['<?php echo $month[$a]; ?>', <?php echo $count3; ?>,<?php echo $count2; ?>, <?php echo $count; ?>,<?php echo $count1; ?>],
         <?php }
         ?>
               ]);
@@ -58,7 +104,7 @@ ON A.ControlNo=C.ControlNo WHERE (Status!='Terminated' AND Status!='Terminated V
       hAxis: {slantedText:true, slantedTextAngle:45, title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true} },
       vAxis: {title: 'NO. OF ACCOUNTS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
       backgroundColor: 'transparent',
-      colors:['#2795be','#a63923', '#FFA500' ],
+      colors:['#2795be', '#FFA500','#00b200', '#a63923' ],
 
 
         //if salve officer
