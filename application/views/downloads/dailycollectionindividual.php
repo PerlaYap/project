@@ -68,6 +68,7 @@
 				<td colspan="4" class="hdrDC">LOAN</td>
 				<td colspan="2" class="hdrDC">SAVINGS</td>
 				<td rowspan="2" class="hdrDC">WITHDRAWAL</td>
+				<td rowspan="2" class="hdrDC">SIGNATURE</td>
 			</tr>
 			<tr>
 				<td class="hdrDC">Active Release</td>
@@ -109,6 +110,7 @@
 				<td class="collectDC" rowspan="2"></td>
 				<td class="collectDC" rowspan="2"><?php echo number_format($savings,2) ?></td>
 				<td class="collectDC"><input type="checkbox" name="" value="">50.00</td>
+				<td class="collectDC" rowspan="2"></td>
 				<td class="collectDC" rowspan="2"></td>
 			</tr>
 				<tr>
