@@ -449,3 +449,10 @@ table.pastdue{
 	vertical-align: bottom;
 	text-align: center;
 }
+
+.pastdue{
+	padding: 5px 10px 5px 10px;
+	color:black;
+	font-size: 11.5px;
+	text-align: center;
+}
