@@ -340,7 +340,7 @@ foreach ($getTotal->result() as $row) {
 			</tr>
 		</table>
 
-		<table style="margin-left: 750px; margin-top: -132px;" >
+		<!-- <table style="margin-left: 750px; margin-top: -132px;" >
 			
 			<?php if($userrank=='branchmanager'){?>
 			<tr>
@@ -363,7 +363,7 @@ foreach ($getTotal->result() as $row) {
 			<tr>
 				<td class="BM2">Date</td>
 			</tr>
-		</table>
+		</table> -->
 			</div>
 			<br><br>
 			<div class="noPrint" style="width: 100%; text-align: center;">

@@ -14,6 +14,7 @@
 		 $center = $r->CenterNo;
 		 $stat = $r->Status;
 		 $date = $r->DateUpdated;
+		}
 		?>
 		<h1><br>
 			<!-- <img src="../../../Assets/images/alert.png" class="alertpng"> -->
@@ -44,7 +45,7 @@
 		 
 		<br><br>
 		<input type="hidden" name="name" value="<?php echo $controlno; ?>">
-		<?php } ?>
+		<?php //} ?>
 		
 			<input type='submit' name="submitvalue" value="View Profile" class="button00">
 			<input type='submit' name="submitvalue" value="Cancel" class="button001">

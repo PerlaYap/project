@@ -29,6 +29,8 @@ if (!empty($_POST)) {
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/dailycollection.css'); ?>">
 <script src="<?php echo base_url('Assets/js/dailycollection.js'); ?>"></script>
 
+
+
 <script type="text/javascript">
 
 function sbudisable(size){
@@ -117,11 +119,31 @@ function putinput(size){
 			
 			</label>
 		</form>
+		<form action='recordcollection' method='post'>
+		<?php if (!empty($_POST)){?>
 
+
+
+	<!-------------------------------------- GENERAL HIDDEN VALUES -------------------------------------------------->
+			<input type ='hidden' name='sopersonnel' value='<?php echo $SOpersonnel; ?>'/>
+			<input  id="name" value="<?php echo date("Y-m-j") ; ?>" type="hidden" name="date" />
+			<input type='hidden' name='branchcontrolno' value='<?php echo $branchno ?>' />
+			<!-- <input type='hidden' name='centercontrolno' value='<?php echo $mem->CaritasCenters_ControlNo ?>' /> -->
+			<!-- <input type='hidden' name='centerno' value='<?php echo $center ?>'> -->
+
+	<!-------------------------------------- GENERAL HIDDEN VALUES -------------------------------------------------->	
+		
 		<table border=1 style="border-collapse:collapse; margin-left:auto; margin-right:auto; table">
 			<tr> 
 				<td class="header" colspan="9">DAILY COLLECTION</td> 
 			</tr>
+
+			<?php
+				$hasmember = $getMember->result();
+				 if (!empty($hasmember)) {
+				 ?>
+				
+
 			<tr>
 				<td rowspan="2" class="hdrDC" style="width: 10px;"><b>#</b></td>
 				<td rowspan="2" class="hdrDC" style="width:260px; "><b>MEMBER NAME</b></td>
@@ -134,54 +156,131 @@ function putinput(size){
 				<td class="hdrDC">Past Due</td>
 				<td class="hdrDC">Payment</td>
 				<td class="hdrDC">Loan Balance</td>
-
 				<td class="hdrDC">Savings Build-Up</td>
 				<td class="hdrDC">Savings Collection</td>
 			</tr>
 
+			<?php 
+
+				$num=0;
+				$activereleasetotal=0;
+				$totalpastdue =0;
+				$totalsbucollected =0;
+				$totalloanrecieved ="";
+				$totalwithdrawal =0;
+				$totalloanbalance =0;
+				$totalsbu =0;
+				$y =0;
+				$elsize = count($hasmember);
+
+				 foreach ($hasmember as $mem) {
+
+					$activerelease =$mem->AmountRequested + $mem->Interest;
+					$pastdue =$mem->pastdue;
+					$y+=1;
+					$maxwithdrawal = $mem->Savings - $mem->AmountRequested*0.4;
+				?>
+
+		<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->
+
+			<input type='hidden' name='loanappcontrolno[]' value='<?php echo $mem->LoanApplication_ControlNo ?>' />
+			<input type='hidden' name='memberid[]' value='<?php echo $mem->Members_ControlNo; ?>'>
+			<input type='hidden' name='centercontrolno' value='<?php echo $mem->CaritasCenters_ControlNo ?>' /> 
+
+		<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->	
+
+				<?php $loantype = $mem->LoanType;
+								if ($loantype =='23-Weeks') {
+									$amounttopay = $activerelease/23;
+								}else if ($loantype =='40-Weeks') {
+										$amounttopay = $activerelease/40;
+								}
+							 ?>
+			
 			<tr class="dcHover">
-				<td class="dcData">1</td>
-				<td class="dcData1">Cara Ruiz Manalo</td>
-				<td class="dcData">4,000.00</td>
-				<td class="dcData">250</td>
-				<td class="dcData">	<input type="text" class="dcInput"/>	</td>
-				<td class="dcData">4,000.00</td>
-				<td class="dcData">5,050.00</td>
-				<td class="dcData">	<input type="text" class="dcInput"/>	</td>
-				<td class="dcData2">	<input type="text" class="dcInput"/>	</td>
+				<td class="dcData"><?php echo $y; ?> </td> <!-- number -->
+				<td class="dcData1"><?php echo $mem->Name; ?></td> <!-- name -->
+				<td class="dcData"><?php echo number_format($activerelease, 2); ?></td><!-- active release -->
+				<td class="dcData"><?php echo number_format($pastdue, 2); ?></td><!-- past due -->
+				<td class="dcData"><input value="0" min='0' max='<?php echo $mem->LoanExpense ?>' title='Minimum amount: <?php echo number_format($amounttopay,2); ?>' id='<?php echo "loanpayment".$y; ?>' name='loanpayment[]' onChange="sbudisable(<?php echo "$elsize"; ?>);" required type="number" class="dcInput"/></td> <!-- payment -->
+				<input type='hidden' name='amounttopay[]' value="<?php echo $amounttopay; ?>"/>
+
+
+				<td class="dcData"><?php echo number_format($mem->LoanExpense, 2); ?></td><!-- loan balance -->
+				<td class="dcData"><?php echo number_format($mem->Savings, 2); ?></td><!-- sbu -->
+				<td class="dcData"><input type="number" required class="dcInput" id="<?php echo "inputSBU".$y; ?>" onChange="putinput(<?php echo "$elsize"; ?>);" disabled='true' name="f[]"/></td><!-- savings -->
+				<input type='hidden' id="<?php echo "SBUhid".$y; ?>" name='sbu[]' />	
+				<td class="dcData2">	<input type="number" min='0' max='<?php echo $maxwithdrawal; ?>' name='withdrawal[]' class="dcInput" />	</td> <!-- withdrawal -->
 			</tr>
 
+				<?php
+					$activereleasetotal +=$activerelease;
+					$totalpastdue +=$pastdue;
+					$totalloanbalance +=$mem->LoanExpense; ?>
+			<?php } ?>
+			<?php } ?>
+<!-- SAVINGS ONLY -->
+			<?php 
+						$num = $y;
+						$getsav=$getSavingsOnly->result();
+						if (!empty($getsav)) {
+							$totsavings = 0;
+				?>	
+			<?php foreach ($getsav as $savmem) { 
+
+						$name=$savmem->Name;
+						$sbutot = $savmem->Savings;
+						$memberno2 = $savmem->ControlNo;
+				?>
+	<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->		
+
+			<input type="hidden" value="<?php echo $memberno2 ?>" name="memberno2[]" />
+			
+
+	<!-------------------------------------- HIDDEN VALUES -------------------------------------------------->		
 			<tr class="dcHover">
-				<td class="dcData">2</td>
-				<td class="dcData1">Jolo Manaois Navidad</td>
+				<td class="dcData"><?php echo $num+=1; ?></td>
+				<td class="dcData1"><?php echo $name; ?></td>
 				<td class="dcData">-</td>
 				<td class="dcData">-</td>
 				<td class="dcData">	<input type="text" class="dcInput" disabled/>	</td>
 				<td class="dcData">-</td>
-				<td class="dcData">6,100.00</td>
-				<td class="dcData">	<input type="text" class="dcInput"/>	</td>
-				<td class="dcData2">	<input type="text" class="dcInput"/>	</td>
+				<td class="dcData"><?php echo number_format($sbutot, 2) ?></td>
+				<td class="dcData"><input type="number" value="50" required name="saveonly[]" class="dcInput"/></td>
+				<td class="dcData2"><input type="number"  name="withdrawonly[]" min="0" max="<?php echo $sbutot ?>" class="dcInput"/>	</td>
 			</tr>
 
+					<?php $totsavings +=$sbutot; ?>
+				
+				<?php } }?>
 			<tr>
 				<td colspan="9" style="height:4px; padding:0;"></td>
 			</tr>
 
 			<tr class="dcHover">
 				<td class="dcData" colspan="2" style="text-align: right;"><b>Total:</b></td>
-				<td class="dcData"><b>4,000.00</b</td>
-				<td class="dcData"><b>250.00</b></td>
-				<td class="dcData"><b>500.00</b></td>
-				<td class="dcData"><b>4,000.00</b></td>
-				<td class="dcData"><b>11,150.00</b></td>
-				<td class="dcData"><b>100.00</b></td>
-				<td class="dcData2"><b>0.00</b></td>
+				<td class="dcData"><b><?php echo number_format($activereleasetotal,2) ?></b></td><!-- tot activerelease -->
+				<td class="dcData"><b><?php echo number_format($totalpastdue,2) ?></b></td><!-- total pastdue -->
+				<td class="dcData"><b> </b></td><!-- total payment -->
+				<td class="dcData"><b><?php echo number_format($totalloanbalance,2) ?></b></td><!-- total loan balance -->
+				<td class="dcData"><b><?php echo number_format($totsavings,2) ?></b></td><!-- total sbu -->
+				<td class="dcData"><b> </b></td><!-- total savings collected -->
+				<td class="dcData2"><b> </b></td><!-- total withdrawal -->
 			</tr>
+			
 			
 
 
 
+
+
+
 		</table>
+		<br>
+		<input  type="submit" class="button" name="submitbtn" value="Submit" style="margin-left: 505px; margin-top:0px; position:absolute;"/>
+		<?php } ?>
+		</form>
+		
 
 <br><br>
 <br><br>

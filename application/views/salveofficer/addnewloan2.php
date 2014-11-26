@@ -57,6 +57,16 @@ RIGHT JOIN (SELECT chm.CaritasCenters_ControlNo AS CenterControl ,A.ControlNo, M
 RIGHT JOIN (SELECT mem.ControlNo, MemberID, FirstName, MiddleName, LastName FROM membersname memn RIGHT JOIN Members mem ON mem.ControlNo=memn.ControlNo WHERE mem.MemberID='$mid') A ON A.ControlNo=chm.Members_ControlNo) B ON cbhcc.CaritasCenters_ControlNo=B.CenterControl
 "); 
 
+$capitalshare = $this->db->query("SELECT `MemberID` ,`totcapitalshare` FROM `totalcapitalshare` t join members m on t.Members_ControlNo = m.ControlNo where `MemberID` = '$mid'");
+
+if (!empty($capitalshare->result())) {
+	foreach ($capitalshare->result() as $cap) {
+	$totcapitalshare = $cap->totcapitalshare;
+	}
+}else{
+	$totcapitalshare = 0;
+}
+
 foreach ($memberinfo->result() as $row) {
 	$firstName=$row->FirstName;
 	$lastName=$row->LastName;
@@ -310,38 +320,34 @@ foreach ($dayoftheweek->result() as $row){
 				        <input type="hidden" name="centercontrol" value="<?php echo $centerControl?>" />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				    <br><br><br><br>
 				  	<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Loan Information
 				        <span>Pakiautomatic yung pagcalculate kung yung loan amount ay nageexceed sa maximum. Pakiayus din yung values sa capital shares, 100-5000 siya. pakicheck din kung mageexceed na siya sa 5000 kung bibili man siya, bawal na siya dapat bumili kung ganun</span>
 				    </h1>
 
 				    <label>
-				        <span>Cost of Shares for Purchase:<p class="reqd">*</p></span> 
+						<span>Current Capital Share:</span> 
+						<input type='text' value='<?php echo number_format($totcapitalshare,2) ?>'>
+				    </label>
+
+				    <label>
+				        <span>Cost of Shares for Purchase:<p class="reqd">*</p></span>
+				        	<?php $r_cap = 5000 - $totcapitalshare;
+				        		$r_size = $r_cap/100;
+				        	 ?>
+
 				       	<select required="true" name="capitalshare" style="width:580px;">
-						    <option value="100" selected="selected">100</option>
-						    <option value="200">200</option>
-						    <option value="300">300</option>
-						    <option value="400">400</option>
-						    <option value="500">500</option>
+				       		<option></option>
+				       		<?php if ($r_size>0){ ?>
+				       			<?php for ($k=1; $k <=$r_size ; $k++) { ?>
+				       			<option value='<?php echo 100*$k ?>'><?php echo number_format(100*$k,2) ?></option>
+				       			<?php } ?>
+				       		<?php }else{ ?>
+				       			<option value='0'>0.00</option>
+				       		<?php } ?>
+
+				       		
+						   
 					    </select>
 				    </label>  
 
@@ -354,7 +360,7 @@ foreach ($dayoftheweek->result() as $row){
 				        <input type="text" readOnly="true" id="maxLoan" name="" style="width: 210px; color:#962a2a" />
 				
 				    <label>
-				        <span>Loan Type: <p class="reqd">*</p></span></label>
+				        <span>Loan Duration: <p class="reqd">*</p></span></label>
 				        <select required="true" name="loantype" style="width:220px;">
 						    <option value="" selected="selected"></option>
 						    <option value="23-Weeks">23-weeks</option>
@@ -396,8 +402,8 @@ foreach ($dayoftheweek->result() as $row){
 				    <label>
 				        <span>Business:<p class="reqd">*</p></span>
 				        <select required="true" style="width:572px;" name="loanbusiness" id="selectMenu" onchange="showBusiness(this.value)">
-						    <option value=" "></option>
-						    <option value="newbusiness">New Business</option>
+						    <!-- <option value=" "></option> -->
+						    <option value="newbusiness" selected>Existing Business</option>
 						     <?php
 				    		foreach ($loanbusiness->result() as $row) { 
 				    			echo "<option value='".$row->ControlNo."'>".$row->BusinessName."</option>" ;
@@ -534,13 +540,13 @@ foreach ($dayoftheweek->result() as $row){
 
 
 					<br><br><br><br>
-					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Co-Maker Information
+					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Household Co-Maker Information
 				        <span>yung business rule dito yung 1st-3rd loan cycle ni member, co-maker yung hihingin, yung comaker dapat member ng company at 3 times lang siya pwede maging comaker at kung 4th loan cycle na, dapat guarantor na, yung guarantor pwede siya relative/ friend/ any individual na malapit sa bahay ni member, basta kilala siya ni member by 2 years; ayusin natin yung fixed values ng relationship part
 				         </span>
 				    </h1>
 
 				    <label>
-				        <span>Co-Maker :</span>
+				        <span>Household Co-Maker :</span>
 				        <select required="true" id="comaker" name="comaker" style="width:572px;" onchange="showCoMaker(this.value)" >
 						    <option value=" " selected=""></option>
 						    <?php
@@ -628,7 +634,7 @@ foreach ($dayoftheweek->result() as $row){
 				    </h1>
 
 					   		<label>
-						    	<span>Co-Maker:</span> 
+						    	<span>Member Co-Maker:</span> 
 						        <!--<input id="" type="text" name="mcomakerid" style="width:562px;" />-->
 						        <select required="true" name='mcomakerid' style="width: 562px;" >
 				        		<option></option>
@@ -641,7 +647,9 @@ foreach ($dayoftheweek->result() as $row){
 
 						    <label>
 						    	<span>Relationship :</span> 
-						        <select name="mrelationship" style="width:405px;">
+
+						    	<input type='hidden' name='mrelationship' value='friend'>
+						        <!-- <select name="mrelationship" style="width:405px;">
 						        	<option value=" " selected=" "></option>
 						        	<option value="Aunt">Aunt</option>
 						        	<option value="Child">Child</option>
@@ -651,7 +659,7 @@ foreach ($dayoftheweek->result() as $row){
 						        	<option value="Spouse">Spouse</option>
 						        	<option value="Parent">Parent</option>
 						        	<option value="Uncle">Uncle</option>
-						        </select>
+						        </select> -->
 						    </label>
 
 				 <!--	<label>

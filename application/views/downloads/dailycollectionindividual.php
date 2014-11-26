@@ -34,6 +34,9 @@
 
  	$getMember = $this->db->query("SELECT * FROM (SELECT mem.`ControlNo`,CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`)as Name,  `LoanExpense`, `Savings`, `CapitalShare`,`pastdue`,`CaritasCenters_ControlNo` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`)member join (SELECT `LoanApplication_ControlNo`,`status`, `Members_ControlNo`,`AmountRequested`, `Interest`, `LoanType` FROM `loanapplication_has_members` lhm , `loanapplication` l WHERE lhm.`LoanApplication_ControlNo` = l.`ControlNo`) loan on member.ControlNo = loan.Members_ControlNo where member.`CaritasCenters_ControlNo`= $center and `status`='Current' order by Name");
  	$hasmember = $getMember->result();
+
+ 	$getSavingsOnly = $this->db->query("SELECT * FROM (SELECT mem.`ControlNo`,CONCAT(`LastName`, ', ', `FirstName`,' ',  `MiddleName`)as Name,`Approved`, `Savings`,`CaritasCenters_ControlNo`,`LoanExpense` FROM `caritascenters_has_members` cm, `membersname`mem, `members` m WHERE mem.`ControlNo` = cm.`Members_ControlNo` and cm.`Members_ControlNo` = m.`ControlNo`)member where member.`CaritasCenters_ControlNo`= $center and `LoanExpense` = 0 and `Approved`= 'YES' order by Name");
+ 	$getsav=$getSavingsOnly->result();
  
 
  ?>
@@ -68,6 +71,7 @@
 				<td colspan="4" class="hdrDC">LOAN</td>
 				<td colspan="2" class="hdrDC">SAVINGS</td>
 				<td rowspan="2" class="hdrDC">WITHDRAWAL</td>
+				<td rowspan="2" class="hdrDC">SIGNATURE</td>
 			</tr>
 			<tr>
 				<td class="hdrDC">Active Release</td>
@@ -110,12 +114,44 @@
 				<td class="collectDC" rowspan="2"><?php echo number_format($savings,2) ?></td>
 				<td class="collectDC"><input type="checkbox" name="" value="">50.00</td>
 				<td class="collectDC" rowspan="2"></td>
+				<td class="collectDC" rowspan="2"></td>
 			</tr>
 				<tr>
 					<td class="collectDC3">Additional: <br></td>
 				</tr>
 
 			<?php } ?>
+
+<!-- FOR SAVINGS ONLY -->
+		
+		<?php 
+			if (!empty($getsav)) {
+				$num2 = $num;
+				foreach ($getsav as $savmem) {
+						$name=$savmem->Name;
+						$sbutot = $savmem->Savings;
+						$memberno2 = $savmem->ControlNo;
+						$num2 +=1;
+			?>
+				<tr>
+				<td class="collectDC" rowspan="2"><?php  echo $num2; ?>.</td>
+				<td class="collectDC2" rowspan="2"><?php echo $name;  ?></td>
+				<td class="collectDC" rowspan="2">-</td>
+				<td class="collectDC" rowspan="2">-</td>
+				<td class="collectDC" rowspan="2">-</td>
+				<td class="collectDC" rowspan="2">-</td>
+				<td class="collectDC" rowspan="2"><?php echo number_format($sbutot,2); ?></td>
+				<td class="collectDC"><input type="checkbox" name="" value="">50.00</td>
+				<td class="collectDC" rowspan="2"></td>
+				<td class="collectDC" rowspan="2"></td>
+			</tr>
+				<tr>
+					<td class="collectDC3">Additional: <br></td>
+				</tr>
+
+		<?php 	}
+			} ?>
+
 
 		</table>
 		
