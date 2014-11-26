@@ -269,6 +269,10 @@ class Reports extends CI_Controller {
         $this->load->view('reports/borrowerandsaver'); 
     }
 
+    public function aging(){
+        $this->load->view('reports/aging');
+    }
+
     public function editcollection(){
         $this->load->view('header');
         $this->load->view('navigation');

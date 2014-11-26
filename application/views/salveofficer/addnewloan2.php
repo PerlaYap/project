@@ -157,8 +157,14 @@ foreach ($dayoftheweek->result() as $row){
 		else
 			maxLoan=(savings/.40);
 	}
-
-		$("input#maxLoan").val(maxLoan.toFixed(2));
+		$("input#maxLoan").val(<?php echo number_format(maxLoan) ?>);
+		
+		if(enteredLoan>maxLoan){
+			document.getElementById("loanamount").style.border="thin solid red";
+		}
+		else{
+			document.getElementById("loanamount").style.border="";
+		}
 	}
 	
 
