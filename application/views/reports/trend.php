@@ -27,7 +27,7 @@
   $month = array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec");
 
  if($type==1){
- $lineBranch=$this->db->query("SELECT  Month(DateApplied) AS Month, Count(ControlNo) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
+ $lineBranch=$this->db->query("SELECT  Month(DateApplied) AS Month, ROUND((SUM(AmountRequested)/Count(ControlNo)),2) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
 WHERE YEAR(DateApplied)='$years' AND (Status='Full Payment' OR Status='Current' OR Status='Active') AND CaritasBranch_ControlNo='$branch'
 GROUP BY Month(DateApplied)");
 
@@ -40,10 +40,10 @@ foreach($lineBranch->result() as $row){
   $arrayline[$row->Month]=$row->NumberofLoan;
 }}
 else if($type==2){
-$lineBranch1=$this->db->query("SELECT  Month(DateApplied) AS Month, Count(ControlNo) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
+$lineBranch1=$this->db->query("SELECT  Month(DateApplied) AS Month, ROUND((SUM(AmountRequested)/Count(ControlNo)),2) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
 WHERE YEAR(DateApplied)='$years' AND (Status='Full Payment' OR Status='Current' OR Status='Active') AND CaritasBranch_ControlNo='$branch'
 GROUP BY Month(DateApplied)");
-$lineBranch2=$this->db->query("SELECT  Month(DateApplied) AS Month, Count(ControlNo) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
+$lineBranch2=$this->db->query("SELECT  MMonth(DateApplied) AS Month, ROUND((SUM(AmountRequested)/Count(ControlNo)),2) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
 WHERE YEAR(DateApplied)='$years1' AND (Status='Full Payment' OR Status='Current' OR Status='Active') AND CaritasBranch_ControlNo='$branch'
 GROUP BY Month(DateApplied)");
 
@@ -156,7 +156,7 @@ foreach($branchname->result() as $row){
           <?php for($a=1;$a<13;$a++){ ?>
           <tr>
               <td class="tdReport"><?php echo $month[$a-1]; ?></td>
-              <td class="tdReport"><?php echo $arrayline[$a]; ?></td>
+              <td class="tdReport"><?php echo number_format($arrayline[$a],2); ?></td>
           </tr>
           <?php } ?>
       </table>
@@ -174,7 +174,7 @@ foreach($branchname->result() as $row){
           <?php for($a=1;$a<13;$a++){ ?>
           <tr>
               <td class="tdReport"><?php echo $month[$a-1]; ?></td>
-              <td class="tdReport"><?php echo $arrayline[$a]; ?></td>
+              <td class="tdReport"><?php echo number_format($arrayline[$a],2); ?></td>
           </tr>
           <?php } ?>
       </table>
@@ -190,7 +190,7 @@ foreach($branchname->result() as $row){
           <?php for($a=1;$a<13;$a++){ ?>
           <tr>
               <td class="tdReport" style="border-left: hidden;"><?php echo $month[$a-1]; ?></td>
-              <td class="tdReport"><?php echo $arrayline1[$a]; ?></td>
+              <td class="tdReport"><?php echo number_format($arrayline1[$a],2); ?></td>
           </tr>
           <?php } ?>
           
