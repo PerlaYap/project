@@ -61,6 +61,8 @@ WHERE loanapplication_ControlNo='$loanControl'");
  	$capitalShare=$row->CapitalShare;
  }
 $activeLoan=$amountRequested+$interest;
+$serviceCharge=($amountRequested * 0.02);
+$totalPayment=$amountRequested-$serviceCharge-$capitalShare;
 
 $days=array();
 $date=$dateReleased;
@@ -80,6 +82,11 @@ if($loanType=="23-Weeks"){
 	$date=$days[$a];
 }
 }
+
+if($loanType=="23-Weeks")
+	$dailyCollection=$activeLoan/23;
+else
+	$dailyCollection=$activeLoan/40;
 ?>
 
 	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> Payment Schedule</h3>
@@ -92,12 +99,16 @@ if($loanType=="23-Weeks"){
 			<td class="pName"><b><?php echo $name ?></b></td>
 		</tr>
 		<tr>
-			<td class="pLabel">Loan Type:</td>
+			<td class="pLabel">Loan Duration:</td>
 			<td class="pName"><b><?php echo $loanType ?></b></td>
 		</tr>
 		<tr>
-			<td class="pLabel">Active Release:</td>
-			<td class="pName"><b><?php echo number_format($activeLoan,2) ?></b></td>
+			<td class="pLabel">Loan Amount:</td>
+			<td class="pName"><b>Php <?php echo number_format($amountRequested,2) ?></b></td>
+		</tr>
+		<tr>
+			<td class="pLabel">Loan Interest:</td>
+			<td class="pName"><b>Php <?php echo number_format($interest,2) ?></b></td>
 		</tr>
 		<tr>
 			<td class="pLabel">Date Applied:</td>
@@ -106,6 +117,10 @@ if($loanType=="23-Weeks"){
 		<tr>
 			<td class="pLabel">Date Released:</td>
 			<td class="pName"><b><?php echo $dateReleased ?></b></td>
+		</tr>
+		<tr>
+			<td class="pLabel">Amount Recieved:</td>
+			<td class="pName"><b>Php <?php echo number_format($totalPayment,2) ?></b></td>
 		</tr>
 		<tr>
 			<td class="pLabel">Branch:</td>
@@ -118,6 +133,10 @@ if($loanType=="23-Weeks"){
 		<tr>
 			<td class="pLabel">Collection Day:</td>
 			<td class="pName"><b><?php echo $dayoftheWeek ?></b></td>
+		</tr>
+		<tr>
+			<td class="pLabel">Collection Amount per Week:</td>
+			<td class="pName"><b>Php <?php echo number_format($dailyCollection,2) ?></b></td>
 		</tr>
 	</table>
 	
@@ -179,13 +198,13 @@ if($loanType=="23-Weeks"){
 		        <td class="sigBy">Prepared by:</td>
 		      </tr>
 		      <tr>
-		        <td class="sigName">Marvin Lao*</td>
+		        <td class="sigName"><u> &nbsp&nbsp<?php echo $user ?>&nbsp&nbsp</u></td>
 		      </tr>
 		      <tr>
-		        <td class="sigPosition">Branch Manager*</td>
+		        <td class="sigPosition">Branch Manager</td>
 		      </tr>
 		      <tr>
-		        <td class="sigPosition">November 21, 2014*</td>
+		        <td class="sigPosition"><?php echo $datetoday ?></td>
 		      </tr>
 		    </table>
 
@@ -194,13 +213,13 @@ if($loanType=="23-Weeks"){
 		        <td class="sigBy">Received by:</td>
 		      </tr>
 		      <tr>
-		        <td class="sigName">Name</td>
+		        <td class="sigName"><u>&nbsp&nbsp<?php echo $name ?>&nbsp&nbsp</u></td>
 		      </tr>
 		      <tr>
-		        <td class="sigPosition"> Position</td>
+		        <td class="sigPosition"> Member</td>
 		      </tr>
 		      <tr>
-		        <td class="sigPosition">November 21, 2014</td>
+		        <td class="sigPosition"><?php echo $datetoday ?></td>
 		      </tr>
 		    </table>
 

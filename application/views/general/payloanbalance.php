@@ -46,7 +46,7 @@
 						<input type ='hidden' name='sopersonnel' value='<?php echo $SOpersonnel; ?>'/>
 						<label>
 					        <span>Loan Balance :</span></label>
-					        <input id="name" type="text" name='loanbalance' value="<?php echo $loanbalance ?>" style="width: 562px;" readonly=true/>
+					        <input id="name" type="text" name='loanbalance' value="Php <?php echo number_format($loanbalance,2) ?>" style="width: 562px;" readonly=true/>
 
 					    <label>
 					        <span>Payment Received :</span></label>
@@ -75,15 +75,15 @@
 							<input type='hidden' name='controlno' value='<?php echo $controlno ?>'>
 						<label>
 					        <span>Savings :</span></label>
-					        <input id="name" type="text" name="savings" value="<?php echo $savingstot ?>" style="width: 562px;" disabled/>
+					        <input id="name" type="text" name="savings" value="Php <?php echo number_format($savingstot,2) ?>" style="width: 562px;" disabled/>
 
 					    <label>
 					        <span>Loan Balance :</span></label>
-					        <input id="name" type="text" name="loanbalance" value="<?php echo $loanbalance ?>" style="width: 562px;" disabled/>
-
+					        <input id="name" type="text" name="loanbalance" value="Php <?php echo number_format($loanbalance,2) ?>" style="width: 562px;" disabled/>
+					        <?php $currentsavings = $savingstot-$loanbalance; ?>
 					    <label>
 					        <span>Current Savings :</span></label>
-					        <input id="name" type="text" name="fname" value="<?php echo $savingstot-$loanbalance ?>" style="width: 562px; color:#b7351b; font-weight:bold;" disabled/>
+					        <input id="name" type="text" name="fname" value="Php <?php echo number_format($currentsavings,2) ?>" style="width: 562px; color:#b7351b; font-weight:bold;" disabled/>
 					        <br><br>
 					    <input type='submit' value='OK' >
 					    <input type='button' value='cancel' onclick="gotodirectory()">
@@ -112,15 +112,16 @@
 						<input type ='hidden' name='sopersonnel' value='<?php echo $SOpersonnel; ?>'/>
 						<label>
 					        <span>Savings :</span></label>
-					        <input id="name" type="text" name="savings" value="<?php echo $savingstot ?>" style="width: 562px;" readonly=true/>
+					        <input id="name" type="text" name="savings" value="Php <?php echo number_format($savingstot,2) ?>" style="width: 562px;" readonly=true/>
 
 					    <label>
 					        <span>Loan Balance :</span></label>
-					        <input id="name" type="text" name="loanbalance" value="<?php echo $loanbalance ?>" style="width: 562px;" readonly=true/>
+					        <input id="name" type="text" name="loanbalance" value="Php <?php echo number_format($loanbalance,2) ?>" style="width: 562px;" readonly=true/>
 
 					    <label>
+					    	<?php $remainingloan = $loanbalance-$savingstot; ?>
 					        <span>Remaining Loan Balance :</span></label>
-					        <input id="name" type="text" name="reamainingbalance" value="<?php echo $loanbalance-$savingstot ?>" style="width: 562px; color:#b7351b; font-weight:bold;" readonly=true/>
+					        <input id="name" type="text" name="reamainingbalance" value="Php <?php echo number_format($remainingloan,2) ?>" style="width: 562px; color:#b7351b; font-weight:bold;" readonly=true/>
 					     <label>PLS. PAY THE REMAINING BALANCE THROUGH CASH.</label>
 					     <label>
 					        <span>Payment Recieved :</span></label>

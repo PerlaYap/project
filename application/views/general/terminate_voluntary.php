@@ -155,7 +155,7 @@ $SOpersonnel =$this->session->userdata('personnelno');
 
 				 	<label>
 				        <span>Current Savings :</span></label>
-				        <input id="name" type="text" name="fname" value="<?php echo $savingstot.".00" ?>" style="width: 562px; font-weight: bold;" disabled/>
+				        <input id="name" type="text" name="fname" value="Php <?php echo number_format($savingstot,2) ?>" style="width: 562px; font-weight: bold;" disabled/>
 
 				   <!--  <label>
 				        <span>Savings Withdrawn :</span></label>
@@ -167,7 +167,7 @@ $SOpersonnel =$this->session->userdata('personnelno');
 
 				        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				    	Capital Shares Worth :
-				        <input id="name" type="text" name="fname" value="<?php echo $capital_share ?>" style="width: 297px; font-weight: bold;" disabled/>
+				        <input id="name" type="text" name="fname" value="Php <?php echo number_format($capital_share,2) ?>" style="width: 297px; font-weight: bold;" disabled/>
 
 				<br><br><br>
 
@@ -183,16 +183,19 @@ $SOpersonnel =$this->session->userdata('personnelno');
 				        <input id="name" type="text" name="fname" value="<?php echo $LoanType; ?>" style="width: 562px;" disabled/>
 
 				    <label>
+				    	<?php $activeloanrelease = $AmountRequested+$Interest;
+				    		  $loancollected = ($AmountRequested+$Interest) - $loanexpense;
+				    	 ?>
 				        <span>Active Loan Release :</span></label>
-				        <input id="name" type="text" name="fname" value="<?php echo $AmountRequested+$Interest; ?>" style="width: 562px;" disabled/>
+				        <input id="name" type="text" name="fname" value="Php <?php echo number_format($activeloanrelease,2) ?>" style="width: 562px;" disabled/>
 
 				    <label>
 				        <span>Loan Collected :</span></label>
-				        <input id="name" type="text" name="fname" value=" <?php echo ($AmountRequested+$Interest) - $loanexpense; ?>" style="width: 562px;" disabled/>
+				        <input id="name" type="text" name="fname" value="Php <?php echo number_format($loancollected,2) ?>" style="width: 562px;" disabled/>
 
 				    <label>
 				        <span>Remaining Balance :</span></label>
-				        <input id="name" type="text" name="fname" value="<?php echo $loanexpense;?>" style="width: 562px; color:#b7351b;" disabled/>
+				        <input id="name" type="text" name="fname" value="Php <?php echo number_format($loanexpense,2)?>" style="width: 562px; color:#b7351b;" disabled/>
 
 
 
@@ -230,7 +233,7 @@ $SOpersonnel =$this->session->userdata('personnelno');
 						PLEASE SETTLE THE REMAINING LOAN BALANCE <br>
 						
 							<?php } ?>
-						<b>Php <?php echo $loanexpense ?> .00</b> <br><br>
+						<b>Php <?php echo number_format($loanexpense,2) ?></b> <br><br>
 							<?php if ($type=='voluntary'): ?>
 						<form action='payloanbalance' method='post' id='myform'>
 							<input type='hidden' name='controlno' value='<?php echo $memcontrol ?>'>

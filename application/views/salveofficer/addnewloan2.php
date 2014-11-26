@@ -322,7 +322,7 @@ foreach ($dayoftheweek->result() as $row){
 
 				    <br><br><br><br>
 				  	<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Loan Information
-				        <span>Pakiautomatic yung pagcalculate kung yung loan amount ay nageexceed sa maximum. Pakiayus din yung values sa capital shares, 100-5000 siya. pakicheck din kung mageexceed na siya sa 5000 kung bibili man siya, bawal na siya dapat bumili kung ganun</span>
+				       <!--  <span>Pakiautomatic yung pagcalculate kung yung loan amount ay nageexceed sa maximum. Pakiayus din yung values sa capital shares, 100-5000 siya. pakicheck din kung mageexceed na siya sa 5000 kung bibili man siya, bawal na siya dapat bumili kung ganun</span> -->
 				    </h1>
 
 				    <label>
@@ -352,12 +352,21 @@ foreach ($dayoftheweek->result() as $row){
 				    </label>  
 
 				    <label>
+				    	<?php $maxloan_1 = 0;
+									if ($loanCount==0) {
+										$maxloan_1 += 4000;
+									}else{
+										$maxloan_1 = ($savings/0.4);
+									}
+						 ?>
+
 				        <span>Amount Requested:<p class="reqd">*</p></span></label>
-					 	<input required="true" type="text" id="loanamount" name="amountreq" style="width: 210px;" placeholder="Pesos" />	
+					 	<input required="true" type="number" max='<?php echo $maxloan_1; ?>' min='0' title="Maximum Loan Amount: <?php echo $maxloan_1 ?>" id="loanamount" name="amountreq" style="width: 210px;" placeholder="Pesos" />	
 
 					 	&nbsp&nbsp&nbsp&nbsp
 				        Max Loan Amount :
 				        <input type="text" readOnly="true" id="maxLoan" name="" style="width: 210px; color:#962a2a" />
+				        	
 				
 				    <label>
 				        <span>Loan Duration: <p class="reqd">*</p></span></label>
@@ -373,30 +382,9 @@ foreach ($dayoftheweek->result() as $row){
 					
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Business Information
-				        <span>tanggalin na yung business field since lahat existing businesses, lagay nalang ng type of business with fixed values</span>
+				        <!-- <span>tanggalin na yung business field since lahat existing businesses, lagay nalang ng type of business with fixed values</span> -->
 				    </h1>
 					
 				    <label>
@@ -494,7 +482,7 @@ foreach ($dayoftheweek->result() as $row){
 
 				<br><br><br><br>
 				<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Material Inventory
-				    <span>(agay tayo material types dito with fixed values :) tanggalin na ata yung quantity dito, diretso na amount</span>
+				    <span>lagay tayo material types dito with fixed values :) tanggalin na ata yung quantity dito, diretso na amount</span>
 				</h1>
 
 				   
@@ -541,8 +529,8 @@ foreach ($dayoftheweek->result() as $row){
 
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Household Co-Maker Information
-				        <span>yung business rule dito yung 1st-3rd loan cycle ni member, co-maker yung hihingin, yung comaker dapat member ng company at 3 times lang siya pwede maging comaker at kung 4th loan cycle na, dapat guarantor na, yung guarantor pwede siya relative/ friend/ any individual na malapit sa bahay ni member, basta kilala siya ni member by 2 years; ayusin natin yung fixed values ng relationship part
-				         </span>
+				        <!-- <span>yung business rule dito yung 1st-3rd loan cycle ni member, co-maker yung hihingin, yung comaker dapat member ng company at 3 times lang siya pwede maging comaker at kung 4th loan cycle na, dapat guarantor na, yung guarantor pwede siya relative/ friend/ any individual na malapit sa bahay ni member, basta kilala siya ni member by 2 years; ayusin natin yung fixed values ng relationship part
+				         </span> -->
 				    </h1>
 
 				    <label>

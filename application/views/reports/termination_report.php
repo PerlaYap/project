@@ -29,10 +29,10 @@
  ?>
 
  <?php if ($status == 'Terminated'): ?>
- 	<TITLE>TERMINATION REPORT</TITLE>
+ 	<TITLE>TERMINATION SUMMARY</TITLE>
  <?php endif ?>
  <?php if ($status =='Terminated Voluntarily'): ?>
- 	<TITLE>WITHDRAWAL REPORT</TITLE>
+ 	<TITLE>WITHDRAWAL SUMMARY</TITLE>
  <?php endif ?>
  	<div style="margin-left: auto;margin-right:auto; text-align:center;">
 		<a href="<?php echo site_url('login/homepage'); ?>" > 
@@ -43,10 +43,10 @@
 			CARITAS SALVE CREDIT COOPERATIVE <br> 
 
 			 <?php if ($status == 'Terminated'): ?>
-				 	Termination Report
+				 	Termination Summary
 				 <?php endif ?>
 			 <?php if ($status =='Terminated Voluntarily'): ?>
-				 	Withdrawal Report
+				 	Withdrawal Summary
 				 <?php endif ?> <br>
 			<?php echo $branch ?> Branch
 		</h3>
@@ -74,17 +74,17 @@
 
 	<label>
 		<span>Total Capital Share :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo number_format($tot_capital,2) ?>" style="width: 630px; background:none;" disabled/> 
+		<input id="name" type="text" name="fname" value="Php <?php echo number_format($tot_capital,2) ?>" style="width: 630px; background:none;" disabled/> 
 
 <?php if ($status=='Terminated Voluntarily'): ?>
 	
 	<label>
 		<span>Total Savings :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo number_format($savings,2) ?>" style="width: 630px;background:none;" disabled/>  
+		<input id="name" type="text" name="fname" value="Php <?php echo number_format($savings,2) ?>" style="width: 630px;background:none;" disabled/>  
 
 	<label>
 		<span>Amount Receivable: :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo number_format($Recievable,2) ?>" style="width: 630px; background:none; font-weight:bold; color:#821818" disabled/> 
+		<input id="name" type="text" name="fname" value="Php <?php echo number_format($Recievable,2) ?>" style="width: 630px; background:none; font-weight:bold; color:#821818" disabled/> 
 
 	<?php endif ?>
 
@@ -115,13 +115,13 @@
         <td class="sigBy">Prepared by:</td>
       </tr>
       <tr>
-        <td class="sigName">Marvin Lao*</td>
+        <td class="sigName"><?php echo $user ?></td>
       </tr>
       <tr>
-        <td class="sigPosition">Branch Manager*</td>
+        <td class="sigPosition">Branch Manager</td>
       </tr>
       <tr>
-        <td class="sigPosition">November 21, 2014*</td>
+        <td class="sigPosition"><?php echo $datetoday ?></td>
       </tr>
     </table>
 
@@ -130,13 +130,13 @@
         <td class="sigBy">Received by:</td>
       </tr>
       <tr>
-        <td class="sigName">Name</td>
+        <td class="sigName"><?php echo $name ?></td>
       </tr>
       <tr>
-        <td class="sigPosition"> Position</td>
+        <td class="sigPosition">Member</td>
       </tr>
       <tr>
-        <td class="sigPosition">November 21, 2014</td>
+        <td class="sigPosition"><?php echo $datetoday ?></td>
       </tr>
     </table>
 
