@@ -244,42 +244,42 @@ foreach($branchname->result() as $row){
         <td class="sigPosition">November 21, 2014</td>
       </tr>
     </table>-->
-    <table style="margin-left: 300px;" >
-      <tr>
-        <td style="font-size: 13px;"><?php echo $name; ?></td>
-      </tr>
-        <?php if($userrank=='branchmanager'){?>
-      <tr>
-        <td class="BM2">Signature Above Printed Name of Branch Manager</td>
-      </tr>
-      <?php }else{ ?>
-      <tr>
-        <td class="BM2">Signature Above Printed Name of Salve Officer</td>
-      </tr>
-      <?php } ?>
-      <tr>
-        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
-      </tr>
-      <tr>
-        
-        <td class="BM2">Date</td>
-      </tr>
-    </table>
+    <table style="margin-left: 140px;" >
+        <tr>
+          <td class="BM1" style="font-size: 13px;"><?php echo $name; ?></td>
+        </tr>
+          <?php if($userrank=='branchmanager'){?>
+        <tr>
+          <td class="BM2">Signature Above Printed Name of <br> Branch Manager</td>
+        </tr>
+        <?php }else{ ?>
+        <tr>
+          <td class="BM2">Signature Above Printed Name of <br> MIS</td>
+        </tr>
+        <?php } ?>
+        <tr>
+          <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+        </tr>
+        <tr>
+          
+          <td class="BM2">Date</td>
+        </tr>
+      </table>
 
-    <table style="margin-left: 750px; margin-top: -132px;" >
-      <tr>
-        <td style="font-size: 13px;">Marvin Lao</td>
-      </tr>
-      <tr>
-        <td class="BM2">Signature Above Printed Name of MIS</td>
-      </tr>
-      <tr>
-        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
-      </tr>
-      <tr>
-        <td class="BM2">Date</td>
-      </tr>
-    </table>
+      <table style="margin-left: 600px; margin-top: -207px;" >
+        <tr>
+          <td class="BM1" style="font-size: 13px;">Ann Evan Echavez</td>
+        </tr>
+        <tr>
+          <td class="BM2">Signature Above Printed Name of <br> General Manager</td>
+        </tr>
+        <tr>
+          <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+        </tr>
+        <tr>
+          <td class="BM2">Date</td>
+        </tr>
+      </table>
     <br>
      
         

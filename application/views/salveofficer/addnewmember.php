@@ -181,7 +181,30 @@ date_default_timezone_set('Asia/Manila');
 
 				    <label>
 				        <span>Business Type :</span>
-				        <input type="text" name="businesstype" id="" style="width: 550px;" required/>
+				   <!--     <input type="text" name="businesstype" id="" style="width: 550px;" required/> -->
+				        <select required="true" id="" name="businesstype" style="width:220px;">
+				        	<option value=" "></option>
+				        	<option value="Alcohol/Tobacco Sales">Alcohol/Tobacco Sales</option>
+				        	<option value="Bakery">Bakery</option>
+				        	<option value="Barber Shop">Barber Shop</option>
+				        	<option value="Caterer">Caterer</option>
+						    <option value="Farming(Animal Production)">Farming(Animal Production)</option>
+						    <option value="Farming(Crop Production)">Farming(Crop Production)</option>
+						    <option value="Fishing/Hunting">Fishing/Hunting</option>
+						    <option value="Florist">Florist</option>
+						    <option value="Laundry">Laundry</option>
+						    <option value="Motor Vehicle Repair">Motor Vehicle Repair</option>
+						    <option value="Nail Salon">Nail Salon</option>
+						    <option value="Others">Others</option>
+						    <option value="Repair/Maintenance">Repair/Maintenance</option>
+						    <option value="Retail Sales">Retail Sales</option>
+						    <option value="Specialty Food(Fruit/Vegetables)">Specialty Food(Fruit/Vegetables)</option>
+						    <option value="Specialty Food(Meat)">Specialty Food(Meat)</option>
+						    <option value="Specialty Food(Seafood)">Specialty Food(Seafood)</option>
+						    <option value="Taxi Services">Taxi Services</option>
+						    <option value="Used Motor Vehicle Sales">Used Motor Vehicle Sales</option>
+						    <option value="Used Scraps Sales">Used Scraps Sales</option>
+					    </select>
 				    </label>
 
 				    <label>
@@ -218,14 +241,14 @@ date_default_timezone_set('Asia/Manila');
 				        	<span>Relationship :</span> 
 				        	<select name="relationship" style="width: 550px; height: 35px;" required>
 				        		<option value=" " selected=" "></option>
-						        	<option value="Aunt">Aunt</option>
-						        	<option value="Child">Child</option>
+						        	<option value="Aunt/Uncle">Aunt/Uncle</option>
 						        	<option value="Cousin">Cousin</option>
 						        	<option value="Grandparent">Grandparent</option>
 						        	<option value="In-Law">In-Law</option>
+						        	<option value="Others">Others</option>
+						        	<option value="Sibling">Sibling</option>
 						        	<option value="Spouse">Spouse</option>
 						        	<option value="Parent">Parent</option>
-						        	<option value="Uncle">Uncle</option>
 				        	</select>
 					        <!--<input id="relationship" type="text" name="relationship"  style="width: 560px;"/>-->
 					    </label>

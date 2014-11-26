@@ -130,33 +130,40 @@
 			</tr>
 		</table> -->
 
-		 <table class="signature" style="margin-left:31.5%; margin-right:auto;">
+		<table style="margin-left: 140px;" >
 	      <tr>
-	        <td class="sigBy">Prepared by:</td>
+	        <td class="BM1" style="font-size: 13px;"><?php echo $name; ?></td>
+	      </tr>
+	        <?php if($userrank=='branchmanager'){?>
+	      <tr>
+	        <td class="BM2">Signature Above Printed Name of <br> Branch Manager</td>
+	      </tr>
+	      <?php }else{ ?>
+	      <tr>
+	        <td class="BM2">Signature Above Printed Name of <br> MIS</td>
+	      </tr>
+	      <?php } ?>
+	      <tr>
+	        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
 	      </tr>
 	      <tr>
-	        <td class="sigName">Marvin Lao*</td>
-	      </tr>
-	      <tr>
-	        <td class="sigPosition">Branch Manager*</td>
-	      </tr>
-	      <tr>
-	        <td class="sigPosition">November 21, 2014*</td>
+	        
+	        <td class="BM2">Date</td>
 	      </tr>
 	    </table>
 
-	    <table class="signature" style="margin-left: 53%; margin-right:auto; margin-top: -111px;">
+	    <table style="margin-left: 600px; margin-top: -207px;" >
 	      <tr>
-	        <td class="sigBy">Received by:</td>
+	        <td class="BM1" style="font-size: 13px;">Ann Evan Echavez</td>
 	      </tr>
 	      <tr>
-	        <td class="sigName">Name</td>
+	        <td class="BM2">Signature Above Printed Name of <br> General Manager</td>
 	      </tr>
 	      <tr>
-	        <td class="sigPosition"> Position</td>
+	        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
 	      </tr>
 	      <tr>
-	        <td class="sigPosition">November 21, 2014</td>
+	        <td class="BM2">Date</td>
 	      </tr>
 	    </table>
 

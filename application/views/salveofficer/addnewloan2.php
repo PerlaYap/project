@@ -291,7 +291,7 @@ foreach ($dayoftheweek->result() as $row){
 
 
 				    <h1>New Loan Application
-				        <span>Please fill in the following fields.</span>
+				   <!--     <span>Please fill in the following fields.</span> -->
 				    </h1>
 				    
 				    <label>
@@ -322,6 +322,7 @@ foreach ($dayoftheweek->result() as $row){
 
 				    <br><br><br><br>
 				  	<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Loan Information
+								<span>Please add the requested loan information. </span>
 				       <!--  <span>Pakiautomatic yung pagcalculate kung yung loan amount ay nageexceed sa maximum. Pakiayus din yung values sa capital shares, 100-5000 siya. pakicheck din kung mageexceed na siya sa 5000 kung bibili man siya, bawal na siya dapat bumili kung ganun</span> -->
 				    </h1>
 
@@ -340,7 +341,7 @@ foreach ($dayoftheweek->result() as $row){
 				       		<option></option>
 				       		<?php if ($r_size>0){ ?>
 				       			<?php for ($k=1; $k <=$r_size ; $k++) { ?>
-				       			<option value='<?php echo 100*$k ?>'><?php echo number_format(100*$k,2) ?></option>
+				       			<option value='<?php echo 100*$k ?>'><?php echo$k." - ".number_format(100*$k,2) ?></option>
 				       			<?php } ?>
 				       		<?php }else{ ?>
 				       			<option value='0'>0.00</option>
@@ -348,6 +349,20 @@ foreach ($dayoftheweek->result() as $row){
 
 				       		
 						   
+<!-- =======
+				  		<span>Please add the requested loan information. </span>
+				        <span><b>Pakiautomatic yung pagcalculate kung yung loan amount ay nageexceed sa maximum.</b></span>
+				    </h1>
+
+				    <label>
+				        <span>Capital Shares:<p class="reqd">*</p></span> 
+				       	<select required="true" name="capitalshare" style="width:580px;">
+						    <option value="100" selected="selected">1 - Php 100</option>
+						    <option value="200">2 - Php 200</option>
+						    <option value="300">3 - Php 300</option>
+						    <option value="400">4 - Php 400</option>
+						    <option value="500">5 - Php 500</option>
+>>>>>>> origin/master -->
 					    </select>
 				    </label>  
 
@@ -384,14 +399,23 @@ foreach ($dayoftheweek->result() as $row){
 
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Business Information
+<<<<<<< HEAD
 				        <!-- <span>tanggalin na yung business field since lahat existing businesses, lagay nalang ng type of business with fixed values</span> -->
+=======
+				        <span>Please add your current business information.</span>
+>>>>>>> origin/master
 				    </h1>
 					
 				    <label>
 				        <span>Business:<p class="reqd">*</p></span>
 				        <select required="true" style="width:572px;" name="loanbusiness" id="selectMenu" onchange="showBusiness(this.value)">
+<<<<<<< HEAD
 						    <!-- <option value=" "></option> -->
 						    <option value="newbusiness" selected>Existing Business</option>
+=======
+						    <option value=" "></option>
+						    <option value="newbusiness">New Current Business</option>
+>>>>>>> origin/master
 						     <?php
 				    		foreach ($loanbusiness->result() as $row) { 
 				    			echo "<option value='".$row->ControlNo."'>".$row->BusinessName."</option>" ;
@@ -407,7 +431,32 @@ foreach ($dayoftheweek->result() as $row){
 
 					<label>
 				    	<span>Type:<p class="reqd">*</p></span> </label>
-				        <input id="business" type="text" name="type" style="width:220px;" /> 
+				<!--        <input id="business" type="text" name="type" style="width:220px;" /> -->
+				        <select required="true" id="business" name="type" style="width:220px;">
+				        	<option value=" "></option>
+				        	<option value="Alcohol/Tobacco Sales">Alcohol/Tobacco Sales</option>
+				        	<option value="Bakery">Bakery</option>
+				        	<option value="Barber Shop">Barber Shop</option>
+				        	<option value="Caterer">Caterer</option>
+						    <option value="Farming(Animal Production)">Farming(Animal Production)</option>
+						    <option value="Farming(Crop Production)">Farming(Crop Production)</option>
+						    <option value="Fishing/Hunting">Fishing/Hunting</option>
+						    <option value="Florist">Florist</option>
+						    <option value="Laundry">Laundry</option>
+						    <option value="Motor Vehicle Repair">Motor Vehicle Repair</option>
+						    <option value="Nail Salon">Nail Salon</option>
+						    <option value="Others">Others</option>
+						    <option value="Repair/Maintenance">Repair/Maintenance</option>
+						    <option value="Retail Sales">Retail Sales</option>
+						    <option value="Specialty Food(Fruit/Vegetables)">Specialty Food(Fruit/Vegetables)</option>
+						    <option value="Specialty Food(Meat)">Specialty Food(Meat)</option>
+						    <option value="Specialty Food(Seafood)">Specialty Food(Seafood)</option>
+						    <option value="Taxi Services">Taxi Services</option>
+						    <option value="Used Motor Vehicle Sales">Used Motor Vehicle Sales</option>
+						    <option value="Used Scraps Sales">Used Scraps Sales</option>
+					    </select>
+
+
 				    
 				    	&nbsp&nbsp
 						Date Established:<p class="reqd">*</p>
@@ -482,18 +531,36 @@ foreach ($dayoftheweek->result() as $row){
 
 				<br><br><br><br>
 				<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Material Inventory
+<<<<<<< HEAD
 				    <span>lagay tayo material types dito with fixed values :) tanggalin na ata yung quantity dito, diretso na amount</span>
+=======
+				    <span>Please indicate the general materials needed in the business.</span>
+>>>>>>> origin/master
 				</h1>
 
 				   
 
 				    <label>
-				        <span>Name:<p class="reqd">*</p></span></label>
-				        <input required="true" type="text" name="materials" class="material_1" style="width: 250px;"/>
-
-				        &nbsp&nbsp&nbsp
+				        <span>Material Type:<p class="reqd">*</p></span></label>
+				      <!--  <input required="true" type="text" name="materials" class="material_1" style="width: 250px;"/> -->
+				        <select required="true" name="materials" class="material_1" style="width:220px;">
+				        	<option value=" "></option>
+				        	<option value="Advertising">Advertising</option>
+				        	<option value="Business Goods">Business Goods</option>
+				        	<option value="Business Supplies">Business Supplies</option>
+				        	<option value="Construction Materials">Construction Materials</option>
+				        	<option value="Employee Salary">Employee Salary</option>
+				        	<option value="Labor Cost">Labor Cost</option>
+				        	<option value="Office Supplies">Office Supplies</option>
+				        	<option value="Others">Others</option>
+				        	<option value="Monthly Rent">Monthly Rent</option>
+				        	<option value="Taxes">Taxes</option>
+				        	<option value="Transportation Service">Transportation Service</option>
+				        	<option value="Utilities">Utilities</option>
+				        </select>
+				     <!--   &nbsp&nbsp&nbsp
 				        Qty:<p class="reqd">*</p>
-					    <input required="true" type="text" name="quantity" class="quantity_1" style="width: 26px;"/>
+					    <input required="true" type="text" name="quantity" class="quantity_1" style="width: 26px;"/> -->
 
 				        &nbsp&nbsp&nbsp
 				        Unit Price:<p class="reqd">*</p>
@@ -557,15 +624,15 @@ foreach ($dayoftheweek->result() as $row){
 						    	<span>Relationship :</span> </label>
 						        <!--<input id="household" type="text" name="hrelation" style="width:400px;" /> -->
 						        <select name="hrelation" style="width:405px;">
-						        	<option value=" " selected=" "></option>
-						        	<option value="Aunt">Aunt</option>
+						        	<option value=" "></option>
+						        	<option value="Aunt/Uncle">Aunt/Uncle</option>
 						        	<option value="Cousin">Cousin</option>
 						        	<option value="Grandparent">Grandparent</option>
 						        	<option value="In-Law">In-Law</option>
-						        	<option value="Parent">Parent</option>
+						        	<option value="Others">Others</option>
 						        	<option value="Sibling">Sibling</option>
 						        	<option value="Spouse">Spouse</option>
-						        	<option value="Uncle">Uncle</option>
+						        	<option value="Parent">Parent</option>
 
 						        </select>
 						        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -635,19 +702,33 @@ foreach ($dayoftheweek->result() as $row){
 
 						    <label>
 						    	<span>Relationship :</span> 
+<<<<<<< HEAD
 
 						    	<input type='hidden' name='mrelationship' value='friend'>
 						        <!-- <select name="mrelationship" style="width:405px;">
 						        	<option value=" " selected=" "></option>
 						        	<option value="Aunt">Aunt</option>
 						        	<option value="Child">Child</option>
+=======
+						        <select name="mrelationship" style="width:405px;">
+						        	<option value=" "></option>
+						        	
+						     		<option value="Aunt/Uncle">Aunt/Uncle</option>
+>>>>>>> origin/master
 						        	<option value="Cousin">Cousin</option>
 						        	<option value="Grandparent">Grandparent</option>
 						        	<option value="In-Law">In-Law</option>
+						        	<option value="Others">Others</option>
+						        	<option value="Sibling">Sibling</option>
 						        	<option value="Spouse">Spouse</option>
 						        	<option value="Parent">Parent</option>
+<<<<<<< HEAD
 						        	<option value="Uncle">Uncle</option>
 						        </select> -->
+=======
+						        	
+						        </select>
+>>>>>>> origin/master
 						    </label>
 
 				 <!--	<label>
@@ -693,7 +774,7 @@ foreach ($dayoftheweek->result() as $row){
 
 
 				<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Credit Investigation
-				    <span>MONETARY VALUE FORMAT</span>
+				    <span>Please place monetary values of the following.</span>
 				</h1>
 
 				<!--<input id="" type="text" name="" style="width:200px;" />-->
@@ -706,8 +787,8 @@ foreach ($dayoftheweek->result() as $row){
 				<?php $a=0;
 				foreach ($sourceIncome->result() as $row) { ?>
 					<tr class="hoverthis">
-						<td class="CIdetail00"><?php echo $row->IncomeType ?><input name='incomedrop<?php echo $a ?>' value='<?php echo $row->IncomeType ?>' type='hidden'/></td>
-						<td class="CIdetail002"><input class="incomeCIinput" type="text" name="income<?php echo $a ?>"  placeholder="0"/></td>
+						<td class="CIdetail00"><?php echo $row->IncomeType ?><input name='incomedrop<?php echo number_format($a, 2) ?>' value='<?php echo $row->IncomeType ?>' type='hidden'/></td>
+						<td class="CIdetail002"><input class="incomeCIinput" type="text" name="income<?php echo number_format($a, 2)?>"  placeholder="0"/></td>
 					</tr>
 					<?php $a++; } ?>
 					
@@ -729,8 +810,8 @@ foreach ($dayoftheweek->result() as $row){
 				<?php $a=0;
 				foreach ($familyExpense->result() as $row) { ?>
 					<tr class="hoverthis">
-						<td class="CIdetail00"><?php echo $row->ExpenseType ?><input name="fexpensedrop<?php echo $a ?>" value="<?php echo $row->ExpenseType ?>" type="hidden"/></td>
-						<td class="CIdetail002"><input class="familyCIinput" type="text" name="fexpense<?php echo $a ?>" placeholder="0"/></td>
+						<td class="CIdetail00"><?php echo $row->ExpenseType ?><input name="fexpensedrop<?php echo number_format($a, 2) ?>" value="<?php echo $row->ExpenseType ?>" type="hidden"/></td>
+						<td class="CIdetail002"><input class="familyCIinput" type="text" name="fexpense<?php echo number_format($a, 2) ?>" placeholder="0"/></td>
 					</tr>
 					<?php $a++; } ?>
 					
@@ -752,8 +833,8 @@ foreach ($dayoftheweek->result() as $row){
 				<?php $a=0;
 				foreach ($businessExpense->result() as $row) { ?>
 					<tr class="hoverthis">
-						<td class="CIdetail00"><?php echo $row->ExpenseType ?><input name="bexpensedrop<?php echo $a ?>" value="<?php echo $row->ExpenseType ?>" type="hidden"></td>
-						<td class="CIdetail002"><input class="businessCIinput" type="text" name="bexpense<?php echo $a ?>"  placeholder="0"/></td>
+						<td class="CIdetail00"><?php echo $row->ExpenseType ?><input name="bexpensedrop<?php echo number_format($a, 2) ?>" value="<?php echo $row->ExpenseType ?>" type="hidden"></td>
+						<td class="CIdetail002"><input class="businessCIinput" type="text" name="bexpense<?php echo number_format($a, 2) ?>"  placeholder="0"/></td>
 					</tr>
 					
 					<?php $a++; } ?>

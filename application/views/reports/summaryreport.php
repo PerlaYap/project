@@ -113,7 +113,7 @@ else
 
 				    <label>
 				    	<span></span>
-				    	<?php echo '<h2 style="text-align:right; margin-right: 100px;">TOTAL AMOUNT TO BE RELEASE: P'.number_format($totalPayment,2).'</h2>'; ?>
+				    	<?php echo '<h2 style="text-align:right; margin-right: 100px;">TOTAL AMOUNT TO BE RELEASED: P'.number_format($totalPayment,2).'</h2>'; ?>
 				    </label>
 				    <br>
 				</form>

@@ -361,43 +361,42 @@ $userrank = $this->session->userdata('rank');
       </tr>
     </table>-->
 
-    <table style="margin-left: 300px;" >
-      <tr>
-        <td style="font-size: 13px;"><?php echo $name; ?></td>
-      </tr>
-        <?php if($userrank=='branchmanager'){?>
-      <tr>
-        <td class="BM2">Signature Above Printed Name of Branch Manager</td>
-      </tr>
-      <?php }else{ ?>
-      <tr>
-        <td class="BM2">Signature Above Printed Name of MIS</td>
-      </tr>
-      <?php } ?>
-      <tr>
-        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
-      </tr>
-      <tr>
-        
-        <td class="BM2">Date</td>
-      </tr>
-    </table>
+   <table style="margin-left: 140px;" >
+	      <tr>
+	        <td class="BM1" style="font-size: 13px;"><?php echo $name; ?></td>
+	      </tr>
+	        <?php if($userrank=='branchmanager'){?>
+	      <tr>
+	        <td class="BM2">Signature Above Printed Name of <br> Branch Manager</td>
+	      </tr>
+	      <?php }else{ ?>
+	      <tr>
+	        <td class="BM2">Signature Above Printed Name of <br> MIS</td>
+	      </tr>
+	      <?php } ?>
+	      <tr>
+	        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+	      </tr>
+	      <tr>
+	        
+	        <td class="BM2">Date</td>
+	      </tr>
+	    </table>
 
-    <table style="margin-left: 750px; margin-top: -132px;" >
-      <tr>
-        <td style="font-size: 13px;">Ann Evan Echavez</td>
-      </tr>
-      <tr>
-        <td class="BM2">Signature Above Printed Name of General Manager</td>
-      </tr>
-      <tr>
-        <td style="font-size: 13px;"><?php echo $datetoday ?></td>
-      </tr>
-      <tr>
-        <td class="BM2">Date</td>
-      </tr>
-    </table>
-		
+	    <table style="margin-left: 600px; margin-top: -207px;" >
+	      <tr>
+	        <td class="BM1" style="font-size: 13px;">Ann Evan Echavez</td>
+	      </tr>
+	      <tr>
+	        <td class="BM2">Signature Above Printed Name of <br> General Manager</td>
+	      </tr>
+	      <tr>
+	        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+	      </tr>
+	      <tr>
+	        <td class="BM2">Date</td>
+	      </tr>
+	    </table>
 
 	<br>
 	<div style="width: 100%; text-align: center;">

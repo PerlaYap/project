@@ -26,6 +26,16 @@
 	$datetoday = date('F d, Y');
 
 	$user = $this->session->userdata('firstname');
+	$userrank = $this->session->userdata('rank');
+	$branchno = $this->session->userdata('branchno');
+	$name2 = $this->session->userdata('firstname');
+	$branchno = $this->session->userdata('branchno');
+$getManager=$this->db->query("SELECT CONCAT(`FirstName`,' ',  `MiddleName`,' ', `LastName`) AS NAME FROM CaritasPersonnel CL 
+											JOIN CARITASBRANCH_HAS_CARITASPERSONNEL BP ON CL.CONTROLNO = BP.CARITASPERSONNEL_ControlNo
+											JOIN CARITASBRANCH B ON BP.CARITASBRANCH_CONTROLNO = B.CONTROLNO
+											
+														WHERE CL.RANK = 'BRANCHMANAGER' 
+														AND B.ControlNo = $branchno ");
 
 
 
@@ -71,6 +81,11 @@ $next="next ".$dayoftheWeek;
  $dateApplied=date('F d, Y', strtotime($dateApplied));
  $dateReleased=date('F d, Y', strtotime($dateReleased));
 
+if($loanType=="23-Weeks")
+	$dailyCollection=$activeLoan/23;
+else
+	$dailyCollection=$activeLoan/40;
+
 if($loanType=="23-Weeks"){
 	for($a=0; $a<23; $a++){
 	$days[$a]=date('F d, Y', strtotime($next,strtotime($date)));
@@ -111,6 +126,10 @@ else
 			<td class="pName"><b>Php <?php echo number_format($interest,2) ?></b></td>
 		</tr>
 		<tr>
+			<td class="pLabel">Amount Released:</td>
+			<td class="pName"><b><?php echo number_format($totalPayment,2)?></b></td>
+		</tr>
+		<tr>
 			<td class="pLabel">Date Applied:</td>
 			<td class="pName"><b><?php echo $dateApplied ?></b></td>
 		</tr>
@@ -142,7 +161,7 @@ else
 	
 	<table class="paymentschedule" border="1" style="margin-top: -1px; width:453px;">
 		<tr>
-			<td class="pLabel" colspan="4" style="border-top-width:0px;text-align: center; height: 40px;"><b>Collection Dates Checklist</b></td>
+			<td class="pLabel" colspan="6" style="border-top-width:0px;text-align: center; height: 40px;"><b>Collection Dates Checklist</b></td>
 		</tr>
 		
 		<?php if($loanType=="23-Weeks"){
@@ -154,16 +173,21 @@ else
 			for ($k=0; $k < $len/2 ; $k++) {  ?>
 		<tr class="date">
 			<td class="check"></td>			
-			<td class="date"><?php echo $days[$k] ?></td>
+			<td class="date"><?php echo $days[$k] ?>	<td><?php echo number_format($dailyCollection,2); ?> </td></td>
+		
 			<td class="check"></td>			
 			<td class="date"><?php  if ($loanType=='23-Weeks') {	
 			 							if (($len/2+$k) < $len-1) {
-											 echo $days[$len/2+$k];	
-											}else{
+											 echo $days[$len/2+$k]; ?>
+
+											 <td><?php echo number_format($dailyCollection,2); ?> </td>
+										<?php	}else{
 												echo " "; }
 									}else{
-										echo $days[$len/2+$k];
-									} ?></td>
+										echo $days[$len/2+$k]; ?>
+			<td><?php echo number_format($dailyCollection,2); ?> </td>
+								<?php	} ?></td>
+			
 			
 		</tr>
 
@@ -191,6 +215,7 @@ else
 				<td class="sig2">&nbsp</td>
 			</tr>
 		</table> -->
+
 
 
 		 <table class="signature" style="margin-left:31.5%; margin-right:auto;">
@@ -222,6 +247,69 @@ else
 		        <td class="sigPosition"><?php echo $datetoday ?></td>
 		      </tr>
 		    </table>
+<!-- 
+		 <table style="margin-left: 140px;" >
+	      <tr>
+	        <td class="BM1" style="font-size: 13px;"><?php echo $name2; ?></td>
+	      </tr>
+	        <?php if($userrank=='branchmanager'){?>
+	      <tr>
+	        <td class="BM2">Signature Above Printed Name of <br> Branch Manager</td>
+	      </tr>
+	      <?php }else{ ?>
+	      <tr>
+	        <td class="BM2">Signature Above Printed Name of <br> Salve Officer</td>
+	      </tr>
+	      <?php } ?>
+	      <tr>
+	        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+	      </tr>
+	      <tr>
+	        
+	        <td class="BM2">Date</td>
+	      </tr> -->
+	    </table>
+
+	<!--    <table style="margin-left: 600px; margin-top: -207px;" >
+	      <tr>
+	        <td class="BM1" style="font-size: 13px;">Ann Evan Echavez</td>
+	      </tr>
+	      <tr>
+	        <td class="BM2">Signature Above Printed Name of <br> General Manager</td>
+	      </tr>
+	      <tr>
+	        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+	      </tr>
+	      <tr>
+	        <td class="BM2">Date</td>
+	      </tr>
+	    </table>-->
+
+	    	<!-- <table style="margin-left: 600px; margin-top: -207px;" >
+			
+			<?php if($userrank=='branchmanager'){?>
+			<tr>
+				<td class="BM1"style="font-size: 13px;">Marvin Lao</td>
+			</tr>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of MIS</td>
+			</tr>
+			<?php }else{ ?>
+			<tr>
+				<td class="BM1"style="font-size: 13px;"><?php echo $Manager; ?></td>
+			</tr>
+			<tr>
+				<td class="BM2">Signature Above Printed Name of Branch Manager</td>
+			</tr>
+			<?php } ?>
+			<tr>
+				<td class="BM1"style="font-size: 13px;"><?php echo $datetoday ?></td>
+			</tr>
+			<tr>
+				<td class="BM2">Date</td>
+			</tr>
+		</table>
+ -->
 
 	<br><br>
 	<div style="width: 100%; text-align: center;">
