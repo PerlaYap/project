@@ -22,11 +22,11 @@ foreach($branchName->result() AS $branch){
 	$branchname=$branch->BranchName;
 }
 
-$pastDue=$this->db->query("SELECT LoanCOntrol, Name, CenterNo, WeeklyPayment, TotalPastDue, DaysPast, Address, ContactNo FROM (SELECT ControlNo, WeeklyPayment, DateReleased, DateEnd, 
-IF(ROUND(TRUNCATE(DATEDIFF(NOW(),DateReleased)/7,0)*WeeklyPayment,2)>IFNULL(Amount,0), IF(ROUND(TRUNCATE(DATEDIFF(NOW(),DateReleased)/7,0)*WeeklyPayment,2)<TotalRelease,ROUND(TRUNCATE(DATEDIFF(NOW(),DateReleased)/7,0)*WeeklyPayment,2), TotalRelease)-IFNULL(Amount,0), 0) AS TotalPastDue,
-IF(ROUND(TRUNCATE(DATEDIFF(NOW(),DateReleased)/7,0)*WeeklyPayment,2)>IFNULL(Amount,0), TRUNCATE(DATEDIFF(NOW(),IFNULL(MaxDate,DateReleased))/7,0),0) AS DaysPast
+$pastDue=$this->db->query("SELECT Name, CenterNo, WeeklyPayment, TotalPastDue, DaysPast, Address, ContactNo FROM (SELECT ControlNo, WeeklyPayment, DateReleased, DateEnd, 
+IF(ROUND(TRUNCATE(DATEDIFF(DATE_SUB(NOW(), INTERVAL 7 DAY),DateReleased)/7,0)*WeeklyPayment,2)>IFNULL(Amount,0), ROUND(TRUNCATE(DATEDIFF(DATE_SUB(NOW(), INTERVAL 7 DAY),DateReleased)/7,0)*WeeklyPayment,2)-IFNULL(Amount,0), 0) AS TotalPastDue,
+IF(ROUND(TRUNCATE(DATEDIFF(DATE_SUB(NOW(), INTERVAL 7 DAY),DateReleased)/7,0)*WeeklyPayment,2)>IFNULL(Amount,0), DATEDIFF(NOW(),IFNULL(MaxDate,DateReleased)),0) AS DaysPast
 FROM (SELECT ControlNo, IF(LoanType='23-Weeks',(AmountRequested+Interest)/23, (AmountRequested+Interest)/40) AS WeeklyPayment, LoanType, DateReleased,
-DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH) AS DateEnd, (AmountRequested+Interest) AS TotalRelease
+DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH) AS DateEnd
 FROM loanapplication
 WHERE (Status='Current' OR Status='Full Payment') AND
 (CAST(DATE_FORMAT(NOW() ,CONCAT(YEAR(DateReleased),'-',MONTH(DateReleased),'-01')) as DATE)<=NOW()
@@ -45,7 +45,7 @@ LEFT JOIN (SELECT * FROM (SELECT * FROM CaritasCenters_has_Members ORDER BY Memb
 ON A.Members_ControlNo=B.Members_ControlNo) cchm ON cchm.MembersControl=lhm.Members_ControlNo)Beta
 ON Beta.LoanControl=Alpha.ControlNo
 LEFT JOIN CaritasCenters cc ON cc.ControlNo=Beta.CenterControl
-WHERE CaritasBranch_ControlNo='$branchno' AND TotalPastDue>0 ORDER BY Name ASC");
+WHERE CaritasBranch_ControlNo='$branchno' AND TotalPastDue>0 ORDER BY Centerno ASC, Name ASC");
 
 ?>
 
@@ -68,29 +68,25 @@ WHERE CaritasBranch_ControlNo='$branchno' AND TotalPastDue>0 ORDER BY Name ASC")
 
 	<table border="1" style="border-collapse: collapse; margin-left: auto; margin-right: auto;">
 		<tr>
-			<td class="pastdue" width="10px"><b>#</b></td>
+			<td class="pastdue" width="10px"><b>CENTER NO</b></td>
 			<td class="pastdue" width="200px" style="text-align: left;"><b>NAME</b></td>
-			<td class="pastdue" width="120px"><b>CENTER NO</b></td>
 			<td class="pastdue" width="120px"><b>WEEKLY PAYMENT</b></td>
-			<td class="pastdue" width="120px"><b>WEEKS PAST DUE</b></td>
+			<td class="pastdue" width="120px"><b>DAYS PAST DUE</b></td>
 			<td class="pastdue" width="120px"><b>TOTAL PAST DUE</b></td>
 			<td class="pastdue" width="150px;"><b>CONTACT NO.</b></td>
 			<td class="pastdue" width="300px;"><b>ADDRESS</b></td>
 		</tr>
-		<?php 
-		$a=1;
-		foreach($pastDue->result() AS $data){ ?>
+		<?php foreach($pastDue->result() AS $data){ ?>
 		<tr>
-			<td class="pastdue"><?php echo $a ?></td>
-			<td class="pastdue" style="text-align: left;"><?php echo $data->Name ?></td>
 			<td class="pastdue"><?php echo $data->CenterNo ?></td>
+			<td class="pastdue" style="text-align: left;"><?php echo $data->Name ?></td>
 			<td class="pastdue"><?php echo number_format($data->WeeklyPayment) ?></td>
 			<td class="pastdue"><?php echo $data->DaysPast ?></td>
 			<td class="pastdue"><?php echo number_format($data->TotalPastDue) ?></td>
 			<td class="pastdue"><?php echo $data->ContactNo ?></td>
 			<td class="pastdue" style="text-align: left;"><?php echo $data->Address ?></td>
 		</tr>
-		<?php $a++;} ?>		
+		<?php } ?>		
 	</table>
 
 	<br><br>
