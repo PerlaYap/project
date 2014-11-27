@@ -89,7 +89,7 @@
       }
     });
 
-          // string filter (NAME)
+          // string filter (activity)
         var stringfilter = new google.visualization.ControlWrapper({
       'controlType': 'StringFilter',
       'containerId': 'stringFilter_control_div',
@@ -120,6 +120,26 @@
       }
     });
 
+    //category picker - position
+          var categoryPicker_activity = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'categoryPicker_activity_div',
+      'options': {
+        'filterColumnIndex': 4,
+        'useFormattedValue': false,
+        'matchType' : 'any',
+        /*'values':['Withdraw','Log in'],*/
+
+        'ui': {
+          'labelStacking': 'horizontal',
+          'label': 'Activity:',
+          'allowTyping': false,
+          'allowMultiple': false,
+          'selectedValuesLayout':'below'
+        }
+      }
+    });
+
 
           //table
        var table = new google.visualization.ChartWrapper({
@@ -136,7 +156,7 @@
 
 
 
-        dashboard.bind([stringfilter ,categoryPicker, stringfilter_date, categoryPicker_name],table);
+        dashboard.bind([stringfilter ,categoryPicker, stringfilter_date, categoryPicker_name, categoryPicker_activity],table);
     dashboard.draw(data);
 
   }
@@ -176,6 +196,7 @@
       <div id="categoryPicker_name_div" class='dontprint' style='float: left; padding: 20px' ></div>
       <div id="stringFilter_datecontrol_div" class='dontprint' style='float: left; padding: 20px' ></div>
       <div id="stringFilter_control_div" class='dontprint' style='float: left; padding: 20px'  ></div>
+      <div id="categoryPicker_activity_div" class='dontprint' style='float: left; padding: 20px' ></div>
       <br> <br><br><br> 
       <div id="table_div"></div>
       

@@ -10,6 +10,7 @@
 </style>	
 
 <?php
+date_default_timezone_set('Asia/Manila');
 $branchno=$this->session->userdata('branchno');
 $user = $this->session->userdata('firstname');
 $datetoday = date('F d, Y');
