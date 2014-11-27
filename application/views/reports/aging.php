@@ -58,18 +58,23 @@ WHERE CaritasBranch_ControlNo='$branchno' AND TotalPastDue>0 ORDER BY Centerno A
 	
 	<h3>
 		CARITAS SALVE CREDIT COOPERATIVE <br> 
-		Past Due Members of<br>
+		Aging Report of<br>
 		<?php echo $branchname ?> Branch <br>
-		AS OF <br>
-		<?php echo $datetoday ?>
+		As of <?php echo $datetoday ?>
 	</h3>
 	<br>
-
+<?php $a=1; ?>
 
 	<table border="1" style="border-collapse: collapse; margin-left: auto; margin-right: auto;">
 		<tr>
-			<td class="pastdue" width="10px"><b>CENTER NO</b></td>
+			<td class="pastdue" width="10px"><b>#</b></td>
 			<td class="pastdue" width="200px" style="text-align: left;"><b>NAME</b></td>
+			<?php if($userrank=='mispersonnel'){?>
+			<td class="pastdue" width="20px"><b>BRANCH</b></td>
+			<td class="pastdue" width="10px"><b>CENTER NO</b></td>
+			<?php }else{ ?>
+			<td class="pastdue" width="10px"><b>CENTER NO</b></td>
+			<?php } ?>
 			<td class="pastdue" width="120px"><b>WEEKLY PAYMENT</b></td>
 			<td class="pastdue" width="120px"><b>DAYS PAST DUE</b></td>
 			<td class="pastdue" width="120px"><b>TOTAL PAST DUE</b></td>
@@ -78,14 +83,22 @@ WHERE CaritasBranch_ControlNo='$branchno' AND TotalPastDue>0 ORDER BY Centerno A
 		</tr>
 		<?php foreach($pastDue->result() AS $data){ ?>
 		<tr>
-			<td class="pastdue"><?php echo $data->CenterNo ?></td>
+			<td class="pastdue" width="10px"><?php echo $a; ?></td>
 			<td class="pastdue" style="text-align: left;"><?php echo $data->Name ?></td>
-			<td class="pastdue"><?php echo number_format($data->WeeklyPayment) ?></td>
+			<?php if($userrank=='mispersonnel'){?>
+			<td class="pastdue" width="20px">BRANCH</td>
+			<td class="pastdue"><?php echo $data->CenterNo ?></td>
+
+			<?php }else{ ?>
+			<td class="pastdue"><?php echo $data->CenterNo ?></td>
+			<?php } ?>
+			<td class="pastdue"><?php echo number_format($data->WeeklyPayment,2) ?></td>
 			<td class="pastdue"><?php echo $data->DaysPast ?></td>
-			<td class="pastdue"><?php echo number_format($data->TotalPastDue) ?></td>
+			<td class="pastdue"><?php echo number_format($data->TotalPastDue,2) ?></td>
 			<td class="pastdue"><?php echo $data->ContactNo ?></td>
-			<td class="pastdue" style="text-align: left;"><?php echo $data->Address ?></td>
+			<td class="pastdue"><?php echo $data->Address ?></td>
 		</tr>
+		<?php $a++; ?>
 		<?php } ?>		
 	</table>
 

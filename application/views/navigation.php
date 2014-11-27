@@ -232,7 +232,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 						</ul>
 					</li>
 				<?php endif; ?>
-					<?php if($userrank=='salveofficer' || $userrank=='branchmanager') :?>
+					<?php if($userrank=='salveofficer') :?>
 					<li class="menu"><a href="<?php echo site_url('downloads/downloadlist'); ?>" class="menu" style="cursor: pointer;">DOWNLOADS</a></li>
 					<?php endif; ?>
 
@@ -257,7 +257,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 					<?php } else if($userrank=='mispersonnel') {?>
 						<li class="menu"><a href="<?php echo site_url('reports/reportListMIS'); ?>" class="menu" style="cursor: pointer;">REPORTS</a>
 							<ul>
-								<!--<li><a href="<?php echo site_url('reports/pdmmonthly'); ?>">Monthly Past Due Mature Report</a></li>-->
+								<li><a href="<?php echo site_url('reports/aging'); ?>">Aging Report</a></li>
 							</ul>
 						</li>
 					<?php } ?>
