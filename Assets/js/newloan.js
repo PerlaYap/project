@@ -89,7 +89,7 @@ function showCoMaker(divID){
 	var difference=parseFloat(document.getElementById("difference").value);
 	var totalIncome=parseFloat(document.getElementById("incometotal").value);
 	var totalExpense=parseFloat(document.getElementById("expensetotal").value);
-	var loanCheck=parseFloat(document.getElementById("maxLoan").value);
+	var loanCheck=parseFloat(replace(",","",(document.getElementById("maxLoan").value));
 	var loanInput=parseFloat(document.getElementById("loanamount").value);
 	var materialTotal=parseFloat(document.getElementById("materialtotal").value);
 

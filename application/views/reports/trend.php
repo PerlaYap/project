@@ -43,7 +43,7 @@ else if($type==2){
 $lineBranch1=$this->db->query("SELECT  Month(DateApplied) AS Month, ROUND((SUM(AmountRequested)/Count(ControlNo)),2) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
 WHERE YEAR(DateApplied)='$years' AND (Status='Full Payment' OR Status='Current' OR Status='Active') AND CaritasBranch_ControlNo='$branch'
 GROUP BY Month(DateApplied)");
-$lineBranch2=$this->db->query("SELECT  MMonth(DateApplied) AS Month, ROUND((SUM(AmountRequested)/Count(ControlNo)),2) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
+$lineBranch2=$this->db->query("SELECT  Month(DateApplied) AS Month, ROUND((SUM(AmountRequested)/Count(ControlNo)),2) AS NumberofLoan FROM loanapplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo 
 WHERE YEAR(DateApplied)='$years1' AND (Status='Full Payment' OR Status='Current' OR Status='Active') AND CaritasBranch_ControlNo='$branch'
 GROUP BY Month(DateApplied)");
 
