@@ -196,9 +196,9 @@ $(document).ready(function(){
 		materialSum();
 	});
 
-	$(".quantity_1").on("keydown keyup",function(){
+	/*$(".quantity_1").on("keydown keyup",function(){
 		materialSum();
-	});
+	});*/
 
 	$(".incomeCIinput").on("keydown keyup",function(){
 		icalculateSum();
@@ -285,7 +285,7 @@ function bcalculateSum(){
 function materialSum(){
 	var sum=0;
 	var unitprice=[];
-	var quantity=[];
+	//var quantity=[];
 
 	$(".unitprice_1").each(function(){
 		if(!isNaN(this.value) && this.value.length !=0){
@@ -293,17 +293,17 @@ function materialSum(){
 		}
 	});
 
-	$(".quantity_1").each(function(){
+	/*$(".quantity_1").each(function(){
 		if(!isNaN(this.value) && this.value.length !=0){
 			quantity.push(this.value);
 		}
 	})
-
-	if(unitprice.length==quantity.length){
+  */
+	//if(unitprice.length==quantity.length){
 		for(var a=0; a<unitprice.length; a++){
-			sum+=(unitprice[a]*quantity[a]);
+			sum+=unitprice[a];
 		}
-	}
+	//}
 
 	$("input#materialtotal").val(number_format(sum));
 }
@@ -592,10 +592,10 @@ function total(){
     									<option value="Utilities">Utilities</option>
     								</select>
     								&nbsp&nbsp&nbsp
-    								Qty:<p class="reqd">*</p>
+    								<!--Qty:<p class="reqd">*</p>
     								<input required="true" type="text" name="quantity" class="quantity_1" style="width: 26px;"/>
-
-    								&nbsp&nbsp&nbsp
+                    
+    								&nbsp&nbsp&nbsp-->
     								Unit Price:<p class="reqd">*</p>
     								<input required="true"  type="text" name="unitprice" class="unitprice_1" style="width: 80px;" placeholder="Peso"/> &nbsp&nbsp 
     								
@@ -613,6 +613,7 @@ function total(){
 				    </span> -->
 				</h1>
 
+        <!--
 				<label>
 					<span>Household Co-Maker :</span>
 					<select required="true" id="comaker" name="comaker" style="width:572px;" onchange="showCoMaker(this.value)" >
@@ -634,7 +635,6 @@ function total(){
 						
 						<label>
 							<span>Relationship :</span> </label>
-							<!--<input id="household" type="text" name="hrelation" style="width:400px;" /> -->
 							<select name="hrelation" style="width:405px;">
 								<option value=" "></option>
 								<option value="Aunt/Uncle">Aunt/Uncle</option>
@@ -672,6 +672,7 @@ function total(){
 								</select>
 								
 							</div>
+            -->
 
 							<br><br><br><br>
 							<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Member Co-Maker Information

@@ -55,13 +55,12 @@ public function add_loanapplication(){
 	}
 
 	//Materials 
-	$omaterials = $this->security->xss_clean($this->input->post('materials'));
-    $oquantity = $this->security->xss_clean($this->input->post('quantity'));
-    $ounitprice = $this->security->xss_clean($this->input->post('unitprice'));
+	$materials = $this->security->xss_clean($this->input->post('materials'));
+    $quantity = 1;
+    $unitprice = $this->security->xss_clean($this->input->post('unitprice'));
 
     //Other Materials
     $materials_1 = $this->security->xss_clean($this->input->post('materials_1'));
-    $quantity_1 = $this->security->xss_clean($this->input->post('quantity_1'));
     $unitprice_1 = $this->security->xss_clean($this->input->post('unitprice_1'));
 
     //Comaker household
@@ -151,15 +150,15 @@ public function add_loanapplication(){
 	//Materials
 
     //FIRST ENTRY
-            $this->addBusinessMaterials($loanControlNo,$businessControlNo,$omaterials,$oquantity,$ounitprice);
+            $this->addBusinessMaterials($loanControlNo,$businessControlNo,$materials,$quantity,$unitprice);
 
     //SECOND ENTRY
 
-	if (!empty($materials_1) && !empty($quantity_1) && !empty($unitprice_1)) {
+	if (!empty($materials_1) && !empty($unitprice_1)) {
 	    $arrsize = count($materials_1);
 	    for ($size=0; $size < $arrsize ; $size++) {
-            if($materials_1[$size]!="" && $quantity_1[$size]!="" && $unitprice_1[$size]!="" )
-	    	$this->addBusinessMaterials($loanControlNo,$businessControlNo,$materials_1[$size],$quantity_1[$size],$unitprice_1[$size]);
+            if($materials_1[$size]!="" && $unitprice_1[$size]!="" )
+	    	$this->addBusinessMaterials($loanControlNo,$businessControlNo,$materials_1[$size],'1',$unitprice_1[$size]);
 	    }
 
 	}
