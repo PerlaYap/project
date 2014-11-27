@@ -48,7 +48,7 @@ ON Alpha.CenterControl=Beta.CenterControl)Beta
 ON Alpha.ControlNo=Beta.MemberControl
 LEFT JOIN membersname mn ON mn.ControlNo=Alpha.ControlNo
 LEFT JOIN Members mem ON mem.ControlNo=Alpha.ControlNo
-WHERE BranchControl='$branchno'"); ?>
+WHERE BranchControl='$branchno' ORDER BY Name ASC"); ?>
 
 <?php $memberinfo=$this->db->query("SELECT cb.ControlNo AS BranchControl, cb.BranchName,cc.ControlNo AS CenterControl, cc.CenterNo, B.FirstName, B.MiddleName, B.LastName, B.ControlNo, B.MemberID FROM caritasbranch_has_caritascenters cbhcc 
 LEFT JOIN caritasbranch cb ON cbhcc.CaritasBranch_ControlNo=cb.ControlNo
