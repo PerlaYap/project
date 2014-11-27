@@ -48,7 +48,7 @@
 	color:black;
 	vertical-align: bottom;
 	text-align: center;
-
+}
 
 </style>
 

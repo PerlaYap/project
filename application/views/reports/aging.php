@@ -87,12 +87,11 @@ WHERE CaritasBranch_ControlNo='$branchno' AND TotalPastDue>0 ORDER BY Name ASC")
 	
 	<h3>
 		CARITAS SALVE CREDIT COOPERATIVE <br> 
-		AGING REPORT<br>
+		Aging Report 
 		<?php 	if($userrank!='mispersonnel'){
-					echo "OF ".$branchname." Branch" ?><br>
+					echo "of ".$branchname." Branch" ?><br>
 				<?php } ?>
-		AS OF <br>
-		<?php echo $datetoday ?>
+		As of <?php echo $datetoday ?>
 	</h3>
 	<br>
 

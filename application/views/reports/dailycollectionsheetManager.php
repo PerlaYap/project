@@ -106,7 +106,7 @@ foreach($branchname->result() as $row){
 <a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 	<h3>
 		CARITAS SALVE CREDIT COOPERATIVE <br> 
-		Daily Collection Sheet <br>
+		Daily Center Collection <br>
 		<?php echo $branchName ?> Branch <br>
 		 As of<?php echo date('M d,Y', strtotime($date)); ?> (<?php echo $day ?>)
 
