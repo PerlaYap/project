@@ -92,7 +92,7 @@ public function add_loanapplication(){
     $incomeAmount=array();
     for($a=0; $a<4;$a++){
         $id="income".$a;
-        $incomeAmount[$a]= $this->security->xss_clean($this->input->post($id));
+        $incomeAmount[$a]= str_replace(",", "", $this->security->xss_clean($this->input->post($id)));
     }
 
     $income=array_combine($incomeName, $incomeAmount);
@@ -107,7 +107,7 @@ public function add_loanapplication(){
     $fexpenseAmount=array();
     for($a=0; $a<11;$a++){
         $id="fexpense".$a;
-        $fexpenseAmount[$a]= $this->security->xss_clean($this->input->post($id));
+        $fexpenseAmount[$a]= str_replace(",","",$this->security->xss_clean($this->input->post($id)));
     }
 
 
@@ -123,7 +123,7 @@ public function add_loanapplication(){
     $bexpenseAmount=array();
     for($a=0; $a<10;$a++){
         $id="bexpense".$a;
-        $bexpenseAmount[$a]= $this->security->xss_clean($this->input->post($id));
+        $bexpenseAmount[$a]= str_replace(",", "", $this->security->xss_clean($this->input->post($id)));
     }
 
 

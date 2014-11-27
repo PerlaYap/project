@@ -430,23 +430,6 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 				       		<?php }else{ ?>
 				       			<option value='0'>0.00</option>
 				       		<?php } ?>
-
-				       		
-						   
-<!-- =======
-				  		<span>Please add the requested loan information. </span>
-				        <span><b>Pakiautomatic yung pagcalculate kung yung loan amount ay nageexceed sa maximum.</b></span>
-				    </h1>
-
-				    <label>
-				        <span>Capital Shares:<p class="reqd">*</p></span> 
-				       	<select required="true" name="capitalshare" style="width:580px;">
-						    <option value="100" selected="selected">1 - Php 100</option>
-						    <option value="200">2 - Php 200</option>
-						    <option value="300">3 - Php 300</option>
-						    <option value="400">4 - Php 400</option>
-						    <option value="500">5 - Php 500</option>
->>>>>>> origin/master -->
 					    </select>
 				    </label>  
 
@@ -483,23 +466,16 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Business Information
-<<<<<<< HEAD
-				        <!-- <span>tanggalin na yung business field since lahat existing businesses, lagay nalang ng type of business with fixed values</span> -->
-=======
+
 				        <span>Please add your current business information.</span>
->>>>>>> origin/master
 				    </h1>
 					
 				    <label>
 				        <span>Business:<p class="reqd">*</p></span>
 				        <select required="true" style="width:572px;" name="loanbusiness" id="selectMenu" onchange="showBusiness(this.value)">
-<<<<<<< HEAD
-						    <!-- <option value=" "></option> -->
 						    <option value="newbusiness" selected>Existing Business</option>
-=======
-						    <option value=" "></option>
 						    <option value="newbusiness">New Current Business</option>
->>>>>>> origin/master
+
 						     <?php
 				    		foreach ($loanbusiness->result() as $row) { 
 				    			echo "<option value='".$row->ControlNo."'>".$row->BusinessName."</option>" ;
@@ -590,36 +566,9 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 				    </label>
 				</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				<br><br><br><br>
 				<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Material Inventory
-<<<<<<< HEAD
-				    <span>lagay tayo material types dito with fixed values :) tanggalin na ata yung quantity dito, diretso na amount</span>
-=======
 				    <span>Please indicate the general materials needed in the business.</span>
->>>>>>> origin/master
 				</h1>
 
 				   
@@ -642,9 +591,9 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 				        	<option value="Transportation Service">Transportation Service</option>
 				        	<option value="Utilities">Utilities</option>
 				        </select>
-				     <!--   &nbsp&nbsp&nbsp
+				     &nbsp&nbsp&nbsp
 				        Qty:<p class="reqd">*</p>
-					    <input required="true" type="text" name="quantity" class="quantity_1" style="width: 26px;"/> -->
+					    <input required="true" type="text" name="quantity" class="quantity_1" style="width: 26px;"/>
 
 				        &nbsp&nbsp&nbsp
 				        Unit Price:<p class="reqd">*</p>
@@ -658,27 +607,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 			   &nbsp&nbsp&nbsp   &nbsp&nbsp&nbsp	   &nbsp&nbsp&nbsp		   &nbsp&nbsp&nbsp	   &nbsp&nbsp&nbsp	 &nbsp&nbsp&nbsp		   &nbsp&nbsp&nbsp	   &nbsp&nbsp&nbsp		
 
 			   Subtotal: <input id="materialtotal" type="text" name="" style="width:100px;" disabled/>
-				    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					<br><br><br><br>
+				   	<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Household Co-Maker Information
 				        <!-- <span>yung business rule dito yung 1st-3rd loan cycle ni member, co-maker yung hihingin, yung comaker dapat member ng company at 3 times lang siya pwede maging comaker at kung 4th loan cycle na, dapat guarantor na, yung guarantor pwede siya relative/ friend/ any individual na malapit sa bahay ni member, basta kilala siya ni member by 2 years; ayusin natin yung fixed values ng relationship part
 				         </span> -->
@@ -745,28 +674,6 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 						        
 					    </div>
 
-					  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					<br><br><br><br>
 					<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Member Co-Maker Information
 				        <span>tanggalin nalang natin ito, since ilalagay ito sa taas.</span>
@@ -786,19 +693,9 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 						    <label>
 						    	<span>Relationship :</span> 
-<<<<<<< HEAD
-
-						    	<input type='hidden' name='mrelationship' value='friend'>
-						        <!-- <select name="mrelationship" style="width:405px;">
-						        	<option value=" " selected=" "></option>
-						        	<option value="Aunt">Aunt</option>
-						        	<option value="Child">Child</option>
-=======
+						    	<input type='hidden' name='mrelationship'>
 						        <select name="mrelationship" style="width:405px;">
-						        	<option value=" "></option>
-						        	
-						     		<option value="Aunt/Uncle">Aunt/Uncle</option>
->>>>>>> origin/master
+						        	<option value="Friend">Friend</option>
 						        	<option value="Cousin">Cousin</option>
 						        	<option value="Grandparent">Grandparent</option>
 						        	<option value="In-Law">In-Law</option>
@@ -806,13 +703,11 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 						        	<option value="Sibling">Sibling</option>
 						        	<option value="Spouse">Spouse</option>
 						        	<option value="Parent">Parent</option>
-<<<<<<< HEAD
+						        	<option value="Aunt">Aunt</option>
 						        	<option value="Uncle">Uncle</option>
-						        </select> -->
-=======
+						        </select>
 						        	
 						        </select>
->>>>>>> origin/master
 						    </label>
 
 				 <!--	<label>
