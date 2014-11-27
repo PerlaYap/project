@@ -305,7 +305,7 @@ function materialSum(){
 		}
 	//}
 
-	$("input#materialtotal").val(number_format(sum));
+	$("input#materialtotal").val(number_format(sum),2);
 }
 
 function total(){
@@ -440,11 +440,16 @@ function total(){
     						}else{
     							$maxloan_1 = ($savings/0.4);
     						}
+                   $a=0;
     						?>
+
+
 
     						<span>Amount Requested:<p class="reqd">*</p></span></label>
     						<input required="true" type="number" max='<?php echo $maxloan_1; ?>' min='0' title="Maximum Loan Amount: <?php echo $maxloan_1 ?>" id="loanamount" name="amountreq" style="width: 210px;" placeholder="Pesos" />	
 
+                <?php $a++; } ?>
+                
     						&nbsp&nbsp&nbsp&nbsp
     						Max Loan Amount :
     						<input type="text" readOnly="true" id="maxLoan" name="" style="width: 210px; color:#962a2a" />

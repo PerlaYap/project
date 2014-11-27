@@ -139,7 +139,7 @@ foreach($branchname->result() as $row){
     <h3>
       CARITAS SALVE CREDIT COOPERATIVE <br> 
       <?php if ($type==1) echo $years; 
-      else if($type==2) echo $years." and ".$years1; ?>Yearly Trend <br> 
+      else if($type==2) echo $years." and ".$years1; ?> Yearly Trend <br> 
       <?php echo $branchName ?> Branch
     </h3>
 
@@ -150,7 +150,7 @@ foreach($branchname->result() as $row){
       <table border="1" class="reportTable">
           <tr>
               <td class="thReport"> MONTH</td>
-              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
+              <td class="thReport"> MOUNT RELEASED</td>
           </tr>
 
           <?php for($a=1;$a<13;$a++){ ?>
@@ -162,7 +162,7 @@ foreach($branchname->result() as $row){
       </table>
       <?php } else if($type==2){ ?>
 
-       <table border="1" class="reportTable" style="margin-left: 355px;">
+       <table border="1" class="reportTable" style="margin-left: 200px;">
           <tr>
               <td class="thReport" colspan="2"><?php echo $years; ?></td>
           </tr>
@@ -179,13 +179,13 @@ foreach($branchname->result() as $row){
           <?php } ?>
       </table>
 
-      <table border="1" class="reportTable" style="margin-left: 635px; margin-top:-449px; position:absolute;">
+      <table border="1" class="reportTable" style="margin-left: 450px; margin-top:-420px; position:absolute;">
           <tr>
               <td class="thReport" colspan="2"  style="border-left: hidden;"><?php echo $years1; ?></td>
           </tr>
           <tr>
               <td class="thReport" style="border-left: hidden;"> MONTH</td>
-              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
+              <td class="thReport"> AMOUNT RELEASED</td>
           </tr>
           <?php for($a=1;$a<13;$a++){ ?>
           <tr>

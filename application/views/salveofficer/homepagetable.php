@@ -32,6 +32,27 @@ table{
 	text-align: center;
 }
 
+.BM2{
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: black;
+	height: 50px;
+	width: 270px;
+	vertical-align: text-top;
+	color: black;
+	text-align: center;
+	padding:0;
+}
+
+.BM1{
+	font-weight: bold;
+	height: 50px;
+	width: 270px;
+	color:black;
+	vertical-align: bottom;
+	text-align: center;
+}
+
 
 </style>
 <?php
@@ -97,10 +118,10 @@ $month = array("January","February","March","April","May","June","July","August"
 <br>
 <table border=1 style="margin-left:auto; margin-right:auto;">
 
-	<tr>
+<!--	<tr>
 		<td class="header" colspan="5"><?php echo $currentyear; ?></td>
 	</tr>
-
+-->
 	<tr>
 		<td class="header" style="width: 150px;"> Month </td>
 		<td class="header"> Active Saver </td>
@@ -197,21 +218,21 @@ $month = array("January","February","March","April","May","June","July","August"
 <br>
 <br>
 
-<table style="margin-left: 300px;" >
+<table style="margin-left: 50px;" >
 			<tr>
-				<td style="font-size: 13px;"><?php echo $name; ?></td>
+				<td class="BM1" style="font-size: 13px;"><?php echo $name; ?></td>
 			</tr>
 				<?php if($userrank=='branchmanager'){?>
 			<tr>
-				<td class="BM2">Signature Above Printed Name of Branch Manager</td>
+				<td class="BM2">Signature Above Printed Name of <BR> Branch Manager</td>
 			</tr>
 			<?php }else{ ?>
 			<tr>
-				<td class="BM2">Signature Above Printed Name of Salve Officer</td>
+				<td class="BM2">Signature Above Printed Name of <BR>Salve Officer</td>
 			</tr>
 			<?php } ?>
 			<tr>
-				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
+				<td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
 			</tr>
 			<tr>
 				
@@ -219,25 +240,25 @@ $month = array("January","February","March","April","May","June","July","August"
 			</tr>
 		</table>
 
-		<table style="margin-left: 750px; margin-top: -132px;" >
+		<table style="margin-left: 380px; margin-top: -200px;" >
 			
 			<?php if($userrank=='branchmanager'){?>
 			<tr>
-				<td style="font-size: 13px;">Marvin Lao</td>
+				<td class="BM1" style="font-size: 13px;">Marvin Lao</td>
 			</tr>
 			<tr>
-				<td class="BM2">Signature Above Printed Name of MIS</td>
+				<td class="BM2">Signature Above Printed Name of <BR> MIS</td>
 			</tr>
 			<?php }else{ ?>
 			<tr>
 				<td style="font-size: 13px;"><?php echo $Manager; ?></td>
 			</tr>
 			<tr>
-				<td class="BM2">Signature Above Printed Name of Branch Manager</td>
+				<td class="BM2">Signature Above Printed Name of <BR> Branch Manager</td>
 			</tr>
 			<?php } ?>
 			<tr>
-				<td style="font-size: 13px;"><?php echo $datetoday ?></td>
+				<td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
 			</tr>
 			<tr>
 				<td class="BM2">Date</td>
