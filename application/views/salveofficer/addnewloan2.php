@@ -473,8 +473,8 @@ function total(){
     							<label>
     								<span>Business:<p class="reqd">*</p></span>
     								<select required="true" style="width:572px;" name="loanbusiness" id="selectMenu" onchange="showBusiness(this.value)">
-    									<option value="newbusiness" selected>Existing Business</option>
-    									<option value="newbusiness">New Current Business</option>
+    									<option value="existingbusiness" selected>Existing Business</option>
+    									<option value="newbusiness">New Business</option>
 
     									<?php
     									foreach ($loanbusiness->result() as $row) { 

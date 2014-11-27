@@ -58,7 +58,7 @@ else
 			<div class="content">
 				<br>
 				<form class="basic-grey">
-					<h1><br>Summary Report
+					<h1><br>Release Summary
 				        <span> <br></span>
 				    </h1>
 
