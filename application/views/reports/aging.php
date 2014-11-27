@@ -14,6 +14,8 @@ $branchno=$this->session->userdata('branchno');
 $user = $this->session->userdata('firstname');
 $datetoday = date('F d, Y');
 $name = $this->session->userdata('firstname');
+$userrank = $this->session->userdata('rank');
+
 
 $branchName=$this->db->query("SELECT BranchName FROM CaritasBranch WHERE ControlNo='$branchno'");
 foreach($branchName->result() AS $branch){
@@ -90,7 +92,7 @@ WHERE CaritasBranch_ControlNo='$branchno' AND TotalPastDue>0 ORDER BY Centerno A
 	<br><br>
 	<br><br>
 	<br><br>
-	<table style="margin-left: 270px;" >
+<!--	<table style="margin-left: 270px;" >
 
 			<tr>
 				<td class="BM1" style="font-size: 13px;"><?php echo $user ?></td>
@@ -123,7 +125,45 @@ WHERE CaritasBranch_ControlNo='$branchno' AND TotalPastDue>0 ORDER BY Centerno A
 			<tr>
 				<td class="BM2">Date</td>
 			</tr>
-		</table>
+		</table> -->
+
+		  <table style="margin-left: 270px;" >
+        <tr>
+          <td class="BM1" style="font-size: 13px;"><?php echo $name; ?></td>
+        </tr>
+          <?php if($userrank=='branchmanager'){?>
+        <tr>
+          <td class="BM2">Signature Above Printed Name of <br> Branch Manager</td>
+        </tr>
+        <?php }else{ ?>
+        <tr>
+          <td class="BM2">Signature Above Printed Name of <br> MIS</td>
+        </tr>
+        <?php } ?>
+        <tr>
+          <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+        </tr>
+        <tr>
+          
+          <td class="BM2">Date</td>
+        </tr>
+      </table>
+
+      <table style="margin-left: 720px; margin-top: -207px;" >
+        <tr>
+          <td class="BM1" style="font-size: 13px;">Ann Evan Echavez</td>
+        </tr>
+        <tr>
+          <td class="BM2">Signature Above Printed Name of <br> General Manager</td>
+        </tr>
+        <tr>
+          <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+        </tr>
+        <tr>
+          <td class="BM2">Date</td>
+        </tr>
+      </table>
+    <br>
 
 
 		<br><br><br>
