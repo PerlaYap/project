@@ -33,17 +33,25 @@
 		<input id="name" type="text" name="fname" value="<?php echo $name ?>" style="width: 562px;" disabled/>
 	</label>
 
+		<style type="text/css">
+    		p.reqd{
+    			color: #c43434;
+    			font: 12px Georgia, "Times New Roman", Times, serif;
+    			display: inline;
+    			vertical-align: super;
+    		}
+
+    	</style>
+
 	<label>
-		<span>Life Status: </span>
+		<span>Life Status:<p class="reqd">*</p> </span>
 		<input type='radio' name='lifestatus' value='deceased'> Deceased 
-	</label>
-
-	<label><span></span>
 		<input type='radio' name='lifestatus' checked value='living'> Living
-	</label>   
+	</label>
+	<br>
 
 	<label>
-		<span>Reason for Termination:</span>
+		<span>Reason for Termination:<p class="reqd">*</p></span>
 		<input type='text' name='term_reason' required>
 	</label>
 
