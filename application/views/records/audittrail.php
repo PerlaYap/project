@@ -120,7 +120,7 @@
       }
     });
 
-    //category picker - position
+    //category picker - activity
           var categoryPicker_activity = new google.visualization.ControlWrapper({
       'controlType': 'CategoryFilter',
       'containerId': 'categoryPicker_activity_div',
@@ -135,7 +135,8 @@
           'label': 'Activity:',
           'allowTyping': false,
           'allowMultiple': false,
-          'selectedValuesLayout':'below'
+          'selectedValuesLayout':'below',
+          'sortValues': false
         }
       }
     });
