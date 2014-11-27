@@ -12,7 +12,7 @@
 </style>
 	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 
-<h3>CARITAS SALVE CREDIT COOPERATIVE <br> SAVINGS BUILD-UP and PREFERRED SHARE REPORT  <br> For The Month Of <b>
+<h3>CARITAS SALVE CREDIT COOPERATIVE <br> SAVINGS BUILD-UP and PREFERRED SHARE REPORT  <br> AS OF THE END OF THE MONTH OF <b>
 		<?php echo $monthWord ?> <?php echo $year ?></b></h3>
 <?php
 $user = $this->session->userdata('firstname');

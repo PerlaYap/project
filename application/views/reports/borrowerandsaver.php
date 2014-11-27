@@ -90,7 +90,7 @@ GROUP BY Charlie.CenterControl");
   <h3>
     CARITAS SALVE CREDIT COOPERATIVE <br> 
     NUMBER OF BORROWERS AND SAVERS <br> 
-    <?php echo $branch ?> BRANCH AS OF <?php echo $currentmonth.",".$currentyear ?></b>
+    <?php echo $branch ?> BRANCH AS OF THE END OF THE MONTH OF <br><?php echo $currentmonth.",".$currentyear ?></b>
 
   </h3>
 

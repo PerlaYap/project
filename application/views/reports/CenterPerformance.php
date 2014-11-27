@@ -78,7 +78,7 @@
 	<h3>
 		CARITAS SALVE CREDIT COOPERATIVE <br> 
 		COLLECTION PERFORMANCE PER CENTER OF <?php echo $branch; ?> BRANCH <br> 
-		FOR THE MONTH OF <b><?php  echo $currentmonth." ".$currentyear ?> </b>
+		AS OF THE END OF THE MONTH OF <b><?php  echo $currentmonth." ".$currentyear ?> </b>
 
 	</h3>
 

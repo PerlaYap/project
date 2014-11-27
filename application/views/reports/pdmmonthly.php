@@ -45,7 +45,7 @@ $getbranch = $this->db->query("SELECT b.branchname, b.ControlNo FROM caritasbran
 	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 	
 	<!-- <img src="<?php // echo base_url ('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"> -->
-	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MONTHLY PAST DUE MATURE REPORT <br> For The Month Of <b>
+	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MONTHLY PAST DUE MATURE REPORT <br> AS OF THE END OF THE MONTH OF <b>
 		<?php echo $yue ?> <?php echo $year ?></b></h3>
 <br>
 	<table class="misreport" border="1">

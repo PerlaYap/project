@@ -117,7 +117,7 @@ $port=$getportfolio->result();
 	
 	
 
-	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MONTHLY LOAN PORTFOLIO REPORT <br> For The Month Of <b>
+	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MONTHLY LOAN PORTFOLIO REPORT <br> AS OF THE END OF THE MONTH OF <b>
 		<?php echo $monthWord ?> <?php echo $year ?></b></h3>
 
 		<br>

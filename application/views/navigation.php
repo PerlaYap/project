@@ -239,6 +239,7 @@ WHERE lhm.CaritasBranch_ControlNo= '$branch'");
 
 					<?php if($userrank=='salveofficer'){ ?>
 					<li class="menu"><a href="<?php echo site_url('reports/reportList'); ?>" class="menu" style="cursor: pointer;">REPORTS</a>
+						<li><a href="<?php echo site_url('reports/aging'); ?>">Aging Report</a></li>
 						<!-- <li class="menu"><a href="#" class="menu" style="cursor: pointer;">REPORTS</a> -->
 						</li>					
 					<?php } else if($userrank=='branchmanager'){?>
