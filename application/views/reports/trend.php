@@ -107,7 +107,7 @@ foreach($branchname->result() as $row){
         var options = {
           //title: 'DORMANT & ACTIVE ACCOUNTS',
           hAxis: {title: 'MONTH', titleTextStyle: {color: 'black', italic: false, bold: true}},
-          vAxis: {title: 'NO. OF LOAN APPLICATIONS', titleTextStyle: {color: 'black', italic: false,  bold: true}},
+          vAxis: {title: 'AMOUNT RELEASED', titleTextStyle: {color: 'black', italic: false,  bold: true}},
           backgroundColor: 'transparent',
           colors:['#2795be','#a63923' ],          
           'width':1000,
