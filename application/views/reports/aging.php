@@ -120,7 +120,7 @@ WHERE CaritasBranch_ControlNo='$branchno' AND TotalPastDue>0 ORDER BY Name ASC")
 			<td class="pastdue"><?php echo $a ?></td>
 			<td class="pastdue" style="text-align: left;"><?php echo $data->Name ?></td>
 			<?php if($userrank=='mispersonnel'){?>
-			<td class="pastdue" width="20px">BRANCH</td>
+		
 			<td class="pastdue"><?php echo $data->BranchName ?></td>
 			<td class="pastdue"><?php echo $data->CenterNo ?></td>
 			<?php }else{ ?>
