@@ -209,16 +209,16 @@ foreach ($getTotal->result() as $row) {
 
 <body style="background: none;">
 	<div class="content" style="background:none;">
-		<br>
+		
 			<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo2"></a>
 			
 			<div class="yesPrint">
-				<br>
+			
 				<h3>
 
 					CARITAS SALVE CREDIT COOPERATIVE <br> 
-					Daily Collection Summary <br>
-					<?php echo $nBranch; ?> Branch &nbsp
+					Daily Members Collection <br>
+					<?php echo $nBranch; ?> Branch
 					Center no.  <?php echo $nCenter; ?> <br>
 					as of <?php echo $wordDate?>
 				</h3>

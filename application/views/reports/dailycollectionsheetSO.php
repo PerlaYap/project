@@ -107,9 +107,9 @@ foreach($branchname->result() as $row){
 <a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 	<h3>
 		CARITAS SALVE CREDIT COOPERATIVE <br> 
-		Daily Collection Sheet <br>
-		<?php echo $branchName ?> Branch <br> OF
-		 <?php echo date('M d,Y', strtotime($date)); ?> (<?php echo $day ?>)
+		Daily Center Collection <br>
+		<?php echo $branchName ?> Branch <br> 
+		As of <?php echo date('M d,Y', strtotime($date)); ?> (<?php echo $day ?>)
 
 	</h3>
 
@@ -245,63 +245,10 @@ foreach($branchname->result() as $row){
 
 		<br><br><br><br><br><br>
 
-		<!-- <table style="margin-left: 50px;;">
-			<tr><td class="BM">Signature of BM</td></tr>
-		</table> -->
-
-
 	</div>
 	<br>
 	<br><br><br><br><br><br><br><br><br><br>
-	<!-- <div style="margin-left: 500px; margin-top: -300px;">
-	<table class="signature" style="margin-left:auto; margin-right:auto;">
-			<tr>
-				<td class="sigBy">Prepared by:</td>
-				<td class="sig"><?php echo $user ?></td>
-				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2"><?php echo date('F d, Y'); ?></td>
-			</tr>
-		</table>
-		<br>
-		<table class="signature"  style="margin-left:auto; margin-right:auto;">
-			<tr>
-				<td class="sigBy">Received by:</td>
-				<td class="sig">&nbsp</td>
-				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2">&nbsp</td>
-			</tr>
-		</table>
-	</div> -->
-
-	<!-- <table class="signature" style="margin-left:31.5%; margin-right:auto;">
-      <tr>
-        <td class="sigBy">Prepared by:</td>
-      </tr>
-      <tr>
-        <td class="sigName">Marvin Lao*</td>
-      </tr>
-      <tr>
-        <td class="sigPosition">Branch Manager*</td>
-      </tr>
-      <tr>
-        <td class="sigPosition">November 21, 2014*</td>
-      </tr>
-    </table>
-
-    <table class="signature" style="margin-left: 53%; margin-right:auto; margin-top: -111px;">
-      <tr>
-        <td class="sigBy">Received by:</td>
-      </tr>
-      <tr>
-        <td class="sigName">Name</td>
-      </tr>
-      <tr>
-        <td class="sigPosition"> Position</td>
-      </tr>
-      <tr>
-        <td class="sigPosition">November 21, 2014</td>
-      </tr>
-    </table>-->
+	
 
     <table style="margin-left: 140px;" >
 			<tr>
