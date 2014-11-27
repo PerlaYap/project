@@ -144,13 +144,13 @@ foreach($branchname->result() as $row){
     </h3>
 
     <br>
-      <div id="chart_div" style="margin-right: auto; margin-left: 165px;" ></div>
+      <div id="chart_div" style="margin-right: auto; margin-left: 200px;" ></div>
 
       <?php if($type==1){ ?>
       <table border="1" class="reportTable">
           <tr>
               <td class="thReport"> MONTH</td>
-              <td class="thReport"> MOUNT RELEASED</td>
+              <td class="thReport"> AMOUNT RELEASED</td>
           </tr>
 
           <?php for($a=1;$a<13;$a++){ ?>
@@ -168,7 +168,7 @@ foreach($branchname->result() as $row){
           </tr>
           <tr>
               <td class="thReport"> MONTH</td>
-              <td class="thReport"> NO. OF LOAN APPLICATIONS</td>
+              <td class="thReport"> AMOUNT RELEASED</td>
           </tr>
 
           <?php for($a=1;$a<13;$a++){ ?>
