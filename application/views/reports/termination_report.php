@@ -6,7 +6,7 @@
 	}
 @page { 
     size: portrait;
-    margin: 0.5in;
+    margin: 1in;
   }
 </style>
 
@@ -42,144 +42,94 @@
 		<h3 style="margin-left:auto;margin-right:auto; font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;">
 			CARITAS SALVE CREDIT COOPERATIVE <br> 
 
-			 <?php if ($status == 'Terminated'): ?>
+			<!--  <?php if ($status == 'Terminated'): ?>
 				 	Termination Summary
 				 <?php endif ?>
 			 <?php if ($status =='Terminated Voluntarily'): ?>
 				 	Withdrawal Summary
-				 <?php endif ?> <br>
+				 <?php endif ?> <br> -->
 			<?php echo $branch ?> Branch
 		</h3>
 	</div>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/terminate.css'); ?>">
 
-<div class="basic-grey" style="background:none;">
-	<label>
-		<span>Name :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo $name ?>" style="width: 630px; background:none;" disabled/>
-				  
-	<label>
-		<span>Date Joined :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo $dateentered ?> " style="width: 630px; background:none;" disabled/>  
-
-	<label>
-		<span>Date Terminated :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo $term_date ?> " style="width: 630px; background:none;" disabled/>  
-
-	<label>
-		<span>Reason for Termination :</span></label>
-		<input id="name" type="text" name="fname" value="<?php echo $comment ?>" style="width: 630px; background:none;" disabled/> 
+<br><br>
 
 
-	<label>
-		<span>Total Capital Share :</span></label>
-		<input id="name" type="text" name="fname" value="Php <?php echo number_format($tot_capital,2) ?>" style="width: 630px; background:none;" disabled/> 
 
-<?php if ($status=='Terminated Voluntarily'): ?>
+
+<div style="margin-left: auto; margin-right: auto; width: 750px; font-size: 13px; line-height: 15px; ">
+
+	<br>
+	2014 November 25 <br>
+	<br>
+	<br>
+	Member Address Line 1<br>
+	Member Address Line 2<br>
+	Member Address Line 3<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	Dear <?php echo $name ?>:<br>
+	<br><br>
+
+	<!----------- IF TERMINATED ------------>
+		This is to notify that we have elected to terminate your membership; which, in accordance with the terms and provisions of the contract, is effective <u>two weeks after the above date</u>.<br>
+	<!----------- IF TERMINATED ------------>
 	
-	<label>
-		<span>Total Savings :</span></label>
-		<input id="name" type="text" name="fname" value="Php <?php echo number_format($savings,2) ?>" style="width: 630px;background:none;" disabled/>  
 
-	<label>
-		<span>Amount Receivable: :</span></label>
-		<input id="name" type="text" name="fname" value="Php <?php echo number_format($Recievable,2) ?>" style="width: 630px; background:none; font-weight:bold; color:#821818" disabled/> 
+	<!----------- IF WITHDRAWN ------------>
+		This is to notify that we have withdrawn your membership due to the reason of: <?php echo $comment ?>. <br>
+	<!----------- IF WITHDRAWN ------------>
 
-	<?php endif ?>
+
+	<br>
+	The following information will indicate the assets that you may receive after your "termination/withdrawal".</br>
+	<br>
+		<p style="margin-left: 50px; font-size:13spx;line-height: 20px;">
+			<b>Name: </b><?php echo $name ?> <br>
+			<b>Date Joined: </b><?php echo $dateentered ?><br>
+			<b>Date "Terminated/Withdrawn": </b><?php echo $term_date ?> <br>
+			<b>Reason for Termination: </b><?php echo $comment ?> <br>
+			<b>Total Capital Share: </b>Php <?php echo number_format($tot_capital,2) ?>
+		</p>
+
+	<br>
+	Should you have any concerns regarding the claim of your possible assets, contact us at (02)522-0011 or visit our branch office on Budget Lane Shopping Center, No. 88, Provincial Rd.<br>
+	<br>
+	<br>
+	<br>
+	Sincerely, 
+	<br>
+	<br>
+
+		<table >
+	      <tr>
+	        <td class="BM1">NAME OF BM</td>
+	      </tr>
+	      <tr>
+	        <td class="BM2">Signature Above Printed Name of <br>Branch Manager</td>
+	      </tr>
+	    </table>
+
+
+
+
+
+
+
+
+
 
 </div>
 
-<br><br>
-
-<!-- <table class="signature" style="margin-left:auto; margin-right:auto;">
-			<tr>
-				<td class="sigBy">Approved by:</td>
-				<td class="sig" style="width: 200px;">&nbsp <?php echo $user ?></td>
-				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2" style="width: 150px;">&nbsp<?php echo $datetoday; ?></td>
-			</tr>
-		</table>
-		<br>
-		<table class="signature"  style="margin-left:auto; margin-right:auto;">
-			<tr>
-				<td class="sigBy">Received by:</td>
-				<td class="sig" style="width: 200px;">&nbsp <?php echo $name ?>    </td>
-				<td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-				<td class="sig2" style="width: 150px;">&nbsp</td>
-			</tr>
-		</table> -->
 
 
-	<!--  <table class="signature" style="margin-left:31.5%; margin-right:auto;">
-      <tr>
-        <td class="sigBy">Prepared by:</td>
-      </tr>
-      <tr>
-        <td class="sigName"><?php echo $user ?></td>
-      </tr>
-      <tr>
-        <td class="sigPosition">Branch Manager</td>
-      </tr>
-      <tr>
-        <td class="sigPosition"><?php echo $datetoday ?></td>
-      </tr>
-    </table>
-
-    <table class="signature" style="margin-left: 53%; margin-right:auto; margin-top: -111px;">
-      <tr>
-        <td class="sigBy">Received by:</td>
-      </tr>
-      <tr>
-        <td class="sigName"><?php echo $name ?></td>
-      </tr>
-      <tr>
-        <td class="sigPosition">Member</td>
-      </tr>
-      <tr>
-        <td class="sigPosition"><?php echo $datetoday ?></td>
-      </tr>
-    </table>
- -->
-		<table style="margin-left: 140px;" >
-	      <tr>
-	        <td class="BM1" style="font-size: 13px;"><?php echo $name; ?></td>
-	      </tr>
-	      <tr>
-	        <td class="BM2">Signature Above Printed Name of <br> -</td>
-	      </tr>
-	      <tr>
-	        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
-	      </tr>
-	      <tr>
-	        
-	        <td class="BM2">Date</td>
-	      </tr>
-	    </table>
-
-	    <table style="margin-left: 600px; margin-top: -207px;" >
-	      <tr>
-	        <td class="BM1" style="font-size: 13px;">-</td>
-	      </tr>
-	      <tr>
-	        <td class="BM2">Signature Above Printed Name of <br> -/td>
-	      </tr>
-	      <tr>
-	        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
-	      </tr>
-	      <tr>
-	        <td class="BM2">Date</td>
-	      </tr>
-	    </table>
-
-
-<!-- Approved by:    <?php echo $user ?>                      Date: <?php echo $datetoday ?>
-<br>
-Recieved by:    <?php echo $name ?>                      Date:	 -->
 
 
 <br><br><br>
-
 
 
 
@@ -187,6 +137,70 @@ Recieved by:    <?php echo $name ?>                      Date:	 -->
 		<button onclick="window.print()">Print</button> 
 
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div class="basic-grey" style="margin-left: auto; margin-right: auto; width: 500px; background:none; ">
+		<label>
+			<span>Name :</span></label>
+			<input id="name" type="text" name="fname" value="<?php echo $name ?>" style="width: 200px; background:none;" disabled/>
+					  
+		<label>
+			<span>Date Joined :</span></label>
+			<input id="name" type="text" name="fname" value="<?php echo $dateentered ?> " style="width: 200px; background:none;" disabled/>  
+
+		<label>
+			<span>Date Terminated :</span></label>
+			<input id="name" type="text" name="fname" value="<?php echo $term_date ?> " style="width: 200px; background:none;" disabled/>  
+
+		<label>
+			<span>Reason for Termination :</span></label>
+			<input id="name" type="text" name="fname" value="<?php echo $comment ?>" style="width: 200px; background:none;" disabled/> 
+
+
+		<label>
+			<span>Total Capital Share :</span></label>
+			<input id="name" type="text" name="fname" value="Php <?php echo number_format($tot_capital,2) ?>" style="width: 200px; background:none;" disabled/> 
+
+	<?php if ($status=='Terminated Voluntarily'): ?>
+		
+		<label>
+			<span>Total Savings :</span></label>
+			<input id="name" type="text" name="fname" value="Php <?php echo number_format($savings,2) ?>" style="width: 200px;background:none;" disabled/>  
+
+		<label>
+			<span>Amount Receivable: :</span></label>
+			<input id="name" type="text" name="fname" value="Php <?php echo number_format($Recievable,2) ?>" style="width: 200px; background:none; font-weight:bold; color:#821818" disabled/> 
+
+		<?php endif ?>
+
+	</div> -->
 
 
 

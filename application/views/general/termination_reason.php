@@ -29,7 +29,7 @@
 <div class="basic-grey">
 	<br>
 	<label>
-		<span>Name :</span>
+		<span style="width:170px;">Name :</span>
 		<input id="name" type="text" name="fname" value="<?php echo $name ?>" style="width: 562px;" disabled/>
 	</label>
 
@@ -44,14 +44,14 @@
     	</style>
 
 	<label>
-		<span>Life Status:<p class="reqd">*</p> </span>
+		<span style="width:170px;">Life Status:<p class="reqd">*</p> </span>
 		<input type='radio' name='lifestatus' value='deceased'> Deceased 
 		<input type='radio' name='lifestatus' checked value='living'> Living
 	</label>
 	<br>
 
 	<label>
-		<span>Reason for Termination:<p class="reqd">*</p></span>
+		<span style="width:170px;">Reason for Termination:<p class="reqd">*</p></span>
 		<input type='text' name='term_reason' required>
 	</label>
 

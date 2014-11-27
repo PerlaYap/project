@@ -313,7 +313,7 @@ div.content{
 }
 .basic-grey label>span {
     float: left;
-    width: 170px;
+    width: 130px;
     text-align: right;
     padding-right: 10px;
     margin-top: 10px;
@@ -1331,6 +1331,29 @@ label.pwlabel{
 
 
 
+.BM2{
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: black;
+	height: 50px;
+	width: 190px;
+	vertical-align: text-top;
+	color: black;
+	text-align: left;
+	font-size: 11px;
+	padding:0;
+}
+
+.BM1{
+	font-weight: bold;
+	height: 50px;
+	font-size: 12px;
+	width: 190px;
+	color:black;
+	padding:0;
+	vertical-align: bottom;
+	text-align: left;
+}
 
 
 
