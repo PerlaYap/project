@@ -5,7 +5,7 @@
 
   @page { 
     size: portrait;
-    margin: 0.5in;
+    margin: 0.8in;
   }
 </style>
 
@@ -134,7 +134,6 @@ foreach($branchname->result() as $row){
 
   </head>
   <body>
-
     <a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
     <h3>
       CARITAS SALVE CREDIT COOPERATIVE <br> 
@@ -143,8 +142,7 @@ foreach($branchname->result() as $row){
       <?php echo $branchName ?> Branch
     </h3>
 
-    <br>
-      <div id="chart_div" style="margin-right: auto; margin-left: 200px;" ></div>
+      <div id="chart_div" style="margin-right: auto; margin-left: 20px;" ></div>
 
       <?php if($type==1){ ?>
       <table border="1" class="reportTable">
@@ -162,7 +160,7 @@ foreach($branchname->result() as $row){
       </table>
       <?php } else if($type==2){ ?>
 
-       <table border="1" class="reportTable" style="margin-left: 200px;">
+       <table border="1" class="reportTable" style="margin-left: 250px;">
           <tr>
               <td class="thReport" colspan="2"><?php echo $years; ?></td>
           </tr>
@@ -179,7 +177,7 @@ foreach($branchname->result() as $row){
           <?php } ?>
       </table>
 
-      <table border="1" class="reportTable" style="margin-left: 450px; margin-top:-420px; position:absolute;">
+      <table border="1" class="reportTable" style="margin-left: 480px; margin-top:-449px; position:absolute;">
           <tr>
               <td class="thReport" colspan="2"  style="border-left: hidden;"><?php echo $years1; ?></td>
           </tr>
@@ -197,53 +195,8 @@ foreach($branchname->result() as $row){
       </table>
       <?php } ?>
 
-      <br><br><br>
-     <!--  <table class="signature" style="margin-left:auto; margin-right:auto;">
-      <tr>
-        <td class="sigBy">Prepared by:</td>
-        <td class="sig"><?php echo $user; ?></td>
-        <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2"><?php echo $datetoday; ?></td>
-      </tr>
-    </table>
-    <table class="signature"  style="margin-left:auto; margin-right:auto;">
-      <tr>
-        <td class="sigBy">Received by:</td>
-        <td class="sig">&nbsp</td>
-        <td class="sigBy"> &nbsp&nbsp&nbspDate:</td>
-        <td class="sig2">&nbsp</td>
-      </tr>
-    </table> -->
-
-  <!--   <table class="signature" style="margin-left:31.5%; margin-right:auto;">
-      <tr>
-        <td class="sigBy">Prepared by:</td>
-      </tr>
-      <tr>
-        <td class="sigName">Marvin Lao*</td>
-      </tr>
-      <tr>
-        <td class="sigPosition">Branch Manager*</td>
-      </tr>
-      <tr>
-        <td class="sigPosition">November 21, 2014*</td>
-      </tr>
-    </table>
-
-    <table class="signature" style="margin-left: 53%; margin-right:auto; margin-top: -111px;">
-      <tr>
-        <td class="sigBy">Received by:</td>
-      </tr>
-      <tr>
-        <td class="sigName">Name</td>
-      </tr>
-      <tr>
-        <td class="sigPosition"> Position</td>
-      </tr>
-      <tr>
-        <td class="sigPosition">November 21, 2014</td>
-      </tr>
-    </table>-->
+      <br>
+     
     <table style="margin-left: 140px;" >
         <tr>
           <td class="BM1" style="font-size: 13px;"><?php echo $name; ?></td>
@@ -280,10 +233,9 @@ foreach($branchname->result() as $row){
           <td class="BM2">Date</td>
         </tr>
       </table>
-    <br>
-     
+    
         
-      <br><br>
+      <br>
 
       <div style="width: 100%; text-align: center;">
         <button onclick="window.print()" class="dontprint">Print</button>
