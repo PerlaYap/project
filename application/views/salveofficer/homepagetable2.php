@@ -209,7 +209,7 @@ ON BigOne.CenterControl=BigTwo.CenterControl");
 			</tr>
 			<?php }else{ ?>
 			<tr>
-				<td style="font-size: 13px;"><?php echo $Manager ?></td>
+				<td class="BM1" style="font-size: 13px;"><?php echo $Manager ?></td>
 			</tr>
 			<tr>
 				<td class="BM2">Signature Above Printed Name of <BR> Branch Manager</td>
