@@ -163,7 +163,7 @@ public function add_loanapplication(){
 
 	}
 
-	//Comaker
+	/*Comaker
 
 	if($comakerHousehold == "newhousehold"){
 
@@ -179,7 +179,7 @@ public function add_loanapplication(){
 	}
 
 	$this->addHouseholdComaker($loanControlNo,$householdno);
-
+    */
 	//Member Comaker
         $mcomakerno = $memberControl= $this->getMemberControlNo($mcomakerid);
 	$this->addMemberComaker($loanControlNo,$mcomakerno,$mrelationship);

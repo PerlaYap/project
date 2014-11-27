@@ -445,10 +445,10 @@ window.onload = function() {
 									<span>Name :</span></label>
 									<input type="text" name="materials" id="material" style="width: 250px;" value="<?php echo $result->Material ?>" />
 
-									&nbsp&nbsp&nbsp
+									<!--&nbsp&nbsp&nbsp
 									Qty :
 									<input type="text" name="quantity" id="material" style="width: 26px;" value="<?php echo $result->Quantity ?>"/>
-
+									-->
 									&nbsp&nbsp&nbsp
 									Unit Price :
 									<input type="text" name="unitprice" id="material" style="width: 80px;" value="<?php echo number_format($result->UnitPrice,2) ?>"/> &nbsp&nbsp 

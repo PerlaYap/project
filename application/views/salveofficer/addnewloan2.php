@@ -447,8 +447,6 @@ function total(){
 
     						<span>Amount Requested:<p class="reqd">*</p></span></label>
     						<input required="true" type="number" max='<?php echo $maxloan_1; ?>' min='0' title="Maximum Loan Amount: <?php echo $maxloan_1 ?>" id="loanamount" name="amountreq" style="width: 210px;" placeholder="Pesos" />	
-
-                <?php $a++; } ?>
                 
     						&nbsp&nbsp&nbsp&nbsp
     						Max Loan Amount :
@@ -612,9 +610,9 @@ function total(){
     							&nbsp&nbsp&nbsp   &nbsp&nbsp&nbsp	   &nbsp&nbsp&nbsp		   &nbsp&nbsp&nbsp	   &nbsp&nbsp&nbsp	 &nbsp&nbsp&nbsp		   &nbsp&nbsp&nbsp	   &nbsp&nbsp&nbsp		
 
     							Subtotal: <input id="materialtotal" type="text" name="" style="width:100px;" disabled/>
-    							<br><br><br><br>
+    							 <!-- <br><br><br><br>
     							<h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Household Co-Maker Information
-				        <!-- <span>yung business rule dito yung 1st-3rd loan cycle ni member, co-maker yung hihingin, yung comaker dapat member ng company at 3 times lang siya pwede maging comaker at kung 4th loan cycle na, dapat guarantor na, yung guarantor pwede siya relative/ friend/ any individual na malapit sa bahay ni member, basta kilala siya ni member by 2 years; ayusin natin yung fixed values ng relationship part
+				       <span>yung business rule dito yung 1st-3rd loan cycle ni member, co-maker yung hihingin, yung comaker dapat member ng company at 3 times lang siya pwede maging comaker at kung 4th loan cycle na, dapat guarantor na, yung guarantor pwede siya relative/ friend/ any individual na malapit sa bahay ni member, basta kilala siya ni member by 2 years; ayusin natin yung fixed values ng relationship part
 				    </span> -->
 				</h1>
 
