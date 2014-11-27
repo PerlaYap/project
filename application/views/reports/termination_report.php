@@ -12,11 +12,12 @@
 
 <?php 
 	date_default_timezone_set('Asia/Manila');
-	$datetoday = date('F d, Y');
+	$datetoday = date('Y F d');
 	$branch = $this->session->userdata('branch');
 	$user = $this->session->userdata('firstname');
 
 	foreach ($data as $d) {
+		$controlno = $d->controlno;
 		$name = $d->Name;
 		$dateentered = $d->DateEntered;
 		$tot_capital = $d->totcapitalshare;
@@ -25,6 +26,11 @@
 		$status = $d->status;
 		$term_date = $d->StatusUpdateDate;
 		$comment = $d->Comment;
+	}
+
+	$getaddress = $this->db->query("SELECT * FROM `membersaddress`where ControlNo = $controlno");
+	foreach ($getaddress->result() as $add) {
+		$address_1 = $add->Address;
 	}
  ?>
 
@@ -62,12 +68,12 @@
 <div style="margin-left: auto; margin-right: auto; width: 750px; font-size: 13px; line-height: 15px; ">
 
 	<br>
-	2014 November 25 <br>
+	<?php echo $datetoday ?> <br>
 	<br>
 	<br>
-	Member Address Line 1<br>
-	Member Address Line 2<br>
-	Member Address Line 3<br>
+	<?php echo $address_1 ?><br>
+	<!-- Member Address Line 2<br>
+	Member Address Line 3<br> -->
 	<br>
 	<br>
 	<br>
@@ -75,29 +81,40 @@
 	Dear <?php echo $name ?>:<br>
 	<br><br>
 
-	<!----------- IF TERMINATED ------------>
-		This is to notify that we have elected to terminate your membership; which, in accordance with the terms and provisions of the contract, is effective <u>two weeks after the above date</u>.<br>
-	<!----------- IF TERMINATED ------------>
+	
+	<?php if ($status =="Terminated Voluntarily") { ?>
+	
+		This is to notify that we have withdrawn your membership due to the reason of: <?php echo $comment ?>. <br>
+	
+	
+	<?php } else{ ?>
+
+		This is to notify that we have elected to terminate your membership; which, in accordance with the terms and provisions of the contract, is effective <u>today, <?php echo date('F d, Y') ?></u>.<br>
 	
 
-	<!----------- IF WITHDRAWN ------------>
-		This is to notify that we have withdrawn your membership due to the reason of: <?php echo $comment ?>. <br>
-	<!----------- IF WITHDRAWN ------------>
-
+	<?php } ?>
 
 	<br>
-	The following information will indicate the assets that you may receive after your "termination/withdrawal".</br>
+	The following information will indicate the assets that you may receive after your <?php if ($status =='Terminated Voluntarily') {
+				echo "withdrawal"; }
+				else{ echo "termination"; } ?>.</br>
 	<br>
 		<p style="margin-left: 50px; font-size:13spx;line-height: 20px;">
 			<b>Name: </b><?php echo $name ?> <br>
 			<b>Date Joined: </b><?php echo $dateentered ?><br>
-			<b>Date "Terminated/Withdrawn": </b><?php echo $term_date ?> <br>
+			<b>Date <?php if ($status =='Terminated Voluntarily') {
+				echo "Withdrawn"; }
+				else{ echo "Terminated"; } ?> : </b><?php echo $term_date ?> <br>
 			<b>Reason for Termination: </b><?php echo $comment ?> <br>
-			<b>Total Capital Share: </b>Php <?php echo number_format($tot_capital,2) ?>
+			<b>Total Capital Share: </b>Php <?php echo number_format($tot_capital,2) ?> <br>
+			<?php if ($status=='Terminated Voluntarily') { ?>
+			<b>Total Savings: </b>Php <?php echo number_format($savings,2) ?><br>
+			<b>Amount Receivable: </b>Php <?php echo number_format($Recievable,2) ?>	
+			<?php } ?>
 		</p>
 
-	<br>
-	Should you have any concerns regarding the claim of your possible assets, contact us at (02)522-0011 or visit our branch office on Budget Lane Shopping Center, No. 88, Provincial Rd.<br>
+	<br><!-- 
+	Should you have any concerns regarding the claim of your possible assets, contact us at (02)522-0011 or visit our branch office on Budget Lane Shopping Center, No. 88, Provincial Rd.<br> -->
 	<br>
 	<br>
 	<br>
@@ -107,7 +124,7 @@
 
 		<table >
 	      <tr>
-	        <td class="BM1">NAME OF BM</td>
+	        <td class="BM1"><?php echo $user ?></td>
 	      </tr>
 	      <tr>
 	        <td class="BM2">Signature Above Printed Name of <br>Branch Manager</td>
