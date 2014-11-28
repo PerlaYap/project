@@ -14,7 +14,7 @@ $user = $this->session->userdata('firstname');
 $today = date('F d, Y');
 	$userrank = $this->session->userdata('rank');
 	$name = $this->session->userdata('firstname');
-	 $datetoday = date('F d, Y');
+	$datetoday1 = date('F d, Y');
 
 $misAccount =$this->db->query("SELECT ControlNo AS BranchControl, BranchName, IFNULL(NoMembers,0) AS BegMembers, IFNULL(NewMembers,0) AS NewMembers, IFNULL(TerminatedMembers,0) AS TerminatedMembers,
 IFNULL(ActiveMembers,0) AS ActiveMembers, IFNULL(TotalDormant,0) AS TotalDormant, IFNULL(TotalDanger,0) AS TotalPastDue,
@@ -237,14 +237,13 @@ LEFT JOIN (SELECT * FROM (SELECT * FROM caritasbranch_has_caritascenters
 WHERE Date<=LAST_DAY(DATE_ADD('$datetoday', INTERVAL 0 MONTH)) 
 ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
 ON A.CenterControl=B.CaritasCenters_ControlNo GROUP BY CaritasBranch_ControlNo) Kilo
-ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName ASC")
+ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName ASC");
 ?>
-
 	<a href="<?php echo site_url('login/homepage'); ?>"> <img src="<?php echo base_url('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"></a>
 	
 	<!-- <img src="<?php // echo base_url ('Assets/images/caritaslogo.png'); ?>" class="caritaslogo"> -->
 	<h3>CARITAS SALVE CREDIT COOPERATIVE <br> MONTHLY ACCOUNT REPORT <br> AS OF THE END OF THE MONTH OF <b>
-		<?php echo $monthWord ?> <?php echo $year ?></b></h3>
+		<?php echo $monthWord; ?> <?php echo $year ?></b></h3>
 
 	<br>
 	<table class="misreport" border="1" style="margin-left:auto; margin-right:auto;">
@@ -513,7 +512,7 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
       </tr>
       <?php } ?>
       <tr>
-        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday1; ?></td>
       </tr>
       <tr>
         
@@ -529,7 +528,7 @@ ON Kilo.BranchControl=cb.ControlNo WHERE cb.ControlNo!='1' ORDER BY BranchName A
         <td class="BM2">Signature Above Printed Name of General Manager</td>
       </tr>
       <tr>
-        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday ?></td>
+        <td class="BM1" style="font-size: 13px;"><?php echo $datetoday1; ?></td>
       </tr>
       <tr>
         <td class="BM2">Date</td>
