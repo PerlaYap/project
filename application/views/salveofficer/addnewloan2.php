@@ -2,8 +2,8 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/salveofficer.css'); ?>">
 <!--<link rel="stylesheet" type="text/css" href="../../../Assets/css/salveofficer.css">-->
-<script src="<?php echo base_url('Assets/js/newloan.js'); ?>"></script>
 <script src="<?php echo base_url('Assets/js/jquery-1.11.1.js'); ?>"></script>
+<script src="<?php echo base_url('Assets/js/newloan.js'); ?>"></script>
 
 
 

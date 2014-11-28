@@ -1,60 +1,38 @@
-test=0;
-income=0;
+// test=0;
+// income=0;
+material=0;
 
 function addMaterial(){
-	if(test==test){
-		//<input type='text' name='materials_1[]' class='material_1' style='width: 250px;'/>
-		document.getElementById('inventory').innerHTML +="<label><span></span></label>"
-		+"<select required='true' name='materials_1[]' class='material_1' style='width:220px;'>"
-				        	+"<option value=' '></option>"
-				        	+"<option value='Advertising'>Advertising</option>"
-				        	+"<option value='Business Goods'>Business Goods</option>"
-				        	+"<option value='Business Supplies'>Business Supplies</option>"
-				        	+"<option value='Construction Materials'>Construction Materials</option>"
-				        	+"<option value='Employee Salary'>Employee Salary</option>"
-				        	+"<option value='Labor Cost'>Labor Cost</option>"
-				        	+"<option value='Office Supplies'>Office Supplies</option>"
-				        	+"<option value='Others'>Others</option>"
-				        	+"<option value='Monthly Rent'>Monthly Rent</option>"
-				        	+"<option value='Taxes'>Taxes</option>"
-				        	+"<option value='Transportation Service'>Transportation Service</option>"
-				        	+"<option value='Utilities'>Utilities</option>"
-				        +"</select>"
-				        +"&nbsp&nbsp&nbsp Unit Price :<input type='text' name='unitprice_1[]' class='unitprice_1' style='width: 80px;' placeholder='Peso'/>"; 
-	}	// &nbsp&nbsp&nbsp Qty : <input type='text' name='quantity_1[]' class='quantity_1' style='width: 26px;'/>
-
-		$(".unitprice_1").on("keydown keyup",function(){
-			materialSum();
-		});
-		 /*
-		$(".quantity_1").on("keydown keyup",function(){
-			materialSum();
-		});*/
-}
-
-function addIncome(){
-	if(income==income){
-		document.getElementById('income').innerHTML +="<label><span></span></label><select style='width: 210px;'><option selected></option><option value=''> </option></select> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Daily Income: <input id='incometxt' class='incometxt' type='text' name='income[]' style='width:200px;' />"; 
+	if(material==material){
+		document.getElementById('material').innerHTML +="<label><span></span></label>Material Type:<p class='reqd'>*</p><select required='true' name='materials' class='material_1' style='width:220px;'> <option value=' '></option> <option value='Advertising'>Advertising</option> <option value='Business Goods'>Business Goods</option> <option value='Business Supplies'>Business Supplies</option> <option value='Construction Materials'>Construction Materials</option><option value='Employee Salary'>Employee Salary</option> <option value='Labor Cost'>Labor Cost</option> <option value='Office Supplies'>Office Supplies</option> <option value='Others'>Others</option> <option value='Monthly Rent'>Monthly Rent</option> <option value='Taxes'>Taxes</option><option value='Transportation Service'>Transportation Service</option><option value='Utilities'>Utilities</option></select>&nbsp&nbsp&nbspUnit Price:<p class='reqd'>*</p><input required='true'  type='text' name='unitprice' class='unitprice_1' style='width: 80px;' placeholder='Peso'/> &nbsp&nbsp "; 
+		material+=1;
 	}
+				
 }
 
-function addFamEx(){
-	if(income==income){
-		document.getElementById('famex').innerHTML +="<label><span></span></label><select style='width: 210px;'><option selected></option><option value=''> </option></select> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Daily Expense: <input id='' type='text' name='' style='width:200px;' />"; 
-	}
-}
+// function addIncome(){
+// 	if(income==income){
+// 		document.getElementById('income').innerHTML +="<label><span></span></label><select style='width: 210px;'><option selected></option><option value=''> </option></select> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Daily Income: <input id='incometxt' class='incometxt' type='text' name='income[]' style='width:200px;' />"; 
+// 	}
+// }
 
-function addBusEx(){
-	if(income==income){
-		document.getElementById('busex').innerHTML +="<label><span></span></label><select style='width: 210px;'><option selected></option><option value=''> </option></select> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Daily Expense: <input id='' type='text' name='' style='width:200px;' />"; 
-	}
-}
+// function addFamEx(){
+// 	if(income==income){
+// 		document.getElementById('famex').innerHTML +="<label><span></span></label><select style='width: 210px;'><option selected></option><option value=''> </option></select> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Daily Expense: <input id='' type='text' name='' style='width:200px;' />"; 
+// 	}
+// }
 
-function addIncEx(){
-	if(income==income){
-		document.getElementById('incex').innerHTML +="<label><span></span></label><select style='width: 210px;'><option selected></option><option value=''> </option></select> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Expense: <input id='' type='text' name='' style='width:200px;' />"; 
-	}
-}
+// function addBusEx(){
+// 	if(income==income){
+// 		document.getElementById('busex').innerHTML +="<label><span></span></label><select style='width: 210px;'><option selected></option><option value=''> </option></select> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Daily Expense: <input id='' type='text' name='' style='width:200px;' />"; 
+// 	}
+// }
+
+// function addIncEx(){
+// 	if(income==income){
+// 		document.getElementById('incex').innerHTML +="<label><span></span></label><select style='width: 210px;'><option selected></option><option value=''> </option></select> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Expense: <input id='' type='text' name='' style='width:200px;' />"; 
+// 	}
+// }
 
 
 function hideDiv(){

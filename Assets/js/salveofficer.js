@@ -20,7 +20,7 @@ org=0;
 
 	function addMaterial(){
 		if(material==material){
-			document.getElementById('material').innerHTML +="<label><span></span></label><input type='text' name='' id='' style='width: 250px;'/> &nbsp&nbsp&nbsp      Qty :      <input type='text' name='' id='' style='width: 26px;'/>        &nbsp&nbsp&nbsp      Unit Price :        <input type='text' name='' id='' style='width: 80px;' placeholder='Peso'/>"; 
+			document.getElementById('material').innerHTML +="Material Type:<p class='reqd'>*</p><select required='true' name='materials' class='material_1' style='width:220px;'> <option value=' '></option> <option value='Advertising'>Advertising</option> <option value='Business Goods'>Business Goods</option> <option value='Business Supplies'>Business Supplies</option> <option value='Construction Materials'>Construction Materials</option><option value='Employee Salary'>Employee Salary</option> <option value='Labor Cost'>Labor Cost</option> <option value='Office Supplies'>Office Supplies</option> <option value='Others'>Others</option> <option value='Monthly Rent'>Monthly Rent</option> <option value='Taxes'>Taxes</option><option value='Transportation Service'>Transportation Service</option><option value='Utilities'>Utilities</option></select>&nbsp&nbsp&nbspUnit Price:<p class='reqd'>*</p><input required='true'  type='text' name='unitprice' class='unitprice_1' style='width: 80px;' placeholder='Peso'/> &nbsp&nbsp "; 
 			material+=1;
 		}
 				
