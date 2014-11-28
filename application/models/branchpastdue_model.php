@@ -6,41 +6,60 @@ class Branchpastdue_model extends CI_Model{
 	public function getbranchpastdue($dateTime){
 		date_default_timezone_set('Asia/Manila');
 
-		$month=date('m',$dateTime);
-		$year=date('Y',$dateTime);
 		$date=date('Y-m-d',$dateTime);
 
-		$q_result = $this->branchpastdue($month, $year,$date);
+		$q_result = $this->branchpastdue($date);
 	
 		return $q_result;
 		
 	}
 
-	public function branchpastdue($month, $year, $date){
+	public function branchpastdue($date){
 
-		$query_result= $this->db->query("SELECT ControlNo, BranchID, BranchName, IFNULL(Loan,0) AS Loan, IFNULL(PastDue,0) AS PastDue FROM CaritasBranch Alpha
-LEFT JOIN 
-(SELECT BranchControl, SUM(TransactionType='Loan') AS Loan, SUM(TransactionType='Past Due') AS PastDue
-FROM (SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl
-FROM (SELECT CaritasCenters_ControlNo 
-FROM caritasbranch_has_caritascenters GROUP BY CaritasCenters_ControlNo ORDER BY CaritasCenters_ControlNo ASC)A
-LEFT JOIN (SELECT * FROM 
-(SELECT * FROM CaritasBranch_has_CaritasCenters WHERE Date<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH))
-ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
-ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo)Alpha
-LEFT JOIN CaritasCenters cc ON cc.ControlNo=Alpha.CenterControl
-LEFT JOIN 
-(SELECT Alpha.MemberControl, TransactionType, CenterControl FROM (SELECT Members_ControlNo AS MemberControl, transactionType 
-FROM Transaction WHERE (MONTH(DateTime)='$month' AND YEAR(DateTime)='$year') AND (Transactiontype='Loan' OR TransactionType='Past Due'))Alpha
+		$query_result= $this->db->query("SELECT BranchName, SUM(Target) AS Target, SUM(IF(CurrentAmount<Target, CurrentAmount, Target)) AS ActualReceive, SUM(IF(Collection-Target-LastAmount<0, 0, IF(CurrentAmount<=Target,0, IF(CurrentAmount>=Collection-LastAmount, Collection-Target-LastAmount, CurrentAmount-Target)))) AS PastDue,
+SUM(IF(CurrentAmount+LastAmount<Collection,0, CurrentAmount+LastAmount-Collection)) AS Advance  FROM
+(SELECT CurrentTotal.ControlNo, TRUNCATE(WeeklyPayment*TodayMonth,2) AS Collection, MonthlyPayment AS Target, TRUNCATE(IFNULL(LastAmount,0),2) AS LastAmount,
+TRUNCATE(IFNULL(CurrentAmount,0),2) AS CurrentAmount
+FROM (SELECT ControlNo, WeeklyPayment, IF(LoanType='23-Weeks',IF(TRUNCATE(DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)),DateReleased)/7,0)>23,23,TRUNCATE(DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)),DateReleased)/7,0)), IF(TRUNCATE(DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)),DateReleased)/7,0)>40,40,TRUNCATE(DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)),DateReleased)/7,0))) AS TodayMonth
+FROM (SELECT ControlNo, DateReleased, DateEnd, LoanType, WeeklyPayment, 
+ROUND(((TRUNCATE(DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)),DateReleased)/7,0)-TRUNCATE((IF(Month(DateEnd)=Month('$date') AND YEAR(DateEnd)=YEAR('$date'),DATEDIFF(DateEnd,DateReleased)/7,DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)),DateReleased)/7)),0))* WeeklyPayment),2) AS MonthlyPayment
+FROM 
+(SELECT (AmountRequested+Interest) AS ActiveLoan, ControlNo, IF(LoanType='23-Weeks',(AmountRequested+Interest)/23, (AmountRequested+Interest)/40) AS WeeklyPayment, LoanType, DateReleased, 
+DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH) AS DateEnd
+FROM loanapplication 
+WHERE (Status='Current' OR Status='Full Payment') AND 
+(CAST(DATE_FORMAT('$date' ,CONCAT(YEAR(DateReleased),'-',MONTH(DateReleased),'-01')) as DATE)<='$date' 
+AND '$date'<=LAST_DAY(DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH))))Alpha)Alpha)CurrentTotal
 LEFT JOIN
-(SELECT A.Members_ControlNo AS MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo FROM caritascenters_has_members GROUP BY Members_ControlNo)A
-LEFT JOIN (SELECT * FROM 
-(SELECT * FROM caritascenters_has_members WHERE DateEntered<=LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)) 
-ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
-ON A.Members_ControlNo=B.Members_Controlno)Beta
-ON Alpha.MemberControl=Beta.MemberControl)D ON Alpha.CenterControl=D.CenterControl
-GROUP BY BranchControl)Beta
-ON Alpha.ControlNo=Beta.BranchControl WHERE ControlNo!='1'");
+(SELECT ControlNo,
+ROUND(((TRUNCATE(DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL 0 MONTH)),DateReleased)/7,0)-TRUNCATE((IF(Month(DateEnd)=Month('$date') AND YEAR(DateEnd)=YEAR('$date'),DATEDIFF(DateEnd,DateReleased)/7,DATEDIFF(LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)),DateReleased)/7)),0))* WeeklyPayment),2) AS MonthlyPayment
+FROM 
+(SELECT ControlNo, IF(LoanType='23-Weeks',(AmountRequested+Interest)/23, (AmountRequested+Interest)/40) AS WeeklyPayment, LoanType, DateReleased, 
+DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH) AS DateEnd
+FROM loanapplication 
+WHERE (Status='Current' OR Status='Full Payment') AND 
+(CAST(DATE_FORMAT('$date' ,CONCAT(YEAR(DateReleased),'-',MONTH(DateReleased),'-01')) as DATE)<='$date' 
+AND '$date'<=LAST_DAY(DATE_ADD((IF(LoanType='23-Weeks', DATE_ADD(DateReleased, INTERVAL 161 DAY), DATE_ADD(DateReleased,INTERVAL 280 DAY))), INTERVAL 0 MONTH))))Alpha)TargetCollection
+ON CurrentTotal.ControlNo=TargetCollection.ControlNo
+LEFT JOIN
+(SELECT LoanAppControlNo, SUM(Amount) AS LastAmount FROM Transaction 
+WHERE TransactionType='Loan' AND DateTime<=LAST_DAY(DATE_ADD('$date', INTERVAL -1 MONTH)) GROUP BY LoanAppControlNo)LastCollection
+ON CurrentTotal.ControlNo=LastCollection.LoanAppControlNo
+LEFT JOIN 
+(SELECT LoanAppControlNo, SUM(Amount) AS CurrentAmount FROM Transaction 
+WHERE TransactionType='Loan' AND MONTH(DateTime)=MONTH('$date') AND YEAR(DateTime)=YEAR('$date')
+GROUP BY LoanAppControlNo)CurrentCollection
+ON CurrentTotal.ControlNo=CurrentCollection.LoanAppControlNo)Alpha
+LEFT JOIN (SELECT LoanApplication_ControlNo AS LoanControl, CaritasBranch_ControlNo AS BranchControl, CenterNo FROM loanapplication_has_members lhm
+LEFT JOIN
+(SELECT A.Members_ControlNo, CenterNo FROM (SELECT Members_ControlNo FROM caritascenters_has_members GROUP BY Members_ControlNo)A
+LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
+ON A.Members_ControlNo=B.Members_ControlNo
+LEFT JOIN caritascenters cc ON B.CaritasCenters_ControlNo=cc.ControlNo)cc
+ON lhm.Members_ControlNo=cc.Members_ControlNo)Beta
+ON Alpha.ControlNo=Beta.LoanControl 
+LEFT JOIN caritasbranch cb ON cb.ControlNo=Beta.BranchControl
+GROUP BY BranchControl ORDER BY BranchName ASC");
 
 		return $query_result->result();
 	}

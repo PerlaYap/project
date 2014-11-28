@@ -24,31 +24,19 @@ $date = date('F d, Y');
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Branch', 'Past Due','On Time'],
-          <?php $y = 0;
-                $len = count($pastduesbranch);
-          foreach ($pastduesbranch as $pdb) { 
-            $bname = $pdb->BranchName;
-            $num = $pdb->PastDue;
-            $loan = $pdb->Loan;
-            ?>
-            <?php if ($y == $len-1) { ?>
-                ['<?php echo $bname ?>', <?php echo $num; ?>,<?php echo $loan; ?> ]
-            <?php } else { ?>
-              ['<?php echo $bname ?>', <?php echo $num; ?>,<?php echo $loan; ?> ],
-           <?php } ?>
-            
-          <?php $y++; } ?>
-         
+           ['Year', 'Target', 'On-Time', 'Past Due', 'Advance'],
+          <?php foreach($pastduesbranch AS $data){ ?>
+          ['<?php echo $data->BranchName ?>', <?php echo $data->Target ?>,<?php echo $data->ActualReceive ?>, <?php echo $data->PastDue ?>, <?php echo $data->Advance ?>,],
+          <?php } ?>
 
-          
         ]);
 
         var options = {
           //title: 'Company Performance',
           hAxis: {title: 'Branch', titleTextStyle: {color: 'black', italic: false, bold: true}},
-          vAxis: {title: 'No. of Past Due', titleTextStyle: {color: 'black', italic: false,  bold: true}},
-          colors:['#a83a47', '#a8a23a'],
+          vAxis: {title: 'Amount. of Past Due', titleTextStyle: {color: 'black', italic: false,  bold: true}},
+          bar: { groupWidth: '50%' },
+          colors:['d2ca4c','419fb3', 'b34141','a8a6a6' ],
         };
 
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
@@ -65,7 +53,7 @@ $date = date('F d, Y');
 	<h3>
 		CARITAS SALVE CREDIT COOPERATIVE <br> 
 		COLLECTION PERFORMANCE OF BRANCHES <br> 
-		FOR THE MONTH OF <b> <?php echo $month." " .$year ?> </b>
+		AS OF THE END OF THE MONTH OF <b> <?php echo $month." " .$year ?> </b>
 
 	</h3>
 
@@ -82,17 +70,23 @@ $date = date('F d, Y');
 
     <table border=1 style="border-collapse: collapse; margin-left: auto; margin-right: auto">
       <tr>
-          <td class='hdrx'>CENTER</td>
-          <td class='hdrx'>No. of On-Time Payment</td>
-          <td class='hdrx'>No. of Past Due</td>
-      </tr>
-      <?php
-      foreach ($pastduesbranch as $data){ ?>
-      <tr>
-          <td class='hdrtxt'><?php echo $data->BranchName; ?></td>
-          <td class='hdrtxt'><?php echo $data->Loan; ?></td>
-          <td class='hdrtxt'><?php echo $data->PastDue; ?></td>
-      </tr>
+    <td class="header" style="width: 150px;"> Branch </td>
+    <td class="header"> Target </td>
+    <td class="header"> On-Time </td>
+    <td class="header"> Past Due </td>
+    <td class="header"> Advance </td>
+  </tr>
+
+  <?php
+  foreach($pastduesbranch AS $data){ ?>
+  <tr>
+    <td class="data"><?php echo $data->BranchName ?></td>
+    <td class="data"><?php echo number_format($data->Target,2) ?></td>
+    <td class="data"><?php echo number_format($data->ActualReceive,2) ?></td>
+    <td class="data"><?php echo number_format($data->PastDue,2) ?></td>
+    <td class="data"><?php echo number_format($data->Advance,2) ?></td>
+
+  </tr>
       <?php } ?>
 
     </table>
