@@ -250,8 +250,8 @@ function icalculateSum(){
 	var sum=0;
 
 	$(".incomeCIinput").each(function(){
-		if(!isNaN(this.value) && this.value.length !=0){
-			sum+=parseFloat(this.value);
+		if(!isNaN(this.value.replace(',','')) && this.value.length !=0){
+			sum+=parseFloat(this.value.replace(',',''));
 		}
 	});
 
@@ -262,8 +262,8 @@ function fcalculateSum(){
 	var sum=0;
 
 	$(".familyCIinput").each(function(){
-		if(!isNaN(this.value) && this.value.length !=0){
-			sum+=parseFloat(this.value);
+		if(!isNaN(this.value.replace(',','')) && this.value.length !=0){
+			sum+=parseFloat(this.value.replace(',',''));
 		}
 	});
 
@@ -274,8 +274,8 @@ function bcalculateSum(){
 	var sum=0;
 
 	$(".businessCIinput").each(function(){
-		if(!isNaN(this.value) && this.value.length !=0){
-			sum+=parseFloat(this.value);
+		if(!isNaN(this.value.replace(',','')) && this.value.length !=0){
+			sum+=parseFloat(this.value.replace(',',''));
 		}
 	});
 
@@ -288,8 +288,8 @@ function materialSum(){
 	//var quantity=[];
 
 	$(".unitprice_1").each(function(){
-		if(!isNaN(this.value) && this.value.length !=0){
-			unitprice.push(this.value);
+		if(!isNaN(this.value.replace(',','')) && this.value.length !=0){
+			unitprice.push(this.value.replace(',',''));
 		}
 	});
 
