@@ -32,7 +32,7 @@ foreach ($loanCount->result() as $row) {
 
 <?php $loanbusiness=$this->db->query("SELECT lb.ControlNo, lb.BusinessName FROM loanbusiness_has_loanapplication lhl 
 	RIGHT JOIN (SELECT LoanApplication_ControlNo AS ControlNo FROM loanapplication_has_members lhm WHERE Members_ControlNo=(SELECT ControlNo FROM Members WHERE MemberID='$mid')) A ON A.ControlNo=lhl.LoanApplication_ControlNo
-	LEFT JOIN loanbusiness lb ON lhl.LoanBusiness_ControlNo=lb.ControlNo GROUP BY BusinessName"); ?>
+	LEFT JOIN loanbusiness lb ON lhl.LoanBusiness_ControlNo=lb.ControlNo GROUP BY BusinessName ORDER BY lb.ControlNo DESC LIMIT 1"); ?>
 
 <?php $membercomaker=$this->db->query("SELECT Alpha.ControlNo, CONCAT(LastName,', ',FirstName,' ', MiddleName) AS Name, MemberID FROM (SELECT A.ControlNo, Status FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo)A
 	LEFT JOIN (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus ORDER BY ControlNo ASC, DateUpdated DESC)A GROUP BY ControlNo)B
@@ -315,7 +315,7 @@ function total(){
 
 	income+=parseFloat($("input#isubtotal").val().replace(',',''));
 	
-	expense+=parseFloat($("input#bsubtotal").val()) + parseFloat($("input#fsubtotal").val().replace(',',''));
+	expense+=parseFloat($("input#bsubtotal").val().replace(',','')) + parseFloat($("input#fsubtotal").val().replace(',',''));
 
 	difference+=parseFloat(income)-parseFloat(expense);
 
@@ -476,13 +476,10 @@ function total(){
     							<label>
     								<span>Business:<p class="reqd">*</p></span>
     								<select required="true" style="width:572px;" name="loanbusiness" id="selectMenu" onchange="showBusiness(this.value)">
-    									<option value="existingbusiness" selected>Existing Business</option>
-    									<option value="newbusiness">New Business</option>
-
-    									<?php
-    									foreach ($loanbusiness->result() as $row) { 
-    										echo "<option value='".$row->ControlNo."'>".$row->BusinessName."</option>" ;
-    									} ?>
+    									<?php foreach($loanbusiness->result() AS $data){ ?>
+                        <option value="<?php echo $data->ControlNo; ?>" selected>Existing Business(<?php echo $data->BusinessName; ?>)</option>
+                      <?php } ?>
+    									<option value="newbusiness">Register Current Business</option>
     								</select>
     							</label>
     							
@@ -723,36 +720,6 @@ function total(){
 				    </label>-->
 				    
 				    <br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 				    <h1 style="border-top: 1px solid #DADADA; padding-top: 15px;" >Credit Investigation
 				    	<span>Please place monetary values of the following.</span>

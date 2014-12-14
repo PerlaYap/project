@@ -12,12 +12,12 @@ $userrank = $this->session->userdata('rank');
 
 
 <?php $memberinfo=$this->db->query("SELECT LoanApplication_ControlNo AS LoanControl, lhm.Members_ControlNo AS MemberControl, MemberID, FirstName, MiddleName, LastName, BranchName, CenterNo
-FROM loanapplication_has_members lhm
-LEFT JOIN membersname mn ON mn.ControlNo=lhm.Members_ControlNo
-LEFT JOIN
-(SELECT CenterNo, BranchName, B.CenterControl, Members_ControlNo AS MemberControl FROM (SELECT * FROM caritascenters_has_members WHERE ISNULL(DateLeft))cchm
-INNER JOIN (SELECT CenterControl, BranchControl, BranchName FROM (SELECT CaritasBranch_ControlNo AS BranchControl, CaritasCenters_ControlNo AS CenterControl, MAX(Date)
-FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY Date DESC)A GROUP BY CenterControl) A LEFT JOIN CaritasBranch cb ON cb.ControlNo=A.BranchControl WHERE BranchControl='$branchNo') B ON B.CenterControl=cchm.CaritasCenters_ControlNo
+	FROM loanapplication_has_members lhm
+	LEFT JOIN membersname mn ON mn.ControlNo=lhm.Members_ControlNo
+	LEFT JOIN
+	(SELECT CenterNo, BranchName, B.CenterControl, Members_ControlNo AS MemberControl FROM (SELECT * FROM caritascenters_has_members WHERE ISNULL(DateLeft))cchm
+		INNER JOIN (SELECT CenterControl, BranchControl, BranchName FROM (SELECT CaritasBranch_ControlNo AS BranchControl, CaritasCenters_ControlNo AS CenterControl, MAX(Date)
+			FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY Date DESC)A GROUP BY CenterControl) A LEFT JOIN CaritasBranch cb ON cb.ControlNo=A.BranchControl WHERE BranchControl='$branchNo') B ON B.CenterControl=cchm.CaritasCenters_ControlNo
 LEFT JOIN CaritasCenters cc ON cc.ControlNo=cchm.CaritasCenters_ControlNo) B ON B.MemberControl=lhm.Members_ControlNo
 LEFT JOIN members mem ON mem.ControlNo=lhm.Members_ControlNo
 WHERE LoanApplication_ControlNo=$lid LIMIT 1 "); 
@@ -36,20 +36,20 @@ foreach ($memberinfo->result() as $row) {
 ?>
 
 <?php $loanbusiness=$this->db->query("SELECT lb.ControlNo, lb.BusinessName FROM loanbusiness_has_loanapplication lhl 
-RIGHT JOIN (SELECT LoanApplication_ControlNo AS ControlNo FROM loanapplication_has_members lhm WHERE Members_ControlNo=(SELECT ControlNo FROM Members WHERE MemberID='$memberID')) A ON A.ControlNo=lhl.LoanApplication_ControlNo
-LEFT JOIN loanbusiness lb ON lhl.LoanBusiness_ControlNo=lb.ControlNo GROUP BY BusinessName"); ?>
+	RIGHT JOIN (SELECT LoanApplication_ControlNo AS ControlNo FROM loanapplication_has_members lhm WHERE Members_ControlNo=(SELECT ControlNo FROM Members WHERE MemberID='$memberID')) A ON A.ControlNo=lhl.LoanApplication_ControlNo
+	LEFT JOIN loanbusiness lb ON lhl.LoanBusiness_ControlNo=lb.ControlNo GROUP BY BusinessName"); ?>
 
 <?php $householdlist=$this->db->query("SELECT mhm.HouseholdNo, concat(hn.LastName,', ',hn.FirstName,' ', hn.MiddleName) AS Name
-FROM members_has_membershousehold mhm 
-LEFT JOIN householdname hn ON  mhm.HouseholdNo=hn.HouseholdNo
-RIGHT JOIN (SELECT ControlNo FROM members mem WHERE mem.MemberID='$memberID')A ON A.ControlNo=mhm.ControlNo"); ?>
+	FROM members_has_membershousehold mhm 
+	LEFT JOIN householdname hn ON  mhm.HouseholdNo=hn.HouseholdNo
+	RIGHT JOIN (SELECT ControlNo FROM members mem WHERE mem.MemberID='$memberID')A ON A.ControlNo=mhm.ControlNo"); ?>
 
 <?php $loanInfo=$this->db->query("SELECT ControlNo, ApplicationNumber, AmountRequested, Interest, DateApplied, DayoftheWeek, LoanType, Status, CapitalShare, IFNULL(A.ISubtotal,0) AS ISubtotal, IFNULL(B.FSubtotal,0) AS FSubtotal, IFNULL(C.BSubtotal,0) AS BSubtotal 
-FROM loanapplication la
-LEFT JOIN (SELECT loanapplication_ControlNo AS LoanControl, sum(Amount) AS ISubtotal FROM loanapplication_has_incometype GROUP BY LoanControl) A ON A.LoanControl=la.ControlNo
-LEFT JOIN (SELECT loanapplication_ControlNo AS LoanControl, sum(Amount) AS FSubtotal FROM loanapplication_has_familyexpensetype GROUP BY LoanControl) B ON B.LoanControl=la.ControlNo
-LEFT JOIN (SELECT loanapplication_ControlNo AS LoanControl, sum(Amount) AS BSubtotal FROM loanapplication_has_businessexpensetype GROUP BY LoanControl) C ON C.LoanControl=la.ControlNo
-WHERE ControlNo=$lid"); 
+	FROM loanapplication la
+	LEFT JOIN (SELECT loanapplication_ControlNo AS LoanControl, sum(Amount) AS ISubtotal FROM loanapplication_has_incometype GROUP BY LoanControl) A ON A.LoanControl=la.ControlNo
+	LEFT JOIN (SELECT loanapplication_ControlNo AS LoanControl, sum(Amount) AS FSubtotal FROM loanapplication_has_familyexpensetype GROUP BY LoanControl) B ON B.LoanControl=la.ControlNo
+	LEFT JOIN (SELECT loanapplication_ControlNo AS LoanControl, sum(Amount) AS BSubtotal FROM loanapplication_has_businessexpensetype GROUP BY LoanControl) C ON C.LoanControl=la.ControlNo
+	WHERE ControlNo=$lid"); 
 
 foreach ($loanInfo->result() as $row) {
 	$loanControl=$row->ControlNo;
@@ -71,10 +71,10 @@ foreach ($loanInfo->result() as $row) {
 ?>
 
 <?php $businessInfo=$this->db->query("SELECT A.ControlNo, BusinessName, BusinessType, Year, Month, Day, ContactNo, Address FROM loanbusiness_has_loanapplication lbhla
-LEFT JOIN (SELECT lb.ControlNo, BusinessName, BusinessType, extract(Year FROM DateEstablished) AS Year, extract(Month FROM DateEstablished) AS Month,extract(Day FROM DateEstablished) AS Day, Address, ContactNo 
-FROM loanbusiness lb 
-LEFT JOIN businessaddress ba ON lb.ControlNo=ba.ControlNo
-LEFT JOIN businesscontact bc ON lb.ControlNo=bc.ControlNo) A ON lbhla.LoanBusiness_ControlNo=A.ControlNo
+	LEFT JOIN (SELECT lb.ControlNo, BusinessName, BusinessType, extract(Year FROM DateEstablished) AS Year, extract(Month FROM DateEstablished) AS Month,extract(Day FROM DateEstablished) AS Day, Address, ContactNo 
+		FROM loanbusiness lb 
+		LEFT JOIN businessaddress ba ON lb.ControlNo=ba.ControlNo
+		LEFT JOIN businesscontact bc ON lb.ControlNo=bc.ControlNo) A ON lbhla.LoanBusiness_ControlNo=A.ControlNo
 WHERE LoanApplication_ControlNo='$lid'"); 
 
 foreach ($businessInfo->result() as $row) {
@@ -92,27 +92,6 @@ foreach ($businessInfo->result() as $row) {
 <?php $materials=$this->db->query("SELECT Material, Quantity, UnitPrice FROM loanbusiness_has_loanapplication WHERE LoanApplication_ControlNo='$lid'"); 
 ?>
 
-<?php $noncomaker=$this->db->query("SELECT nmcm.MembersHousehold_HouseholdNo AS HouseholdControl, FirstName, MiddleName, LastName, CivilStatus, GenderID, Age, Occupation, Relationship
-FROM nonmember_comaker nmcm 
-LEFT JOIN membershousehold mh ON nmcm.MembersHousehold_HouseholdNo=mh.HouseholdNo
-LEFT JOIN householdname hn ON nmcm.MembersHousehold_HouseholdNo=hn.HouseholdNo
-LEFT JOIN householdoccupation ho ON nmcm.MembersHousehold_HouseholdNo=ho.HouseholdNo
-LEFT JOIN members_has_membershousehold mhmh ON mhmh.HouseholdNo=nmcm.MembersHousehold_HouseholdNo
-WHERE LoanApplication_ControlNo=$lid"); 
-
-foreach ($noncomaker->result() as $row) {
-	$householdControl=$row->HouseholdControl;
-	$cfirstName=$row->FirstName;
-	$cmiddleName=$row->MiddleName;
-	$clastName=$row->LastName;
-	$civilStatus=$row->CivilStatus;
-	$gender=$row->GenderID;
-	$age=$row->Age;
-	$occupation=$row->Occupation;
-	$crelationship=$row->Relationship;
-}
-?>
-
 <?php $memcomaker=$this->db->query("SELECT MemberID, Relationship FROM member_comaker mc LEFT JOIN Members mem ON mc.Members_ControlNo=mem.ControlNo WHERE LoanApplication_ControlNo=$lid"); 
 
 foreach ($memcomaker->result() as $row) {
@@ -122,7 +101,7 @@ foreach ($memcomaker->result() as $row) {
 ?>
 
 <?php $lastLoan=$this->db->query("SELECT Alpha.ControlNo AS LoanControl, (AmountRequested+Interest) AS TotalPayment, SUM(Beta.Amount) AS PastDue, SUM(Charlie.Amount) AS Payment FROM (SELECT ControlNo, AmountRequested, Interest, DateApplied, Members_ControlNo FROM (SELECT * FROM(SELECT * FROM LoanApplication la LEFT JOIN loanapplication_has_members lhm ON lhm.LoanApplication_ControlNo=la.ControlNo
-WHERE Status='Full Payment' ORDER BY Members_ControlNo, DateApplied DESC)A GROUP BY Members_ControlNo)B WHERE Members_ControlNo=$memberControl)Alpha 
+	WHERE Status='Full Payment' ORDER BY Members_ControlNo, DateApplied DESC)A GROUP BY Members_ControlNo)B WHERE Members_ControlNo=$memberControl)Alpha 
 LEFT JOIN (SELECT * FROM Transaction trans WHERE transactiontype='Past Due')Beta ON Beta.LoanAppControlNo=Alpha.ControlNo
 LEFT JOIN (SELECT * FROM Transaction trans WHERE transactiontype='Loan')Charlie ON Charlie.LoanAppControlNo=Alpha.ControlNo
 WHERE Beta.ControlNo IS NOT NULL OR Charlie.ControlNo IS NOT NULL"); 
@@ -131,6 +110,22 @@ foreach ($lastLoan->result() as $row) {
 }
 ?>
 
+<?php $membercomaker=$this->db->query("SELECT Alpha.ControlNo, CONCAT(LastName,', ',FirstName,' ', MiddleName) AS Name, MemberID FROM (SELECT A.ControlNo, Status FROM (SELECT ControlNo FROM members_has_membersmembershipstatus GROUP BY ControlNo)A
+	LEFT JOIN (SELECT * FROM (SELECT * FROM members_has_membersmembershipstatus ORDER BY ControlNo ASC, DateUpdated DESC)A GROUP BY ControlNo)B
+	ON A.ControlNo=B.ControlNo WHERE Status!='Terminated' AND Status!='Terminated Voluntarily')Alpha
+LEFT JOIN
+(SELECT MemberControl, BranchControl FROM (SELECT A.Members_ControlNo AS MemberControl, CaritasCenters_ControlNo AS CenterControl FROM (SELECT Members_ControlNo FROM caritascenters_has_members GROUP BY Members_ControlNo)A
+	LEFT JOIN (SELECT * FROM (SELECT * FROM caritascenters_has_members ORDER BY Members_ControlNo ASC, DateEntered DESC)A GROUP BY Members_ControlNo)B
+	ON A.Members_ControlNo=B.Members_ControlNo)Alpha
+LEFT JOIN (SELECT A.CaritasCenters_ControlNo AS CenterControl, CaritasBranch_ControlNo AS BranchControl FROM (SELECT CaritasCenters_ControlNo FROM caritasbranch_has_caritascenters GROUP BY CaritasCenters_ControlNo)A
+	LEFT JOIN (SELECT * FROM (SELECT * FROM caritasbranch_has_caritascenters ORDER BY CaritasCenters_ControlNo ASC, Date DESC)A GROUP BY CaritasCenters_ControlNo)B
+	ON A.CaritasCenters_ControlNo=B.CaritasCenters_ControlNo)Beta
+ON Alpha.CenterControl=Beta.CenterControl)Beta
+ON Alpha.ControlNo=Beta.MemberControl
+LEFT JOIN membersname mn ON mn.ControlNo=Alpha.ControlNo
+LEFT JOIN Members mem ON mem.ControlNo=Alpha.ControlNo
+WHERE BranchControl='$branchNo' ORDER BY Name ASC"); ?>
+
 <?php $businessExpense=$this->db->query("SELECT BusinessExpenseType_ExpenseType AS ExpenseType, Amount FROM loanapplication_has_businessexpensetype WHERE loanapplication_ControlNo='$lid'"); ?>
 
 <?php $familyExpense=$this->db->query("SELECT FamilyExpenseType_ExpenseType AS ExpenseType, Amount FROM loanapplication_has_familyexpensetype WHERE loanapplication_ControlNo='$lid'"); ?>
@@ -138,116 +133,114 @@ foreach ($lastLoan->result() as $row) {
 <?php $sourceIncome=$this->db->query("SELECT IncomeType_IncomeType AS IncomeType, Amount FROM loanapplication_has_incometype WHERE loanapplication_ControlNo='$lid'"); ?>
 
 <?php $pastDuePerformance = $this->db->query("SELECT Members_ControlNo AS MemberControl, Count(loanapplication_ControlNo) AS LoanCount, SUM(CapitalShare) AS TotalShare, TotalPastDue,TotalLoanTrans, Percent, PastDue23a, PastDue40a, PastDue23b, PastDue40b, PastDue23c, PastDue40c, PastDue23d, PastDue40d, PastDue23e, PastDue40e,
-IFNULL(ROUND((((PastDue23a+PastDue40a)/TotalTransa)*100),2),0) AS Percenta,IFNULL(ROUND((((PastDue23b+PastDue40b)/TotalTransb)*100),2),0) AS Percentb, IFNULL(ROUND((((PastDue23c+PastDue40c)/TotalTransc)*100),2),0) AS Percentc, IFNULL(ROUND((((PastDue23d+PastDue40d)/TotalTransd)*100),2),0) AS Percentd, IFNULL(ROUND((((PastDue23e+PastDue40e)/TotalTranse)*100),2),0) AS Percente
-FROM (SELECT * FROM loanapplication_has_members lhm WHERE Members_ControlNo='$memberControl') A 
-LEFT JOIN LoanApplication la ON la.ControlNo=A.LoanApplication_ControlNo
-LEFT JOIN
-(SELECT MemberControl,TotalPastDue,TotalLoanTrans, ROUND(((TotalPastDue/TotalLoanTrans)*100),2) AS Percent FROM
-(SELECT Members_ControlNo AS MemberControl, Count(ControlNo) AS TotalLoanTrans FROM transaction trans WHERE (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') A
-CROSS JOIN
-(SELECT Count(ControlNo) AS TotalPastDue FROM transaction trans WHERE transactiontype='Past Due' AND Members_ControlNo='$memberControl') B) C ON C.MemberControl=A.Members_ControlNo
+	IFNULL(ROUND((((PastDue23a+PastDue40a)/TotalTransa)*100),2),0) AS Percenta,IFNULL(ROUND((((PastDue23b+PastDue40b)/TotalTransb)*100),2),0) AS Percentb, IFNULL(ROUND((((PastDue23c+PastDue40c)/TotalTransc)*100),2),0) AS Percentc, IFNULL(ROUND((((PastDue23d+PastDue40d)/TotalTransd)*100),2),0) AS Percentd, IFNULL(ROUND((((PastDue23e+PastDue40e)/TotalTranse)*100),2),0) AS Percente
+	FROM (SELECT * FROM loanapplication_has_members lhm WHERE Members_ControlNo='$memberControl') A 
+	LEFT JOIN LoanApplication la ON la.ControlNo=A.LoanApplication_ControlNo
+	LEFT JOIN
+	(SELECT MemberControl,TotalPastDue,TotalLoanTrans, ROUND(((TotalPastDue/TotalLoanTrans)*100),2) AS Percent FROM
+		(SELECT Members_ControlNo AS MemberControl, Count(ControlNo) AS TotalLoanTrans FROM transaction trans WHERE (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') A
+		CROSS JOIN
+		(SELECT Count(ControlNo) AS TotalPastDue FROM transaction trans WHERE transactiontype='Past Due' AND Members_ControlNo='$memberControl') B) C ON C.MemberControl=A.Members_ControlNo
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue23a FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested<=4000 AND loantype='23-Weeks') A 
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta1
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested<=4000 AND loantype='23-Weeks') A 
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta1
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue40a FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested<=4000 AND loantype='40-Weeks') A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie1
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested<=4000 AND loantype='40-Weeks') A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie1
 CROSS JOIN
 (SELECT Count(ControlNo) AS TotalTransa FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested<=4000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta1
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested<=4000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta1
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue23b FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>4000 AND AmountRequested<=8000 AND loantype='23-Weeks') A 
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta2
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>4000 AND AmountRequested<=8000 AND loantype='23-Weeks') A 
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta2
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue40b FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>4000 AND AmountRequested<=8000 AND loantype='40-Weeks') A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie2
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>4000 AND AmountRequested<=8000 AND loantype='40-Weeks') A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie2
 CROSS JOIN
 (SELECT Count(ControlNo) AS TotalTransb FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>4000 AND AmountRequested<=8000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta2
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>4000 AND AmountRequested<=8000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta2
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue23c FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>8000 AND AmountRequested<=16000 AND loantype='23-Weeks') A 
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta3
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>8000 AND AmountRequested<=16000 AND loantype='23-Weeks') A 
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta3
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue40c FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>8000 AND AmountRequested<=16000 AND loantype='40-Weeks') A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie3
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>8000 AND AmountRequested<=16000 AND loantype='40-Weeks') A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie3
 CROSS JOIN
 (SELECT Count(ControlNo) AS TotalTransc FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>8000 AND AmountRequested<=16000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta3
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>8000 AND AmountRequested<=16000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta3
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue23d FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>16000 AND AmountRequested<=32000 AND loantype='23-Weeks') A 
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta4
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>16000 AND AmountRequested<=32000 AND loantype='23-Weeks') A 
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta4
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue40d FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>16000 AND AmountRequested<=32000 AND loantype='40-Weeks') A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie4
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>16000 AND AmountRequested<=32000 AND loantype='40-Weeks') A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie4
 CROSS JOIN
 (SELECT Count(ControlNo) AS TotalTransd FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>16000 AND AmountRequested<=32000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta4
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>16000 AND AmountRequested<=32000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta4
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue23e FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>32000 AND loantype='23-Weeks') A 
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta5
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>32000 AND loantype='23-Weeks') A 
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Beta5
 CROSS JOIN
 (SELECT Count(ControlNo) AS PastDue40e FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>32000 AND loantype='40-Weeks') A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie5
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>32000 AND loantype='40-Weeks') A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND transactiontype='Past Due' AND Members_ControlNo='$memberControl')Charlie5
 CROSS JOIN
 (SELECT Count(ControlNo) AS TotalTranse FROM transaction trans 
-RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>32000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
-ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta5");
-	
-  foreach ($pastDuePerformance->result() as $row) {
+	RIGHT JOIN (SELECT ControlNo AS LoanControl FROM LoanApplication la WHERE AmountRequested>32000 AND (loantype='40-Weeks' OR loantype='23-Weeks')) A
+	ON A.LoanControl=trans.LoanAppControlNo  WHERE ControlNo IS NOT NULL AND (transactiontype='Past Due' OR transactiontype='Loan') AND Members_ControlNo='$memberControl') Delta5");
+
+foreach ($pastDuePerformance->result() as $row) {
 	$pdmemberControl = $row->MemberControl;
 	$pdloanCount = $row->LoanCount;
-  $pdtotalShare=$row->TotalShare;
-  $pdtotalPastDue=$row->TotalPastDue;
-  $pdtotalLoanTrans=$row->TotalLoanTrans;
-  $pdpercent=$row->Percent;
-  if (empty($pdpercent)) {
-    $pdpercent = 0;
-  }
-  $pd23a=$row->PastDue23a;
-  $pd23b=$row->PastDue23b;
-  $pd23c=$row->PastDue23c;
-  $pd23d=$row->PastDue23d;
-  $pd23e=$row->PastDue23e;
-  $pd40a=$row->PastDue40a;
-  $pd40b=$row->PastDue40b;
-  $pd40c=$row->PastDue40c;
-  $pd40d=$row->PastDue40d;
-  $pd40e=$row->PastDue40e;
-  $pdpercenta=$row->Percenta;
-  $pdpercentb=$row->Percentb;
-  $pdpercentc=$row->Percentc;
-  $pdpercentd=$row->Percentd;
-  $pdpercente=$row->Percente;
+	$pdtotalShare=$row->TotalShare;
+	$pdtotalPastDue=$row->TotalPastDue;
+	$pdtotalLoanTrans=$row->TotalLoanTrans;
+	$pdpercent=$row->Percent;
+	if (empty($pdpercent)) {
+		$pdpercent = 0;
+	}
+	$pd23a=$row->PastDue23a;
+	$pd23b=$row->PastDue23b;
+	$pd23c=$row->PastDue23c;
+	$pd23d=$row->PastDue23d;
+	$pd23e=$row->PastDue23e;
+	$pd40a=$row->PastDue40a;
+	$pd40b=$row->PastDue40b;
+	$pd40c=$row->PastDue40c;
+	$pd40d=$row->PastDue40d;
+	$pd40e=$row->PastDue40e;
+	$pdpercenta=$row->Percenta;
+	$pdpercentb=$row->Percentb;
+	$pdpercentc=$row->Percentc;
+	$pdpercentd=$row->Percentd;
+	$pdpercente=$row->Percente;
 
 }
- ?>
+?>
 <script type="text/javascript">
 window.onload = function() {
 
-	$("#capitalshare").val('<?php echo $capitalShare ?>');
 	$("#loanType").val('<?php echo $loanType ?>');
 	$("#dayoftheWeek").val('<?php echo $dayoftheWeek ?>');
 	$("#businessDrop").val('<?php echo $businessControl ?>');
 	$("#establishMonth").val('<?php echo $month ?>');
 	$("#establishDay").val('<?php echo $day ?>');
 	$("#establishYear").val('<?php echo $year ?>');
-	$("#comakerDrop").val('<?php echo $householdControl ?>');
-	$("#genderDrop").val('<?php echo $gender ?>');
-	$("#civilDrop").val('<?php echo $civilStatus ?>');
+	$('#comakerId').val('<?php echo $memComakerID ?>');
+	$('#relationship').val('<?php echo $mrelationship ?>');
 
 }
 </script>
@@ -316,13 +309,7 @@ window.onload = function() {
 								<span>Loan Application No. :</span> 
 								<input disabled="true" type="text" id="application" name="appnumber" style="width: 210px;" value="<?php echo $applicationNumber?>"/>
 								Amount of Shares :
-								<select id="capitalshare" name="capitalshare" style="width:210px;" disabled/>
-								<option value="<?php echo $capitalShare ?>" selected="selected"><?php echo number_format($capitalShare,2) ?></option>
-								<option value="200">200</option>
-								<option value="300">300</option>
-								<option value="400">400</option>
-								<option value="500">500</option>
-							</select>
+								<input type="text" id="capitalshare" name="capitalshare" style="width:210px;" value="<?php echo $capitalShare; ?>" disabled/>
 						</label>  
 
 						<label>
@@ -360,8 +347,7 @@ window.onload = function() {
 								<label>
 									<span>Business :</span>
 									<select  style="width:572px;" disabled="true" name="loanbusiness" id="businessDrop" onchange="showBusiness(this.value)">
-										<option value=" "></option>
-										<option value="newbusiness">New Business</option>
+										<option value="newbusiness">Register New Business</option>
 										<?php
 										foreach ($loanbusiness->result() as $row) { 
 											echo "<option value='".$row->ControlNo."'>".$row->BusinessName."</option>" ;
@@ -443,27 +429,27 @@ window.onload = function() {
 								<?php foreach ($materials->result() as $result) { ?>
 								<label>
 									<span>Name :</span></label>
-									<input type="text" name="materials" id="material" style="width: 250px;" value="<?php echo $result->Material ?>" />
+									<input type="text" name="materials" id="material" style="width: 250px;" value="<?php echo $result->Material ?>" disable="true" />
 
 									<!--&nbsp&nbsp&nbsp
 									Qty :
 									<input type="text" name="quantity" id="material" style="width: 26px;" value="<?php echo $result->Quantity ?>"/>
-									-->
-									&nbsp&nbsp&nbsp
-									Unit Price :
-									<input type="text" name="unitprice" id="material" style="width: 80px;" value="<?php echo number_format($result->UnitPrice,2) ?>"/> &nbsp&nbsp 
+								-->
+								&nbsp&nbsp&nbsp
+								Unit Price :
+								<input type="text" name="unitprice" id="material" style="width: 80px;" value="<?php echo number_format($result->UnitPrice,2) ?>"/> &nbsp&nbsp 
 
-									<input type="button" class="addmore2" value="+" onclick="addMaterial()"/>
-									<?php	} ?>
+								<input type="button" class="addmore2" value="+" onclick="addMaterial()"/>
+								<?php	} ?>
 
-									<div id="inventory"></div>
+								<div id="inventory"></div>
 
-								</label>				    
+							</label>				    
 
-								<label>
-									<span>
-									</span>
-									---------------------------------------------  CO-MAKER INFORMATION  ---------------------------------------------
+							<label>
+								<span>
+								</span>
+									<!-----------------------------------------------  CO-MAKER INFORMATION  ---------------------------------------------
 
 								</label>
 
@@ -519,20 +505,39 @@ window.onload = function() {
 
 									<label>
 										<span>
-										</span>
+										</span>-->
 										------------------------------------------- MEMBER CO-MAKER INFORMATION  -----------------------------------
 
 									</label>
 
 									<label>
 										<span>Co-Maker ID :</span> 
-										<input id="memComakerID" disabled="true" type="text" name="mcomakerid" style="width:562px;" value="<?php echo $memComakerID ?>"/> 
-									</label>
+										<select required="true" disabled="true" id="comakerId" name='mcomakerid' style="width: 562px;" >
+											<option></option>
+											<?php foreach ($membercomaker->result() as $memid) { ?>
+											<option value="<?php echo $memid->MemberID ?>"> <?php echo $memid->Name ?></option>
+											<?php } ?>
 
+										</select>	 
+									</label>
 									<label>
 										<span>Relationship :</span> 
-										<input id="memComakerRelationship" disabled="true" type="text" name="mrelationship" style="width:562px;" value="<?php echo $mrelationship ?>"/> 
-									</label>
+										<input type='hidden' name='mrelationship'>
+										<select name="mrelationship" id="relationship" style="width:405px;">
+											<option value="Friend">Friend</option>
+											<option value="Cousin">Cousin</option>
+											<option value="Grandparent">Grandparent</option>
+											<option value="In-Law">In-Law</option>
+											<option value="Others">Others</option>
+											<option value="Sibling">Sibling</option>
+											<option value="Spouse">Spouse</option>
+											<option value="Parent">Parent</option>
+											<option value="Aunt">Aunt</option>
+											<option value="Uncle">Uncle</option>
+										</select>
+
+									</select>
+								</label>
 <!--
 					<label>
 				    	<span>Valid ID :</span>
@@ -650,7 +655,7 @@ window.onload = function() {
 							<input type="submit" class="button1" value="Reject" />
 						</div>
 					</form>
-				       <?php }else if($this->session->userdata('rank')=='salveofficer'){ ?>
+					<?php }else if($this->session->userdata('rank')=='salveofficer'){ ?>
 				        	<!--<form action='editloan' method='post'>
 				    		<input type='hidden' name='loanID' value='<?php echo $lid?>'>
 							<input type="submit" class="button" value="Edit Application" />
@@ -815,40 +820,40 @@ window.onload = function() {
 					<div class="headername">Savings Summary As Of <?php echo date("Y/m/d") ?></div>
 					<div class="subskew"></div>
 					<br>
-<?php $savings = $this->db->query("SELECT m.savings, m.ControlNo FROM  loanapplication_has_members lm, members m WHERE lm.loanapplication_controlno = '$lid' AND lm.Members_ControlNo = m.ControlNo "); 
+					<?php $savings = $this->db->query("SELECT m.savings, m.ControlNo FROM  loanapplication_has_members lm, members m WHERE lm.loanapplication_controlno = '$lid' AND lm.Members_ControlNo = m.ControlNo "); 
 
-foreach($savings->result() as $save){
+					foreach($savings->result() as $save){
 
-	$actual = $save->savings;
-	$control_no = $save->ControlNo;
+						$actual = $save->savings;
+						$control_no = $save->ControlNo;
 
-}
+					}
 
-$date = $this->db->query("SELECT TIMESTAMPDIFF(WEEK,(SELECT DateEntered FROM CaritasCenters_has_Members cm, Members m WHERE cm.Members_ControlNo='$control_no' AND cm.Members_ControlNo = m.ControlNo),NOW()) AS diff");
+					$date = $this->db->query("SELECT TIMESTAMPDIFF(WEEK,(SELECT DateEntered FROM CaritasCenters_has_Members cm, Members m WHERE cm.Members_ControlNo='$control_no' AND cm.Members_ControlNo = m.ControlNo),NOW()) AS diff");
 
-foreach($date->result() as $dt){
+					foreach($date->result() as $dt){
 
- $diff = $dt->diff;
+						$diff = $dt->diff;
 
-}
+					}
 
-$expected = $diff*50;
-?>
-
-
-				
-						<p class="info00">Actual Amount of Savings: P<b> <?php echo number_format($actual,2);?></b></p>
-						<p class="info00">Expected Amount of Savings: P<b> <?php echo number_format($expected,2);?></b></p>
-						
-						<br>
+					$expected = $diff*50;
+					?>
 
 
 
+					<p class="info00">Actual Amount of Savings: P<b> <?php echo number_format($actual,2);?></b></p>
+					<p class="info00">Expected Amount of Savings: P<b> <?php echo number_format($expected,2);?></b></p>
 
-						<div class="innerinfo">
-							<p class="info01">
-								<?php 
-								if(!$actual ==0){
+					<br>
+
+
+
+
+					<div class="innerinfo">
+						<p class="info01">
+							<?php 
+							if(!$actual ==0){
 								if ($actual < $expected){
 									$kulang = $expected-$actual;
 									echo 'This member needs to save P'.number_format($kulang,2).' more! ';
@@ -859,16 +864,16 @@ $expected = $diff*50;
 									the expected amount of savings! ';
 								}
 							}
-								?>
-
-					
+							?>
 
 
-							</p>
-						</div>
+
+
+						</p>
 					</div>
 				</div>
-				<br><br><br><br><br><br>
 			</div>
+			<br><br><br><br><br><br>
+		</div>
 
-			<br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br>
